@@ -1,0 +1,62 @@
+<html>
+<head>
+   <title>2.7. User Login Functional Requirements</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="container">
+   <h3>2.7 User Login Functional Requirements</h3>
+
+   <p>The following image depicts what the login screen looks like to any user. The login screen allows registered users to login to the site to access all of the features that their account gives them access to. If they type in their username and password and click submit the users credentials are validated and if correct they are logged in.</p>
+
+   <figure>
+      <img src="loginImages/login.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.1: The empty login dialog.</figcaption>
+   </figure>
+   <figure>
+      <img src="loginImages/login-filled.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.2: The filled login dialog.</figcaption>
+   </figure>
+
+   <p>If they are incorrect they get an error message as seen below.</p>
+
+   <figure>
+      <img src="loginImages/login-incorrect.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.3: The incorrect credentials dialog.</figcaption>
+   </figure>
+
+   <p>If the user has forgotten their password they click "Forgot Password?" which takes them to a password recovery screen. If the user does not have an account then they click the register button and be taken to the registration screen seen below.</p>
+
+   <figure>
+      <img src="loginImages/register.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.4: The empty user registration dialog.</figcaption>
+   </figure>
+   <figure>
+      <img src="loginImages/register-filled.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.5: The filled user registration dialog.</figcaption>
+   </figure>
+
+   <p>In the registration screen a new user types in all of their information and clicks submit, the data is then validated to make sure there is not an existing user with those credentials. If there is an existing user then the user is asked to enter a new username. If there is no conflict with the credentials then the user is registered and are sent an emai lto verify registration.</p>
+
+   <p>If the user clicked "Forgot Password?" on the login screen then they see the below dialog. After the user types in their email address and clicks submit the email address is checked to see if it belongs to a registered user and if it does then an email with a secure password reset token is emailed to the user.</p>
+
+   <figure>
+      <img src="loginImages/reset-password.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.6: The empty password rest dialog.</figcaption>
+   </figure>
+   <figure>
+      <img src="loginImages/reset-password-filled.png" style="width:30%;"/>
+      <figcaption>Figure 2.7.7: The filled password reset dialog.</figcaption>
+   </figure>
+
+   <div id="navButtons" align="center">
+      <a href="chat.html" type="button" class="btn btn-default firstBtn"><b>Previous</b>: Office Hours</a>
+      <a href="../index.html" class="btn btn-default"><b>Up</b>: Functional Requirements</a>
+      <a href="../../index.html" class="btn btn-default"><b>Top</b>: Index</a>
+      <a href="progress.html" class="btn btn-default lastBtn"><b>Next</b>: Student Progress</a>
+   </div>
+   
+</body>
+
+</html>
