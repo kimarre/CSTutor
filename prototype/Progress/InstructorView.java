@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * GUI for the instructor user of the CSTutor tool.
  * @author Erica Solum
- * @version 03.15.15
+ * @version 3Mar15
  */
 public class InstructorView extends JPanel
 {
@@ -25,7 +25,6 @@ public class InstructorView extends JPanel
     
     /**
      * Constructs a new Instructor View GUI.
-     * @param relative   JFrame used for positioning
      */
     public InstructorView()
     {
@@ -40,6 +39,9 @@ public class InstructorView extends JPanel
         add(instBase);
     }
     
+    /**
+     *
+     */
     public void addSideBar()
     {
         tabPane = new JTabbedPane();
