@@ -4,7 +4,11 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-
+/**
+ * GUI base for all Progress features.
+ * @author Erica Solum
+ * @version CPE308 - Milestone 10
+ */
 public class Base extends JPanel
 {
     private JPanel topSpace;
