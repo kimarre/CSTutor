@@ -4,10 +4,10 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-/**
- * GUI base for all Progress features.
- * @author Erica Solum
- * @version CPE308 - Milestone 10
+/****
+ * Class Base provides a basic GUI layout for all Progress features.
+ * @author Erica Solum (esolum@calpoly.edu)
+ * @version 6Apr15
  */
 public class Base extends JPanel
 {
@@ -23,12 +23,13 @@ public class Base extends JPanel
     public Base()
     {
         super();
-        init();
-        
-        
+        init();       
     }
     
-    public void init()
+    /**
+     * Initializes the layout of the base GUI.
+     */
+    private void init()
     {
        
         setVisible(true);
@@ -46,32 +47,47 @@ public class Base extends JPanel
     
     }
     
-    public void layoutMiddle()
+    /**
+     * Provides the code for the middle section of the base GUI, which includes
+     * the side bar and the main content section.
+     */
+    private void layoutMiddle()
     {
-       
-       
+        /*
+         * Create the side bar
+         */
         bar = new SideBar();
         bar.setLayout(new BoxLayout(bar, BoxLayout.Y_AXIS));
         
-        content = new JPanel();
+        /* 
+         * Create the main content section 
+         */
         main = new MainContent();
-        //content.setLayout(new BoxLayout(content, BoxLayout.X_AXIS));
+      
+        /*
+         * Create the overall panel that contains the sidebar, 
+         * main content, and spacers.
+         */ 
+        content = new JPanel();
         content.add(Box.createHorizontalStrut(20));
         content.add(bar);
-        
         content.add(Box.createHorizontalStrut(30));
-        
-       
         content.add(main); 
         content.add(Box.createHorizontalStrut(20));
         content.setBackground(new Color(255,255,255));
     }
     
+    /**
+     * Returns the side bar of the base.
+     */ 
     public JPanel getSideBar()
     {
         return bar;
     }
     
+    /**
+     * Returns the main content section of the base.
+     */
     public JPanel getMain()
     {
         return main;
