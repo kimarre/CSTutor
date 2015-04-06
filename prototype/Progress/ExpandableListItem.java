@@ -5,8 +5,11 @@ import javax.swing.*;
 
 
 
-
-@SuppressWarnings("serial")
+/****
+ * 
+ * @author Erica Solum (esolum@calpoly.edu)
+ * @version 6Apr15
+ */
 public class ExpandableListItem extends JPanel
 {
     private JList<String> children;
