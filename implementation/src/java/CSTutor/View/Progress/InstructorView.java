@@ -30,7 +30,7 @@ public class InstructorView extends JPanel
     {
         instBase = new InstBase();
         main = instBase.getMain();
-        renderer = new ListRenderer(main);
+        renderer = new ListRenderer();
         
         addSideBar();
         

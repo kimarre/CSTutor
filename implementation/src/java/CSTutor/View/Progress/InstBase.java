@@ -34,7 +34,7 @@ public class InstBase extends JPanel
     {
         super();
         init();
-        renderer = new ListRenderer(main); 
+        renderer = new ListRenderer(); 
     }
     
     public void init()
@@ -168,7 +168,7 @@ public class InstBase extends JPanel
         classesModel.addElement("   - CPE 305");
         classesModel.addElement("   - CPE 308");
         JList<String> classesList = new JList<>(classesModel);
-        classesList.setCellRenderer(new ListRenderer(main));
+        classesList.setCellRenderer(new ListRenderer());
         
         /* Students List */
         DefaultListModel<String> studentModel = new DefaultListModel<>();
@@ -205,7 +205,7 @@ public class InstBase extends JPanel
         studentModel.addElement("   - James Welsh");
         studentModel.addElement("   - Marlene Williams");
         JList<String> studentList = new JList<>(studentModel);
-        studentList.setCellRenderer(new ListRenderer(main));
+        studentList.setCellRenderer(new ListRenderer());
         
         /* Tutorials list */
         DefaultListModel<String> tutorialsModel = new DefaultListModel<>();
@@ -225,13 +225,13 @@ public class InstBase extends JPanel
         tutorialsModel.addElement("     ...");
         tutorialsModel.addElement("     ...");
         JList<String> tutorialList = new JList<>(tutorialsModel);
-        tutorialList.setCellRenderer(new ListRenderer(main));
+        tutorialList.setCellRenderer(new ListRenderer());
         
         
         /* Lists Stuff */
-        ExpandableListItem tutorials = new ExpandableListItem("Tutorials", tutorialList, new ListRenderer(main));
-        ExpandableListItem classes = new ExpandableListItem("Classes", classesList, new ListRenderer(main)); 
-        ExpandableListItem students = new ExpandableListItem("Students", studentList, new ListRenderer(main)); 
+        ExpandableListItem tutorials = new ExpandableListItem("Tutorials", tutorialList, new ListRenderer());
+        ExpandableListItem classes = new ExpandableListItem("Classes", classesList, new ListRenderer()); 
+        ExpandableListItem students = new ExpandableListItem("Students", studentList, new ListRenderer()); 
         
         /* Panel Stuff */
         tutorialPanel = new JPanel();
