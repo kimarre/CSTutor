@@ -15,11 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
-import CSTutor.View.Progress.*;
-import CSTutor.Model.Progress.*;
-/*import view.ListRenderer;
-import view.MainContent;
-import model.InstructorModel;*/
+import CSTutor.Model.Progress.InstructorModel;
 
 /**
  * 

@@ -4,7 +4,7 @@
 package CSTutor.View.Progress;
 
 import javax.swing.JPanel;
-import CSTutor.Model.Progress.*;
+import CSTutor.Model.Progress.StudentModel;
 
 /****
  * 
