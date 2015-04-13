@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Login;
+package CSTutor.View.Login;
 
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author kylereis
+ * @author Kyle Reis
  */
 public class RecoverPassword extends javax.swing.JFrame {
 
@@ -133,6 +128,7 @@ public class RecoverPassword extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RecoverPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
