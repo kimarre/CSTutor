@@ -1,15 +1,12 @@
-package Progress;
+package CSTutor.View.Progress;
 import java.awt.*;
 
 import javax.swing.*;
 
 
 
-/****
- * 
- * @author Erica Solum (esolum@calpoly.edu)
- * @version 6Apr15
- */
+
+@SuppressWarnings("serial")
 public class ExpandableListItem extends JPanel
 {
     private JList<String> children;
@@ -18,8 +15,7 @@ public class ExpandableListItem extends JPanel
     private boolean expanded;
     private ListRenderer renderer;
     
-    
-    
+
     
     public ExpandableListItem(String title, JList<String> list, ListRenderer renderer)
     {
@@ -48,6 +44,7 @@ public class ExpandableListItem extends JPanel
     
     public void expand()
     {
+        System.out.println("Expanding!");
         expanded = true;
     }
     public void compress()

@@ -1,21 +1,16 @@
-package Progress;
+package CSTutor.View.Progress;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-/****
- * Class ListRenderer stylizes the collapsable lists that appear in the left side bars of the Instructor 
- * and Student UIs.
- */
+
 public class ListRenderer extends JLabel implements ListCellRenderer<String>
 {
-    private MainContent main;
-    public ListRenderer(MainContent main)
+    public ListRenderer()
     {
         super();
         setOpaque(true);
-        this.main = main;
         
     }
 

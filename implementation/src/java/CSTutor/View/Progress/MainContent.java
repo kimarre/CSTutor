@@ -1,4 +1,4 @@
-package Progress;
+package CSTutor.View.Progress;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
