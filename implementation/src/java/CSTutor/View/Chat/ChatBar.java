@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Chat;
+package CSTutor.View.Chat;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -63,5 +63,5 @@ public class ChatBar extends JPanel {
      //this.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

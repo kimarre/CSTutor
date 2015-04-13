@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.View.Chat;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
