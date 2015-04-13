@@ -39,7 +39,7 @@ public class ChatBox extends JFrame {
    	 
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
-             //use msgArea.getText() to get chat
+             System.out.println(msgArea.getText());
    			 //hook here for putting in chat
    		 }
    	 });

@@ -50,18 +50,6 @@ public class Online extends JFrame{
    			    //hook here for private message
    		    }
         });
-        menuOption2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //use listbox.getSelectedValue() to get the student name as string
-   			    //hook here for view session
-   		    }
-        });
-        menuOption3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //use listbox.getSelectedValue() to get the student name as string
-   			    //hook here for share session
-   		    }
-        });
             
 
         listbox.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
