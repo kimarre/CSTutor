@@ -1,4 +1,4 @@
-package Quiz;
+package CSTutor.View.Quiz;
 
 import java.awt.*;
 import java.awt.event.*;
