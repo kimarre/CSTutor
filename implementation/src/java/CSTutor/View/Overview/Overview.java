@@ -1,13 +1,16 @@
-package Overview;
+/**
+ * The framework for the CSTutor GUI.
+ * @author Kyle Reis
+ */
 
-// This is a version test!
+package CSTutor.View.Overview;
 
-import Chat.*;
-import Login.*;
-import Manager.*;
-import Progress.*;
-import Tutorial.*;
-import Quiz.*;
+import CSTutor.View.Chat.*;
+import CSTutor.View.Login.*;
+import CSTutor.View.Manager.*;
+import CSTutor.View.Progress.*;
+import CSTutor.View.Tutorial.*;
+import CSTutor.View.Quiz.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,26 +38,18 @@ public class Overview extends JFrame {
         init();
         mainPanel = new JPanel();
         mainTop = new JPanel(new CardLayout());
-        //insideTop = new ManagerGUI();
         chatBar = new ChatBar();
-        
-        //
-        JPanel test = new JPanel();
-        test.setSize(300, 100);
-    	test.add(new JButton("BOTMENU GOES HERE!!!"));
-        //
         
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
         mainTop.add(new ManagerGUI(), "Manager");
         mainTop.add(new InstructorView(), "Progress");
-        mainTop.add(new Tutorial(), "Tutorial");
+        mainTop.add(new TutorialEditor(), "Tutorial");
+        mainTop.add(new Tutorial(), "Student Tutorial");
         mainTop.add(new QuizGui(), "Quiz");
         mainPanel.add(mainTop);
         mainPanel.add(chatBar);
         add(mainPanel);
-        //add(mainInternal);
-        //add(chatBar);
         pack();
         setVisible(true);
     }
@@ -152,6 +147,5 @@ public class Overview extends JFrame {
     
     private void ProgressAction(java.awt.event.MouseEvent evt) {
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Progress");
-        
     }
 }
