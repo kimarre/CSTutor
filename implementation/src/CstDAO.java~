@@ -1,12 +1,6 @@
 import java.util.*;
 import java.sql.*;
 
-/**
- * The CstDAO, short for CSTutor Data Access Object serves as a wrapper for all the database accessor and supplier functions. 
- * 
- * @author Luke 
- */
-
 // CSTutor Data Access Object
 public class CstDAO {
    private static final String db_name = "test.db";
