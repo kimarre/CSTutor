@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import view.ListRenderer;
+import CSTutor.View.Progress.ListRenderer;
 
 
 /****
