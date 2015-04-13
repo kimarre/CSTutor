@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.View.Manager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

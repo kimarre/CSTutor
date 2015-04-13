@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.View.Manager;
 
 import java.awt.*;
 import java.awt.event.*;
