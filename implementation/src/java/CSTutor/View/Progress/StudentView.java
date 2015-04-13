@@ -1,4 +1,4 @@
-package Progress;
+package CSTutor.View.Progress;
 
 import javax.swing.*;
 

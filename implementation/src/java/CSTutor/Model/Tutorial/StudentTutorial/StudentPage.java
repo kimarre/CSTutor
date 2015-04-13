@@ -1,6 +1,7 @@
 package CSTutor.Model.Tutorial.StudentTutorial;
 
-import Tutorial.*;
+import CSTutor.Model.Tutorial.*;
+import CSTutor.View.Tutorial.*;
 
 /**
 * A Student page is an individual topic page within a tutorial track. This is 

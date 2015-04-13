@@ -1,3 +1,5 @@
+package CSTutor.Model.Database;
+
 import java.util.*;
 import java.sql.*;
 
@@ -37,6 +39,6 @@ public class CstDAO {
    // Return a student row as a list of strings
    public List<String> get_student(String username) {
       return new ArrayList<String>(Arrays.asList("", "", ""));
-      return ["", "", ""]
+      
    }
 }
