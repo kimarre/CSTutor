@@ -2,7 +2,7 @@ package CSTutor.Model.Progress;
 
 import javax.swing.JPanel;
 
-import view.*;
+import CSTutor.View.Progress.*;
 
 /****
  * Class Progress is the top-level model class for the Calendar Tool progress and
