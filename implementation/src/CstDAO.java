@@ -6,6 +6,8 @@ public class CstDAO {
    private static final String db_name = "test.db";
    private static final String create_students_table = "CREATE TABLE IF NOT EXISTS "
     + "students (username TEXT PRIMARY KEY, first TEXT NOT NULL, last TEXT NOT NULL);";
+   private static final String create_ = "CREATE TABLE IF NOT EXISTS "
+    + "students (username TEXT PRIMARY KEY, first TEXT NOT NULL, last TEXT NOT NULL);";
 
    public static void main(String args[]) {
       Connection c = null;
@@ -35,5 +37,6 @@ public class CstDAO {
    // Return a student row as a list of strings
    public List<String> get_student(String username) {
       return new ArrayList<String>(Arrays.asList("", "", ""));
+      return ["", "", ""]
    }
 }
