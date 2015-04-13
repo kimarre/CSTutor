@@ -1,10 +1,10 @@
 /**
  * REMEMBER TO CHANGE THE PACKAGE TO CSTUTOR.VIEW.PROGRESS
  */
-package view;
+package CSTutor.View.Progress;
 
 import javax.swing.JPanel;
-import model.GuestModel;
+import CSTutor.Model.Progress.GuestModel;
 
 /**
  * @author Erica Solum (esolum@calpoly.edu)

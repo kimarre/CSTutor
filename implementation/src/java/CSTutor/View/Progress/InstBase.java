@@ -1,34 +1,15 @@
-/**
- * REMEMBER TO CHANGE THE PACKAGE TO CSTUTOR.VIEW.PROGRESS
- */
 package CSTutor.View.Progress;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Vector;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-
-import CSTutor.View.Progress.*;
+import javax.swing.*;
 import CSTutor.Model.Progress.*;
-/*import view.ListRenderer;
-import view.MainContent;
-import model.InstructorModel;*/
 
-/**
- * 
- * @author Erica Solum (esolum@calpoly.edu)
- * @version 13Apr15
- */
-public class InstructorUI extends JPanel
+
+public class InstBase extends JPanel
 {
-    
     private JPanel topSpace;
     private JPanel bottomSpace;
     private JPanel finalTutorialPane;
@@ -41,22 +22,22 @@ public class InstructorUI extends JPanel
     private JScrollPane tutorialScroll;
     private JScrollPane studentScroll;
     private JScrollPane classScroll;
+//    private Vector<String> classes;
     private JPanel classPanel;
     private JPanel tutorialPanel;
     private JPanel studentPanel;
     private ListRenderer renderer;
     private final int barWidth = 200;
     private final int barHeight = 500;
-    private InstructorModel model;
     
-    public InstructorUI(InstructorModel model)
+    
+    public InstBase()
     {
-        this.model = model;
+        super();
         init();
         renderer = new ListRenderer(); 
     }
     
-        
     public void init()
     {
        
@@ -73,7 +54,7 @@ public class InstructorUI extends JPanel
         
     
     }
-        
+    
     public void layoutMiddle()
     {
         makeSideBar();
@@ -249,9 +230,9 @@ public class InstructorUI extends JPanel
         
         
         /* Lists Stuff */
-        ExpandableListItem tutorials = new ExpandableListItem("Tutorials", model.getTutorialList(), new ListRenderer());
-        ExpandableListItem classes = new ExpandableListItem("Classes", model.getClassList(), new ListRenderer()); 
-        ExpandableListItem students = new ExpandableListItem("Students", model.getStudentList(), new ListRenderer()); 
+        ExpandableListItem tutorials = new ExpandableListItem("Tutorials", tutorialList, new ListRenderer());
+        ExpandableListItem classes = new ExpandableListItem("Classes", classesList, new ListRenderer()); 
+        ExpandableListItem students = new ExpandableListItem("Students", studentList, new ListRenderer()); 
         
         /* Panel Stuff */
         tutorialPanel = new JPanel();
@@ -268,7 +249,6 @@ public class InstructorUI extends JPanel
         classPanel.setMaximumSize(new Dimension(barWidth, 500));
         classPanel.add(classes);
         classPanel.add(Box.createVerticalGlue());
-        classPanel.setBackground(new Color(208, 226, 245));
         classPanel.setVisible(true);
         
         studentPanel = new JPanel();
@@ -292,15 +272,12 @@ public class InstructorUI extends JPanel
         classScroll.setColumnHeaderView(studentSpace);
         classScroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
                     classCorner);
-        classScroll.setBackground(new Color(208, 226, 245));
-
         
         studentScroll = new JScrollPane(studentPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         studentScroll.setColumnHeaderView(tutorialSpace);
         studentScroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
                     studentCorner);
-        
         
         
         /* Final Pane stuff */
@@ -316,5 +293,10 @@ public class InstructorUI extends JPanel
         tabPane.addTab("Tutorials", finalTutorialPane);
         
         
+        
+        
+
+        
     }
+    
 }
