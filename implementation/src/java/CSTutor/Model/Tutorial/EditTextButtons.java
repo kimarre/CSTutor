@@ -1,4 +1,4 @@
-package Tutorial;
+package CSTutor.Model.Tutorial;
 
 /**
  * EditTextButtons comprise the toolbar that gives the authors or editors the

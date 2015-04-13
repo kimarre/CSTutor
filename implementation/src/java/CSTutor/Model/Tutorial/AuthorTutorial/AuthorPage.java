@@ -1,6 +1,7 @@
-package Tutorial.AuthorTutorial;
+package CSTutor.Model.Tutorial.AuthorTutorial;
 
-import Tutorial.*;
+import CSTutor.Model.Tutorial.*;
+import CSTutor.View.Tutorial.*;
 import Tutorial.StudentTutorial.*;
 
 /**

@@ -1,4 +1,4 @@
-package Tutorial;
+package CSTutor.Model.Tutorial;
 
 /**
  * The description is intended for the author to include any background 

@@ -1,4 +1,4 @@
-package Tutorial;
+package CSTutor.Model.Tutorial;
 
 /**
  * The Roadmap Module is the bar on the left side of the student's tutorial

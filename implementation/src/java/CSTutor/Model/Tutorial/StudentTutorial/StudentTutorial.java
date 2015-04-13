@@ -1,4 +1,4 @@
-package Tutorial.StudentTutorial;
+package CSTutor.Model.Tutorial.StudentTutorial;
 
 import java.util.*;
 //import chat.toolbar;

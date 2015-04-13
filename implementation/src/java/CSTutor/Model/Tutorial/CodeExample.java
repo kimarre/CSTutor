@@ -1,4 +1,4 @@
-package Tutorial;
+package CSTutor.Model.Tutorial;
 
 /**
  * The code example is for the author to show how the topic is used. 
