@@ -6,10 +6,11 @@
 package CSTutor.View.Tutorial;
 
 import java.awt.CardLayout;
+import CSTutor.Model.Tutorial.*;
 
 /**
  *
- * @author karre
+ * @author Kim Arre
  */
 public class TutorialEditor extends javax.swing.JPanel {
 

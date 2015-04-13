@@ -7,7 +7,7 @@ package CSTutor.View.Tutorial;
 
 /**
  *
- * @author kimrawr
+ * @author Kim Arre
  */
 public class SaveConfirmation extends javax.swing.JFrame {
 
