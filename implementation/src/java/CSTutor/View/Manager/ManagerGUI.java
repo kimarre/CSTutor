@@ -10,7 +10,9 @@ import javax.swing.border.*;
 
 import java.util.*;
 import java.io.*;
-
+/**
+ * @author Simon Vurens
+ */
 
 public class ManagerGUI extends JPanel {
 	public NewClassGUI newClass;

@@ -9,6 +9,8 @@ import java.util.List;
  * are not a part of any Unit. The sections are the different sections of
  * the class. The students are all the Users who are in the class, and 
  * access is which users can view the class.
+ * 
+ * @author Simon Vurens
  */
 public class Class {
    private List<Unit> units;

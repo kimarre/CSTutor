@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-
+/**
+ * @author Simon Vurens
+ */
 public class NewClassGUI extends JFrame{
 	StudentPicker picker;
 	public static CSTutor.Model.Manager.Class newClass;
