@@ -19,7 +19,7 @@ public class Progress
     private JPanel viewPanel;
     
     
-    /*
+    /**
      * Launches the progress feature with the provided access.
      */
     public Progress(int accessCode)
@@ -28,8 +28,7 @@ public class Progress
         {
             InstructorModel model = new InstructorModel();
             InstructorUI view = new InstructorUI(model);
-            viewPanel = view;
-            
+            viewPanel = view;    
         }
         else if(accessCode == STUDENT_ACCESS)
         {
@@ -45,6 +44,9 @@ public class Progress
         } 
     }
     
+    /**
+     * Returns the panel that is made from launching the Progress feature.
+     */
     public JPanel getView()
     {
         return viewPanel;
