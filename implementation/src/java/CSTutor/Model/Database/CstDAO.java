@@ -1,7 +1,14 @@
+package CSTutor.Model.Database;
+
 import java.util.*;
 import java.sql.*;
 
-// CSTutor Data Access Object
+/**
+ * CSTutor Data Access Object
+ *  Interfaces with the sqlite database.
+ *
+ * @author dlgordon
+ */
 public class CstDAO {
    private static final String db_name = "test.db";
    private static final String create_students_table =
@@ -23,7 +30,6 @@ public class CstDAO {
     "INSERT OR REPLACE INTO quizzes VALUES (\"%s\", \"%s\");";
    private static final String get_quiz_query =
     "SELECT * FROM quizzes WHERE id=\"%s\";";
-
 
    private Connection c;
    
