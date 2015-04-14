@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 /**
  * ChatOverlay is a class that will encompass the overlay bar at the bottom of our application.

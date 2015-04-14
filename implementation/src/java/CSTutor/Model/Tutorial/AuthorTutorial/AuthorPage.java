@@ -2,7 +2,6 @@ package CSTutor.Model.Tutorial.AuthorTutorial;
 
 import CSTutor.Model.Tutorial.*;
 import CSTutor.Model.Tutorial.StudentTutorial.*;
-import CSTutor.View.Tutorial.*;
 
 /**
 * An Author page is an individual topic page within a tutorial track. This is 

@@ -6,7 +6,7 @@ package CSTutor.Model.Progress;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-import CSTutor.View.Progress.ListRenderer;
+import CSTutor.View.Progress.*;
 
 
 /****

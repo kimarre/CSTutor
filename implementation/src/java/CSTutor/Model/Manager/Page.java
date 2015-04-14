@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.Model.Manager;
 
 /**
  * Derived from section 2.2.

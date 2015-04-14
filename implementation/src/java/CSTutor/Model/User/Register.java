@@ -9,7 +9,7 @@ package CSTutor.Model.User;
  * @author Kyle Reis
  */
 public class Register {
-    UserDB database = new UserDB();
+    UserDB database;
     
     /**
      * Validates that all of the needed information for a User was entered and
@@ -19,7 +19,7 @@ public class Register {
        post:
          database.users.length() > 0;
      */
-    void createUser()
+    public void createUser()
     {
         User user = new User();
         database.addUser(user);

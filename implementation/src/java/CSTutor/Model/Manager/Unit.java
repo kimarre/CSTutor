@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.Model.Manager;
 import java.util.*;
 
 /**

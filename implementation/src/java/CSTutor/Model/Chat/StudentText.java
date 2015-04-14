@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 /**
  * studentText is a class that will be used by the Console class. It's an object

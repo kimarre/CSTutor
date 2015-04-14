@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.Model.Manager;
 
 /**
  * The user class is based on the requirement that classes need students.

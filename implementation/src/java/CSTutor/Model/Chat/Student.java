@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 /**
  * The student class houses all the information that the ChatWindow needs from students.

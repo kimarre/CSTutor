@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 import java.util.*;
 

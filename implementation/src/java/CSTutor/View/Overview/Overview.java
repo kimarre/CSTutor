@@ -8,7 +8,7 @@ package CSTutor.View.Overview;
 import CSTutor.View.Chat.*;
 import CSTutor.View.Login.*;
 import CSTutor.View.Manager.*;
-import CSTutor.View.Progress.*;
+import CSTutor.Model.Progress.*;
 import CSTutor.View.Tutorial.*;
 import CSTutor.View.Quiz.*;
 import javax.swing.*;
@@ -30,6 +30,7 @@ public class Overview extends JFrame {
     private JPanel mainTop;
     private JPanel insideTop;
     private JPanel chatBar;
+    private static int INSTRUCTOR_ACCESS = 2;
     
     public static void main(String[] args) {
         new Overview();
@@ -43,7 +44,7 @@ public class Overview extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
         mainTop.add(new ManagerGUI(), "Manager");
-        mainTop.add(new InstructorView(), "Progress");
+        mainTop.add(new Progress(INSTRUCTOR_ACCESS).getView(), "Progress");
         mainTop.add(new TutorialEditor(), "Tutorial");
         mainTop.add(new Tutorial(), "Student Tutorial");
         mainTop.add(new QuizGui(), "Quiz");

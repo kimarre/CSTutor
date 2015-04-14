@@ -1,15 +1,17 @@
 package CSTutor.View.Login;
 
+
+
 /**
  *
  * @author Kyle Reis
  */
-public class Register extends javax.swing.JFrame {
+public class RegisterGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Register2
      */
-    public Register() {
+    public RegisterGUI() {
         initComponents();
     }
 
@@ -108,6 +110,8 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitAction
+        register = new CSTutor.Model.User.Register();
+        register.createUser();
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_SubmitAction
@@ -129,14 +133,18 @@ public class Register extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -145,7 +153,7 @@ public class Register extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Register().setVisible(true);
+                new RegisterGUI().setVisible(true);
             }
         });
     }
@@ -162,4 +170,5 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
+    private CSTutor.Model.User.Register register;
 }
