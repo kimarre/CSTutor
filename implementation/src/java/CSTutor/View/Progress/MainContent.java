@@ -11,7 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/****
+ * Class MainContent is the base section where information is displayed.
+ * @author Erica Solum
+ * @version 13Apr15
+ */
 public class MainContent extends JPanel
 {
     private final int width = 750;
@@ -25,13 +29,16 @@ public class MainContent extends JPanel
         
     }
     
+    /**
+     * Initializes the JPanel.
+     */
     public void init()
     {
         content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.X_AXIS));
   
         content.setBackground(new Color(208, 226, 245));
-        makeCrap();
+        displaySampleData();
         
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setBorder(BorderFactory.createEtchedBorder(1));
@@ -44,17 +51,18 @@ public class MainContent extends JPanel
         add(content);
     }
     
-    public void injectContent()
-    {
-        content.setVisible(true);
-    }
-    
+    /**
+     * Makes the content in the main section not visible.
+     */
     public void eraseContent()
     {
         content.setVisible(false);
     }
     
-    public void makeCrap()
+    /**
+     * Displays a sample graph in the main content section.
+     */
+    public void displaySampleData()
     {
         try
         {

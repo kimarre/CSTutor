@@ -49,7 +49,9 @@ public class InstructorUI extends JPanel
         renderer = new ListRenderer(); 
     }
     
-        
+    /**
+     * Initializes the Instructor UI.
+     */
     public void init()
     {
        
@@ -67,6 +69,9 @@ public class InstructorUI extends JPanel
     
     }
         
+    /**
+     * Lays out the middle portion of the UI.
+     */
     public void layoutMiddle()
     {
         makeSideBar();
@@ -85,17 +90,25 @@ public class InstructorUI extends JPanel
         content.setBackground(new Color(255,255,255));
     }
     
+    /**
+     * Returns the side bar.
+     */
     public JPanel getSideBar()
     {
         return bar;
     }
     
+    /**
+     * Returns the main content section of the UI.
+     */
     public MainContent getMain()
     {
         return main;
     }
     
-    
+    /**
+     * Formats the instructor's side bar.
+     */
     public void makeSideBar()
     {
         bar = new JPanel();
@@ -307,7 +320,6 @@ public class InstructorUI extends JPanel
         tabPane.addTab("Classes", finalClassesPane);
         tabPane.addTab("Students", finalStudentPane);
         tabPane.addTab("Tutorials", finalTutorialPane);
-        
         
     }
 }

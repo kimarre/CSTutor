@@ -6,7 +6,12 @@ import javax.swing.*;
 
 
 
-@SuppressWarnings("serial")
+/****
+ * Class ExpandableListItem is used to populate the side bar on the Progress section
+ * of the CSTutor tool.
+ * @author Erica Solum
+ *
+ */
 public class ExpandableListItem extends JPanel
 {
     private JList<String> children;
@@ -14,8 +19,6 @@ public class ExpandableListItem extends JPanel
     private final int width = 200;
     private boolean expanded;
     private ListRenderer renderer;
-    
-
     
     public ExpandableListItem(String title, JList<String> list, ListRenderer renderer)
     {
@@ -32,32 +35,43 @@ public class ExpandableListItem extends JPanel
         setVisible(true);
     }  
     
+    /**
+     * Converts the list item to a String.
+     */
     public String toString()
     {
         return title;
     }
     
+    /**
+     * Returns all the children under the list item. 
+     */
     public JList<String> getChildren()
     {
         return children;
     }
     
+    /**
+     * Expand the list item.
+     */
     public void expand()
     {
-        System.out.println("Expanding!");
         expanded = true;
     }
+    
+    /**
+     * Compress the list item.
+     */
     public void compress()
     {
         expanded = false;
     }
     
+    /**
+     * Returns if the list item is expanded.
+     */
     public boolean isExpanded()
     {
         return expanded;
     }
-    
-    
-    
-
 }
