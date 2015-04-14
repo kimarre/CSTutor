@@ -1,4 +1,4 @@
-package CSTutor.Model.Database;
+//package CSTutor.Model.Database;
 
 import java.util.*;
 import java.sql.*;
@@ -33,12 +33,17 @@ public class CstDAO {
 
    private Connection c;
    
+   /**
+    * Constructor
+    */
    public CstDAO() throws Exception {
       Class.forName("org.sqlite.JDBC");
       c = DriverManager.getConnection("jdbc:sqlite:" + db_name);
    }  
    
-   // Create each table if it doesn't exist
+   /**
+    * Create each table if it doesn't exist
+    */
    public void create_tables() throws Exception { 
       Statement s = c.createStatement();
       s.executeUpdate(create_students_table);
@@ -46,14 +51,18 @@ public class CstDAO {
       s.close();
    }
 
-   // Given a student, update the student if already exists or create if not.
+   /**
+    * Given a student, update the student if already exists or create if not.
+    */
    public void upsert_student(String username, String first, String last) throws Exception {
       Statement s = c.createStatement();
       s.executeUpdate(String.format(upsert_student_query, username, first, last));
       s.close();
    }
 
-   // Get student (as string list) by username
+   /**
+    * Get student (as string list) by username
+    */
    public List<String> get_student(String username) throws Exception {
       Statement s = c.createStatement();
       ResultSet r = s.executeQuery(String.format(get_student_query, username));
@@ -63,14 +72,18 @@ public class CstDAO {
       return student;
    }
 
-   // Given a quiz, update the quiz if already exists or create if not.
+   /**
+    * Given a quiz, update the quiz if already exists or create if not.
+    */
    public void upsert_quiz(int id, String quiz) throws Exception {
       Statement s = c.createStatement();
       s.executeUpdate(String.format(upsert_quiz_query, String.valueOf(id), quiz));
       s.close();
    }
 
-   // Get quiz by id
+   /**
+    * Get quiz by id
+    */
    public String get_quiz(int id) throws Exception {
       Statement s = c.createStatement();
       ResultSet r = s.executeQuery(String.format(get_quiz_query, String.valueOf(id)));
@@ -79,7 +92,9 @@ public class CstDAO {
       return quiz;
    }
 
-   // Test each method
+   /**
+    * Test each method
+    */
    public static void test() {
       CstDAO d;
       List<String> student;
@@ -102,6 +117,9 @@ public class CstDAO {
       System.out.println("Test successful.");
    }
 
+   /**
+    * Main for testing only
+    */
    public static void main(String[] args) {
       test();
    }
