@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-
+/**
+ * @author Simon Vurens
+ */
 public class NewUnitGUI extends JFrame{
 	public NewUnitGUI() {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

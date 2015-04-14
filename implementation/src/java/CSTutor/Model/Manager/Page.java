@@ -6,6 +6,7 @@ package CSTutor.Model.Manager;
  * Each Page is either a page in the tutorial or a quiz. 
  * However, they are treated the same way by the manager, 
  * as they are part of a Tutorial. The name is the name of the page.
+ * @author Simon Vurens
  */
 public abstract class Page {
    String name;

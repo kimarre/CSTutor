@@ -6,6 +6,8 @@ import java.util.*;
  *
  * A Unit is a collection of tutorials, making one cohesive section about
  * a range of subjects. It has a name.
+ * 
+ * @author Simon Vurens
  */
 public abstract class Unit {
    private List<Tutorial> tutorials;

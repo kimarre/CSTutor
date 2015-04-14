@@ -7,6 +7,8 @@ import java.util.List;
  * The manager contains a collection of classes. The selectedClass is the
  * currently selected class, and the selectedSection is the currently selected
  * section within that class.
+ * 
+ * @author Simon Vurens
  */
 public class Manager {
    List<Class> data;
@@ -118,21 +120,40 @@ public class Manager {
     */
     public void createPage(Page page){}
 
+    /**
+     * Deletes the given class 
+     */
     public void deleteClass(Class classs) {
    	 System.out.println("In CSTutor.Model.Manager.deleteClass()");
     }
+
+    /**
+     * Deletes the given section 
+     */
     public void deleteSection(Section section) {
    	 System.out.println("In CSTutor.Model.Manager.deleteSection()");
     }
+
+    /**
+     * Deletes the given unit 
+     */
     public void deleteUnit(Unit unit) {
    	 System.out.println("In CSTutor.Model.Manager.deleteUnit()");
-       }
+    }
+
+    /**
+     * Deletes the given tutorial 
+     */
     public void deleteTutorial(Tutorial tutorial) {
    	 System.out.println("In CSTutor.Model.Manager.deleteTutorial()");
-       }
+    }
+
+    /**
+     * Deletes the given page 
+     */
     public void deletePage(Page page) {
    	 System.out.println("In CSTutor.Model.Manager.deletePage()");
-       }
+    }
 
 
    /**
