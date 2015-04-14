@@ -1,6 +1,3 @@
-/**
- * REMEMBER TO CHANGE THE PACKAGE TO CSTUTOR.MODEL.PROGRESS
- */
 package CSTutor.Model.Progress;
 
 /****
@@ -17,10 +14,13 @@ public class GuestModel
     {
     }
     
+    /**
+     * Returs the message that prompts guest users to login to see their progress.
+     */
     public String getMessage()
     {
         System.out.println("In GuestModel.getMessage");
-        return new String("To view quiz results and tutorial progress, pleas sign in here.");
+        return new String("To view quiz results and tutorial progress, please sign in here.");
     }
 
 }

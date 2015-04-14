@@ -18,6 +18,7 @@ public class ManagerGUI extends JPanel {
 	public NewSectionGUI newSection;
 	public NewUnitGUI newUnit;
 	public NewTutGUI newTut;
+	public static CSTutor.Model.Manager.Manager managerModel = new CSTutor.Model.Manager.Manager();
     public static void main(String[] args)
     {
         new ManagerGUI();
@@ -94,23 +95,7 @@ public class ManagerGUI extends JPanel {
     	JPanel tutPanel = new JPanel();
     	tutPanel.setLayout(new BoxLayout(tutPanel, BoxLayout.Y_AXIS));
         tutPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("CSC 101");
-        DefaultMutableTreeNode u1 = new DefaultMutableTreeNode("(no unit)");
-        DefaultMutableTreeNode u2 = new DefaultMutableTreeNode("Final Review");
-        DefaultMutableTreeNode c1 = new DefaultMutableTreeNode("Hello World");
-        DefaultMutableTreeNode c2 = new DefaultMutableTreeNode("Variables");
-        DefaultMutableTreeNode c3 = new DefaultMutableTreeNode("Conditionals");
-        DefaultMutableTreeNode s1 = new DefaultMutableTreeNode("Introduction");
-        DefaultMutableTreeNode s2 = new DefaultMutableTreeNode("Printing Text");
-        DefaultMutableTreeNode s3 = new DefaultMutableTreeNode("Special Characters");
-        c1.add(s1);
-        c1.add(s2);
-        c1.add(s3);
-        u1.add(c1);
-        u1.add(c2);
-        u1.add(c3);
-        root.add(u1);
-        root.add(u2);
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("PREVIEW GOES HERE");
 
         final JTree fileTree = new JTree(root);
         fileTree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -131,39 +116,10 @@ public class ManagerGUI extends JPanel {
         
         
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 3, 10, 10));
-        
-        JButton newUBut = new JButton("New Unit");
-        newUBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("New Unit button pressed");
-        	   newUnit.setVisible(true);
-           }
-        });
-        buttonPanel.add(newUBut);
-        
-        JButton newTBut = new JButton("New Tutorial");
-        newTBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("New Tutorial button pressed");
-        	   newTut.setVisible(true);
-           }
-        });
-        buttonPanel.add(newTBut);
-        
-        JButton newPBut = new JButton("New Page");
-        newPBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("New Page button pressed");
-           }
-        });
-        buttonPanel.add(newPBut);
+        buttonPanel.setLayout(new GridLayout(3, 2, 10, 10));
+
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(new JPanel());
         
         JButton editBut = new JButton("Edit");
         editBut.addActionListener(new ActionListener()
@@ -175,56 +131,17 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(editBut);
         
-        JButton renameBut = new JButton("Rename");
-        renameBut.addActionListener(new ActionListener()
+        JButton viewBut = new JButton("View");
+        viewBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Rename button pressed");
+        	   System.out.println("View button pressed");
            }
         });
-        buttonPanel.add(renameBut);
-        
-        JButton delBut = new JButton("Delete");
-        delBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Delete button pressed");
-           }
-        });
-        buttonPanel.add(delBut);
-        
-        JButton moveBut = new JButton("Move...");
-        moveBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Move... button pressed");
-        	   moveTut.setVisible(true);
-           }
-        });
-        buttonPanel.add(moveBut);
-        
-        JButton moveUpBut = new JButton("Move Up");
-        moveUpBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Move Up button pressed");
-           }
-        });
-        buttonPanel.add(moveUpBut);
-        
-        JButton moveDownBut = new JButton("Move Down");
-        moveDownBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Move Down button pressed");
-           }
-        });
-        buttonPanel.add(moveDownBut);
+        buttonPanel.add(viewBut);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(new JPanel());
         
         tutPanel.add(buttonPanel);
         
@@ -272,6 +189,23 @@ public class ManagerGUI extends JPanel {
         root.add(c12);
         root.add(c13);
         root.add(c14);
+        
+        DefaultMutableTreeNode u1 = new DefaultMutableTreeNode("(no unit)");
+        DefaultMutableTreeNode u2 = new DefaultMutableTreeNode("Final Review");
+        DefaultMutableTreeNode t1 = new DefaultMutableTreeNode("Hello World");
+        DefaultMutableTreeNode t2 = new DefaultMutableTreeNode("Variables");
+        DefaultMutableTreeNode t3 = new DefaultMutableTreeNode("Conditionals");
+        DefaultMutableTreeNode p1 = new DefaultMutableTreeNode("Introduction");
+        DefaultMutableTreeNode p2 = new DefaultMutableTreeNode("Printing Text");
+        DefaultMutableTreeNode p3 = new DefaultMutableTreeNode("Special Characters");
+        t1.add(p1);
+        t1.add(p2);
+        t1.add(p3);
+        u1.add(t1);
+        u1.add(t2);
+        u1.add(t3);
+        s1.add(u1);
+        s1.add(u2);
 
         final JTree fileTree = new JTree(root);
         fileTree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -297,7 +231,12 @@ public class ManagerGUI extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(3, 3, 10, 10));
         
-        JButton newCBut = new JButton("New Class");
+        JButton newCBut = new JButton("New...");
+        /**
+         * For the purposes of this milestone, it opens directly to the new class
+         * interface rather than anything else. By next milestone it should be more
+         * functional.
+         */
         newCBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
@@ -308,38 +247,56 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(newCBut);
         
-        JButton newSBut = new JButton("New Section");
-        newSBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("New Section button pressed");
-        	   newSection.setVisible(true);
-           }
-        });
-        buttonPanel.add(newSBut);
         
         JButton delBut = new JButton("Delete");
         delBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Delete button pressed");
+         	  
+         	 System.out.println("Delete button pressed");
+	        	 DefaultMutableTreeNode node = (DefaultMutableTreeNode)fileTree.getLastSelectedPathComponent();
+	          if (node == null){
+	          	System.out.println("Nothing selected");
+	          }
+	          else {
+	          	System.out.println(node.toString() + " selected");
+	          	System.out.println(node.toString() + " " + node.getLevel());
+	          	switch(node.getLevel()) {
+	          	case 1:
+	          		managerModel.deleteClass(null);
+	          		break;
+	          	case 2:
+	          		managerModel.deleteSection(null);
+	          		break;
+	          	case 3:
+	          		managerModel.deleteUnit(null);
+	          		break;
+	          	case 4:
+	          		managerModel.deleteTutorial(null);
+	          		break;
+	          	case 5:
+	          		managerModel.deletePage(null);
+	          		break;
+	          	default:
+	          		//root or error
+	          	}
+	          }
            }
         });
         buttonPanel.add(delBut);
         
-        JButton editBut = new JButton("Edit");
-        editBut.addActionListener(new ActionListener()
+        JButton renameBut = new JButton("Rename...");
+        renameBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Edit button pressed");
+        	   System.out.println("Rename button pressed");
            }
         });
-        buttonPanel.add(editBut);
+        buttonPanel.add(renameBut);
         
-        JButton moveBut = new JButton("Move Section");
+        JButton moveBut = new JButton("Move...");
         moveBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
@@ -349,15 +306,26 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(moveBut);
         
-        JButton renameBut = new JButton("Rename");
-        renameBut.addActionListener(new ActionListener()
+        JButton moveupBut = new JButton("Move Up");
+        moveupBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Rename button pressed");
+        	   System.out.println("Move Section button pressed");
            }
         });
-        buttonPanel.add(renameBut);
+        buttonPanel.add(moveupBut);
+        
+        JButton movedownBut = new JButton("Move Down");
+        movedownBut.addActionListener(new ActionListener()
+        {
+           public void actionPerformed(ActionEvent event)
+           {
+        	   System.out.println("Move Section button pressed");
+           }
+        });
+        buttonPanel.add(movedownBut);
+
 
         buttonPanel.add(new JPanel());
         buttonPanel.add(new JPanel());

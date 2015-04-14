@@ -1,4 +1,4 @@
-package Quiz;
+package CSTutor.Model.Quiz;
 
 /**
  * A Question consist of a description of a question, number of question, and

@@ -1,6 +1,3 @@
-/**
- * REMEMBER TO CHANGE THE PACKAGE TO CSTUTOR.MODEL.PROGRESS
- */
 package CSTutor.Model.Progress;
 
 import java.util.ArrayList;
@@ -27,8 +24,7 @@ public class InstructorModel
     {
         retrieveTutorialData();
         retrieveStudentData();
-        retrieveClassesData();
-        
+        retrieveClassesData();   
     }
     
     /**
@@ -134,6 +130,9 @@ public class InstructorModel
         classList.setCellRenderer(new ListRenderer());
     }
     
+    /**
+     * Returns the list of students loaded from the database.
+     */
     public JList<String> getStudentList()
     {
         System.out.println("In InstructorModel.getStudentList");
@@ -141,12 +140,18 @@ public class InstructorModel
         
     }
     
+    /**
+     * Returns the list of tutorials loaded from the database.
+     */
     public JList<String> getTutorialList()
     {
         System.out.println("In InstructorModel.getTutorialList");
         return tutorialList;
     }
     
+    /**
+     * Returns the list of classes loaded from the database.
+     */
     public JList<String> getClassList()
     {
         System.out.println("In InstructorModel.getClassList");

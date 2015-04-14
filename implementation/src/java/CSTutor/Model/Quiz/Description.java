@@ -1,4 +1,4 @@
-package Quiz;
+package CSTutor.Model.Quiz;
 
 /**
  * The description is meant for student to see what each question is about.

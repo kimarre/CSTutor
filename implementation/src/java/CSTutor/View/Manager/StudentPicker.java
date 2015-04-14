@@ -53,7 +53,7 @@ public class StudentPicker extends JFrame{
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("OK button pressed");
+        	   NewClassGUI.newClass.addStudent(null);
         	   setVisible(false);
            }
         });

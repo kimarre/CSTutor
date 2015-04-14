@@ -1,4 +1,4 @@
-package Quiz;
+package CSTutor.Model.Quiz;
 
 /**
  * This advicepage allows teachers to give feedback on tutorial pages to review

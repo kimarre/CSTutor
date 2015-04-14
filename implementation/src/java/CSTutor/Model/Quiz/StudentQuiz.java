@@ -1,4 +1,4 @@
-package Quiz;
+package CSTutor.Model.Quiz;
 
 import java.util.Collection;
 
