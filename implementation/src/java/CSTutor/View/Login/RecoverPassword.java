@@ -1,6 +1,7 @@
 package CSTutor.View.Login;
 
 import javax.swing.JOptionPane;
+import CSTutor.Model.User.*;
 
 /**
  *
@@ -97,6 +98,7 @@ public class RecoverPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
+        recover.generateResetToken();
         this.setVisible(false);
         JOptionPane.showConfirmDialog(null,
                 "Check your email for the password reset link.\n It may take up to 5 minbutes for you to recieve the email.", "Confirm Reset", JOptionPane.OK_CANCEL_OPTION);
@@ -147,4 +149,5 @@ public class RecoverPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+    private RecoverPass recover = new RecoverPass();
 }

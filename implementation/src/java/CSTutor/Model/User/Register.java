@@ -22,6 +22,7 @@ public class Register {
     public void createUser()
     {
         User user = new User();
-        database.addUser(user);
+        //database.addUser(user);
+        System.out.println("New User Created.");
     }
 }

@@ -22,10 +22,12 @@ public class RecoverPass {
         &&
         tokenDatabase.tokens.length() > 0;
      */
-    void generateResetToken()
+    public void generateResetToken()
     {
         token = null;
-        tokenDatabase.addToken(token);
+        //tokenDatabase.addToken(token);
+        sendEmail();
+        System.out.println("Reset Token Generated");
     }
     
     /**
