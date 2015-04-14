@@ -1,6 +1,3 @@
-/**
- * REMEMBER TO CHANGE THE PACKAGE TO CSTUTOR.VIEW.PROGRESS
- */
 package CSTutor.View.Progress;
 
 import javax.swing.JPanel;
