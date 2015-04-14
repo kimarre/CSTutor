@@ -31,10 +31,17 @@ public class AuthorPage {
          authorPages'.contains(this);
 
    */
+
+   /**
+   * Saves the changes on the editing page to the tutorial.
+   */
    public void save() {
       System.out.println("Called tutorial save() method.");
    }
    
+   /**
+   * Shows the tutorial changes from the student point of view.
+   */
    public void preview() {
       System.out.println("Called tutorial previow() method.");
    }

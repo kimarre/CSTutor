@@ -9,10 +9,16 @@ package CSTutor.Model.Tutorial;
 public class RoadmapModule {
    String[] pageLinks;
 
+   /**
+   * Jumps to the very first tutorial page.
+   */
    public void toBeginning() {
        System.out.println("Called RoadmapModule's toBeginning() method.");
    }
 
+   /**
+   * Jumps to the very last tutorial page.
+   */
    public void toEnd() {
        System.out.println("Called RoadmapModule's toEnd() method.");
 
