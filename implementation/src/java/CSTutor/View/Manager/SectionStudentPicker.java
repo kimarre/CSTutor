@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * @author Simon Vurens
+ */
 public class SectionStudentPicker extends JFrame{
 	public SectionStudentPicker() {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
