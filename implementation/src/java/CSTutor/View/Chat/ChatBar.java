@@ -5,6 +5,7 @@
  */
 package CSTutor.View.Chat;
 
+import CSTutor.Model.Chat.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
@@ -12,7 +13,7 @@ import java.awt.*;
 
 /**
  *
- * @author kylereis
+ * @author Simon Vurens
  */
 public class ChatBar extends JPanel {
 
@@ -33,8 +34,8 @@ public class ChatBar extends JPanel {
     //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-     box = new ChatBox();
-     online = new Online();
+     box = new ChatBox(new ChatWindow());
+     online = new Online(new Student());
      box.setVisible(false);
      online.setVisible(false);
    	 JPanel butPanel = new JPanel();

@@ -1,5 +1,8 @@
 
 package CSTutor.View.Chat;
+
+import CSTutor.Model.Chat.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
@@ -8,17 +11,19 @@ import java.awt.event.*;
 import java.awt.*;
 /**
  *
- * @author kylereis
+ * @author Simon Vurens
  */
 public class ChatBox extends JFrame {
-
+	
+	ChatWindow CW;
     JTextArea msgArea;
     /**
      * Creates new form ChatBox
      */
-    public ChatBox() {
+    public ChatBox(ChatWindow CW) {
         initComponents();
         
+        this.CW = CW;
         this.setVisible(true);
         this.setSize(300, 400);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -39,8 +44,7 @@ public class ChatBox extends JFrame {
    	 
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
-             //use msgArea.getText() to get chat
-   			 //hook here for putting in chat
+             CW.Enter(null);
    		 }
    	 });
    	 
@@ -65,15 +69,7 @@ public class ChatBox extends JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChatBox().setVisible(false);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;

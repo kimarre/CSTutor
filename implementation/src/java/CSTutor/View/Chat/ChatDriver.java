@@ -3,6 +3,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 
+
+/**
+ * 
+ * 
+ * @author Simon Vurens
+ */
+
 public class ChatDriver extends JFrame{
 	//public static 
 	public static ChatDriver thisOne;
