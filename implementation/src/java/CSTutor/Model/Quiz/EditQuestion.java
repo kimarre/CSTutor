@@ -1,4 +1,4 @@
-package Quiz;
+package CSTutor.Model.Quiz;
 
 /**
  * EditQuestion is a way for teachers to edit questions, with specific font and

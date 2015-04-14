@@ -2,12 +2,15 @@ package CSTutor.Model.Tutorial.AuthorTutorial;
 
 import CSTutor.Model.Tutorial.*;
 import CSTutor.Model.Tutorial.StudentTutorial.*;
+import CSTutor.View.Tutorial.*;
 
 /**
 * An Author page is an individual topic page within a tutorial track. This is 
 * the page that authors fill out their tutorial content on.
+*
+* @author Kim Arre
 */
-public abstract class AuthorPage {
+public class AuthorPage {
    Description description;
    CodeExample example;
    String tryItYourself;
@@ -28,8 +31,12 @@ public abstract class AuthorPage {
          authorPages'.contains(this);
 
    */
-   abstract void save(StudentTutorial studentPages, AuthorTutorial authorPages);
+   public void save() {
+      System.out.println("Called tutorial save() method.");
+   }
    
-   abstract void preview();
+   public void preview() {
+      System.out.println("Called tutorial previow() method.");
+   }
 
 }

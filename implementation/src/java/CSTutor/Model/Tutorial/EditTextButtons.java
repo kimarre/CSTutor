@@ -3,6 +3,8 @@ package CSTutor.Model.Tutorial;
 /**
  * EditTextButtons comprise the toolbar that gives the authors or editors the
  * ability to format text within any of the text input fields.
+ *
+ * @author Kim Arre
  */
 public abstract class EditTextButtons {
    String fontStyle;
