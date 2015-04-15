@@ -1,5 +1,7 @@
-package Manager;
-
+package CSTutor.View.Manager;
+/**
+ * @author Simon Vurens
+ */
 import java.awt.*;
 import java.awt.event.*;
 

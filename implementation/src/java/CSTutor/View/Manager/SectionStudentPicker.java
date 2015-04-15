@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.View.Manager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * @author Simon Vurens
+ */
 public class SectionStudentPicker extends JFrame{
 	public SectionStudentPicker() {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

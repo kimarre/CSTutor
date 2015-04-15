@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 import java.util.*;
 
@@ -7,13 +7,20 @@ import java.util.*;
  * The ChatWindow is one of the primary data object of the Chat Tool.
  *
  * The data components of the ChatWindow are a Console window for output and a text box for input.
+ * 
+ *  @author Stephen Daily
  */
 
-public abstract class ChatWindow {
+public class ChatWindow {
     Console chatOutput;
     TextBox textInput;
 	Boolean isShowing;
-
+	
+	
+	public ChatWindow() {
+		
+	}
+	
     /**
      * Enter is a button that transfers the text from the text box from a given student and adds it to the
      * list in the console
@@ -28,7 +35,9 @@ public abstract class ChatWindow {
      *
      */
 
-    abstract void Enter(TextBox textInput);
+    public void Enter(TextBox textInput){
+    	System.out.println("Printing from Enter() in CSTutor.Model.Chat.ChatWindow");
+    }
 	
 	/**
      * showWindow will pop the window out if isShowing is false
@@ -40,7 +49,7 @@ public abstract class ChatWindow {
         (isShowing != true);
     *
     */
-    abstract void showWindow(Boolean isShowing);
+    void showWindow(Boolean isShowing){}
 
     /**
      * hideWindow will minimize the ChatWindow if isShowing is true;
@@ -52,5 +61,5 @@ public abstract class ChatWindow {
          (isShowing != true);
      *
      */
-    abstract void hideWindow(Boolean isShowing);
+    void hideWindow(Boolean isShowing){}
 }

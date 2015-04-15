@@ -6,10 +6,12 @@
 package CSTutor.View.Tutorial;
 
 import java.awt.CardLayout;
+import CSTutor.Model.Tutorial.*;
+import CSTutor.Model.Tutorial.AuthorTutorial.*;
 
 /**
  *
- * @author karre
+ * @author Kim Arre
  */
 public class TutorialEditor extends javax.swing.JPanel {
 
@@ -18,6 +20,7 @@ public class TutorialEditor extends javax.swing.JPanel {
      */
     public TutorialEditor() {
         initComponents();
+        tutorialPage = new AuthorPage();
     }
 
     /**
@@ -52,7 +55,7 @@ public class TutorialEditor extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
         tryItYourself = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTextArea7 = new javax.swing.JTextArea();
         previewButton = new javax.swing.JButton();
@@ -168,10 +171,10 @@ public class TutorialEditor extends javax.swing.JPanel {
 
         jLabel8.setText("<html><b>Try It Yourself!</html></b>");
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -202,7 +205,7 @@ public class TutorialEditor extends javax.swing.JPanel {
                         .addGap(80, 80, 80)
                         .addComponent(previewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tryItYourselfLayout.setVerticalGroup(
@@ -215,7 +218,7 @@ public class TutorialEditor extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(tryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(previewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
@@ -247,17 +250,20 @@ public class TutorialEditor extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        
+        tutorialPage.save();
         confirmSave = new SaveConfirmation();
         confirmSave.setVisible(false);
         // TODO add your handling code here:
         confirmSave.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
-        // TODO add your handling code here:
         //preview.setVisible(true);
+        tutorialPage.preview();
         ((CardLayout)(getParent().getLayout())).show(getParent(), "Student Tutorial");
     }//GEN-LAST:event_previewButtonActionPerformed
 
@@ -267,7 +273,6 @@ public class TutorialEditor extends javax.swing.JPanel {
     private javax.swing.JComboBox font;
     private javax.swing.JComboBox fontColor;
     private javax.swing.JComboBox fontSize;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -289,7 +294,10 @@ public class TutorialEditor extends javax.swing.JPanel {
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton previewButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JPanel tryItYourself;
     // End of variables declaration//GEN-END:variables
     private static SaveConfirmation confirmSave;
+    private static AuthorPage tutorialPage;
+    
 }

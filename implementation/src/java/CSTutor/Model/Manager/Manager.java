@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.Model.Manager;
 import java.util.List;
 
 /**
@@ -7,14 +7,19 @@ import java.util.List;
  * The manager contains a collection of classes. The selectedClass is the
  * currently selected class, and the selectedSection is the currently selected
  * section within that class.
+ * 
+ * @author Simon Vurens
  */
-public abstract class Manager {
+public class Manager {
    List<Class> data;
    Class selectedClass;
    Section selectedSection;
    Unit selectedUnit;
    Tutorial selectedTutorial;
    Page selectedPage;
+   public Manager() {
+   	
+   }
 
    /**
     * SelectSection sets the selectedSection to the given section, if it
@@ -26,7 +31,7 @@ public abstract class Manager {
       post:
        selectedSection'.equals(select);
     */
-   abstract void selectSection(Section select);
+   public void selectSection(Section select) {}
    /**
     * SelectClass sets the selectedClass to the given class, if it exists.
     * <pre>
@@ -35,7 +40,7 @@ public abstract class Manager {
       post:
        selectedClass'.equals(select);
     */ 
-   abstract void selectClass(Class select);
+   public void selectClass(Class select) {}
    /**
     * SelectUnit sets the selectedUnit to the given unit, if it is within the selected class or section.
     * <pre>
@@ -45,7 +50,7 @@ public abstract class Manager {
       post:
        selectedUnit'.equals(select);
     */ 
-   abstract void selectUnit(Unit select);
+   public void selectUnit(Unit select){}
    /**
     * SelectTutorial sets the selectedTutorial to the given tutorial, if it is withing the selected unit.
     * <pre>
@@ -54,7 +59,7 @@ public abstract class Manager {
       post:
        selectedTutorial'.equals(select);
     */ 
-   abstract void selectTutorial(Tutorial select);
+   public void selectTutorial(Tutorial select){}
    /**
     * SelectPage sets the selectedPage to the given page, if it is within the selectedTutorial.
     * <pre>
@@ -63,7 +68,7 @@ public abstract class Manager {
       post:
        selectedPage'.equals(select);
     */ 
-   abstract void selectPage(Page select);
+   public void selectPage(Page select){}
 
    /**
     * CreateClass adds the given class to data.
@@ -73,7 +78,9 @@ public abstract class Manager {
       post:
        data'.contains(classs);
     */
-   abstract void createClass(Class classs);
+   public void createClass(Class classs){
+  	 	System.out.println("In CSTutor.Model.Manager.createClass()");
+  	}
 
    /**
     * CreateSection adds the given section to the currently selected class.
@@ -83,7 +90,7 @@ public abstract class Manager {
       post:
        selectedClass'.sections.contains(section);
     */
-   abstract void createSection(Section section);
+   public void createSection(Section section){}
    /**
     * CreateUnit adds the given section to the currently selected class.
     * <pre>
@@ -93,7 +100,7 @@ public abstract class Manager {
       post:
        selectedClass'.units.contains(unit) || selectedSection' != null && selectedSection'.units.contains(unit);
     */
-   abstract void createUnit(Unit unit);
+   public void createUnit(Unit unit){}
    /**
     * CreateTutorial adds the given tutorial to the currently selected unit.
     * <pre>
@@ -102,7 +109,7 @@ public abstract class Manager {
       post:
        selectedUnit'.tutorials.contains(tutorial);
     */
-   abstract void createTutorial(Tutorial tutorial);
+    public void createTutorial(Tutorial tutorial){}
    /**
     * CreatePage adds the given page to the currently selected tutorial.
     * <pre>
@@ -111,32 +118,43 @@ public abstract class Manager {
       post:
        selectedTutorial'.pages.contains(page);
     */
-   abstract void createPage(Page page);
+    public void createPage(Page page){}
 
-   /**
-    * DeleteUnitTutorialOrPage removes the selected object.
-    * <pre>
-     pre:
-      selectedClass != null && selectedUnit != null;
-     post: 
-      //the deepest non-null object got deleted. If spest has an xor, the ors should really be xors.
-      selectedTutorial' != null && selectedPage != null && selectedPage' == null && !selectedTutorial'.pages.contains(selectedPage) ||
-      selectedPage == null && selectedUnit' != null && selectedTutorial != null && selectedTutorial' == null && !selectedUnit'.tutorials.contains(selectedTutorial) ||
-      selectedSection' != null && selectedTutorial == null && selectedUnit != null && selectedUnit' == null && !selectedSection'.units.contains(selectedUnit) ||
-      selectedClass' != null && selectedTutorial == null && selectedUnit != null && selectedUnit' == null && !selectedClass'.units.contains(selectedUnit);
-    */
-   abstract void deleteUnitTutorialOrPage();
+    /**
+     * Deletes the given class 
+     */
+    public void deleteClass(Class classs) {
+   	 System.out.println("In CSTutor.Model.Manager.deleteClass()");
+    }
 
-   /**
-    * DeleteClassOrSection removes the currently selected section or class.
-    * <pre>
-     pre:
-     selectedClass != null;
-     post:
-     selectedClass' != null && selectedSection != null && selectedSection' == null && selectedClass'.sections.contains(selectedSection) ||
-     selectedClass != null && selectedClass' == null && !data'.contains(selectedClass);
-    */
-   abstract void deleteClassOrSection();
+    /**
+     * Deletes the given section 
+     */
+    public void deleteSection(Section section) {
+   	 System.out.println("In CSTutor.Model.Manager.deleteSection()");
+    }
+
+    /**
+     * Deletes the given unit 
+     */
+    public void deleteUnit(Unit unit) {
+   	 System.out.println("In CSTutor.Model.Manager.deleteUnit()");
+    }
+
+    /**
+     * Deletes the given tutorial 
+     */
+    public void deleteTutorial(Tutorial tutorial) {
+   	 System.out.println("In CSTutor.Model.Manager.deleteTutorial()");
+    }
+
+    /**
+     * Deletes the given page 
+     */
+    public void deletePage(Page page) {
+   	 System.out.println("In CSTutor.Model.Manager.deletePage()");
+    }
+
 
    /**
     * MovePage moves the selected page into the given tutorial, if it exists.
@@ -146,7 +164,7 @@ public abstract class Manager {
      post:
       newTutorial'.pages.contains(selectedPage);
     */
-   abstract void movePage(Tutorial newTutorial);
+    public void movePage(Tutorial newTutorial){}
    /**
     * MoveTutorial moves the given tutorial into the given unit.
     * <pre>
@@ -155,5 +173,5 @@ public abstract class Manager {
      post:
       newUnit'.tutorials.contains(selectedTutorial);
     */
-   abstract void moveTutorial(Unit newUnit);
+    public void moveTutorial(Unit newUnit){}
 }

@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.View.Manager;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-
+/**
+ * @author Simon Vurens
+ */
 public class NewTutGUI extends JFrame{
 	public NewTutGUI() {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

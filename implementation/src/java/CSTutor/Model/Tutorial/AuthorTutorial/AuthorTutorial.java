@@ -1,4 +1,4 @@
-package Tutorial.AuthorTutorial;
+package CSTutor.Model.Tutorial.AuthorTutorial;
 
 import java.util.*;
 //import chat.toolbar;
@@ -6,6 +6,8 @@ import java.util.*;
 /**
  * An author tutorial is the representation of what the author sees as an
  * entire tutorial track.
+ *
+ * @author Kim Arre
  */
 public abstract class AuthorTutorial {
    

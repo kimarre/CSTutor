@@ -1,0 +1,15 @@
+CSTutor.Model.Chat
+CSTutor.Model.Manager
+CSTutor.Model.Progress
+CSTutor.Model.Quiz
+CSTutor.Model.Tutorial
+CSTutor.Model.Tutorial.AuthorTutorial
+CSTutor.Model.Tutorial.StudentTutorial
+CSTutor.Model.User
+CSTutor.View.Chat
+CSTutor.View.Login
+CSTutor.View.Manager
+CSTutor.View.Overview
+CSTutor.View.Progress
+CSTutor.View.Quiz
+CSTutor.View.Tutorial

@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.View.Manager;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,10 +7,14 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-
+/**
+ * @author Simon Vurens
+ */
 public class NewClassGUI extends JFrame{
 	StudentPicker picker;
+	public static CSTutor.Model.Manager.Class newClass;
 	public NewClassGUI() {
+		  newClass = new CSTutor.Model.Manager.Class();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("New Class");
         this.setSize(300, 400);
@@ -71,7 +75,7 @@ public class NewClassGUI extends JFrame{
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Remove button pressed");
+        	   newClass.removeStudent(null);
            }
         });
         options.add(remBut);
@@ -91,6 +95,7 @@ public class NewClassGUI extends JFrame{
 		final JComboBox perOptions = new JComboBox(permissions);
 		perOptions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				newClass.changeAccessLevel(null);
 				System.out.println(perOptions.getSelectedItem());
 			}
 		});
@@ -120,7 +125,7 @@ public class NewClassGUI extends JFrame{
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("OK button pressed");
+        	   ManagerGUI.managerModel.createClass(newClass);
         	   setVisible(false);
            }
         });

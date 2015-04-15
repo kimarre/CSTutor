@@ -1,7 +1,9 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 /**
  * TextBox is an object that takes user inputted text and transfers to the data to the console.
+ * 
+ *  @author Stephen Daily
  */
 
 

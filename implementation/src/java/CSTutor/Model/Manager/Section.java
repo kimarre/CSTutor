@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.Model.Manager;
 import java.util.Collection;
 
 /**
@@ -8,6 +8,7 @@ import java.util.Collection;
  * units and tutorials.
  *
  * Derived from section 2.2.
+ * @author Simon Vurens
  */
 public abstract class Section {
    private Collection<User> students;

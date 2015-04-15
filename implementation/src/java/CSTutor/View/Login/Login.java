@@ -127,7 +127,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        register = new Register();
+        register = new RegisterGUI();
         register.setVisible(true);
         this.setVisible(false);
         // TODO add your handling code here:
@@ -187,6 +187,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
-    private Register register;
+    private RegisterGUI register;
     private RecoverPassword recoverPass;
 }

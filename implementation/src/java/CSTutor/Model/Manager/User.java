@@ -1,8 +1,10 @@
-package Manager;
+package CSTutor.Model.Manager;
 
 /**
  * The user class is based on the requirement that classes need students.
  * Each user has a name and access level associated with them.
+ * 
+ * @author Simon Vurens
  */
 public abstract class User {
    String name;

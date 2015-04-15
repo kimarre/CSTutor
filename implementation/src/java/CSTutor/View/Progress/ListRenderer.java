@@ -1,25 +1,26 @@
-package Progress;
+package CSTutor.View.Progress;
 
 import java.awt.*;
 
 import javax.swing.*;
 
 /****
- * Class ListRenderer stylizes the collapsable lists that appear in the left side bars of the Instructor 
- * and Student UIs.
+ * Class ListRenderer stylizes the list items that populate the side bar. 
+ * @author Erica Solum
+ * @version 13Apr15
  */
 public class ListRenderer extends JLabel implements ListCellRenderer<String>
 {
-    private MainContent main;
-    public ListRenderer(MainContent main)
+    public ListRenderer()
     {
         super();
         setOpaque(true);
-        this.main = main;
         
     }
 
-    
+    /**
+     * Returns the rendered JLabel of the list item.
+     */
     public Component getListCellRendererComponent(JList<? extends String> list,
             String value, int index, boolean isSelected, boolean cellHasFocus)
     {
@@ -58,8 +59,6 @@ public class ListRenderer extends JLabel implements ListCellRenderer<String>
         }
         
         setBackground(background);
-        
-        
         return this;
     }
 

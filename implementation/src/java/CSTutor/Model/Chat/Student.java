@@ -1,12 +1,14 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 /**
  * The student class houses all the information that the ChatWindow needs from students.
  * It will house student ID, online status, and session ID.
+ * 
+ *  @author Stephen Daily
  */
 
 
-abstract class Student{
+public class Student{
     String firstName;
     String lastName;
     int studentID;
@@ -14,9 +16,17 @@ abstract class Student{
 	Boolean isInstructor;
     int sessionID;
 	
-	abstract void requestPrivateMessage();
+    public Student() {
+    	
+    }
+    
+	public void requestPrivateMessage() {
+		System.out.println("Calling from requestPrivateMessage in Model.Chat.Student");
+	}
 	
-	abstract void requestScreenSharing();
+	public void requestScreenSharing() {
+		System.out.println("Calling from requestScreenSharing in Model.Chat.Student");
+	}
 	
 	
 	/**
@@ -30,5 +40,7 @@ abstract class Student{
      *
      */
 	
-	abstract void inviteScreenSharing();
+	public void inviteScreenSharing() {
+		System.out.println("Calling from inviteScreenSharing in Model.Chat.Student");
+	}
 }

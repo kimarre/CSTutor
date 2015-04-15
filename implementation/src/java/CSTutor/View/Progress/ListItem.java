@@ -1,4 +1,4 @@
-package Progress;
+package CSTutor.View.Progress;
 
 /****
  * Class ListItem creates a customizable item that populates the lists in the side bars

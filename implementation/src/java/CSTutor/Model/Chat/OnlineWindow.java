@@ -1,4 +1,4 @@
-package Chat;
+package CSTutor.Model.Chat;
 
 import java.util.*;
 
@@ -8,6 +8,8 @@ import java.util.*;
  * 
  * The OnlineWindow will consist of a collection of students and each of those students will have 
  * methods associated with them.  
+ * 
+ *  @author Stephen Daily
  */
 
 public abstract class OnlineWindow {

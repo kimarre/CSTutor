@@ -1,4 +1,4 @@
-package Manager;
+package CSTutor.View.Manager;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-
+/**
+ * @author Simon Vurens
+ */
 public class StudentPicker extends JFrame{
 	public StudentPicker() {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -53,7 +55,7 @@ public class StudentPicker extends JFrame{
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("OK button pressed");
+        	   NewClassGUI.newClass.addStudent(null);
         	   setVisible(false);
            }
         });

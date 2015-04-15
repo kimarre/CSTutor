@@ -1,6 +1,6 @@
-package Tutorial.StudentTutorial;
+package CSTutor.Model.Tutorial.StudentTutorial;
 
-import Tutorial.*;
+import CSTutor.Model.Tutorial.*;
 
 /**
 * A Student page is an individual topic page within a tutorial track. This is 
@@ -15,6 +15,9 @@ public abstract class StudentPage {
 
    RoadmapModule module;
 
+   /**
+   * Runs the code in the text editor and shows output to the console.
+   */
    abstract void run();
 
    /*
@@ -23,6 +26,9 @@ public abstract class StudentPage {
          // There must be a page to navigate to that's next in the track.
          //
          exists(this.next());
+   */
+   /**
+   * Navigates to the next tutorial.
    */
    abstract void next();
 
@@ -34,7 +40,8 @@ public abstract class StudentPage {
          //
          exists(this.previous());
    */
+   /**
+   * Navigates to the previous tutorial.
+   */
    abstract void prev();
-
-   //ChatToolbar chat;
 }

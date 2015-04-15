@@ -1,10 +1,14 @@
-package Progress;
+package CSTutor.View.Progress;
 import java.awt.*;
 
 import javax.swing.*;
 
 
-
+/****
+ * Class ExpandableListRenderer stylizes the side bars.
+ * @author Erica Solum (esolum@calpoly.edu)
+ * @version 13Apr15
+ */
 public class ExpandableListRenderer extends JLabel implements ListCellRenderer<ExpandableListItem>
 {
 
@@ -13,6 +17,9 @@ public class ExpandableListRenderer extends JLabel implements ListCellRenderer<E
         setOpaque(true);
     }
    
+    /**
+     * Returns the renderer for the list items.
+     */
     public Component getListCellRendererComponent(JList<? extends ExpandableListItem> list,
             ExpandableListItem value, int index, boolean isSelected, boolean cellHasFocus)
     {
