@@ -7,6 +7,8 @@ import java.util.*;
  * The ChatWindow is one of the primary data object of the Chat Tool.
  *
  * The data components of the ChatWindow are a Console window for output and a text box for input.
+ *
+ * @author Stephen Daily
  */
 
 public abstract class ChatWindow {
