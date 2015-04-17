@@ -1,5 +1,8 @@
 package CSTutor.Model.Tutorial;
 
+import java.util.*;
+import CSTutor.Model.Tutorial.StudentTutorial.*;
+
 /**
  * The Roadmap Module is the bar on the left side of the student's tutorial
  * that allows them to quickly navigate sections of the tutorial track.
@@ -7,13 +10,20 @@ package CSTutor.Model.Tutorial;
  * @author Kim Arre
  */
 public class RoadmapModule {
-   String[] pageLinks;
+   LinkedList<Integer> pageLinks;
+
+   public RoadmapModule() {
+      pageLinks = new LinkedList();
+
+      // TO-DO: fill the array with StudentPage entries from the database.
+   }
 
    /**
    * Jumps to the very first tutorial page.
    */
    public void toBeginning() {
-       System.out.println("Called RoadmapModule's toBeginning() method.");
+      Integer newPage = pageLinks.getFirst();
+      System.out.println("Called RoadmapModule's toBeginning() method.");
    }
 
    /**
