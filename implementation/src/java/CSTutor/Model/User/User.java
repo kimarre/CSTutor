@@ -18,6 +18,10 @@ public class User {
     String firstName;
     String lastName;
     String email;
-    Password password;
+    private static Password password;
     boolean instructor;
+    
+    public Password getPassword(){
+        return password;
+    }
 }
