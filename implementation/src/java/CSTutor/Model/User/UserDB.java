@@ -53,7 +53,7 @@ public class UserDB {
                 user_found.email.equals(email)) && return == null;
      * 
      */
-    User getUser(String email)
+    public User getUser(String email)
     {
         return new User();
     }
