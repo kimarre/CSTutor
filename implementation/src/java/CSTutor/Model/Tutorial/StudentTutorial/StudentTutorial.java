@@ -8,5 +8,6 @@ import java.util.*;
  * entire tutorial track.
  */
 public abstract class StudentTutorial {
-   ArrayList<StudentPage> studentPages;
+   ArrayList<TutorialPage> studentPages;
+   //Current page
 }

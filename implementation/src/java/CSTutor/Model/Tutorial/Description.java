@@ -7,6 +7,7 @@ package CSTutor.Model.Tutorial;
  * @author Kim Arre
  */
 public abstract class Description {
+   String title;
    String intro;
    String syntax;
 }

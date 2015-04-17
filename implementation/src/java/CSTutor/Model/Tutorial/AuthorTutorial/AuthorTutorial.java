@@ -11,5 +11,5 @@ import java.util.*;
  */
 public abstract class AuthorTutorial {
    
-   Collection<AuthorPage> authorPages;
+   Collection<TutorialEditor> authorPages;
 }
