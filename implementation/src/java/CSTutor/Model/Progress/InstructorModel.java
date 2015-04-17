@@ -38,7 +38,7 @@ public class InstructorModel
          System.out.println("In InstructorModel.retrieveTutorialData");
          
          /* Tutorials list */
-         DefaultListModel<String> tutorialsModel = new DefaultListModel<>();
+         DefaultListModel<String> tutorialsModel = new DefaultListModel<String>();
          tutorialsModel.addElement("Tutorials");
          tutorialsModel.addElement("   - Hello World!");
          tutorialsModel.addElement("   - Intro. to C");
@@ -54,7 +54,7 @@ public class InstructorModel
          tutorialsModel.addElement("     ...");
          tutorialsModel.addElement("     ...");
          tutorialsModel.addElement("     ...");
-         tutorialList = new JList<>(tutorialsModel);
+         tutorialList = new JList<String>(tutorialsModel);
          tutorialList.setCellRenderer(new ListRenderer());
     }
     
@@ -69,7 +69,7 @@ public class InstructorModel
         System.out.println("In InstructorModel.retrieveStudentData");
         
         /* Students List */
-        DefaultListModel<String> studentModel = new DefaultListModel<>();
+        DefaultListModel<String> studentModel = new DefaultListModel<String>();
         studentModel.addElement("Students");
         studentModel.addElement("   - Maria Auxier");
         studentModel.addElement("   - Marian Bell");
@@ -102,7 +102,7 @@ public class InstructorModel
         studentModel.addElement("   - Paula Webb");
         studentModel.addElement("   - James Welsh");
         studentModel.addElement("   - Marlene Williams");
-        studentList = new JList<>(studentModel);
+        studentList = new JList<String>(studentModel);
         studentList.setCellRenderer(new ListRenderer());
     }
     
@@ -117,7 +117,7 @@ public class InstructorModel
         System.out.println("In InstructorModel.retrieveClassesData");
         
         /* Classes list */
-        DefaultListModel<String> classesModel = new DefaultListModel<>();
+        DefaultListModel<String> classesModel = new DefaultListModel<String>();
         classesModel.addElement("Classes");
         classesModel.addElement("   - CPE 123");
         classesModel.addElement("   - CPE 101");
@@ -126,7 +126,7 @@ public class InstructorModel
         classesModel.addElement("   - CPE 357");
         classesModel.addElement("   - CPE 305");
         classesModel.addElement("   - CPE 308");
-        classList = new JList<>(classesModel);
+        classList = new JList<String>(classesModel);
         classList.setCellRenderer(new ListRenderer());
     }
     

@@ -1,16 +1,19 @@
+package CSTutor.View;
+
 /**
  * The framework for the CSTutor GUI.
  * @author Kyle Reis
  */
 
-package CSTutor.View.Overview;
 
+
+import CSTutor.View.User.*;
 import CSTutor.View.Chat.*;
-import CSTutor.View.Login.*;
 import CSTutor.View.Manager.*;
 import CSTutor.Model.Progress.*;
 import CSTutor.View.Tutorial.*;
 import CSTutor.View.Quiz.*;
+import CSTutor.Model.User.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,12 +33,15 @@ public class Overview extends JFrame {
     private JPanel mainTop;
     private JPanel insideTop;
     private JPanel chatBar;
+    public User user;
+    public UserDB userDB;
     private static int INSTRUCTOR_ACCESS = 2;
     
     public static void main(String[] args) {
         new Overview();
     }
     public Overview() {
+        userDB = new UserDB();
         init();
         mainPanel = new JPanel();
         mainTop = new JPanel(new CardLayout());
@@ -130,7 +136,7 @@ public class Overview extends JFrame {
     }
     
     private void LoginAction(java.awt.event.MouseEvent evt) {                             
-        login = new Login();
+        login = new Login(this);
         login.setVisible(true);
     } 
     

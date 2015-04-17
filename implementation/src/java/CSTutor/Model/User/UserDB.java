@@ -25,7 +25,7 @@ public class UserDB {
                     user_other.email.equals(user.email)))
      * 
      */
-    void addUser(User user)
+    public void addUser(User user)
     {
         
     }
@@ -53,7 +53,7 @@ public class UserDB {
                 user_found.email.equals(email)) && return == null;
      * 
      */
-    User getUser(String email)
+    public User getUser(String email)
     {
         return new User();
     }
