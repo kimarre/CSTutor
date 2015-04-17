@@ -1,4 +1,7 @@
-package CSTutor.View.Login;
+package CSTutor.View.User;
+
+import CSTutor.View.Overview.*;
+import CSTutor.Model.User.*;
 
 /**
  *
@@ -6,11 +9,14 @@ package CSTutor.View.Login;
  */
 public class Login extends javax.swing.JFrame {
 
+    Overview parent;
     /**
      * Creates new form Login3
+     * @param parent The launching class.
      */
-    public Login() {
+    public Login(Overview parent) {
         initComponents();
+        this.parent = parent;
     }
 
     /**
@@ -120,7 +126,10 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        passwordField.setText("");
+        User tempUser = parent.userDB.getUser(usernameField.getText());
+        // TODO: check if tempUser exists
+        tempUser.getPassword().getHash().length();
+        passwordField.getText();
         usernameField.setText("");
         this.setVisible(false);
         // TODO add your handling code here:
@@ -172,7 +181,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login(null).setVisible(true);
             }
         });
     }

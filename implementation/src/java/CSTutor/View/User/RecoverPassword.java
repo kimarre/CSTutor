@@ -1,4 +1,4 @@
-package CSTutor.View.Login;
+package CSTutor.View.User;
 
 import javax.swing.JOptionPane;
 import CSTutor.Model.User.*;
