@@ -1,22 +1,39 @@
 #
 # Makefile for CSTutor prototype.
 #
-MODULES =	Overview \
-		Progress \
-		Quiz \
-		Chat \
-		Login \
-		Manager \
-		Tutorial
+MODULES =	View/Overview \
+		View/Progress \
+		View/Quiz \
+		View/Chat \
+		View/Login \
+		View/Manager \
+		View/Tutorial \
+		Model/Chat \
+		Model/Database \
+		Model/Manager \
+		Model/Progress \
+		Model/Quiz \
+		Model/Tutorial \
+		Model/Tutorial/AuthorTutorial \
+		Model/Tutorial/StudentTutorial \
+		Model/User
 
-FILES =		*.java \
-		Overview/*.java \
-		Progress/*.java \
-		Quiz/*.java \
-		Chat/*.java \
-		Login/*.java \
-		Manager/*.java \
-		Tutorial/*.java
+FILES =		View/Overview/*.java \
+		View/Progress/*.java \
+		View/Quiz/*.java \
+		View/Chat/*.java \
+		View/Login/*.java \
+		View/Manager/*.java \
+		View/Tutorial/*.java \
+		Model/Chat/*.java \
+		Model/Database/*.java \
+		Model/Manager/*.java \
+		Model/Progress/*.java \
+		Model/Quiz/*.java \
+		Model/Tutorial/*.java \
+		Model/Tutorial/AuthorTutorial/*.java \
+		Model/Tutorial/StudentTutorial/*.java \
+		Model/User/*.java
 
 all:		compile jar doc
 
@@ -25,7 +42,7 @@ compile:	$(FILES)
 
 jar:		$(FILES)
 		cd .classes ; \
-		jar cmf Manifest.mf CSTutor.jar *.class $(MODULES) ; \
+		jar cmf Manifest.txt CSTutor.jar *.class $(MODULES) ; \
 		chmod a+x CSTutor.jar ; 
 doc:
 	javadoc \
