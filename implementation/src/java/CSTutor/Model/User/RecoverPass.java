@@ -48,7 +48,7 @@ public class RecoverPass
         
         System.out.println(token);
         
-        token = Base64.getEncoder().encodeToString(token.getBytes());
+        //token = Base64.getEncoder().encodeToString(token.getBytes());
         
         System.out.println(token);
         
