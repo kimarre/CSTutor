@@ -17,7 +17,7 @@ public class Password {
       pre:
         Hash.length() > 0;
      */
-    String getPassword()
+    public String getHash()
     {
         return Hash;
     }
