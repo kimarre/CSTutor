@@ -6,6 +6,7 @@ import java.util.List;
  *
  * A tutorial is a collection of information pages and quizzes. Multiple
  * pages make up a tutorial. A tutorial can be part of a larger unit.
+ * @author Simon Vurens
  */
 public abstract class Tutorial {
    private List<Page> pages;

@@ -49,7 +49,9 @@ public class InstructorUI extends JPanel
         renderer = new ListRenderer(); 
     }
     
-        
+    /**
+     * Initializes the Instructor UI.
+     */
     public void init()
     {
        
@@ -67,6 +69,9 @@ public class InstructorUI extends JPanel
     
     }
         
+    /**
+     * Lays out the middle portion of the UI.
+     */
     public void layoutMiddle()
     {
         makeSideBar();
@@ -85,17 +90,25 @@ public class InstructorUI extends JPanel
         content.setBackground(new Color(255,255,255));
     }
     
+    /**
+     * Returns the side bar.
+     */
     public JPanel getSideBar()
     {
         return bar;
     }
     
+    /**
+     * Returns the main content section of the UI.
+     */
     public MainContent getMain()
     {
         return main;
     }
     
-    
+    /**
+     * Formats the instructor's side bar.
+     */
     public void makeSideBar()
     {
         bar = new JPanel();
@@ -171,7 +184,7 @@ public class InstructorUI extends JPanel
         finalStudentPane.setVisible(true);
         
         /* Classes list */
-        DefaultListModel<String> classesModel = new DefaultListModel<>();
+        DefaultListModel<String> classesModel = new DefaultListModel<String>();
         classesModel.addElement("Classes");
         classesModel.addElement("   - CPE 123");
         classesModel.addElement("   - CPE 101");
@@ -180,11 +193,11 @@ public class InstructorUI extends JPanel
         classesModel.addElement("   - CPE 357");
         classesModel.addElement("   - CPE 305");
         classesModel.addElement("   - CPE 308");
-        JList<String> classesList = new JList<>(classesModel);
+        JList<String> classesList = new JList<String>(classesModel);
         classesList.setCellRenderer(new ListRenderer());
         
         /* Students List */
-        DefaultListModel<String> studentModel = new DefaultListModel<>();
+        DefaultListModel<String> studentModel = new DefaultListModel<String>();
         studentModel.addElement("Students");
         studentModel.addElement("   - Maria Auxier");
         studentModel.addElement("   - Marian Bell");
@@ -217,11 +230,11 @@ public class InstructorUI extends JPanel
         studentModel.addElement("   - Paula Webb");
         studentModel.addElement("   - James Welsh");
         studentModel.addElement("   - Marlene Williams");
-        JList<String> studentList = new JList<>(studentModel);
+        JList<String> studentList = new JList<String>(studentModel);
         studentList.setCellRenderer(new ListRenderer());
         
         /* Tutorials list */
-        DefaultListModel<String> tutorialsModel = new DefaultListModel<>();
+        DefaultListModel<String> tutorialsModel = new DefaultListModel<String>();
         tutorialsModel.addElement("Tutorials");
         tutorialsModel.addElement("   - Hello World!");
         tutorialsModel.addElement("   - Intro. to C");
@@ -237,7 +250,7 @@ public class InstructorUI extends JPanel
         tutorialsModel.addElement("     ...");
         tutorialsModel.addElement("     ...");
         tutorialsModel.addElement("     ...");
-        JList<String> tutorialList = new JList<>(tutorialsModel);
+        JList<String> tutorialList = new JList<String>(tutorialsModel);
         tutorialList.setCellRenderer(new ListRenderer());
         
         
@@ -307,7 +320,6 @@ public class InstructorUI extends JPanel
         tabPane.addTab("Classes", finalClassesPane);
         tabPane.addTab("Students", finalStudentPane);
         tabPane.addTab("Tutorials", finalTutorialPane);
-        
         
     }
 }
