@@ -41,6 +41,15 @@ public class Overview extends JFrame {
         new Overview();
     }
     public Overview() {
+        try
+        {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         userDB = new UserDB();
         init();
         mainPanel = new JPanel();
