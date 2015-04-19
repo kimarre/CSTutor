@@ -20,8 +20,8 @@ public class ChatBar extends JPanel {
     /**
      * Creates new form ChatBar
      */
-    public ChatBox box;
-    public Online online;
+   public ChatBox box;
+   public Online online;
    public ChatBar() {
       initComponents();
    }

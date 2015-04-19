@@ -16,7 +16,9 @@ public class ChatWindow {
     TextBox textInput;
 	Boolean isShowing;
 	
-	
+	/**
+	 * Constructor
+	 */
 	public ChatWindow() {
 		
 	}
@@ -35,8 +37,13 @@ public class ChatWindow {
      *
      */
 
-    public void Enter(TextBox textInput){
-    	System.out.println("Printing from Enter() in CSTutor.Model.Chat.ChatWindow");
+    public Boolean Enter(String text){
+    	if(!text.equals("") && text.trim().length() > 0) {
+    		textInput = new textInput(text);
+    		textInput.pushText();
+    		return true;
+    	}
+    	return false;
     }
 	
 	/**

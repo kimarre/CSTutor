@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class ChatBox extends JFrame {
 	
-	ChatWindow CW;
+	ChatWindow chatWindow;
     JTextArea msgArea;
     /**
      * Creates new form ChatBox
@@ -23,7 +23,7 @@ public class ChatBox extends JFrame {
     public ChatBox(ChatWindow CW) {
         initComponents();
         
-        this.CW = CW;
+        this.chatWindow = CW;
         this.setVisible(true);
         this.setSize(300, 400);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -44,7 +44,9 @@ public class ChatBox extends JFrame {
    	 
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
-             CW.Enter(null);
+             if(chatWindow.Enter(msgArea.getText())) {
+            	 msgArea.setText("");
+             }
    		 }
    	 });
    	 

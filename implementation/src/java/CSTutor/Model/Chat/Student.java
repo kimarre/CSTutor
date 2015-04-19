@@ -16,14 +16,24 @@ public class Student{
 	Boolean isInstructor;
     int sessionID;
 	
+    /**
+     * Constructor
+     */
     public Student() {
     	
     }
     
+    /**
+     * A function that sends a request to a student for a private message.
+     */
 	public void requestPrivateMessage() {
 		System.out.println("Calling from requestPrivateMessage in Model.Chat.Student");
 	}
 	
+	
+	/**
+	 * A function that sends a request to a student for a screen sharing. 
+	 */
 	public void requestScreenSharing() {
 		System.out.println("Calling from requestScreenSharing in Model.Chat.Student");
 	}
