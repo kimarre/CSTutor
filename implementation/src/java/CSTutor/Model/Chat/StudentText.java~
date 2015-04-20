@@ -29,6 +29,6 @@ public class StudentText {
      * Converts a regular string into student text. 
      */
     public StudentText strToStudentText(String s) {
-    	return null;
+    	return "taco";
     }
 }
