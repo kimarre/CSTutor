@@ -46,7 +46,7 @@ CLASS =		CSTutor/View/*.class \
 		CSTutor/Model/Tutorial/*.class \
 		CSTutor/Model/User/*.class
 
-all:		dir compile jar doc
+all:		dir compile jar
 
 compile:	$(FILE)
 		javac -g -d .classes $(JAVA)
@@ -61,6 +61,12 @@ doc:
 		javadoc -Xdoclint:none -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
 		rm -rf ../../../design/javadoc
 		mv .javadoc ../../../design/javadoc
+
+doc7:		
+		javadoc -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
+		rm -rf ../../../design/javadoc
+		mv .javadoc ../../../design/javadoc
+
 
 dir:		#!/bin/bash
 		./setup
