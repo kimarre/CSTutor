@@ -62,6 +62,12 @@ doc:
 		rm -rf ../../../design/javadoc
 		mv .javadoc ../../../design/javadoc
 
+doc7:		
+		javadoc -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
+		rm -rf ../../../design/javadoc
+		mv .javadoc ../../../design/javadoc
+
+
 dir:		#!/bin/bash
 		./setup
 		cp Manifest.txt .classes/Manifest.txt
