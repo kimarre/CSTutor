@@ -2,11 +2,8 @@ package CSTutor.Model.Manager;
 import java.util.List;
 
 /**
- * The Manager object is based on section 2.2 of the requirements. 
- * 
- * The manager contains a collection of classes. The selectedClass is the
- * currently selected class, and the selectedSection is the currently selected
- * section within that class.
+ * The Manager contains all the information for the manager view. It contains
+ * all Classes, as well as what is currently selected. 
  * 
  * @author Simon Vurens (svurens@calpoly.edu)
  */
