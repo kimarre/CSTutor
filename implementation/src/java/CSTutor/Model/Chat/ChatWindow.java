@@ -39,7 +39,7 @@ public class ChatWindow {
 
     public Boolean Enter(String text){
     	if(!text.equals("") && text.trim().length() > 0) {
-    		textInput = new textInput(text);
+    		textInput = new TextBox(text);
     		textInput.pushText();
     		return true;
     	}

@@ -10,19 +10,11 @@ import java.util.*;
 /**
  * @author Simon Vurens
  */
-public class NewTutGUI extends JFrame{
+public class NewTutGUI extends JPanel{
 	public NewTutGUI() {
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        this.setTitle("New Tutorial");
-        this.setSize(300, 400);
-        this.setLocationRelativeTo(null);
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
-        addName();
-        addButtons();
-        
-        this.pack();
-        this.setVisible(false);
+      addName();
 	}
 	
 	public void addName() {

@@ -8,7 +8,7 @@ import java.util.List;
  * currently selected class, and the selectedSection is the currently selected
  * section within that class.
  * 
- * @author Simon Vurens
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class Manager {
    List<Class> data;

@@ -19,7 +19,6 @@ public class MoveGUI extends JFrame{
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         
         addSelections();
-        addButtons();
         
         this.pack();
         this.setVisible(false);
