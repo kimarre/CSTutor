@@ -1,28 +1,26 @@
 #
 # Makefile for CSTutor prototype.
 #
-MODULES =	CSTutor/View/Overview \
-		CSTutor/View/Progress \
+MODULES =	CSTutor/View/Progress \
 		CSTutor/View/Quiz \
 		CSTutor/View/Chat \
-		CSTutor/View/Login \
+		CSTutor/View/User \
 		CSTutor/View/Manager \
 		CSTutor/View/Tutorial \
+		CSTutor/View \
 		CSTutor/Model/Chat \
 		CSTutor/Model/Database \
 		CSTutor/Model/Manager \
 		CSTutor/Model/Progress \
 		CSTutor/Model/Quiz \
 		CSTutor/Model/Tutorial \
-		CSTutor/Model/Tutorial/AuthorTutorial \
-		CSTutor/Model/Tutorial/StudentTutorial \
 		CSTutor/Model/User
 
-FILES =		CSTutor/View/Overview/*.java \
+JAVA =		CSTutor/View/*.java \
 		CSTutor/View/Progress/*.java \
 		CSTutor/View/Quiz/*.java \
 		CSTutor/View/Chat/*.java \
-		CSTutor/View/Login/*.java \
+		CSTutor/View/User/*.java \
 		CSTutor/View/Manager/*.java \
 		CSTutor/View/Tutorial/*.java \
 		CSTutor/Model/Chat/*.java \
@@ -31,27 +29,43 @@ FILES =		CSTutor/View/Overview/*.java \
 		CSTutor/Model/Progress/*.java \
 		CSTutor/Model/Quiz/*.java \
 		CSTutor/Model/Tutorial/*.java \
-		CSTutor/Model/Tutorial/AuthorTutorial/*.java \
-		CSTutor/Model/Tutorial/StudentTutorial/*.java \
 		CSTutor/Model/User/*.java
 
-all:		compile jar doc
+CLASS =		CSTutor/View/*.class \
+		CSTutor/View/Progress/*.class \
+		CSTutor/View/Quiz/*.class \
+		CSTutor/View/Chat/*.class \
+		CSTutor/View/User/*.class \
+		CSTutor/View/Manager/*.class \
+		CSTutor/View/Tutorial/*.class \
+		CSTutor/Model/Chat/*.class \
+		CSTutor/Model/Database/*.class \
+		CSTutor/Model/Manager/*.class \
+		CSTutor/Model/Progress/*.class \
+		CSTutor/Model/Quiz/*.class \
+		CSTutor/Model/Tutorial/*.class \
+		CSTutor/Model/User/*.class
 
-compile:	$(FILES)
-		javac -g -d .classes $(FILES)
+all:		dir compile jar doc
 
-jar:		$(FILES)
+compile:	$(FILE)
+		javac -g -d .classes $(JAVA)
+
+jar:		$(FILE)
 		cd .classes ; \
-		jar cmf Manifest.txt CSTutor.jar *.class $(MODULES) ; \
+		jar cmf Manifest.txt ../CSTutor.jar $(CLASS) ; \
+		cd ../ \
 		chmod a+x CSTutor.jar ; 
-doc:
-	javadoc \
-	    -private \
-	    -d .javadoc \
-	    -doctitle "CSTutor Prototype" \
-	    -windowtitle "CSTutor Prototype" \
-	    -overview overview.html \
-	    $(MODULES)
+
+doc:		
+		javadoc -Xdoclint:none -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
+		rm -rf ../../../design/javadoc
+		mv .javadoc ../../../design/javadoc
+
+dir:		#!/bin/bash
+		./setup
+		cp Manifest.txt .classes/Manifest.txt
+		ls -a
 
 clean:
 	rm -rf .classes/* .javadoc/*
