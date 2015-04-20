@@ -46,7 +46,7 @@ CLASS =		CSTutor/View/*.class \
 		CSTutor/Model/Tutorial/*.class \
 		CSTutor/Model/User/*.class
 
-all:		dir compile jar doc
+all:		dir compile jar
 
 compile:	$(FILE)
 		javac -g -d .classes $(JAVA)
