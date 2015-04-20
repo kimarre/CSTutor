@@ -15,11 +15,8 @@ import java.io.*;
  */
 
 public class ManagerGUI extends JPanel {
-	public NewClassGUI newClass;
+	public NewObjectGUI newObject;
 	public MoveGUI moveTut;
-	public NewSectionGUI newSection;
-	public NewUnitGUI newUnit;
-	public NewTutGUI newTut;
 	public static CSTutor.Model.Manager.Manager managerModel = new CSTutor.Model.Manager.Manager();
     public static void main(String[] args)
     {
@@ -32,11 +29,7 @@ public class ManagerGUI extends JPanel {
         //this.setLocationRelativeTo(null);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
-        newClass = new NewClassGUI();
-        moveTut = new MoveGUI();
-        newSection = new NewSectionGUI();
-        newUnit = new NewUnitGUI();
-        newTut = new NewTutGUI();
+        newObject = new NewObjectGUI();
         
         //addMenuBar();        
         addManagerContent();
@@ -244,7 +237,7 @@ public class ManagerGUI extends JPanel {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("New Class button pressed");
-        	   newClass.setVisible(true);
+        	   newObject.setVisible(true);
            }
         });
         buttonPanel.add(newCBut);
