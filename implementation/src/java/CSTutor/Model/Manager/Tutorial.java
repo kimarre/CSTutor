@@ -2,14 +2,14 @@ package CSTutor.Model.Manager;
 import java.util.List;
 
 /**
- * Derived from section 2.2
- *
- * A tutorial is a collection of information pages and quizzes. Multiple
- * pages make up a tutorial. A tutorial can be part of a larger unit.
- * @author Simon Vurens
+ * Class Tutorial represents a tutorial track. It contains multiple pages.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public abstract class Tutorial {
+	/* All tutorial pages in this track*/
    private List<Page> pages;
+   /* The name of the tutorial track*/
    private String name;
    /**
     * AddPage adds the given page to the collection

@@ -7,8 +7,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-/**
- * @author Simon Vurens
+/****
+ * Class NewTutGUI provides the GUI for creating a new tutorial.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class NewTutGUI extends JPanel{
 	public NewTutGUI() {

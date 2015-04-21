@@ -2,15 +2,14 @@ package CSTutor.Model.Manager;
 import java.util.*;
 
 /**
- * Derived from section 2.2
- *
- * A Unit is a collection of tutorials, making one cohesive section about
- * a range of subjects. It has a name.
+ * Class Unit holds a collection of tutorial tracks.
  * 
- * @author Simon Vurens
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public abstract class Unit {
+	/* The tutorial tracks */
    private List<Tutorial> tutorials;
+   /* The name of the unit*/
    private String name;
 
    /**

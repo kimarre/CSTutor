@@ -7,8 +7,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-/**
- * @author Simon Vurens
+/****
+ * Class NewClassGUI provides the GUI for creating a new class.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class NewClassGUI extends JPanel{
 	StudentPicker picker;

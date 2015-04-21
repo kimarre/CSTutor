@@ -7,8 +7,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-/**
- * @author Simon Vurens
+/****
+ * Class NewUnitGUI provides the GUI for creating a new unit.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class NewUnitGUI extends JPanel{
 	public NewUnitGUI() {

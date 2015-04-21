@@ -1,6 +1,8 @@
 package CSTutor.View.Manager;
-/**
- * @author Simon Vurens
+/****
+ * Class NewSectionGUI provides the GUI for creating a new section.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 import java.awt.*;
 import java.awt.event.*;

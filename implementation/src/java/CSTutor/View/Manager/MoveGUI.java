@@ -7,8 +7,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-/**
- * @author Simon Vurens
+/****
+ * Class MoveGUI provides the GUI for moving objects.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class MoveGUI extends JFrame{
 	public MoveGUI() {

@@ -1,19 +1,28 @@
 package CSTutor.Model.Manager;
 import java.util.List;
 
-/**
+/****
  * The Manager contains all the information for the manager view. It contains
  * all Classes, as well as what is currently selected. 
  * 
  * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class Manager {
+	/* A list of all classes */
    List<Class> data;
+	/* The selected class */
    Class selectedClass;
+	/* The selected section */
    Section selectedSection;
+	/* The selected unit */
    Unit selectedUnit;
+	/* The selected tutorial */
    Tutorial selectedTutorial;
+	/* The selected page */
    Page selectedPage;
+   /**
+    * Creates a manager model. Should only be one per site.
+    */
    public Manager() {
    	
    }
