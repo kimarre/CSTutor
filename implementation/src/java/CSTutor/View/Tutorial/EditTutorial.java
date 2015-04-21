@@ -20,7 +20,7 @@ public class EditTutorial extends javax.swing.JPanel {
      */
     public EditTutorial() {
         initComponents();
-        tutorialPage = new TutorialEditor();
+        tutorialPage = new CSTutor.Model.Tutorial.TutorialEditor();
     }
 
     /**
@@ -298,6 +298,6 @@ public class EditTutorial extends javax.swing.JPanel {
     private javax.swing.JPanel tryItYourself;
     // End of variables declaration//GEN-END:variables
     private static SaveConfirmation confirmSave;
-    private static TutorialEditor tutorialPage;
+    private static CSTutor.Model.Tutorial.TutorialEditor tutorialPage;
     
 }
