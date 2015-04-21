@@ -11,7 +11,8 @@ import CSTutor.Model.Tutorial.*;
 
 /**
  *
- * @author Kim Arre
+ * @author Kim Arre (karre@calpoly.edu)
+ * @version 20Apr2015
  */
 public class EditTutorial extends javax.swing.JPanel {
 
@@ -20,7 +21,7 @@ public class EditTutorial extends javax.swing.JPanel {
      */
     public EditTutorial() {
         initComponents();
-        tutorialPage = new TutorialEditor();
+        tutorialPage = new CSTutor.Model.Tutorial.TutorialEditor();
     }
 
     /**
@@ -50,7 +51,7 @@ public class EditTutorial extends javax.swing.JPanel {
         jTextArea5 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        syntaxLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         tryItYourself = new javax.swing.JPanel();
@@ -128,7 +129,7 @@ public class EditTutorial extends javax.swing.JPanel {
 
         jLabel7.setText("<html><b>Description</html></b>");
 
-        jLabel1.setText("<html><b>Syntax</html></b>");
+        syntaxLabel.setText("<html><b>Syntax</html></b>");
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
@@ -149,7 +150,7 @@ public class EditTutorial extends javax.swing.JPanel {
                     .addGroup(DescriptionPanelLayout.createSequentialGroup()
                         .addGroup(DescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -161,7 +162,7 @@ public class EditTutorial extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -252,20 +253,29 @@ public class EditTutorial extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        tutorialPage.description.intro = "woop";
         tutorialPage.save();
         confirmSave = new SaveConfirmation();
         confirmSave.setVisible(false);
-        // TODO add your handling code here:
+        
         confirmSave.setVisible(true);
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }
 
     private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
         //preview.setVisible(true);
         tutorialPage.preview();
         ((CardLayout)(getParent().getLayout())).show(getParent(), "Student Tutorial");
     }//GEN-LAST:event_previewButtonActionPerformed
+    
+    public static void main(String args[]) {
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new EditTutorial().setVisible(true);
+            }
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,7 +283,7 @@ public class EditTutorial extends javax.swing.JPanel {
     private javax.swing.JComboBox font;
     private javax.swing.JComboBox fontColor;
     private javax.swing.JComboBox fontSize;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel syntaxLabel;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -298,6 +308,6 @@ public class EditTutorial extends javax.swing.JPanel {
     private javax.swing.JPanel tryItYourself;
     // End of variables declaration//GEN-END:variables
     private static SaveConfirmation confirmSave;
-    private static TutorialEditor tutorialPage;
+    private static CSTutor.Model.Tutorial.TutorialEditor tutorialPage;
     
 }

@@ -10,11 +10,17 @@ import CSTutor.View.Tutorial.*;
 * @version 20Apr2015
 */
 public class TutorialEditor {
-   Description description;
-   CodeExample example;
-   String tryItYourself;
+	/** Describes the overall concept of the subject at hand.*/
+   public Description description;
+   
+   /** Contains the example code and output */
+   public CodeExample example;
+   
+   /** Contains the instructor's problem for the student */
+   public String tryItYourself;
 
-   EditTextButtons toolbar;
+   /** Contains the editing options for a Tutorial Editor page*/
+   public EditTextButtons toolbar;
 
    /*
       pre:                                                          <pre>
@@ -36,6 +42,7 @@ public class TutorialEditor {
    */
    public void save() {
       System.out.println("Called tutorial save() method.");
+      System.out.println("String received was: " + description.intro);
    }
    
    /**

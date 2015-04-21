@@ -10,15 +10,28 @@ import CSTutor.Model.Tutorial.*;
 * @version 20Apr2015
 */
 public class TutorialPage {
-   String title;
-   Description description;
-   CodeExample example;
-   String tryItYourself;
-   String textEditor;
-   String console;
+   /** Represents the overall title for the tutorial page */
+   public String title;
    
-   int nextPageId;
-   int prevPageId;
+   /** Describes the overall concept of the subject at hand.*/
+   public Description description;
+   
+   /** Contains the example code and output */
+   public CodeExample example;
+   
+   /** Contains the instructor's problem for the student */
+   public String tryItYourself;
+   
+   /** Allows the student to enter their own code to try to solve the 'Try It Yourself' problem given by the instructor */
+   public String textEditor;
+   
+   /** Output of the student program gets redirected to this text field for feedback and results */
+   public String console;
+   
+   /** Unique identifier for the page for the database */
+   int pageId;
+   
+   /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
    RoadmapModule module;
 
    /**
