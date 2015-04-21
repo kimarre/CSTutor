@@ -50,7 +50,6 @@ public class Overview extends JFrame {
         {
             e.printStackTrace();
         }*/
-
         userDB = new UserDB();
         init();
         mainPanel = new JPanel();
@@ -100,12 +99,17 @@ public class Overview extends JFrame {
         myTuts.setText("My Tutorials");
         myTuts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TutorialAction(evt);
+                MyTutorialAction(evt);
             }
         });
         jMenuTutorials.add(myTuts);
         
         createTuts.setText("Create Tutorial");
+        createTuts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateTutorialAction(evt);
+            }
+        });
         jMenuTutorials.add(createTuts);
         
         // Quizzes
@@ -154,7 +158,11 @@ public class Overview extends JFrame {
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Manager");
     }
     
-    private void TutorialAction(java.awt.event.ActionEvent evt) { 
+    private void MyTutorialAction(java.awt.event.ActionEvent evt) { 
+        ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
+    }
+    
+    private void CreateTutorialAction(java.awt.event.ActionEvent evt) { 
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Tutorial");
     }
     
