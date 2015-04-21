@@ -28,6 +28,8 @@ public class ListRenderer extends JLabel implements ListCellRenderer<String>
         setText(value);
         
         
+        
+        
         if(index == 0)
         {
             background = new Color(159, 198, 233);
@@ -35,6 +37,7 @@ public class ListRenderer extends JLabel implements ListCellRenderer<String>
         }
         else if(isSelected && index != 0)
         {
+            System.out.println("Accessing " + value);
             background = new Color(183, 183, 183);
             setFont(new Font("Avenir", Font.PLAIN, 16));
             
