@@ -1,5 +1,6 @@
 package CSTutor.View.User;
 
+import CSTutor.View.Overview;
 import CSTutor.View.*;
 import CSTutor.Model.User.*;
 
@@ -128,7 +129,7 @@ public class Login extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         User tempUser = parent.userDB.getUser(usernameField.getText());
         // TODO: check if tempUser exists
-        tempUser.getPassword().getHash().length();
+        //tempUser.getPassword().getHash().length();
         passwordField.getText();
         usernameField.setText("");
         this.setVisible(false);
