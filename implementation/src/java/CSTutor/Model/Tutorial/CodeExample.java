@@ -7,6 +7,6 @@ package CSTutor.Model.Tutorial;
  * @version 20Apr2015
  */
 public abstract class CodeExample {
-   String sampleCode;
-   String sampleOutput;
+   public String sampleCode;
+   public String sampleOutput;
 }

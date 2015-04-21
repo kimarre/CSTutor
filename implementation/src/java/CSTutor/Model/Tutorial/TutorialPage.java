@@ -10,13 +10,14 @@ import CSTutor.Model.Tutorial.*;
 * @version 20Apr2015
 */
 public class TutorialPage {
-   String title;
-   Description description;
-   CodeExample example;
-   String tryItYourself;
-   String textEditor;
-   String console;
+   public String title;
+   public Description description;
+   public CodeExample example;
+   public String tryItYourself;
+   public String textEditor;
+   public String console;
    
+   int pageId;
    int nextPageId;
    int prevPageId;
    RoadmapModule module;

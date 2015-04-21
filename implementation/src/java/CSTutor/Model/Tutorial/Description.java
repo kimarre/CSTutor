@@ -8,6 +8,6 @@ package CSTutor.Model.Tutorial;
  * @version 20Apr2015
  */
 public abstract class Description {
-   String intro;
-   String syntax;
+   public String intro;
+   public String syntax;
 }
