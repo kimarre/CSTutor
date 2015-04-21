@@ -7,9 +7,15 @@ package CSTutor.Model.Chat;
  */
 
 
-abstract class TextBox{
+public class TextBox{
     String buffer;
-
+    StudentText convertedText;
+    
+    
+    public TextBox(String buffer) {
+    	this.buffer = buffer; 
+    }
+    
     /**
      * pushText will take the text in the buffer, and push it to the console.
      *
@@ -20,5 +26,7 @@ abstract class TextBox{
          (text != null);
      *
      */
-     abstract void pushText(String text);
+     public void pushText() {
+    	 convertedText = new StudentText(buffer);
+     }
 }

@@ -1,5 +1,8 @@
 package CSTutor.Model.User;
 
+import java.util.*;
+import java.security.*;
+
 /**
  * RecoverPass is responsible for sending password reset email to users that
  * have asked to reset their password. It is is derived from
@@ -8,10 +11,18 @@ package CSTutor.Model.User;
  *
  * @author Kyle Reis
  */
-public class RecoverPass {
+public class RecoverPass 
+{
     UserDB userDatabase;
     TokenDB tokenDatabase;
     String token;
+    SecureRandom numGenerator;
+    
+    public RecoverPass()
+    {
+        numGenerator = new SecureRandom();
+        tokenDatabase = new TokenDB();
+    }
     
     /**
      * Generates a password reset token based on a random number generated using
@@ -24,10 +35,31 @@ public class RecoverPass {
      */
     public void generateResetToken()
     {
-        token = null;
-        //tokenDatabase.addToken(token);
-        sendEmail();
-        System.out.println("Reset Token Generated");
+        token = "";
+        
+        for (int i = 0; i <=6; i++)
+        {
+            token += Integer.toString(numGenerator.nextInt());
+            if (i != 6)
+            {
+                token += ':';
+            }
+        }
+        
+        System.out.println(token);
+        
+        token = Base64.getEncoder().encodeToString(token.getBytes());
+        
+        System.out.println(token);
+        
+        if(tokenDatabase.addToken(token))
+        {
+            sendEmail();
+            System.out.println("Reset Token Generated");
+        } else {
+            // generate again
+        }
+        
     }
     
     /**

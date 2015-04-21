@@ -183,6 +183,76 @@ public class InstructorUI extends JPanel
         finalStudentPane.setBackground(new Color(208, 226, 245));
         finalStudentPane.setVisible(true);
         
+        /* Classes list */
+        DefaultListModel<String> classesModel = new DefaultListModel<String>();
+        classesModel.addElement("Classes");
+        classesModel.addElement("   - CPE 123");
+        classesModel.addElement("   - CPE 101");
+        classesModel.addElement("   - CPE 102");
+        classesModel.addElement("   - CPE 103");
+        classesModel.addElement("   - CPE 357");
+        classesModel.addElement("   - CPE 305");
+        classesModel.addElement("   - CPE 308");
+        JList<String> classesList = new JList<String>(classesModel);
+        classesList.setCellRenderer(new ListRenderer());
+        
+        /* Students List */
+        DefaultListModel<String> studentModel = new DefaultListModel<String>();
+        studentModel.addElement("Students");
+        studentModel.addElement("   - Maria Auxier");
+        studentModel.addElement("   - Marian Bell");
+        studentModel.addElement("   - Eugene Brown");
+        studentModel.addElement("   - Jamie Bryant");
+        studentModel.addElement("   - Danielle Carter");
+        studentModel.addElement("   - Vernon Chilton");
+        studentModel.addElement("   - Mary Clark");
+        studentModel.addElement("   - Laurie Crawford");
+        studentModel.addElement("   - Geoffrey Dunning");
+        studentModel.addElement("   - Lester Flores");
+        studentModel.addElement("   - Suzanne Gridley");
+        studentModel.addElement("   - Bruce Griffin");
+        studentModel.addElement("   - Jennifer Headrick");
+        studentModel.addElement("   - Kevin Hoover");
+        studentModel.addElement("   - Constance Jackson");
+        studentModel.addElement("   - Chris Kapp");
+        studentModel.addElement("   - Leon Lewis");
+        studentModel.addElement("   - Victor Massey");
+        studentModel.addElement("   - Blanche Natal");
+        studentModel.addElement("   - Dianne Ohara");
+        studentModel.addElement("   - Charlotte Perry");
+        studentModel.addElement("   - Eric Prince");
+        studentModel.addElement("   - Frank Reed");
+        studentModel.addElement("   - Nicole Rios");
+        studentModel.addElement("   - David Rodriguez");
+        studentModel.addElement("   - James Scott");
+        studentModel.addElement("   - Robert Taylor");
+        studentModel.addElement("   - Anna Turley");
+        studentModel.addElement("   - Paula Webb");
+        studentModel.addElement("   - James Welsh");
+        studentModel.addElement("   - Marlene Williams");
+        JList<String> studentList = new JList<String>(studentModel);
+        studentList.setCellRenderer(new ListRenderer());
+        
+        /* Tutorials list */
+        DefaultListModel<String> tutorialsModel = new DefaultListModel<String>();
+        tutorialsModel.addElement("Tutorials");
+        tutorialsModel.addElement("   - Hello World!");
+        tutorialsModel.addElement("   - Intro. to C");
+        tutorialsModel.addElement("   - Data Types");
+        tutorialsModel.addElement("   - If Statements");
+        tutorialsModel.addElement("   - Loops in C");
+        tutorialsModel.addElement("   - Functions");
+        tutorialsModel.addElement("   - The Stack");
+        tutorialsModel.addElement("     ...");
+        tutorialsModel.addElement("     ...");
+        tutorialsModel.addElement("     ...");
+        tutorialsModel.addElement("     ...");
+        tutorialsModel.addElement("     ...");
+        tutorialsModel.addElement("     ...");
+        tutorialsModel.addElement("     ...");
+        JList<String> tutorialList = new JList<String>(tutorialsModel);
+        tutorialList.setCellRenderer(new ListRenderer());
+        
         
         /* Lists Stuff */
         ExpandableListItem tutorials = new ExpandableListItem("Tutorials", model.getTutorialList(), new ListRenderer());

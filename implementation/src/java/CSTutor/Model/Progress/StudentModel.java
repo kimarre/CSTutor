@@ -35,7 +35,7 @@ public class StudentModel
          System.out.println("In StudentModel.retrieveTutorialData");
          
          /* Tutorials list */
-         DefaultListModel<String> tutorialsModel = new DefaultListModel<>();
+         DefaultListModel<String> tutorialsModel = new DefaultListModel<String>();
          tutorialsModel.addElement("Tutorials");
          tutorialsModel.addElement("   - Hello World!");
          tutorialsModel.addElement("   - Intro. to C");
@@ -51,7 +51,7 @@ public class StudentModel
          tutorialsModel.addElement("     ...");
          tutorialsModel.addElement("     ...");
          tutorialsModel.addElement("     ...");
-         tutorialList = new JList<>(tutorialsModel);
+         tutorialList = new JList<String>(tutorialsModel);
          tutorialList.setCellRenderer(new ListRenderer());
     }
     
@@ -66,7 +66,7 @@ public class StudentModel
         System.out.println("In StudentModel.retrieveClassesData");
         
         /* Classes list */
-        DefaultListModel<String> classesModel = new DefaultListModel<>();
+        DefaultListModel<String> classesModel = new DefaultListModel<String>();
         classesModel.addElement("Classes");
         classesModel.addElement("   - CPE 123");
         classesModel.addElement("   - CPE 101");
@@ -75,7 +75,7 @@ public class StudentModel
         classesModel.addElement("   - CPE 357");
         classesModel.addElement("   - CPE 305");
         classesModel.addElement("   - CPE 308");
-        classList = new JList<>(classesModel);
+        classList = new JList<String>(classesModel);
         classList.setCellRenderer(new ListRenderer());
     }
     

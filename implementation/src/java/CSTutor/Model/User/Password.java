@@ -1,5 +1,8 @@
 package CSTutor.Model.User;
 
+import java.util.regex.*;
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Password is a hash of the password that the user entered when registering. 
  * It is is derived from
@@ -9,7 +12,7 @@ package CSTutor.Model.User;
  * @author Kyle Reis
  */
 public class Password {
-    String Hash;
+    String hash;
     
     /**
      * Gets the hashed version of the password.
@@ -17,9 +20,9 @@ public class Password {
       pre:
         Hash.length() > 0;
      */
-    String getPassword()
+    public boolean validateHash(String password)
     {
-        return Hash;
+        return BCrypt.checkpw(password, hash);
     }
     
     /**
@@ -32,6 +35,28 @@ public class Password {
      */
     boolean setPassword(String password)
     {
-        return false;
+        boolean valid = false;
+        
+        if(checker(password))
+        {
+            hash = BCrypt.hashpw(password, BCrypt.gensalt());
+            valid = true;
+        }
+        return valid;
+        
+        
+        //boolean correct = BCrypt.checkpw("password", hash);
+    }
+    
+    /**
+     * Checks to see if the password meets the character requirements.
+     * @param password the password to be checked.
+     * @return True - if the password meets all of the criteria.
+     */
+    boolean checker(String password)
+    {
+        Pattern regex = Pattern.compile("[^!@#$%^&*()a-zA-Z0-9]");
+        Matcher m = regex.matcher(password);
+        return (password.length() > 5 && password.length() < 40 && !m.find());
     }
 }

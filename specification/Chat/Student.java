@@ -3,6 +3,8 @@ package Chat;
 /**
  * The student class houses all the information that the ChatWindow needs from students.
  * It will house student ID, online status, and session ID.
+ *
+ * @author Stephen Daily
  */
 
 

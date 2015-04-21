@@ -1,6 +1,8 @@
 package CSTutor.View.Manager;
-/**
- * @author Simon Vurens
+/****
+ * Class NewSectionGUI provides the GUI for creating a new section.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 import java.awt.*;
 import java.awt.event.*;
@@ -10,18 +12,14 @@ import javax.swing.event.*;
 
 import java.util.*;
 
-public class NewSectionGUI extends JFrame{
+public class NewSectionGUI extends JPanel{
 	SectionStudentPicker picker;
 	public NewSectionGUI() {
-        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        this.setTitle("New Section");
-        this.setSize(300, 400);
-        this.setLocationRelativeTo(null);
         
         picker = new SectionStudentPicker();
         picker.setVisible(false);
         
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         
         
@@ -29,10 +27,6 @@ public class NewSectionGUI extends JFrame{
         addStudentPanel();
         addPermissions();
         addProf();
-        addButtons();
-        
-        this.pack();
-        this.setVisible(false);
 	}
 	public void addNamePanel() {
 		JPanel namePanel = new JPanel();

@@ -1,6 +1,6 @@
 package CSTutor.Model.User;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * TokenDB holds all of the currently valid password reset tokens. 
@@ -11,7 +11,11 @@ import java.util.Collection;
  * @author Kyle Reis
  */
 public class TokenDB {
-    Collection<String> tokens;
+    Map<String, String> tokens;
+    
+    public TokenDB() {
+        tokens = new HashMap();
+    }
     
     /**
      * Adds a token to the collection of currently valid tokens.
@@ -24,9 +28,15 @@ public class TokenDB {
                     token_other.equals(token)))
      * 
      */
-    void addToken(String token)
+    boolean addToken(String token)
     {
-        tokens.add(token);
+        if (!isToken(token))
+        {
+            tokens.put(token, "bob");
+            return true;
+        } else {
+            return false;
+        }
     }
     
     /**

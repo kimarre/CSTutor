@@ -7,33 +7,27 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-/**
- * @author Simon Vurens
+/****
+ * Class NewClassGUI provides the GUI for creating a new class.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
-public class NewClassGUI extends JFrame{
+public class NewClassGUI extends JPanel{
 	StudentPicker picker;
 	public static CSTutor.Model.Manager.Class newClass;
 	public NewClassGUI() {
 		  newClass = new CSTutor.Model.Manager.Class();
-        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        this.setTitle("New Class");
-        this.setSize(300, 400);
-        this.setLocationRelativeTo(null);
         
         picker = new StudentPicker();
         picker.setVisible(false);
         
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         
         
         addNamePanel();
         addStudentPanel();
         addPermissions();
-        addButtons();
-        
-        this.pack();
-        this.setVisible(false);
 	}
 	public void addNamePanel() {
 		JPanel namePanel = new JPanel();

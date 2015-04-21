@@ -10,6 +10,6 @@ import java.util.*;
  */
 
 
-abstract class Console {
-    Collection<StudentText> data;
+public class Console {
+    Vector<StudentText> data;
 }

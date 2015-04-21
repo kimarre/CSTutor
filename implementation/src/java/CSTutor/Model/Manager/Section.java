@@ -2,18 +2,21 @@ package CSTutor.Model.Manager;
 import java.util.Collection;
 
 /**
- * Represents a section of a class. Each section contains some students from
- * the class. Each section also has a professor. Like classes, they may have
- * their own units and tutorials, but also have access to the overall class'
- * units and tutorials.
- *
- * Derived from section 2.2.
+ * Class Section is a subsection of a class. It can have a specific professor, but otherwise
+ * is similar to a class.
+ * 
  * @author Simon Vurens
  */
 public abstract class Section {
+	/* The name of the section */
+	private String name;
+	/* The enrolled students in the section. A subset of students enrolled in the class*/
    private Collection<User> students;
+   /* The set of units within the section*/
    private Collection<Unit> units;
+   /* the professor in charge of the section */
    private User professor;
+   /* The class that this section is a part of */
    private Class parent;
     /** 
     * AddStudent adds the specified student to the section
@@ -27,7 +30,7 @@ public abstract class Section {
    abstract void removeStudent(User student);
 
    /**
-    * ChangeProfessor changes the professor of the section
+    * ChangeProfessor changes the professor of the section to the specified professor
     */
    abstract void changeProfessor(User professor);
 }

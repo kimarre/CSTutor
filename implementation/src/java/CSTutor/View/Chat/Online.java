@@ -70,7 +70,8 @@ public class Online extends JFrame{
         add(overallPanel);
         listbox.setVisible(true);
         listbox.setFocusable(false);
-        this.pack();
+        this.setResizable(false);
+        this.setSize(200, 400);
     }
 
 

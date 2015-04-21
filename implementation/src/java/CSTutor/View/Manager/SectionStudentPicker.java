@@ -9,8 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-/**
- * @author Simon Vurens
+/****
+ * Class SectionStudentPicker provides the GUI for adding students to a section.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class SectionStudentPicker extends JFrame{
 	public SectionStudentPicker() {

@@ -1,0 +1,4 @@
+#!/bin/bash
+if [ ! -d .classes ]; then 
+	mkdir .classes
+fi
