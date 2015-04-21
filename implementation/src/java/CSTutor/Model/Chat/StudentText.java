@@ -25,11 +25,11 @@ public class StudentText {
      */
     public StudentText(String text) {
     	this.text = text;
-    	this.studentID = "123456";
+    	this.studentID = 123456;
     	this.time = new Date();
     }
     
-    private string formatTime() {
+    private String formatTime() {
     	SimpleDateFormat ft = new SimpleDateFormat ("HH.mm.ss a");
     	return ft.format(time);
     }
@@ -37,7 +37,7 @@ public class StudentText {
     /**
      * Converts a regular string into student text. 
      */
-    public string strToStudentText(String s) {
+    public String strToStudentText(String s) {
     	return (formatTime() + studentID + text);
     }
 }
