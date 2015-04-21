@@ -57,7 +57,7 @@ public class Tutorial extends javax.swing.JPanel {
         runButton = new javax.swing.JButton();
         tryItLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tryItTextbox = new javax.swing.JTextArea();
+        tryItTextbox = new javax.swing.JTextField();
         titleLabel = new javax.swing.JLabel();
         previousLessonButton = new javax.swing.JButton();
         nextLessonButton = new javax.swing.JButton();
@@ -158,8 +158,8 @@ public class Tutorial extends javax.swing.JPanel {
         tryItLabel.setText("<html><b>Try It Yourself!</html></b>");
 
         tryItTextbox.setColumns(20);
-        tryItTextbox.setRows(5);
-        tryItTextbox.setText("Write a program that prints out the multiples\nof 5 from 0 to 25.");
+        //tryItTextbox.setRows(5);
+        tryItTextbox.setText("poop");
         jScrollPane2.setViewportView(tryItTextbox);
 
         javax.swing.GroupLayout TryItYourselfLayout = new javax.swing.GroupLayout(TryItYourself);
@@ -349,7 +349,7 @@ public class Tutorial extends javax.swing.JPanel {
     private javax.swing.JButton toBeginningButton;
     private javax.swing.JButton toEndButton;
     private javax.swing.JLabel tryItLabel;
-    private javax.swing.JTextArea tryItTextbox;
+    private javax.swing.JTextField tryItTextbox;
     // End of variables declaration//GEN-END:variables
     public RoadmapModule sideModule;
 }

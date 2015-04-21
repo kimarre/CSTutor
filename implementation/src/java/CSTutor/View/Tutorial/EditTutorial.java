@@ -22,6 +22,7 @@ public class EditTutorial extends javax.swing.JPanel {
     public EditTutorial() {
         initComponents();
         tutorialPage = new CSTutor.Model.Tutorial.TutorialEditor();
+        studentPage = new CSTutor.Model.Tutorial.TutorialPage();
     }
 
     /**
@@ -254,7 +255,8 @@ public class EditTutorial extends javax.swing.JPanel {
     
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        tutorialPage.tryItYourself = "woop";
+        tutorialPage.tryItYourself = tryItText.getText();
+        studentPage.tryItYourself = tryItText.getText();
         tutorialPage.save();
         confirmSave = new SaveConfirmation();
         confirmSave.setVisible(false);
@@ -308,6 +310,7 @@ public class EditTutorial extends javax.swing.JPanel {
     private javax.swing.JPanel tryItYourself;
     // End of variables declaration//GEN-END:variables
     private static SaveConfirmation confirmSave;
-    private static CSTutor.Model.Tutorial.TutorialEditor tutorialPage;
+    public static CSTutor.Model.Tutorial.TutorialEditor tutorialPage;
+    public static CSTutor.Model.Tutorial.TutorialPage studentPage;
     
 }
