@@ -10,11 +10,16 @@ import CSTutor.View.Tutorial.*;
 * @version 20Apr2015
 */
 public class TutorialEditor {
-	/** */
+	/** Describes the overall concept of the subject at hand.*/
    public Description description;
+   
+   /** Contains the example code and output */
    public CodeExample example;
+   
+   /** Contains the instructor's problem for the student */
    public String tryItYourself;
 
+   /** Contains the editing options for a Tutorial Editor page*/
    public EditTextButtons toolbar;
 
    /*

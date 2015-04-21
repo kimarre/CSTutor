@@ -8,6 +8,9 @@ package CSTutor.Model.Tutorial;
  * @version 20Apr2015
  */
 public abstract class Description {
+	/** String text to hold the introduction of the tutorial's description */
    public String intro;
+   
+   /** String text to hold the syntax of the tutorial's subject */
    public String syntax;
 }

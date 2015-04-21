@@ -11,8 +11,12 @@ import CSTutor.Model.Tutorial.*;
  * @version 20Apr2015
  */
 public class RoadmapModule {
+	/** (Temporary?) List of all tutorial pages to reference */
    LinkedList<Integer> pageLinks;
 
+   /** 
+    * Initializes the Roadmap Module to have an empty LinkedList.
+    * */
    public RoadmapModule() {
       pageLinks = new LinkedList();
 
