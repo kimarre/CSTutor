@@ -1,6 +1,7 @@
 package CSTutor.Model.Tutorial;
 
 import CSTutor.View.Tutorial.*;
+import CSTutor.Model.Tutorial.*;
 
 /**
 * An Author page is an individual topic page within a tutorial track. This is 
@@ -21,6 +22,13 @@ public class TutorialEditor {
 
    /** Contains the editing options for a Tutorial Editor page*/
    public EditTextButtons toolbar;
+   
+   /** 
+    * Constructs a new instance of a TutorialEditor
+    */
+   public TutorialEditor() {
+	   
+   }
 
    /*
       pre:                                                          <pre>
@@ -42,7 +50,7 @@ public class TutorialEditor {
    */
    public void save() {
       System.out.println("Called tutorial save() method.");
-      System.out.println("String received was: " + description.intro);
+      System.out.println("String received was: " + tryItYourself);
    }
    
    /**

@@ -13,4 +13,12 @@ public abstract class Description {
    
    /** String text to hold the syntax of the tutorial's subject */
    public String syntax;
+   
+   /**
+    * Initiates a new instance of a description
+    */
+   public Description() {
+	   intro = "";
+	   syntax = "";
+   }
 }

@@ -42,23 +42,23 @@ public class EditTutorial extends javax.swing.JPanel {
         fontColor = new javax.swing.JComboBox();
         DescriptionPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        descriptionText = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        codeExampleText = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
+        outputText = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         syntaxLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        syntaxText = new javax.swing.JTextArea();
         tryItYourself = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
+        tryItText = new javax.swing.JTextArea();
         previewButton = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
@@ -81,24 +81,24 @@ public class EditTutorial extends javax.swing.JPanel {
         fontColor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Black", "Blue", "Red", "Orange", "Green", "Purple" }));
         jToolBar1.add(fontColor);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("For loops are a type of control structure that \nallow code to be repeatedly executed.\n\nThey take three arguments in the order of:\n   1. starting condition; \n   2. condition to exit the loop; \n   3. post loop increment");
-        jScrollPane4.setViewportView(jTextArea2);
+        descriptionText.setColumns(20);
+        descriptionText.setRows(5);
+        descriptionText.setText("For loops are a type of control structure that \nallow code to be repeatedly executed.\n\nThey take three arguments in the order of:\n   1. starting condition; \n   2. condition to exit the loop; \n   3. post loop increment");
+        jScrollPane4.setViewportView(descriptionText);
 
         jLabel6.setText("<html><b>Output</html></b>");
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        jTextArea4.setRows(5);
-        jTextArea4.setText("for (int i=0; i<5; i++) {\n    printf(\"Hello world\\n\");\n}");
-        jScrollPane5.setViewportView(jTextArea4);
+        codeExampleText.setColumns(20);
+        codeExampleText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        codeExampleText.setRows(5);
+        codeExampleText.setText("for (int i=0; i<5; i++) {\n    printf(\"Hello world\\n\");\n}");
+        jScrollPane5.setViewportView(codeExampleText);
 
-        jTextArea5.setColumns(20);
-        jTextArea5.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        jTextArea5.setRows(5);
-        jTextArea5.setText("Hello world\nHello world\nHello world\nHello world\nHello world");
-        jScrollPane6.setViewportView(jTextArea5);
+        outputText.setColumns(20);
+        outputText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        outputText.setRows(5);
+        outputText.setText("Hello world\nHello world\nHello world\nHello world\nHello world");
+        jScrollPane6.setViewportView(outputText);
 
         jLabel4.setText("<html><b>Code Example</html></b>");
 
@@ -131,11 +131,11 @@ public class EditTutorial extends javax.swing.JPanel {
 
         syntaxLabel.setText("<html><b>Syntax</html></b>");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("for (int i=0; i<5; i++) {\n   ...\n}");
-        jScrollPane1.setViewportView(jTextArea1);
+        syntaxText.setColumns(20);
+        syntaxText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        syntaxText.setRows(5);
+        syntaxText.setText("for (int i=0; i<5; i++) {\n   ...\n}");
+        jScrollPane1.setViewportView(syntaxText);
 
         javax.swing.GroupLayout DescriptionPanelLayout = new javax.swing.GroupLayout(DescriptionPanel);
         DescriptionPanel.setLayout(DescriptionPanelLayout);
@@ -179,10 +179,10 @@ public class EditTutorial extends javax.swing.JPanel {
             }
         });
 
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jTextArea7.setText("Write a program that outputs all multiplesof 5 from \n0 to 25. (ex. 0 5 10 15 20 25)");
-        jScrollPane8.setViewportView(jTextArea7);
+        tryItText.setColumns(20);
+        tryItText.setRows(5);
+        tryItText.setText("Write a program that outputs all multiplesof 5 from \n0 to 25. (ex. 0 5 10 15 20 25)");
+        jScrollPane8.setViewportView(tryItText);
 
         previewButton.setText("Preview");
         previewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +254,7 @@ public class EditTutorial extends javax.swing.JPanel {
     
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        tutorialPage.description.intro = "woop";
+        tutorialPage.tryItYourself = "woop";
         tutorialPage.save();
         confirmSave = new SaveConfirmation();
         confirmSave.setVisible(false);
@@ -294,11 +294,11 @@ public class EditTutorial extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea7;
+    private javax.swing.JTextArea syntaxText;
+    private javax.swing.JTextArea descriptionText;
+    private javax.swing.JTextArea codeExampleText;
+    private javax.swing.JTextArea outputText;
+    private javax.swing.JTextArea tryItText;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
