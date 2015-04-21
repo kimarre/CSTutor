@@ -27,6 +27,6 @@ public class TextBox{
      *
      */
      public void pushText() {
-    	 
+    	 convertedText = new StudentText(buffer);
      }
 }
