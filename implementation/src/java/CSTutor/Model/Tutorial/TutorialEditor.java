@@ -6,7 +6,8 @@ import CSTutor.View.Tutorial.*;
 * An Author page is an individual topic page within a tutorial track. This is 
 * the page that authors fill out their tutorial content on.
 *
-* @author Kim Arre
+* @author Kim Arre (karre@calpoly.edu)
+* @version 20Apr2015
 */
 public class TutorialEditor {
    Description description;

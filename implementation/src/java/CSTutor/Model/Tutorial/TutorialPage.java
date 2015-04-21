@@ -5,6 +5,9 @@ import CSTutor.Model.Tutorial.*;
 /**
 * A Student page is an individual topic page within a tutorial track. This is 
 * the page that students interact with to take the tutorials on.
+* 
+* @author Kim Arre (karre@calpoly.edu)
+* @version 20Apr2015
 */
 public class TutorialPage {
    String title;
@@ -13,7 +16,9 @@ public class TutorialPage {
    String tryItYourself;
    String textEditor;
    String console;
-
+   
+   int nextPageId;
+   int prevPageId;
    RoadmapModule module;
 
    /**

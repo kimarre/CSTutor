@@ -3,9 +3,10 @@ package CSTutor.Model.Tutorial;
 /**
  * The code example is for the author to show how the topic is used. 
  *
- * @author Kim Arre
+ * @author Kim Arre (karre@calpoly.edu)
+ * @version 20Apr2015
  */
 public abstract class CodeExample {
-   String code;
-   String output;
+   String sampleCode;
+   String sampleOutput;
 }
