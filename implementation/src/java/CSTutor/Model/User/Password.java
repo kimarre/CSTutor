@@ -14,6 +14,16 @@ import org.mindrot.jbcrypt.BCrypt;
 public class Password {
     String hash;
     
+    public Password()
+    {
+        
+    }
+    
+    public Password(String username)
+    {
+        
+    }
+    
     /**
      * Gets the hashed version of the password.
      * @return the hash of the password.
