@@ -4,8 +4,8 @@ import java.util.*;
 import java.sql.*;
 
 /**
- * CSTutor Data Access Object
- *  Interfaces with the sqlite database.
+ * CSTutor Data Access Object.
+ * Interfaces with the sqlite database.
  *
  * @author dlgordon
  */
@@ -34,7 +34,10 @@ public class CstDAO {
    private Connection c;
    
    /**
-    * Constructor
+    * Constructor.
+    * 
+    * @precondition Database exists in directory and JDBC is imported.
+    * @postcondition Connection opened to database.
     */
    public CstDAO() throws Exception {
       Class.forName("org.sqlite.JDBC");
@@ -42,7 +45,10 @@ public class CstDAO {
    }  
    
    /**
-    * Create each table if it doesn't exist
+    * Create each table if it doesn't exist.
+    *
+    * @precondition None.
+    * @postcondition Tables exist in database.
     */
    public void create_tables() throws Exception { 
       Statement s = c.createStatement();
@@ -53,6 +59,12 @@ public class CstDAO {
 
    /**
     * Given a student, update the student if already exists or create if not.
+    *
+    * @precondition Student table exists.
+    * @postcondition Student is upserted into table.
+    * @param username Student's username
+    * @param first Student's first name
+    * @param last Student's last name
     */
    public void upsert_student(String username, String first, String last) throws Exception {
       Statement s = c.createStatement();
@@ -61,7 +73,12 @@ public class CstDAO {
    }
 
    /**
-    * Get student (as string list) by username
+    * Get student (as string list) by username.
+    *
+    * @precondition Student exists in table.
+    * @postcondition None.
+    * @param username Student's username
+    * @return String list of the student's columns
     */
    public List<String> get_student(String username) throws Exception {
       Statement s = c.createStatement();
@@ -74,6 +91,12 @@ public class CstDAO {
 
    /**
     * Given a quiz, update the quiz if already exists or create if not.
+    *
+    * @precondition Quiz table exists.
+    * @postcondition Quiz is upserted into table.
+    *
+    * @param id Quiz id
+    * @param quiz Content of the quiz
     */
    public void upsert_quiz(int id, String quiz) throws Exception {
       Statement s = c.createStatement();
@@ -83,6 +106,11 @@ public class CstDAO {
 
    /**
     * Get quiz by id
+    *
+    * @precondition Quiz exists in table.
+    * @postcondition None.
+    * @param id Quiz id
+    * @return Content of the quiz.
     */
    public String get_quiz(int id) throws Exception {
       Statement s = c.createStatement();
@@ -93,7 +121,10 @@ public class CstDAO {
    }
 
    /**
-    * Test each method
+    * Test each method, throw Exception on error
+    *
+    * @precondition None.
+    * @postcondition None.
     */
    public static void test() {
       CstDAO d;
