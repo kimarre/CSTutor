@@ -40,7 +40,22 @@ public class ChatBox extends JFrame {
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
              if(chatWindow.Enter(msgArea.getText())) {
-            	 displayArea.setText("a\na\na\na\na\na\na\na\na\na\na\na\na\na\na\na\na\n");
+            	 // ******************************************************
+            	 // LOOOOK HEEEEEERE
+            	 // ******************************************************
+            	 //use displayArea.setText(string) to set the whole text.
+            	 //alternatively, use displayArea.append(string) to add to the existing string.
+            	 //so if you have a queue, you can either convert the queue into a giant string
+            	 //and set the text, or you can start with an empty string and append strings.
+            	 
+            	 //in this case all I do is get the text from the user's input, and add it
+            	 //to the displayArea, with a new line.
+            	 displayArea.append(msgArea.getText() + "\n");
+            	 
+            	 //clear out the enter area
+            	 msgArea.setText("");
+            	 
+            	 //redraw the screen (I'm not actually sure this is needed, but best be safe?)
             	 selfRef.repaint();
              }
    		 }
@@ -55,6 +70,7 @@ public class ChatBox extends JFrame {
    	 
    	 displayArea = new JTextArea();
    	 displayArea.setEditable(false);
+   	 displayArea.setText("");
    	 overallPanel.add(new JScrollPane(displayArea), BorderLayout.CENTER);
    	 overallPanel.add(sendPanel, BorderLayout.SOUTH);
    	 add(overallPanel);
