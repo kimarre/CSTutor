@@ -1,13 +1,14 @@
 package CSTutor.Model.Manager;
 
 /**
- * The user class is based on the requirement that classes need students.
- * Each user has a name and access level associated with them.
+ * Class User represents a user in the system.
  * 
- * @author Simon Vurens
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public abstract class User {
+	/* The name of the user */
    String name;
+   /* The access level of the user*/
    AccessLevel access;
 
    /**

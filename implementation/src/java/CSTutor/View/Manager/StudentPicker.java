@@ -7,8 +7,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import java.util.*;
-/**
- * @author Simon Vurens
+/****
+ * Class StudentPicker provides the GUI for adding students to a class.
+ * 
+ * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class StudentPicker extends JFrame{
 	public StudentPicker() {

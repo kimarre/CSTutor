@@ -49,7 +49,7 @@ CLASS =		CSTutor/View/*.class \
 all:		dir compile jar clean
 
 compile:	$(FILE)
-		javac -g -d .classes $(JAVA)
+		javac -cp CSTutor/Model/User/*:. -g -d .classes $(JAVA)
 
 jar:		$(FILE)
 		cd .classes ; \

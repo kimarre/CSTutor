@@ -55,6 +55,6 @@ public class UserDB {
      */
     public User getUser(String email)
     {
-        return new User();
+        return null;
     }
 }

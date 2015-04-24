@@ -1,7 +1,7 @@
 package CSTutor.Model.Manager;
 import java.util.*;
 
-/**
+/****
  * The Class object represents a class. This contains methods to add or
  * remove sections, units, and students. It also contains methods to rearrange
  * units, and to change the access level.
@@ -9,10 +9,18 @@ import java.util.*;
  * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class Class {
-   private List<Unit> units;
+	/* All sections contained by this class */
    private List<Section> sections;
+
+	/* All students enrolled in this class */
    private List<User> students;
+   
+	/* The minimum level of access required to view this class */
    private ClassAccessLevel access;
+   
+   /**
+    * Creates a new class.
+    */
    public Class() {
    	
    }
@@ -30,22 +38,6 @@ public class Class {
     */
    public void removeSection(Section section){
 	   sections.remove(section);
-   }
-
-   /**
-    * RemoteTutorial removes the specified tutorial from the collection of
-    * tutorials without a unit.
-    */
-   public void removeUnit(Unit unit){
-	   units.remove(unit);
-   }
-
-   /**
-    * AddTutorial adds the specified tutorial to the collection of tutorials
-    * without a unit.
-    */
-   public void addUnit(Unit unit){
-	   units.add(unit);
    }
 
    /**
