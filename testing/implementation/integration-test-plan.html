@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>
+Calendar Tool Integration Test Plan
+</title>
+</head>
+<body bgcolor=white>
+<p align=center>
+<font size=+2>
+<strong>Calendar Tool Integration Test Plan</strong>
+</font>
+</p>
+
+<br>
+After the classes in each package are independently tested with <tt>caldb</tt>
+and <tt>admin</tt> stubs, perform integration testing in the following phases:
+<ol type=1>
+<p>
+<li>
+Integrate the <tt>schedule</tt> package with the <tt>caldb</tt> package and
+rerun the class tests in the <tt>schedule</tt> package.
+<p>
+<li>
+Add the <tt>view</tt> package to the integrated <tt>schedule + caldb</tt>
+packages; rerun the class tests in the <tt>schedule</tt> and <tt>view</tt>
+packages.
+<p>
+<li>
+Add the <tt>admin</tt> package to the integrated <tt>schedule + view +
+caldb</tt>; rerun the class tests in the <tt>schedule</tt>, <tt>view</tt>, and
+<tt>admin</tt> packages.
+<p>
+<li>
+Integrate the <tt>caldb</tt> and <tt>caldb.server</tt> packages and rerun the
+class tests in the <tt>caldb</tt> package.
+<p>
+<li>
+Add the <tt>caldb.server</tt> package to the integrated <tt>schedule + view +
+admin + caldb</tt>; rerun the class tests in the <tt>schedule</tt>,
+<tt>view</tt>, and <tt>admin</tt> packages.
+<p>
+<li>
+Add the <tt>options</tt> package to the integrated <tt>schedule + view + admin
++ caldb + server</tt>; rerun the class tests in the <tt>schedule</tt>,
+<tt>view</tt>, <tt>admin</tt>, and <tt>options</tt> packages.
+<p>
+<li>
+Add the <tt>file</tt> package to the integrated <tt>schedule + view + admin +
+options + caldb + server</tt>; rerun the class tests in the <tt>schedule</tt>,
+<tt>view</tt>, <tt>admin</tt>, <tt>options</tt>, and <tt>file</tt> packages.
+<p>
+<li>
+Add the <tt>edit</tt> package to the integrated <tt>schedule + view + admin +
+options + file + caldb + server</tt>; rerun class tests in the
+<tt>schedule</tt>, <tt>view</tt>, <tt>admin</tt>, <tt>options</tt>,
+<tt>file</tt>, and <tt>edit</tt> packages.
+<p>
+<li>
+Add the top-level <tt>caltool</tt> classes to the integrated packages and run
+the top-level class tests, which in turn run the class tests in each package.
+</ol>
+</body>
+</html>
