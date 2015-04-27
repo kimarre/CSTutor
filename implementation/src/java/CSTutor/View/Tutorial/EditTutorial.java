@@ -237,7 +237,7 @@ public class EditTutorial extends javax.swing.JPanel {
         pageData.tryItYourself = tryItText.getText();
         
         //previewTutorial = new Tutorial(pageData);
-        previewTutorial = new Tutorial();
+        previewTutorial = new Tutorial(pageData);
         
         tempFrame.add(previewTutorial);
         tempFrame.setVisible(true);
