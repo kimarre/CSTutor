@@ -7,8 +7,8 @@ package CSTutor.Model.Tutorial;
  * @author Kim Arre (karre@calpoly.edu)
  * @version 20Apr2015
  */
-public abstract class Description {
-	/** String text to hold the introduction of the tutorial's description */
+public class Description {
+   /** String text to hold the introduction of the tutorial's description */
    public String intro;
    
    /** String text to hold the syntax of the tutorial's subject */
@@ -18,7 +18,7 @@ public abstract class Description {
     * Initiates a new instance of a description
     */
    public Description() {
-	   intro = "";
-	   syntax = "";
+        intro = "";
+        syntax = "";
    }
 }

@@ -6,7 +6,7 @@ package CSTutor.Model.Tutorial;
  * @author Kim Arre (karre@calpoly.edu)
  * @version 20Apr2015
  */
-public abstract class CodeExample {
+public class CodeExample {
 	/** Contains the example's sample code provided by the instructor */
    public String sampleCode;
    

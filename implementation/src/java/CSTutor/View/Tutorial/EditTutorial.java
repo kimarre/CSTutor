@@ -1,16 +1,20 @@
 
 package CSTutor.View.Tutorial;
 
+import CSTutor.Model.Tutorial.*;
 import javax.swing.*;
+import java.util.*;
+import static javax.swing.JOptionPane.*;
 
 /**
- *
+ * View for tutorial editing by an instructor.
  * @author Kim Arre
+ * @version 27Apr2015
  */
 public class EditTutorial extends javax.swing.JPanel {
 
     /**
-     * Creates new form Tutorial
+     * Constructs a new instance of EditTutorial
      */
     public EditTutorial() {
         initComponents();
@@ -51,8 +55,6 @@ public class EditTutorial extends javax.swing.JPanel {
 
         titleLabel.setText("Title:");
 
-        titleField.setText("jTextField1");
-
         descLabel.setText("Description");
 
         syntaxLabel.setText("Syntax");
@@ -76,12 +78,12 @@ public class EditTutorial extends javax.swing.JPanel {
             .addGroup(descPanelLayout.createSequentialGroup()
                 .addGroup(descPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(descPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(descPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(descPanelLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(titleLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(titleField))
                         .addComponent(codeExampleLabel)
                         .addComponent(descLabel)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,10 +128,25 @@ public class EditTutorial extends javax.swing.JPanel {
         enterExerciseLabel.setText("Input your student exercise.");
 
         previewButton.setText("Preview");
+        previewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previewButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         toolsButton.setText("Tools...");
+        toolsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,7 +208,63 @@ public class EditTutorial extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** 
+     * Opens a new instance of the toolbar (EditingTools).
+     */
+    private void toolsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolsButtonActionPerformed
+        //toolbar = new EditingTools();
+        //toolbar.setVisible(true);
+        new EditingTools().setVisible(true);
+    }//GEN-LAST:event_toolsButtonActionPerformed
 
+    /** 
+    * Opens a new instance of a Tutorial from the student's perspective.
+    */
+    private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
+      
+        // fill in tutorial components
+        JFrame tempFrame = new JFrame();
+        tempFrame.setSize(1075, 700);
+        
+        
+        TutorialData pageData = new TutorialData();
+        
+        pageData.setTitle(titleField.getText());
+        pageData.setDescription(descText.getText());
+        pageData.setSyntax(syntaxText.getText());
+        pageData.setExampleCode(sampleCodeText.getText());
+        pageData.setExampleOutput(outputText.getText());
+        pageData.tryItYourself = tryItText.getText();
+        
+        //previewTutorial = new Tutorial(pageData);
+        previewTutorial = new Tutorial();
+        
+        tempFrame.add(previewTutorial);
+        tempFrame.setVisible(true);
+    }//GEN-LAST:event_previewButtonActionPerformed
+
+    /**
+     * Opens a new instance of the save confirmation dialog box.
+     */
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // Make the tutorial object
+        JOptionPane confirmation = new JOptionPane();
+        int result = confirmation.showConfirmDialog(null, "Are you sure you want to save?", "Confirm Save", YES_NO_OPTION);
+        
+        if (result == YES_OPTION) {
+            System.out.println("Confirmed!");
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    /** Contains the overall data for the tutorial pages used */
+    LinkedList<TutorialData> pages;
+    
+    /** Contains the editing tools needed for authors to personalize tutorial text */
+    public EditingTools toolbar;
+    
+    /** Window for previewing the tutorial content input before saving */
+    public Tutorial previewTutorial;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codeExampleLabel;
     private javax.swing.JLabel descLabel;

@@ -3,13 +3,13 @@ package CSTutor.Model.Tutorial;
 import CSTutor.Model.Tutorial.*;
 
 /**
-* A Student page is an individual topic page within a tutorial track. This is 
+* Contains the data that is used to construct the tutorial page. This is 
 * the page that students interact with to take the tutorials on.
 * 
 * @author Kim Arre (karre@calpoly.edu)
 * @version 20Apr2015
 */
-public class TutorialPage {
+public class TutorialData {
    /** Represents the overall title for the tutorial page */
    public String title;
    
@@ -33,6 +33,61 @@ public class TutorialPage {
    
    /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
    RoadmapModule module;
+   
+   public TutorialData() {
+       description = new Description();
+       example = new CodeExample();
+   }
+   
+   /** Retrieves the tutorial's title */
+   public String getTitle() {
+       return title;
+   }
+   
+   /** Retrieves the tutorial's description */
+   public String getDescription() {
+       return description.intro;
+   }
+   
+   /** Retrieves the tutorial's syntax*/
+   public String getSyntax() {
+       return description.syntax;
+   }
+   
+   /** Retrieves the tutorial's example code*/
+   public String getExampleCode() {
+       return example.sampleCode;
+   }
+   
+   /** Retrieves the tutorial's example output */
+   public String getExampleOutput() {
+       return example.sampleOutput;
+   }
+   
+   /** Sets the tutorial's title */
+   public void setTitle(String newTitle) {
+       title = newTitle;
+   }
+   
+   /** Sets the tutorial's description */
+   public void setDescription(String desc) {
+       description.intro = desc;
+   }
+   
+   /** Sets the tutorial's syntax */
+   public void setSyntax(String syntax) {
+       description.syntax = syntax;
+   }
+   
+   /** Sets the tutorial's example code */
+   public void setExampleCode(String code) {
+       example.sampleCode = code;
+   }
+   
+   /** Sets the tutorial's example output */
+   public void setExampleOutput(String output) {
+       example.sampleOutput = output;
+   }
 
    /**
    * Runs the code in the text editor and shows output to the console.
