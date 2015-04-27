@@ -68,10 +68,10 @@ doc7:
 		mv .javadoc ../../../design/javadoc
 
 
-dir:		#!/bin/bash
-		./setup
+dir:	
+		mkdir -p .classes
 		cp Manifest.txt .classes/Manifest.txt
 		ls -a
 
 clean:
-	rm -rf .classes/* .javadoc/*
+		rm -rf .classes/* .javadoc/*
