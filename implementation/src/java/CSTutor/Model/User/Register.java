@@ -34,7 +34,7 @@ public class Register {
     public boolean createUser(String firstName, String lastName, String email, String pass, boolean instructor)
     {
         EmailValidator validator = EmailValidator.getInstance(false);
-        if (validator.isValid(email))
+        if (validator.isValid(email) && database.getUser(email) == null)
         {
             User user = new User(firstName, lastName, email, pass, instructor);
             database.addUser(user);
@@ -42,8 +42,6 @@ public class Register {
         } else {
             return false;
         }
-        //User user = new User();
-        //database.addUser(user);
         //System.out.println("New User Created.");
     }
 }

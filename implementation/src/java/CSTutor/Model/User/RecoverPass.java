@@ -35,29 +35,32 @@ public class RecoverPass
      */
     public void generateResetToken()
     {
-        token = "";
+        boolean generating = true;
         
-        for (int i = 0; i <=6; i++)
+        while (generating)
         {
-            token += Integer.toString(numGenerator.nextInt());
-            if (i != 6)
+            token = "";
+            for (int i = 0; i <=6; i++)
             {
-                token += ':';
+                token += Integer.toString(numGenerator.nextInt());
+                if (i != 6)
+                {
+                    token += ':';
+                }
             }
-        }
-        
-        System.out.println(token);
-        
-        token = Base64.getEncoder().encodeToString(token.getBytes());
-        
-        System.out.println(token);
-        
-        if(tokenDatabase.addToken(token))
-        {
-            sendEmail();
-            System.out.println("Reset Token Generated");
-        } else {
-            // generate again
+
+            System.out.println(token);
+
+            token = Base64.getEncoder().encodeToString(token.getBytes());
+
+            System.out.println(token);
+
+            if(tokenDatabase.addToken(token))
+            {
+                sendEmail();
+                System.out.println("Reset Token Generated");
+                generating = false;
+            }
         }
         
     }
@@ -73,5 +76,6 @@ public class RecoverPass
     void sendEmail()
     {
         //this might not get implemented
+        System.out.println("Reset token sent");
     }
 }
