@@ -42,7 +42,8 @@ public class Manager {
     * SelectClass sets the selectedClass to the given class, if it exists.
     * <pre>
       pre:
-       data.contains(select);
+      
+       select != null && data.contains(select);
       post:
        selectedClass'.equals(select);
     */ 
@@ -128,29 +129,49 @@ public class Manager {
 
     /**
      * Deletes the given class 
+     * <pre>
+      pre:
+       selectedClass != null && data.contains(selectedClass);
+      post:
+       selectedClass' == null && !data'.contains(selectedClass);
      */
-    public void deleteClass(Class classs) {
+    public void deleteClass() {
    	 System.out.println("In CSTutor.Model.Manager.deleteClass()");
     }
 
     /**
      * Deletes the given section 
+     * <pre>
+      pre:
+       selectedSection != null && selectedClass != null && selectedClass.sections.contains(selectedSection);
+      post:
+       selectedSection' == null && !selectedClass'.sections.contains(selectedSection);
      */
-    public void deleteSection(Section section) {
+    public void deleteSection() {
    	 System.out.println("In CSTutor.Model.Manager.deleteSection()");
     }
 
     /**
      * Deletes the given unit 
+     * <pre>
+      pre:
+       selectedSection != null && selectedUnit != null && selectedSections.units.contains(selectedUnit);
+      post:
+       selectedUnit' == null && !selectedSection'.units.contains(selectedUnit);
      */
-    public void deleteUnit(Unit unit) {
+    public void deleteUnit() {
    	 System.out.println("In CSTutor.Model.Manager.deleteUnit()");
     }
 
     /**
      * Deletes the given tutorial 
+     * <pre>
+      pre:
+       selectedTutorial != null && selectedUnit != null && selectedUnit.tutorials.contains(selectedTutorial);
+      post:
+       selectedTutorial' == null && !selectedUnit'.sections.contains(selectedTutorial);
      */
-    public void deleteTutorial(Tutorial tutorial) {
+    public void deleteTutorial() {
    	 System.out.println("In CSTutor.Model.Manager.deleteTutorial()");
     }
 

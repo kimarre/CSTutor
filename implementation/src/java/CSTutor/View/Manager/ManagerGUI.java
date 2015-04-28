@@ -259,16 +259,16 @@ public class ManagerGUI extends JPanel {
 	          	System.out.println(node.toString() + " " + node.getLevel());
 	          	switch(node.getLevel()) {
 	          	case 1:
-	          		managerModel.deleteClass(null);
+	          		managerModel.deleteClass();
 	          		break;
 	          	case 2:
-	          		managerModel.deleteSection(null);
+	          		managerModel.deleteSection();
 	          		break;
 	          	case 3:
-	          		managerModel.deleteUnit(null);
+	          		managerModel.deleteUnit();
 	          		break;
 	          	case 4:
-	          		managerModel.deleteTutorial(null);
+	          		managerModel.deleteTutorial();
 	          		break;
 	          	case 5:
 	          		managerModel.deletePage(null);
