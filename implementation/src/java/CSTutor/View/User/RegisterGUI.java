@@ -11,8 +11,9 @@ public class RegisterGUI extends javax.swing.JFrame {
     /**
      * Creates new form Register2
      */
-    public RegisterGUI() {
+    public RegisterGUI(UserDB DB) {
         initComponents();
+        users= DB;
     }
 
     /**
@@ -110,8 +111,9 @@ public class RegisterGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitAction
-        register = new CSTutor.Model.User.Register(new UserDB());
+        register = new CSTutor.Model.User.Register(users);
         boolean valid = register.createUser(fisrtNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), false);
+        System.out.println("User Registered: " + valid);
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_SubmitAction
@@ -153,7 +155,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterGUI().setVisible(true);
+                new RegisterGUI(new UserDB()).setVisible(true);
             }
         });
     }
@@ -171,4 +173,5 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
     private CSTutor.Model.User.Register register;
+    private UserDB users;
 }

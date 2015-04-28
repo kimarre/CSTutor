@@ -11,8 +11,15 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @author Kyle Reis
  */
 public class Register {
+    /**
+     * The user database
+     */
     UserDB database;
     
+    /**
+     * Creates the Register object.
+     * @param database the user database.
+     */
     public Register(UserDB database)
     {
         this.database = database;

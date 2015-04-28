@@ -11,8 +11,14 @@ import java.util.*;
  * @author Kyle Reis
  */
 public class TokenDB {
-    Map<String, String> tokens;
+    /**
+     * The database of reset tokens
+     */
+    private Map<String, String> tokens;
     
+    /**
+     * Constructs a new Token Database.
+     */
     public TokenDB() {
         tokens = new HashMap();
     }
@@ -28,11 +34,11 @@ public class TokenDB {
                     token_other.equals(token)))
      * 
      */
-    boolean addToken(String token)
+    boolean addToken(String token, String email)
     {
         if (!isToken(token))
         {
-            tokens.put(token, "bob");
+            tokens.put(token, email);
             return true;
         } else {
             return false;
@@ -60,7 +66,7 @@ public class TokenDB {
      */
     boolean isToken(String token)
     {
-        return false;
+        return tokens.containsKey(token);
     }
     
     /**

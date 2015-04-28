@@ -14,6 +14,7 @@ public class RecoverPassword extends javax.swing.JFrame {
      */
     public RecoverPassword() {
         initComponents();
+        users = new UserDB();
     }
 
     /**
@@ -31,6 +32,7 @@ public class RecoverPassword extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         Username = new javax.swing.JTextField();
         SubmitButton = new javax.swing.JButton();
+        invalidText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,6 +53,9 @@ public class RecoverPassword extends javax.swing.JFrame {
             }
         });
 
+        invalidText.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        invalidText.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,12 +74,17 @@ public class RecoverPassword extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(SubmitButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(SubmitButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(67, 67, 67)
+                    .addComponent(invalidText, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(77, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,20 +99,32 @@ public class RecoverPassword extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(SubmitButton)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(201, 201, 201)
+                    .addComponent(invalidText, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(78, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        recover.generateResetToken();
-        this.setVisible(false);
-        JOptionPane.showConfirmDialog(null,
+        User user = users.getUser(Username.getText());
+        if(user != null)
+        {
+            recover.generateResetToken(user.getEmail());
+            this.setVisible(false);
+            JOptionPane.showConfirmDialog(null,
                 "Check your email for the password reset link.\n It may take up to 5 minbutes for you to recieve the email.", "Confirm Reset", JOptionPane.OK_CANCEL_OPTION);
-        // TODO add your handling code here:
+
+        } else {
+            invalidText.setText("There is no user with this username");
+        }
+                
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     /**
@@ -144,10 +166,12 @@ public class RecoverPassword extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SubmitButton;
     private javax.swing.JTextField Username;
+    private javax.swing.JLabel invalidText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
-    private RecoverPass recover = new RecoverPass();
+    private final RecoverPass recover = new RecoverPass();
+    private final UserDB users;
 }

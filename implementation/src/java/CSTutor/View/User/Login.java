@@ -145,11 +145,14 @@ public class Login extends javax.swing.JFrame {
         {
              valid = tempUser.getPassword().validateHash(passwordField.getText());
         }
-        usernameField.setText("");
         if(!valid)
         {
+            usernameField.setText("");
+            passwordField.setText("");
             invalidText.setText("Either the username or password that you entered is invalid.");
         } else {
+            parent.user = tempUser;
+            System.out.println("Logged in: " + tempUser.getName());
             this.setVisible(false);
         }
         
@@ -157,7 +160,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        register = new RegisterGUI();
+        register = new RegisterGUI(parent.userDB);
         register.setVisible(true);
         this.setVisible(false);
         // TODO add your handling code here:

@@ -17,11 +17,26 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @author Kyle Reis
  */
 public class User {
-    String firstName;
-    String lastName;
-    String email;
+    /**
+     * Shockingly this is the users first name.
+     */
+    private String firstName;
+    /**
+     * Shockingly this is the users last name.
+     */
+    private String lastName;
+    /**
+     * Shockingly this is the users email
+     */
+    private String email;
+    /**
+     * Shockingly this is the users password.
+     */
     private static Password password;
-    boolean instructor;
+    /**
+     * Whether or not the user is an instructor.
+     */
+    private boolean instructor;
     
     /**
      * The constructor for a User.
@@ -37,10 +52,48 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.instructor = instructor;
-        password = new Password(pass);
+        password = new Password();
+        password.setPassword(pass);
     }
     
+    /**
+     * Gets a copy of the password object.
+     * @return The password object for this user.
+     */
     public Password getPassword(){
         return password;
+    }
+    
+    /**
+     * Gets the email for this user.
+     * @return The users email.
+     */
+    public String getEmail(){
+        return email;
+    }
+    
+    /**
+     * Gets the users full name.
+     * @return The users full name.
+     */
+    public String getName(){
+        return firstName + " " + lastName;
+    }
+    
+    /**
+     * Whether or not the User is an instructor.
+     * @return True if the user is an instructor, otherwise false.
+     */
+    public Boolean isInstructor()
+    {
+        return instructor;
+    }
+    
+    /**
+     * Makes the user an instructor.
+     */
+    public void setInstructor()
+    {
+        instructor = true;
     }
 }

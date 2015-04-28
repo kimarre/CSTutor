@@ -13,15 +13,27 @@ import java.security.*;
  */
 public class RecoverPass 
 {
-    UserDB userDatabase;
+    /**
+     * The token database
+     */
     TokenDB tokenDatabase;
+    /**
+     * The generated token
+     */
     String token;
+    /**
+     * The cryptographically secure pseudo random number generator.
+     */
     SecureRandom numGenerator;
     
-    public RecoverPass()
+    /**
+     * The Constructor for RecoverPass.
+     * @param tokens The token database.
+     */
+    public RecoverPass(TokenDB tokens)
     {
         numGenerator = new SecureRandom();
-        tokenDatabase = new TokenDB();
+        tokenDatabase = tokens;
     }
     
     /**
@@ -33,7 +45,7 @@ public class RecoverPass
         &&
         tokenDatabase.tokens.length() > 0;
      */
-    public void generateResetToken()
+    public void generateResetToken(String email)
     {
         boolean generating = true;
         
@@ -51,11 +63,11 @@ public class RecoverPass
 
             System.out.println(token);
 
-            token = Base64.getEncoder().encodeToString(token.getBytes());
+            //token = Base64.getEncoder().encodeToString(token.getBytes());
 
             System.out.println(token);
 
-            if(tokenDatabase.addToken(token))
+            if(tokenDatabase.addToken(token, email))
             {
                 sendEmail();
                 System.out.println("Reset Token Generated");

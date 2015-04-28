@@ -1,6 +1,6 @@
 package CSTutor.Model.User;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * UserDB holds all of the registered users for cstutor. It is is derived from
@@ -10,7 +10,18 @@ import java.util.Collection;
  * @author Kyle Reis
  */
 public class UserDB {
+    /**
+     * The database of users
+     */
     Collection<User> users;
+    
+    /**
+     * Creates a new User Database.
+     */
+    public UserDB()
+    {
+        users = new ArrayList<User>();
+    }
     
     /**
      * Adds the given user to the UserDB. Checks to make sure a user with the 
@@ -27,7 +38,7 @@ public class UserDB {
      */
     public void addUser(User user)
     {
-        
+        users.add(user);
     }
     
     /**
@@ -55,6 +66,15 @@ public class UserDB {
      */
     public User getUser(String email)
     {
-        return null;
+        User result = null;
+        for(User user : users)
+        {
+            if(user.getEmail().equals(email))
+            {
+                result = user;
+                break;
+            }
+        }
+        return result;
     }
 }
