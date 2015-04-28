@@ -19,7 +19,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class InstructorModel
 {
-    private ArrayList<Tutorial> tutorialList;
+    private ArrayList<TutorialData> tutorialList;
     //private ArrayList<String> tutorialList;
     private ArrayList<Class> classList;
     private ArrayList<Student> studentList;
@@ -41,14 +41,14 @@ public class InstructorModel
     {
         System.out.println("In InstructorModel.retrieveTutorialData");
         
-        tutorialList = new ArrayList<Tutorial>();
-        tutorialList.add(new Tutorial("-  Hello World!"));
-        tutorialList.add(new Tutorial("-  Intro. to C"));
-        tutorialList.add(new Tutorial("-  Data Types"));
-        tutorialList.add(new Tutorial("-  Conditionals"));
-        tutorialList.add(new Tutorial("-  Loops in C"));
-        tutorialList.add(new Tutorial("-  Functions"));
-        tutorialList.add(new Tutorial("-  The Stack"));
+        tutorialList = new ArrayList<TutorialData>();
+        tutorialList.add(new TutorialData("-  Hello World!"));
+        tutorialList.add(new TutorialData("-  Intro. to C"));
+        tutorialList.add(new TutorialData("-  Data Types"));
+        tutorialList.add(new TutorialData("-  Conditionals"));
+        tutorialList.add(new TutorialData("-  Loops in C"));
+        tutorialList.add(new TutorialData("-  Functions"));
+        tutorialList.add(new TutorialData("-  The Stack"));
     }
     
     /**
@@ -164,29 +164,29 @@ public class InstructorModel
         
     }
     
-    public JList<Tutorial> getTutorialList()
+    public JList<TutorialData> getTutorialList()
     {
         System.out.println("In InstructorModel.getTutorialList");
         
         
         
         /* Tutorials list */
-        DefaultListModel<Tutorial> tutorialsModel = new DefaultListModel<Tutorial>();
-        tutorialsModel.addElement(new Tutorial("Hello World!"));
-        tutorialsModel.addElement(new Tutorial("Intro. to C"));
-        tutorialsModel.addElement(new Tutorial("Data Types"));
-        tutorialsModel.addElement(new Tutorial("If Statements"));
-        tutorialsModel.addElement(new Tutorial("Loops in C"));
-        tutorialsModel.addElement(new Tutorial("Functions"));
-        tutorialsModel.addElement(new Tutorial("The Stack"));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        JList<Tutorial> tutorialJList = new JList<Tutorial>(tutorialsModel);
+        DefaultListModel<TutorialData> tutorialsModel = new DefaultListModel<TutorialData>();
+        tutorialsModel.addElement(new TutorialData("Hello World!"));
+        tutorialsModel.addElement(new TutorialData("Intro. to C"));
+        tutorialsModel.addElement(new TutorialData("Data Types"));
+        tutorialsModel.addElement(new TutorialData("If Statements"));
+        tutorialsModel.addElement(new TutorialData("Loops in C"));
+        tutorialsModel.addElement(new TutorialData("Functions"));
+        tutorialsModel.addElement(new TutorialData("The Stack"));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        JList<TutorialData> tutorialJList = new JList<TutorialData>(tutorialsModel);
         
         
         return tutorialJList;

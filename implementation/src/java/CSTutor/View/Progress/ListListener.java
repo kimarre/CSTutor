@@ -1,5 +1,7 @@
 package CSTutor.View.Progress;
 
+import java.awt.Font;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -33,11 +35,14 @@ public class ListListener implements ListSelectionListener
             System.out.println("Selected " + obj.toString());
             
             JLabel testLabel = new JLabel(obj.toString());
+            testLabel.setFont(new Font("Avenir", Font.PLAIN, 25));
             main.removeAll();
             main.add(testLabel);
             
             main.revalidate();
-            main.repaint();  
+            main.repaint();
+            
+            
         }
     }
 }

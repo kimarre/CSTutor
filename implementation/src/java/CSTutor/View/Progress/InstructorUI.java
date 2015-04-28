@@ -18,7 +18,7 @@ import javax.swing.JTree;
 
 import CSTutor.Model.Progress.InstructorModel;
 import CSTutor.Model.Progress.Student;
-import CSTutor.Model.Progress.Tutorial;
+import CSTutor.Model.Progress.TutorialData;
 import CSTutor.Model.Progress.Class;
 
 /**
@@ -46,6 +46,7 @@ public class InstructorUI extends JPanel
     private ListRenderer renderer;
     private final int barWidth = 200;
     private final int barHeight = 460;
+    private final int searchHeight = 30;
     private InstructorModel model;
     private JTree tree;
     
@@ -77,7 +78,7 @@ public class InstructorUI extends JPanel
     }
         
     /**
-     * Lays out the middle portion of the UI.
+     * Provides the code for the middle portion of the GUI.
      */
     public void layoutMiddle()
     {
@@ -186,7 +187,7 @@ public class InstructorUI extends JPanel
         finalStudentPane.setVisible(true);
         
         /* JList Sturf */
-        JList<Tutorial> tutorialJList = model.getTutorialList();
+        JList<TutorialData> tutorialJList = model.getTutorialList();
         JList<Class> classJList = model.getClassList();
         JList<Student> studentJList = model.getStudentList();
         tutorialJList.setCellRenderer(new ListRenderer());
@@ -272,9 +273,9 @@ public class InstructorUI extends JPanel
         tutorialSearchPanel.add(new JLabel("Search"));
         tutorialSearchPanel.add(Box.createHorizontalStrut(5));
         tutorialSearchPanel.add(new JTextField());
-        tutorialSearchPanel.setMinimumSize(new Dimension(200, 40));
-        tutorialSearchPanel.setPreferredSize(new Dimension(200, 40));
-        tutorialSearchPanel.setMaximumSize(new Dimension(200, 40));
+        tutorialSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
+        tutorialSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
+        tutorialSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
         finalTutorialPane.add(tutorialSearchPanel);
         
         JPanel classSearchPanel = new JPanel();
@@ -284,9 +285,9 @@ public class InstructorUI extends JPanel
         classSearchPanel.add(new JLabel("Search"));
         classSearchPanel.add(Box.createHorizontalStrut(5));
         classSearchPanel.add(new JTextField());
-        classSearchPanel.setMinimumSize(new Dimension(200, 40));
-        classSearchPanel.setPreferredSize(new Dimension(200, 40));
-        classSearchPanel.setMaximumSize(new Dimension(200, 40));
+        classSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
+        classSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
+        classSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
         finalClassesPane.add(classSearchPanel);
         
         JPanel studentSearchPanel = new JPanel();
@@ -296,9 +297,9 @@ public class InstructorUI extends JPanel
         studentSearchPanel.add(new JLabel("Search"));
         studentSearchPanel.add(Box.createHorizontalStrut(5));
         studentSearchPanel.add(new JTextField());
-        studentSearchPanel.setMinimumSize(new Dimension(200, 40));
-        studentSearchPanel.setPreferredSize(new Dimension(200, 40));
-        studentSearchPanel.setMaximumSize(new Dimension(200, 40));
+        studentSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
+        studentSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
+        studentSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
         finalStudentPane.add(studentSearchPanel);
         
         

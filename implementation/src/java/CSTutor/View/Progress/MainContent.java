@@ -49,7 +49,9 @@ public class MainContent extends JPanel
      */
     public void eraseContent()
     {
-        
+        this.removeAll();
+        this.revalidate();
+        this.repaint();
     }
 
 }
