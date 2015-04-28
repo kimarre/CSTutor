@@ -7,12 +7,19 @@ import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+
 
 import CSTutor.Model.Progress.InstructorModel;
+import CSTutor.Model.Progress.Student;
+import CSTutor.Model.Progress.Tutorial;
+import CSTutor.Model.Progress.Class;
 
 /**
  * 
@@ -29,7 +36,6 @@ public class InstructorUI extends JPanel
     private JPanel finalStudentPane;
     private JPanel content;
     private MainContent main;
-    private JPanel bar;
     private JTabbedPane tabPane;
     private JScrollPane tutorialScroll;
     private JScrollPane studentScroll;
@@ -39,8 +45,9 @@ public class InstructorUI extends JPanel
     private JPanel studentPanel;
     private ListRenderer renderer;
     private final int barWidth = 200;
-    private final int barHeight = 500;
+    private final int barHeight = 460;
     private InstructorModel model;
+    private JTree tree;
     
     public InstructorUI(InstructorModel model)
     {
@@ -74,11 +81,11 @@ public class InstructorUI extends JPanel
      */
     public void layoutMiddle()
     {
-        makeSideBar();
-        
         content = new JPanel();
         main = new MainContent();
+        main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
         //content.setLayout(new BoxLayout(content, BoxLayout.X_AXIS));
+        makeSideBar();
         content.add(Box.createHorizontalStrut(20));
         content.add(tabPane);
         
@@ -95,7 +102,7 @@ public class InstructorUI extends JPanel
      */
     public JPanel getSideBar()
     {
-        return bar;
+        return null;
     }
     
     /**
@@ -111,11 +118,6 @@ public class InstructorUI extends JPanel
      */
     public void makeSideBar()
     {
-        bar = new JPanel();
-        bar.setLayout(new BoxLayout(bar, BoxLayout.Y_AXIS));
-        bar.setVisible(true);
-        
-        
         /* Sidebar Formatting*/
         
         JPanel classSpace = new JPanel();
@@ -171,7 +173,7 @@ public class InstructorUI extends JPanel
         finalClassesPane.setMinimumSize(new Dimension(barWidth, barHeight));
         finalClassesPane.setPreferredSize(new Dimension(barWidth, barHeight));
         finalClassesPane.setMaximumSize(new Dimension(barWidth, barHeight));
-        finalClassesPane.setBackground(new Color(208, 226, 245));
+        finalClassesPane.setBackground(new Color(255, 226, 245));
         finalClassesPane.setVisible(true);
         
         finalStudentPane = new JPanel();
@@ -183,107 +185,51 @@ public class InstructorUI extends JPanel
         finalStudentPane.setBackground(new Color(208, 226, 245));
         finalStudentPane.setVisible(true);
         
-        /* Classes list */
-        DefaultListModel<String> classesModel = new DefaultListModel<String>();
-        classesModel.addElement("Classes");
-        classesModel.addElement("   - CPE 123");
-        classesModel.addElement("   - CPE 101");
-        classesModel.addElement("   - CPE 102");
-        classesModel.addElement("   - CPE 103");
-        classesModel.addElement("   - CPE 357");
-        classesModel.addElement("   - CPE 305");
-        classesModel.addElement("   - CPE 308");
-        JList<String> classesList = new JList<String>(classesModel);
-        classesList.setCellRenderer(new ListRenderer());
-        
-        /* Students List */
-        DefaultListModel<String> studentModel = new DefaultListModel<String>();
-        studentModel.addElement("Students");
-        studentModel.addElement("   - Maria Auxier");
-        studentModel.addElement("   - Marian Bell");
-        studentModel.addElement("   - Eugene Brown");
-        studentModel.addElement("   - Jamie Bryant");
-        studentModel.addElement("   - Danielle Carter");
-        studentModel.addElement("   - Vernon Chilton");
-        studentModel.addElement("   - Mary Clark");
-        studentModel.addElement("   - Laurie Crawford");
-        studentModel.addElement("   - Geoffrey Dunning");
-        studentModel.addElement("   - Lester Flores");
-        studentModel.addElement("   - Suzanne Gridley");
-        studentModel.addElement("   - Bruce Griffin");
-        studentModel.addElement("   - Jennifer Headrick");
-        studentModel.addElement("   - Kevin Hoover");
-        studentModel.addElement("   - Constance Jackson");
-        studentModel.addElement("   - Chris Kapp");
-        studentModel.addElement("   - Leon Lewis");
-        studentModel.addElement("   - Victor Massey");
-        studentModel.addElement("   - Blanche Natal");
-        studentModel.addElement("   - Dianne Ohara");
-        studentModel.addElement("   - Charlotte Perry");
-        studentModel.addElement("   - Eric Prince");
-        studentModel.addElement("   - Frank Reed");
-        studentModel.addElement("   - Nicole Rios");
-        studentModel.addElement("   - David Rodriguez");
-        studentModel.addElement("   - James Scott");
-        studentModel.addElement("   - Robert Taylor");
-        studentModel.addElement("   - Anna Turley");
-        studentModel.addElement("   - Paula Webb");
-        studentModel.addElement("   - James Welsh");
-        studentModel.addElement("   - Marlene Williams");
-        JList<String> studentList = new JList<String>(studentModel);
-        studentList.setCellRenderer(new ListRenderer());
-        
-        /* Tutorials list */
-        DefaultListModel<String> tutorialsModel = new DefaultListModel<String>();
-        tutorialsModel.addElement("Tutorials");
-        tutorialsModel.addElement("   - Hello World!");
-        tutorialsModel.addElement("   - Intro. to C");
-        tutorialsModel.addElement("   - Data Types");
-        tutorialsModel.addElement("   - If Statements");
-        tutorialsModel.addElement("   - Loops in C");
-        tutorialsModel.addElement("   - Functions");
-        tutorialsModel.addElement("   - The Stack");
-        tutorialsModel.addElement("     ...");
-        tutorialsModel.addElement("     ...");
-        tutorialsModel.addElement("     ...");
-        tutorialsModel.addElement("     ...");
-        tutorialsModel.addElement("     ...");
-        tutorialsModel.addElement("     ...");
-        tutorialsModel.addElement("     ...");
-        JList<String> tutorialList = new JList<String>(tutorialsModel);
-        tutorialList.setCellRenderer(new ListRenderer());
-        
-        
-        /* Lists Stuff */
-        ExpandableListItem tutorials = new ExpandableListItem("Tutorials", model.getTutorialList(), new ListRenderer());
-        ExpandableListItem classes = new ExpandableListItem("Classes", model.getClassList(), new ListRenderer()); 
-        ExpandableListItem students = new ExpandableListItem("Students", model.getStudentList(), new ListRenderer()); 
+        /* JList Sturf */
+        JList<Tutorial> tutorialJList = model.getTutorialList();
+        JList<Class> classJList = model.getClassList();
+        JList<Student> studentJList = model.getStudentList();
+        tutorialJList.setCellRenderer(new ListRenderer());
+        tutorialJList.addListSelectionListener(
+                new ListListener(main));
+        classJList.setCellRenderer(new ListRenderer());
+        classJList.addListSelectionListener(
+                new ListListener(main));
+        studentJList.setCellRenderer(new ListRenderer());
+        studentJList.addListSelectionListener(
+                new ListListener(main));
         
         /* Panel Stuff */
         tutorialPanel = new JPanel();
         tutorialPanel.setLayout(new BoxLayout(tutorialPanel, BoxLayout.Y_AXIS));
-        tutorialPanel.setMinimumSize(new Dimension(barWidth, 500));
-        tutorialPanel.setMaximumSize(new Dimension(barWidth, 500));
-        tutorialPanel.add(tutorials);
+        tutorialPanel.setMinimumSize(new Dimension(barWidth, barHeight));
+        tutorialPanel.setMaximumSize(new Dimension(barWidth, barHeight));
+        tutorialPanel.setBackground(new Color(208, 226, 245));
+        tutorialPanel.add(tutorialJList);
         tutorialPanel.add(Box.createVerticalGlue());
         tutorialPanel.setVisible(true);
         
         classPanel = new JPanel();
         classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
-        classPanel.setMinimumSize(new Dimension(barWidth, 500));
-        classPanel.setMaximumSize(new Dimension(barWidth, 500));
-        classPanel.add(classes);
+        classPanel.setMinimumSize(new Dimension(barWidth, barHeight));
+        classPanel.setMaximumSize(new Dimension(barWidth, barHeight));
+        classPanel.add(classJList);
         classPanel.add(Box.createVerticalGlue());
         classPanel.setBackground(new Color(208, 226, 245));
         classPanel.setVisible(true);
         
         studentPanel = new JPanel();
         studentPanel.setLayout(new BoxLayout(studentPanel, BoxLayout.Y_AXIS));
-        studentPanel.setMinimumSize(new Dimension(barWidth, 500));
-        studentPanel.setMaximumSize(new Dimension(barWidth, 500));
-        studentPanel.add(students);
+        studentPanel.setMinimumSize(new Dimension(barWidth, barHeight));
+        studentPanel.setMaximumSize(new Dimension(barWidth, barHeight));
+        studentPanel.setBackground(new Color(208, 226, 245));
+        studentPanel.add(studentJList);
         studentPanel.add(Box.createVerticalGlue());
         studentPanel.setVisible(true);
+        
+        
+        
+        
         
         
         /* Scroll Stuff */
@@ -292,6 +238,7 @@ public class InstructorUI extends JPanel
         tutorialScroll.setColumnHeaderView(classSpace);
         tutorialScroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
                 tutorialCorner);
+        
         
         classScroll = new JScrollPane(classPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -311,8 +258,48 @@ public class InstructorUI extends JPanel
         
         /* Final Pane stuff */
         finalTutorialPane.add(tutorialScroll);
+        //finalClassesPane.add(classSpace);
         finalClassesPane.add(classScroll);
+        
+        //finalClassesPane.add(treeView);
+        
         finalStudentPane.add(studentScroll);
+        
+        JPanel tutorialSearchPanel = new JPanel();
+        tutorialSearchPanel.setLayout(new BoxLayout(tutorialSearchPanel, BoxLayout.X_AXIS));
+        tutorialSearchPanel.setBackground(new Color(153, 153, 153));
+        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
+        tutorialSearchPanel.add(new JLabel("Search"));
+        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
+        tutorialSearchPanel.add(new JTextField());
+        tutorialSearchPanel.setMinimumSize(new Dimension(200, 40));
+        tutorialSearchPanel.setPreferredSize(new Dimension(200, 40));
+        tutorialSearchPanel.setMaximumSize(new Dimension(200, 40));
+        finalTutorialPane.add(tutorialSearchPanel);
+        
+        JPanel classSearchPanel = new JPanel();
+        classSearchPanel.setLayout(new BoxLayout(classSearchPanel, BoxLayout.X_AXIS));
+        classSearchPanel.setBackground(new Color(153, 153, 153));
+        classSearchPanel.add(Box.createHorizontalStrut(5));
+        classSearchPanel.add(new JLabel("Search"));
+        classSearchPanel.add(Box.createHorizontalStrut(5));
+        classSearchPanel.add(new JTextField());
+        classSearchPanel.setMinimumSize(new Dimension(200, 40));
+        classSearchPanel.setPreferredSize(new Dimension(200, 40));
+        classSearchPanel.setMaximumSize(new Dimension(200, 40));
+        finalClassesPane.add(classSearchPanel);
+        
+        JPanel studentSearchPanel = new JPanel();
+        studentSearchPanel.setLayout(new BoxLayout(studentSearchPanel, BoxLayout.X_AXIS));
+        studentSearchPanel.setBackground(new Color(153, 153, 153));
+        studentSearchPanel.add(Box.createHorizontalStrut(5));
+        studentSearchPanel.add(new JLabel("Search"));
+        studentSearchPanel.add(Box.createHorizontalStrut(5));
+        studentSearchPanel.add(new JTextField());
+        studentSearchPanel.setMinimumSize(new Dimension(200, 40));
+        studentSearchPanel.setPreferredSize(new Dimension(200, 40));
+        studentSearchPanel.setMaximumSize(new Dimension(200, 40));
+        finalStudentPane.add(studentSearchPanel);
         
         
         /* TABBED PANE STUFF */
@@ -320,6 +307,7 @@ public class InstructorUI extends JPanel
         tabPane.addTab("Classes", finalClassesPane);
         tabPane.addTab("Students", finalStudentPane);
         tabPane.addTab("Tutorials", finalTutorialPane);
+        
         
     }
 }

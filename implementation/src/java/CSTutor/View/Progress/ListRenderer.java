@@ -9,7 +9,7 @@ import javax.swing.*;
  * @author Erica Solum
  * @version 13Apr15
  */
-public class ListRenderer extends JLabel implements ListCellRenderer<String>
+public class ListRenderer extends JLabel implements ListCellRenderer<Object>
 {
     public ListRenderer()
     {
@@ -21,23 +21,16 @@ public class ListRenderer extends JLabel implements ListCellRenderer<String>
     /**
      * Returns the rendered JLabel of the list item.
      */
-    public Component getListCellRendererComponent(JList<? extends String> list,
-            String value, int index, boolean isSelected, boolean cellHasFocus)
+    public Component getListCellRendererComponent(JList<? extends Object> list,
+            Object value, int index, boolean isSelected, boolean cellHasFocus)
     {
         Color background;
-        setText(value);
+        setText("   " + value.toString());
         
-        
-        
-        
-        if(index == 0)
+       
+        if(isSelected)
         {
-            background = new Color(159, 198, 233);
-            setFont(new Font("Avenir Black", Font.LAYOUT_LEFT_TO_RIGHT, 20));
-        }
-        else if(isSelected && index != 0)
-        {
-            System.out.println("Accessing " + value);
+            
             background = new Color(183, 183, 183);
             setFont(new Font("Avenir", Font.PLAIN, 16));
             
@@ -48,20 +41,20 @@ public class ListRenderer extends JLabel implements ListCellRenderer<String>
             setFont(new Font("Avenir", Font.PLAIN, 16));
         }
         
+
+            setMinimumSize(new Dimension(200, 35));
+            setPreferredSize(new Dimension(200, 35));
+            setMaximumSize(new Dimension(200, 35));
         
-        Dimension dim = getMaximumSize();
-        setMaximumSize(new Dimension(200, dim.height));
-        setPreferredSize(new Dimension(200, dim.height));
-        setMinimumSize(new Dimension(200, dim.height));
-        
-        if(index == 0)
-        {
-            setMinimumSize(new Dimension(200, getMaximumSize().height + 10));
-            setPreferredSize(new Dimension(200, getMaximumSize().height + 10));
-            setMaximumSize(new Dimension(200, getMaximumSize().height + 10));
-        }
         
         setBackground(background);
+        
+        /*if(isSelected)
+        {
+            System.out.println(value.toString());
+        }*/
+        
+        
         return this;
     }
 
