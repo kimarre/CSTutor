@@ -160,8 +160,8 @@ public class TutorDAO {
    public List<List<String>> getClassHierarchy() throws Exception {
       Statement s = c.createStatement();
       List<String> classes = getClasses();
-      List<List<String>> hierarchy;
-
+      List<List<String>> hierarchy = null;
+      return hierarchy;
    }
 
    /**

@@ -61,7 +61,7 @@ public class Overview extends JFrame {
         mainTop.add(new ManagerGUI(), "Manager");
         mainTop.add(new Progress(INSTRUCTOR_ACCESS).getView(), "Progress");
         mainTop.add(new EditTutorial(), "Tutorial");
-        mainTop.add(new Tutorial(), "Student Tutorial");
+        mainTop.add(new CSTutor.View.Tutorial.Tutorial(), "Student Tutorial");
         mainTop.add(new QuizBuildGUI(), "Quiz");
         mainPanel.add(mainTop);
         mainPanel.add(chatBar);
