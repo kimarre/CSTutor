@@ -12,9 +12,9 @@ public class RecoverPassword extends javax.swing.JFrame {
     /**
      * Creates new form RecoverPassword
      */
-    public RecoverPassword() {
+    public RecoverPassword(UserDB users) {
         initComponents();
-        users = new UserDB();
+        this.users = users;
     }
 
     /**
@@ -158,7 +158,7 @@ public class RecoverPassword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecoverPassword().setVisible(true);
+                new RecoverPassword(new UserDB()).setVisible(true);
             }
         });
     }
@@ -172,6 +172,7 @@ public class RecoverPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
-    private final RecoverPass recover = new RecoverPass(null);
+    private final TokenDB tokens = new TokenDB();
+    private final RecoverPass recover = new RecoverPass(tokens);
     private final UserDB users;
 }

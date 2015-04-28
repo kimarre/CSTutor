@@ -11,8 +11,9 @@ import java.util.*;
  * @author dlgordon
  */
 public class TutorDAO {
-   private static final String db_path = "tutordb.db";
-   private static final String init_db_path = "tutordb.sql";
+   private static final String basepath = "";//"CSTutor/Model/Database/";
+   private static final String db_path = basepath + "tutordb.db";
+   private static final String init_db_path = basepath + "tutordb.sql";
    private static final String upsert_user_query =
     "INSERT OR REPLACE INTO users VALUES (\"%s\", \"%s\", \"%s\", \"%s\");";
    private static final String get_user_query =
@@ -30,10 +31,16 @@ public class TutorDAO {
     * @precondition Database exists in directory and JDBC is imported.
     * @postcondition Connection opened to database.
     */
-   public TutorDAO() throws Exception {
-      Class.forName("org.sqlite.JDBC");
-      c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
-      init_db();
+   public TutorDAO() {
+      try {
+        //System.out.println(db_path);
+        //System.out.println(System.getProperty("user.dir"));
+        c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
+        //System.out.println("...");
+        init_db();
+      } catch(Exception e) {
+        System.out.println("Couldn't open db connection.");
+      }
    }  
    
    /**
@@ -121,13 +128,16 @@ public class TutorDAO {
     * @postcondition None.
     * @return List of class names.
     */
-   public List<String> getClasses() throws Exception {
-      Statement s = c.createStatement();
-      ResultSet r = s.executeQuery("SELECT name FROM classes;");
+   public List<String> getClasses () {
       List<String> classes = new ArrayList<String>();
-      while (r.next()) {
-        classes.add(r.getString("name"));
-      }
+      try {
+        Statement s = c.createStatement();
+        ResultSet r = s.executeQuery("SELECT name FROM classes;");
+        while (r.next()) {
+          classes.add(r.getString("name"));
+        }
+        System.out.println(classes.size());
+      } catch(Exception e) {System.out.println(e);}
       return classes;
    }
 
@@ -174,6 +184,7 @@ public class TutorDAO {
       TutorDAO d;
       List<String> user;
       String quiz;
+      List<String> classes;
       try {
          d = new TutorDAO();
          d.upsert_user("dlgordon", "Luke", "Gordon", "student");
@@ -184,6 +195,9 @@ public class TutorDAO {
          quiz = d.get_quiz(1);
          if (!quiz.equals("Test"))
             throw new Exception();
+         classes = d.getClasses();
+         System.out.println(classes);
+
       } catch ( Exception e ) {
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
          System.exit(1);
