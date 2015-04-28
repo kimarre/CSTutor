@@ -18,8 +18,13 @@ public class TutorialData
     }
     
     /**
-     * Returns a string representation of TutorialData, also know as the name of
+     * Returns a string representation of a tutorial, also know as the name of
      * the tutorial.
+     *                                                  <pre>
+     pre:
+       // String name must not be null.
+       name != null && !name.isEmpty();
+     *
      */
     public String toString()
     {

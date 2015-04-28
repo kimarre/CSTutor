@@ -19,6 +19,11 @@ public class Class
     /**
      * Returns a string representation of the class, also know as the name of
      * the class.
+     *                                                  <pre>
+     pre:
+       // String name must not be null.
+       name != null && !name.isEmpty();
+     *
      */
     public String toString()
     {
