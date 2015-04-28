@@ -77,4 +77,4 @@ clean:
 		rm -rf .classes/* .javadoc/*
 
 run:
-		java -jar CSTutor.jar
+		java -cp CSTutor.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/Model/Database/*.jar CSTutor.View.Overview
