@@ -9,13 +9,9 @@ package CSTutor.Model.Progress;
  */
 public class GuestModel
 {
-
-    public GuestModel()
-    {
-    }
     
     /**
-     * Returs the message that prompts guest users to login to see their progress.
+     * Returns the message that prompts guest users to login to see their progress.
      */
     public String getMessage()
     {

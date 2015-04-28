@@ -15,8 +15,8 @@ import CSTutor.View.Progress.*;
  */
 public class StudentModel
 {
-    private JList<String> tutorialList; 
-    private JList<String> classList;
+    private JList<TutorialData> tutorialList;
+    private JList<Class> classList;
     
     public StudentModel()
     {
@@ -25,9 +25,9 @@ public class StudentModel
     }
     
     /**
-     * Get list of this instructor's tutorials from the database. Puts this
-     * data into an arraylist for easy retrieval later on. Currently sample 
-     * data is filling the arraylist for viewing purposes until further 
+     * Retrieves data about student's tutorials from the database. Puts
+     * data into a JList for easy formatting later on. Currently sample 
+     * data is filling the list for viewing purposes until further 
      * database implementation is done.
      */
     public void retrieveTutorialData()
@@ -35,65 +35,68 @@ public class StudentModel
          System.out.println("In StudentModel.retrieveTutorialData");
          
          /* Tutorials list */
-         DefaultListModel<String> tutorialsModel = new DefaultListModel<String>();
-         tutorialsModel.addElement("Tutorials");
-         tutorialsModel.addElement("   - Hello World!");
-         tutorialsModel.addElement("   - Intro. to C");
-         tutorialsModel.addElement("   - Data Types");
-         tutorialsModel.addElement("   - If Statements");
-         tutorialsModel.addElement("   - Loops in C");
-         tutorialsModel.addElement("   - Functions");
-         tutorialsModel.addElement("   - The Stack");
-         tutorialsModel.addElement("     ...");
-         tutorialsModel.addElement("     ...");
-         tutorialsModel.addElement("     ...");
-         tutorialsModel.addElement("     ...");
-         tutorialsModel.addElement("     ...");
-         tutorialsModel.addElement("     ...");
-         tutorialsModel.addElement("     ...");
-         tutorialList = new JList<String>(tutorialsModel);
-         tutorialList.setCellRenderer(new ListRenderer());
+         DefaultListModel<TutorialData> tutorialsModel
+             = new DefaultListModel<TutorialData>(); /* List model for the JList */
+         
+         /* Add sample elements to the list */
+         tutorialsModel.addElement(new TutorialData("Hello World!"));
+         tutorialsModel.addElement(new TutorialData("Intro. to C"));
+         tutorialsModel.addElement(new TutorialData("Data Types"));
+         tutorialsModel.addElement(new TutorialData("If Statements"));
+         tutorialsModel.addElement(new TutorialData("Loops in C"));
+         tutorialsModel.addElement(new TutorialData("Functions"));
+         tutorialsModel.addElement(new TutorialData("The Stack"));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialsModel.addElement(new TutorialData("     ..."));
+         tutorialList = new JList<TutorialData>(tutorialsModel);
     }
     
     /**
-     * Get list of this student's classes from the database. Puts this 
-     * data into a list for easy retrieval later on. Currently sample 
-     * data is filling the a list for viewing purposes until further
-     *  database implementation is done.
+     * Retrieves list of student's classes from the database. Puts 
+     * data into a JList for easy formatting later on. Currently sample 
+     * data is filling the list for viewing purposes until further
+     * database implementation is done.
      */
     public void retrieveClassesData()
     {
         System.out.println("In StudentModel.retrieveClassesData");
         
-        /* Classes list */
-        DefaultListModel<String> classesModel = new DefaultListModel<String>();
-        classesModel.addElement("Classes");
-        classesModel.addElement("   - CPE 123");
-        classesModel.addElement("   - CPE 101");
-        classesModel.addElement("   - CPE 102");
-        classesModel.addElement("   - CPE 103");
-        classesModel.addElement("   - CPE 357");
-        classesModel.addElement("   - CPE 305");
-        classesModel.addElement("   - CPE 308");
-        classList = new JList<String>(classesModel);
-        classList.setCellRenderer(new ListRenderer());
+        /*
+         * List model for the JList.
+         */
+        DefaultListModel<Class> classesModel = new DefaultListModel<Class>();
+        
+        /*
+         * Add sample elements to the list.
+         */
+        classesModel.addElement(new Class("CPE 123"));
+        classesModel.addElement(new Class("CPE 101"));
+        classesModel.addElement(new Class("CPE 102"));
+        classesModel.addElement(new Class("CPE 103"));
+        classesModel.addElement(new Class("CPE 357"));
+        classesModel.addElement(new Class("CPE 305"));
+        classesModel.addElement(new Class("CPE 308"));
+        classList = new JList<Class>(classesModel);
     }
     
     /**
-     * Returns the list of tutorials loaded from the database.
+     * Returns the JList filled with tutorial data.
      */
-    public JList<String> getTutorialList()
+    public JList<TutorialData> getTutorialList()
     {
-        System.out.println("In StudentModel.getTutorialList");
         return tutorialList;
     }
     
     /**
-     * Returns the list of classes loaded from the database.
+     * Returns the JList filled with class data.
      */
-    public JList<String> getClassList()
+    public JList<Class> getClassList()
     {
-        System.out.println("In StudentModel.getClassList");
         return classList;
     }
 

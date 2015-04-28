@@ -61,16 +61,14 @@ public class RecoverPass
                 }
             }
 
-            System.out.println(token);
-
             //token = Base64.getEncoder().encodeToString(token.getBytes());
 
-            System.out.println(token);
+            System.out.println("Token: " + token);
 
             if(tokenDatabase.addToken(token, email))
             {
-                sendEmail();
                 System.out.println("Reset Token Generated");
+                sendEmail();
                 generating = false;
             }
         }

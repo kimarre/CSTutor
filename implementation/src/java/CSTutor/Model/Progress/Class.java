@@ -16,14 +16,26 @@ public class Class
         this.name = name;
     }
     
+    /**
+     * Returns a string representation of the class, also know as the name of
+     * the class.
+     *                                                  <pre>
+     pre:
+       // String name must not be null.
+       name != null && !name.isEmpty();
+     *
+     */
     public String toString()
     {
         return name;
     }
     
+    /**
+     * Returns the list of sections listed under this class.
+     */
     public void getSections()
     {
-        
+        System.out.println("In Class.getSections");
     }
 
 }
