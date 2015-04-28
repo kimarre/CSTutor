@@ -43,6 +43,11 @@ public class Class {
    /**
     * RemoveStudent removes the specified student from the class and any
     * sections they are in.
+     * <pre>
+      pre:
+       student != null && students != null && students.contains(student);
+      post:
+       !students'.contains(student);
     */
    public void removeStudent(User student){
 	   students.remove(student);
@@ -50,12 +55,17 @@ public class Class {
    }
 
    /**
-    * AddStudent adds the student to the class. THey are not a part of
+    * AddStudent adds the student to the class. They are not a part of
     * any section, initially.
+     * <pre>
+      pre:
+       student != null && students != null && !students.contains(student);
+      post:
+       students'.contains(student);
     */
    public void addStudent(User student){
 	   students.add(student);
-   	System.out.println("In CSTutor.Model.Class.addStudent()");
+   	   System.out.println("In CSTutor.Model.Class.addStudent()");
    }
 
    /**

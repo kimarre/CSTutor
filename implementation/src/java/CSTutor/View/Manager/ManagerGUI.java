@@ -147,6 +147,14 @@ public class ManagerGUI extends JPanel {
     	JPanel classPanel = new JPanel();
     	classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
         classPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        /*CSTutor.Model.Database.TutorDAO dao = new CSTutor.Model.Database.TutorDAO();
+        java.util.List<String> classes = dao.getClasses();
+        java.util.List<DefaultMutableTreeNode> classNodes = new ArrayList<DefaultMutableTreeNode>();
+        for (int i = 0; i < classes.size(); i++) {
+            classNodes.add(new DefaultMutableTreeNode(classes.get(i)));
+        }*/
+
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Classes");
         DefaultMutableTreeNode c1 = new DefaultMutableTreeNode("CSC 101");
         DefaultMutableTreeNode c2 = new DefaultMutableTreeNode("CSC 102");
@@ -166,10 +174,18 @@ public class ManagerGUI extends JPanel {
         DefaultMutableTreeNode s2 = new DefaultMutableTreeNode("Section 2");
         DefaultMutableTreeNode s3 = new DefaultMutableTreeNode("Section 3");
         DefaultMutableTreeNode s4 = new DefaultMutableTreeNode("Section 4");
+        /*classNodes.get(0).add(s1);
+        classNodes.get(0).add(s2);
+        classNodes.get(0).add(s3);
+        classNodes.get(0).add(s4);*/
         c1.add(s1);
         c1.add(s2);
         c1.add(s3);
         c1.add(s4);
+        /*// Add all class nodes
+        for (int i = 0; i < classNodes.size(); i++) {
+            root.add(classNodes.get(i));
+        }*/
         root.add(c1);
         root.add(c2);
         root.add(c3);
@@ -259,16 +275,16 @@ public class ManagerGUI extends JPanel {
 	          	System.out.println(node.toString() + " " + node.getLevel());
 	          	switch(node.getLevel()) {
 	          	case 1:
-	          		managerModel.deleteClass(null);
+	          		managerModel.deleteClass();
 	          		break;
 	          	case 2:
-	          		managerModel.deleteSection(null);
+	          		managerModel.deleteSection();
 	          		break;
 	          	case 3:
-	          		managerModel.deleteUnit(null);
+	          		managerModel.deleteUnit();
 	          		break;
 	          	case 4:
-	          		managerModel.deleteTutorial(null);
+	          		managerModel.deleteTutorial();
 	          		break;
 	          	case 5:
 	          		managerModel.deletePage(null);
