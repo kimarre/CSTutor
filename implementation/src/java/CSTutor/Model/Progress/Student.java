@@ -9,7 +9,7 @@ package CSTutor.Model.Progress;
  *
  */
 public class Student
-{
+{ 
     private String name;
     
     public Student(String name)
@@ -17,6 +17,10 @@ public class Student
         this.name = name;
     }
     
+    /**
+     * Returns a string representation of Student, also know as the name of
+     * the student.
+     */
     public String toString()
     {
         return name;

@@ -5,13 +5,11 @@ package CSTutor.Model.Progress;
  * under a class. Class TutorialData provides methods to get the name of
  * the tutorial.
  * @author Erica Solum (esolum@calpoly.edu)
- *
  */
 public class TutorialData
 {
     private String name;
     private boolean complete;
-    
     
     public TutorialData(String name)
     {
@@ -19,6 +17,10 @@ public class TutorialData
         complete = false;
     }
     
+    /**
+     * Returns a string representation of TutorialData, also know as the name of
+     * the tutorial.
+     */
     public String toString()
     {
         return name;
