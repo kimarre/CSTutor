@@ -12,17 +12,10 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author Kyle Reis
  */
 public class Password {
-    String hash;
-    
-    public Password()
-    {
-        
-    }
-    
-    public Password(String username)
-    {
-        
-    }
+    /**
+     * The hash of the password.
+     */
+    private String hash;
     
     /**
      * Gets the hashed version of the password.
@@ -41,7 +34,7 @@ public class Password {
      * @param password The password that is trying to be set.
      * @return true if the password was valid and set.
       post:
-        Hash.length() > 0;
+        hash.length() > 0;
      */
     boolean setPassword(String password)
     {
