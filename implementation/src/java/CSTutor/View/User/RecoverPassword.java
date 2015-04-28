@@ -172,6 +172,6 @@ public class RecoverPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
-    private final RecoverPass recover = new RecoverPass();
+    private final RecoverPass recover = new RecoverPass(null);
     private final UserDB users;
 }

@@ -75,3 +75,6 @@ dir:
 
 clean:
 		rm -rf .classes/* .javadoc/*
+
+run:
+		java -jar CSTutor.jar
