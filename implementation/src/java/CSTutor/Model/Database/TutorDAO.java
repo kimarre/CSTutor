@@ -13,16 +13,16 @@ import java.util.*;
 public class TutorDAO {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
-   private static final String upsert_user_query =
+   private static Connection c = init();
+   
+   private static final String upsertUser_query =
     "INSERT OR REPLACE INTO users VALUES (\"%s\", \"%s\", \"%s\", \"%s\");";
-   private static final String get_user_query =
+   private static final String getUser_query =
     "SELECT * FROM users WHERE username=\"%s\";";
-   private static final String upsert_quiz_query =
+   private static final String upsertQuiz_query =
     "INSERT OR REPLACE INTO quizzes VALUES (\"%s\", \"%s\", \"%s\", \"%s\");";
-   private static final String get_quiz_query =
+   private static final String getQuiz_query =
     "SELECT * FROM quizzes WHERE id=\"%s\";";
-
-   private Connection c;
    
    /**
     * Constructor.
@@ -30,15 +30,18 @@ public class TutorDAO {
     * @precondition Database exists in directory and JDBC is imported.
     * @postcondition Connection opened to database.
     */
-   public TutorDAO() {
+   private static Connection init() {
       try {
         Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
-        init_db();
+        Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
+        init_db(c);
+        return c;
       } catch(Exception e) {
         System.err.println("Couldn't open db connection.");
         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        System.exit(1);
       }
+      return null;
    }  
    
    /**
@@ -48,9 +51,9 @@ public class TutorDAO {
     * @precondition Database exists.
     * @postcondition Database is initialized.
     */
-   private void init_db() throws Exception { 
-      Statement s = c.createStatement();
-      java.io.InputStream input = getClass().getResourceAsStream(init_db_path);
+   private static void init_db(Connection con) throws Exception { 
+      Statement s = con.createStatement();
+      java.io.InputStream input = TutorDAO.class.getResourceAsStream(init_db_path);
       java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";");
       while (scan.hasNext()) {
         s.executeUpdate(scan.next());
@@ -67,9 +70,9 @@ public class TutorDAO {
     * @param first user's first name
     * @param last user's last name
     */
-   public void upsert_user(String username, String first, String last, String permissions) throws Exception {
+   public static void upsertUser(String username, String first, String last, String permissions) throws Exception {
       Statement s = c.createStatement();
-      s.executeUpdate(String.format(upsert_user_query, username, first, last, permissions));
+      s.executeUpdate(String.format(upsertUser_query, username, first, last, permissions));
       s.close();
    }
 
@@ -81,9 +84,9 @@ public class TutorDAO {
     * @param username user's username
     * @return String list of the user's columns
     */
-   public List<String> get_user(String username) throws Exception {
+   public static List<String> getUser(String username) throws Exception {
       Statement s = c.createStatement();
-      ResultSet r = s.executeQuery(String.format(get_user_query, username));
+      ResultSet r = s.executeQuery(String.format(getUser_query, username));
       ArrayList<String> user = new ArrayList<String>(Arrays.asList(
        r.getString("username"), r.getString("first"), r.getString("last")));
       s.close();
@@ -98,9 +101,9 @@ public class TutorDAO {
     * @param id Quiz id
     * @param quiz Content of the quiz
     */
-   public void upsert_quiz(int id, String quiz, String permissions, String owner) throws Exception {
+   public static void upsertQuiz(int id, String quiz, String permissions, String owner) throws Exception {
       Statement s = c.createStatement();
-      s.executeUpdate(String.format(upsert_quiz_query, String.valueOf(id), quiz, permissions, owner));
+      s.executeUpdate(String.format(upsertQuiz_query, String.valueOf(id), quiz, permissions, owner));
       s.close();
    }
 
@@ -112,9 +115,9 @@ public class TutorDAO {
     * @param id Quiz id
     * @return Content of the quiz.
     */
-   public String get_quiz(int id) throws Exception {
+   public static String getQuiz(int id) throws Exception {
       Statement s = c.createStatement();
-      ResultSet r = s.executeQuery(String.format(get_quiz_query, String.valueOf(id)));
+      ResultSet r = s.executeQuery(String.format(getQuiz_query, String.valueOf(id)));
       String quiz = r.getString("name");
       s.close();
       return quiz;
@@ -127,7 +130,7 @@ public class TutorDAO {
     * @postcondition None.
     * @return List of class names.
     */
-   public List<String> getClasses () {
+   public static List<String> getClasses() {
       List<String> classes = new ArrayList<String>();
       try {
         Statement s = c.createStatement();
@@ -147,7 +150,7 @@ public class TutorDAO {
     * @param className Name of the class for which to look up sections.
     * @return List of section numbers (as a String)
     */
-   public List<String> getSections(String className) throws Exception {
+   public static List<String> getSections(String className) throws Exception {
       Statement s = c.createStatement();
       ResultSet r = s.executeQuery(String.format(
        "SELECT sectionNum FROM sections WHERE className = \"%s\";", className));
@@ -165,7 +168,7 @@ public class TutorDAO {
     * @postcondition None.
     * @return List of list of strings representing class hierarchy from database.
     */
-   public List<List<String>> getClassHierarchy() throws Exception {
+   public static List<List<String>> getClassHierarchy() throws Exception {
       Statement s = c.createStatement();
       List<String> classes = getClasses();
       List<List<String>> hierarchy = null;
@@ -185,12 +188,12 @@ public class TutorDAO {
       List<String> classes;
       try {
          d = new TutorDAO();
-         d.upsert_user("dlgordon", "Luke", "Gordon", "student");
-         user = d.get_user("dlgordon");
+         d.upsertUser("dlgordon", "Luke", "Gordon", "student");
+         user = d.getUser("dlgordon");
          if (!user.get(1).equals("Luke"))
             throw new Exception();
-         d.upsert_quiz(1, "Test", "all", "dlgordon");
-         quiz = d.get_quiz(1);
+         d.upsertQuiz(1, "Test", "all", "dlgordon");
+         quiz = d.getQuiz(1);
          if (!quiz.equals("Test"))
             throw new Exception();
          classes = d.getClasses();

@@ -148,9 +148,8 @@ public class ManagerGUI extends JPanel {
     	classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
         classPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Connect to db
-        CSTutor.Model.Database.TutorDAO dao = new CSTutor.Model.Database.TutorDAO();
-        java.util.List<String> classes = dao.getClasses();
+        // Make classnode for each in class in db
+        java.util.List<String> classes = CSTutor.Model.Database.TutorDAO.getClasses();
         java.util.List<DefaultMutableTreeNode> classNodes = new ArrayList<DefaultMutableTreeNode>();
         for (int i = 0; i < classes.size(); i++) {
             classNodes.add(new DefaultMutableTreeNode(classes.get(i)));
@@ -161,6 +160,7 @@ public class ManagerGUI extends JPanel {
         DefaultMutableTreeNode s2 = new DefaultMutableTreeNode("Section 2");
         DefaultMutableTreeNode s3 = new DefaultMutableTreeNode("Section 3");
         DefaultMutableTreeNode s4 = new DefaultMutableTreeNode("Section 4");
+        
         classNodes.get(0).add(s1);
         classNodes.get(0).add(s2);
         classNodes.get(0).add(s3);
