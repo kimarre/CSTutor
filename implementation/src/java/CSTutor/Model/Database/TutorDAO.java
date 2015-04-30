@@ -11,9 +11,8 @@ import java.util.*;
  * @author dlgordon
  */
 public class TutorDAO {
-   private static final String basepath = "";//"CSTutor/Model/Database/";
-   private static final String db_path = basepath + "tutordb.db";
-   private static final String init_db_path = basepath + "tutordb.sql";
+   private static final String db_path = "tutordb.db";
+   private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static final String upsert_user_query =
     "INSERT OR REPLACE INTO users VALUES (\"%s\", \"%s\", \"%s\", \"%s\");";
    private static final String get_user_query =
@@ -33,13 +32,12 @@ public class TutorDAO {
     */
    public TutorDAO() {
       try {
-        //System.out.println(db_path);
-        //System.out.println(System.getProperty("user.dir"));
+        Class.forName("org.sqlite.JDBC");
         c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
-        //System.out.println("...");
         init_db();
       } catch(Exception e) {
-        System.out.println("Couldn't open db connection.");
+        System.err.println("Couldn't open db connection.");
+        System.err.println(e.getClass().getName() + ": " + e.getMessage());
       }
    }  
    
@@ -52,9 +50,10 @@ public class TutorDAO {
     */
    private void init_db() throws Exception { 
       Statement s = c.createStatement();
-      String[] statements = new String(Files.readAllBytes(Paths.get(init_db_path))).split(";\n");
-      for (int i = 0; i < statements.length; i++) {
-         s.executeUpdate(statements[i]);
+      java.io.InputStream input = getClass().getResourceAsStream(init_db_path);
+      java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";");
+      while (scan.hasNext()) {
+        s.executeUpdate(scan.next());
       }
       s.close();
    }
@@ -136,7 +135,6 @@ public class TutorDAO {
         while (r.next()) {
           classes.add(r.getString("name"));
         }
-        System.out.println(classes.size());
       } catch(Exception e) {System.out.println(e);}
       return classes;
    }

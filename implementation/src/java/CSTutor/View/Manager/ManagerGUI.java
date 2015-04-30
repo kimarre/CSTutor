@@ -148,58 +148,28 @@ public class ManagerGUI extends JPanel {
     	classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
         classPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        /*CSTutor.Model.Database.TutorDAO dao = new CSTutor.Model.Database.TutorDAO();
+        // Connect to db
+        CSTutor.Model.Database.TutorDAO dao = new CSTutor.Model.Database.TutorDAO();
         java.util.List<String> classes = dao.getClasses();
         java.util.List<DefaultMutableTreeNode> classNodes = new ArrayList<DefaultMutableTreeNode>();
         for (int i = 0; i < classes.size(); i++) {
             classNodes.add(new DefaultMutableTreeNode(classes.get(i)));
-        }*/
+        }
 
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Classes");
-        DefaultMutableTreeNode c1 = new DefaultMutableTreeNode("CSC 101");
-        DefaultMutableTreeNode c2 = new DefaultMutableTreeNode("CSC 102");
-        DefaultMutableTreeNode c3 = new DefaultMutableTreeNode("CSC 103");
-        DefaultMutableTreeNode c4 = new DefaultMutableTreeNode("CSC 121");
-        DefaultMutableTreeNode c5 = new DefaultMutableTreeNode("CSC 225");
-        DefaultMutableTreeNode c6 = new DefaultMutableTreeNode("CSC 300");
-        DefaultMutableTreeNode c7 = new DefaultMutableTreeNode("CSC 305");
-        DefaultMutableTreeNode c8 = new DefaultMutableTreeNode("CSC 307");
-        DefaultMutableTreeNode c9 = new DefaultMutableTreeNode("CSC 308");
-        DefaultMutableTreeNode c10 = new DefaultMutableTreeNode("CSC 309");
-        DefaultMutableTreeNode c11 = new DefaultMutableTreeNode("CSC 349");
-        DefaultMutableTreeNode c12 = new DefaultMutableTreeNode("CSC 357");
-        DefaultMutableTreeNode c13 = new DefaultMutableTreeNode("CSC 365");
-        DefaultMutableTreeNode c14 = new DefaultMutableTreeNode("CSC 378");
         DefaultMutableTreeNode s1 = new DefaultMutableTreeNode("Section 1");
         DefaultMutableTreeNode s2 = new DefaultMutableTreeNode("Section 2");
         DefaultMutableTreeNode s3 = new DefaultMutableTreeNode("Section 3");
         DefaultMutableTreeNode s4 = new DefaultMutableTreeNode("Section 4");
-        /*classNodes.get(0).add(s1);
+        classNodes.get(0).add(s1);
         classNodes.get(0).add(s2);
         classNodes.get(0).add(s3);
-        classNodes.get(0).add(s4);*/
-        c1.add(s1);
-        c1.add(s2);
-        c1.add(s3);
-        c1.add(s4);
-        /*// Add all class nodes
+        classNodes.get(0).add(s4);
+
+        // Add all class nodes
         for (int i = 0; i < classNodes.size(); i++) {
             root.add(classNodes.get(i));
-        }*/
-        root.add(c1);
-        root.add(c2);
-        root.add(c3);
-        root.add(c4);
-        root.add(c5);
-        root.add(c6);
-        root.add(c7);
-        root.add(c8);
-        root.add(c9);
-        root.add(c10);
-        root.add(c11);
-        root.add(c12);
-        root.add(c13);
-        root.add(c14);
+        }
         
         DefaultMutableTreeNode u1 = new DefaultMutableTreeNode("(no unit)");
         DefaultMutableTreeNode u2 = new DefaultMutableTreeNode("Final Review");

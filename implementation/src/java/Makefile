@@ -1,7 +1,7 @@
 #
 # Makefile for CSTutor prototype.
 #
-MODULES =	CSTutor/View/Progress \
+MODULES=CSTutor/View/Progress \
 		CSTutor/View/Quiz \
 		CSTutor/View/Chat \
 		CSTutor/View/User \
@@ -16,7 +16,7 @@ MODULES =	CSTutor/View/Progress \
 		CSTutor/Model/Tutorial \
 		CSTutor/Model/User
 
-JAVA =		CSTutor/View/*.java \
+JAVA =CSTutor/View/*.java \
 		CSTutor/View/Progress/*.java \
 		CSTutor/View/Quiz/*.java \
 		CSTutor/View/Chat/*.java \
@@ -31,7 +31,7 @@ JAVA =		CSTutor/View/*.java \
 		CSTutor/Model/Tutorial/*.java \
 		CSTutor/Model/User/*.java
 
-CLASS =		CSTutor/View/*.class \
+CLASS=CSTutor/View/*.class \
 		CSTutor/View/Progress/*.class \
 		CSTutor/View/Quiz/*.class \
 		CSTutor/View/Chat/*.class \
@@ -53,7 +53,8 @@ compile:	$(FILE)
 
 jar:		$(FILE)
 		cd .classes ; \
-		jar cmf Manifest.txt ../CSTutor.jar $(CLASS) ; \
+		cp ../CSTutor/Model/Database/tutordb.sql CSTutor/Model/Database/tutordb.sql ; \
+		jar cmf Manifest.txt ../CSTutor.jar CSTutor/Model/Database/tutordb.sql $(CLASS) ; \
 		cd ../ \
 		chmod a+x CSTutor.jar ; 
 
