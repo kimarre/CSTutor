@@ -31,9 +31,6 @@ public class Tutorial extends javax.swing.JPanel {
         enableLineWrap();
         sideModule = new RoadmapModule();
         
-        JFrame tempFrame = new JFrame();
-        tempFrame.setSize(1075, 700);
-        
         // First sample tutorial Content
         TutorialData first = new TutorialData();
         first.setTitle("For Loops");
@@ -55,8 +52,7 @@ public class Tutorial extends javax.swing.JPanel {
         
         setAllTheThings(tutorialTrack.peekFirst());
         
-        tempFrame.add(this);
-        tempFrame.setVisible(true);
+        this.setVisible(true);
     }
     
     /**
@@ -80,6 +76,14 @@ public class Tutorial extends javax.swing.JPanel {
         sampleCodeText.setText(pageData.getExampleCode());
         sampleOutputText.setText(pageData.getExampleOutput());
         tryItText.setText(pageData.tryItYourself);
+    }
+    
+    /** 
+     * Adds a given pageData element to the tutorial track linked list
+     * @param pageData The element to be added to the tutorial track
+     */
+    public void addTutorial(TutorialData pageData) {
+        tutorialTrack.add(pageData);
     }
     
     /** Enables line wrap for all text elements since NetBeans is a control 

@@ -2,6 +2,7 @@
 package CSTutor.View.Tutorial;
 
 import CSTutor.Model.Tutorial.*;
+
 import javax.swing.*;
 import java.util.*;
 import static javax.swing.JOptionPane.*;
@@ -214,7 +215,8 @@ public class EditTutorial extends javax.swing.JPanel {
     private void toolsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolsButtonActionPerformed
         //toolbar = new EditingTools();
         //toolbar.setVisible(true);
-        new EditingTools().setVisible(true);
+        toolbar = new EditingTools();
+        toolbar.setVisible(true);
     }//GEN-LAST:event_toolsButtonActionPerformed
 
     /** 
@@ -226,7 +228,19 @@ public class EditTutorial extends javax.swing.JPanel {
         JFrame tempFrame = new JFrame();
         tempFrame.setSize(1075, 700);
         
+        TutorialData pageData = retrieveData();
         
+        //previewTutorial = new Tutorial(pageData);
+        previewTutorial = new Tutorial(pageData);
+        
+        tempFrame.add(previewTutorial);
+        tempFrame.setVisible(true);
+    }//GEN-LAST:event_previewButtonActionPerformed
+
+    /**
+     * Returns a TutorialData object to pass around for various uses.
+     */
+    private TutorialData retrieveData() {
         TutorialData pageData = new TutorialData();
         
         pageData.setTitle(titleField.getText());
@@ -236,13 +250,9 @@ public class EditTutorial extends javax.swing.JPanel {
         pageData.setExampleOutput(outputText.getText());
         pageData.tryItYourself = tryItText.getText();
         
-        //previewTutorial = new Tutorial(pageData);
-        previewTutorial = new Tutorial(pageData);
-        
-        tempFrame.add(previewTutorial);
-        tempFrame.setVisible(true);
-    }//GEN-LAST:event_previewButtonActionPerformed
-
+        return pageData;
+    }
+    
     /**
      * Opens a new instance of the save confirmation dialog box.
      */
@@ -253,17 +263,21 @@ public class EditTutorial extends javax.swing.JPanel {
         
         if (result == YES_OPTION) {
             System.out.println("Confirmed!");
+            editTut = new CSTutor.Model.Tutorial.TutorialEditor();
+            TutorialData temp = retrieveData();
+            editTut.save();
+            
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    /** Contains the overall data for the tutorial pages used */
-    LinkedList<TutorialData> pages;
-    
     /** Contains the editing tools needed for authors to personalize tutorial text */
     public EditingTools toolbar;
     
     /** Window for previewing the tutorial content input before saving */
     public Tutorial previewTutorial;
+    
+    /** Data structure for tutorial editing functionality. */
+    public CSTutor.Model.Tutorial.TutorialEditor editTut;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codeExampleLabel;

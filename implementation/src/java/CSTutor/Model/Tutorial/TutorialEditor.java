@@ -27,7 +27,6 @@ public class TutorialEditor {
     * Constructs a new instance of a TutorialEditor
     */
    public TutorialEditor() {
-	   
    }
 
    /*
@@ -44,13 +43,13 @@ public class TutorialEditor {
          authorPages'.contains(this);
 
    */
-
+public void save(){}
    /**
    * Saves the changes on the editing page to the tutorial.
    */
-   public void save() {
+   public void save(TutorialData pageData) {
       System.out.println("Called tutorial save() method.");
-      System.out.println("String received was: " + tryItYourself);
+      //System.out.println("String received was: " + tryItYourself);
    }
    
    /**

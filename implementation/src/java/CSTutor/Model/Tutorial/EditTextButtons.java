@@ -8,7 +8,7 @@ package CSTutor.Model.Tutorial;
  * @version 20Apr2015
  */
 public abstract class EditTextButtons {
-	/** Identifies which of several font styles are used to format within the tutorial editor */
+    /** Identifies which of several font styles are used to format within the tutorial editor */
    String fontStyle;
    
    /** Determines if the font should be bold */
