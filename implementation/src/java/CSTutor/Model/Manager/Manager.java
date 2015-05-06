@@ -1,5 +1,5 @@
 package CSTutor.Model.Manager;
-import java.util.List;
+import java.util.*;
 
 /****
  * The Manager contains all the information for the manager view. It contains
@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Manager {
 	/* A list of all classes */
-   List<Class> data;
+   public List<Class> data;
 	/* The selected class */
    Class selectedClass;
 	/* The selected section */
@@ -24,7 +24,7 @@ public class Manager {
     * Creates a manager model. Should only be one per site.
     */
    public Manager() {
-   	
+      data = new ArrayList<Class>();
    }
 
    /**
@@ -37,7 +37,16 @@ public class Manager {
       post:
        selectedSection'.equals(select);
     */
-   public void selectSection(Section select) {}
+   public void selectSection(Section select) {
+	   if (select == null) {
+		   selectedSection = null;
+		   selectedClass = null;
+	   }
+	   else {
+		   selectedSection = select;
+		   selectedClass = select.parent;
+	   }
+   }
    /**
     * SelectClass sets the selectedClass to the given class, if it exists.
     * <pre>
@@ -47,7 +56,9 @@ public class Manager {
       post:
        selectedClass'.equals(select);
     */ 
-   public void selectClass(Class select) {}
+   public void selectClass(Class select) {
+	   selectedClass = select;
+   }
    /**
     * SelectUnit sets the selectedUnit to the given unit, if it is within the selected class or section.
     * <pre>
@@ -57,7 +68,18 @@ public class Manager {
       post:
        selectedUnit'.equals(select);
     */ 
-   public void selectUnit(Unit select){}
+   public void selectUnit(Unit select){
+	   if (select == null) {
+		   selectedUnit = null;
+		   selectedSection = null;
+		   selectedClass = null;
+	   }
+	   else {
+		   selectedUnit = select;
+		   selectedSection = select.parent;
+		   selectedClass = select.parent.parent; //lookin good
+	   }
+   }
    /**
     * SelectTutorial sets the selectedTutorial to the given tutorial, if it is withing the selected unit.
     * <pre>
@@ -66,7 +88,20 @@ public class Manager {
       post:
        selectedTutorial'.equals(select);
     */ 
-   public void selectTutorial(Tutorial select){}
+   public void selectTutorial(Tutorial select){
+	   if (select == null) {
+		   selectedTutorial = null;
+		   selectedUnit = null;
+		   selectedSection = null;
+		   selectedClass = null;
+	   }
+	   else {
+		   selectedTutorial = select;
+		   selectedUnit = select.parent;
+		   selectedSection = select.parent.parent;
+		   selectedClass = select.parent.parent.parent; //perfect.
+	   }
+   }
    /**
     * SelectPage sets the selectedPage to the given page, if it is within the selectedTutorial.
     * <pre>
@@ -75,7 +110,22 @@ public class Manager {
       post:
        selectedPage'.equals(select);
     */ 
-   public void selectPage(Page select){}
+   public void selectPage(Page select){
+	   if (select == null) {
+		   selectedPage = null;
+		   selectedTutorial = null;
+		   selectedUnit = null;
+		   selectedSection = null;
+		   selectedClass = null;
+	   }
+	   else {
+		   selectedPage = select;
+		   selectedTutorial = select.parent;
+		   selectedUnit = select.parent.parent;
+		   selectedSection = select.parent.parent.parent;
+		   selectedClass = select.parent.parent.parent.parent; //beautiful.
+	   }
+   }
 
    /**
     * CreateClass adds the given class to data.
@@ -86,6 +136,7 @@ public class Manager {
        data'.contains(classs);
     */
    public void createClass(Class classs){
+	   data.add(classs);
   	 	System.out.println("In CSTutor.Model.Manager.createClass()");
   	}
 
@@ -97,7 +148,11 @@ public class Manager {
       post:
        selectedClass'.sections.contains(section);
     */
-   public void createSection(Section section){}
+   public void createSection(Section section){
+	   if (selectedClass != null) {
+		   selectedClass.sections.add(section);
+	   }
+   }
    /**
     * CreateUnit adds the given section to the currently selected class.
     * <pre>
@@ -107,7 +162,11 @@ public class Manager {
       post:
        selectedClass'.units.contains(unit) || selectedSection' != null && selectedSection'.units.contains(unit);
     */
-   public void createUnit(Unit unit){}
+   public void createUnit(Unit unit){
+	   if (selectedSection != null) {
+		   selectedSection.units.add(unit);
+	   }
+   }
    /**
     * CreateTutorial adds the given tutorial to the currently selected unit.
     * <pre>
@@ -116,7 +175,11 @@ public class Manager {
       post:
        selectedUnit'.tutorials.contains(tutorial);
     */
-    public void createTutorial(Tutorial tutorial){}
+    public void createTutorial(Tutorial tutorial){
+    	if (selectedUnit != null) {
+ 		   selectedUnit.tutorials.add(tutorial);
+ 	   }
+    }
    /**
     * CreatePage adds the given page to the currently selected tutorial.
     * <pre>
@@ -125,7 +188,11 @@ public class Manager {
       post:
        selectedTutorial'.pages.contains(page);
     */
-    public void createPage(Page page){}
+    public void createPage(Page page){
+       if (selectedTutorial != null) {
+ 		   selectedTutorial.pages.add(page);
+ 	   }
+    }
 
     /**
      * Deletes the given class 
@@ -136,6 +203,7 @@ public class Manager {
        selectedClass' == null && !data'.contains(selectedClass);
      */
     public void deleteClass() {
+    	data.remove(selectedClass);
    	 System.out.println("In CSTutor.Model.Manager.deleteClass()");
     }
 
@@ -148,6 +216,9 @@ public class Manager {
        selectedSection' == null && !selectedClass'.sections.contains(selectedSection);
      */
     public void deleteSection() {
+    	if(selectedClass != null) {
+    		selectedClass.sections.remove(selectedSection);
+    	}
    	 System.out.println("In CSTutor.Model.Manager.deleteSection()");
     }
 
@@ -160,6 +231,9 @@ public class Manager {
        selectedUnit' == null && !selectedSection'.units.contains(selectedUnit);
      */
     public void deleteUnit() {
+    	if(selectedSection != null) {
+    		selectedSection.units.remove(selectedUnit);
+    	}
    	 System.out.println("In CSTutor.Model.Manager.deleteUnit()");
     }
 
@@ -172,6 +246,9 @@ public class Manager {
        selectedTutorial' == null && !selectedUnit'.sections.contains(selectedTutorial);
      */
     public void deleteTutorial() {
+    	if(selectedUnit != null) {
+    		selectedUnit.tutorials.remove(selectedUnit);
+    	}
    	 System.out.println("In CSTutor.Model.Manager.deleteTutorial()");
     }
 
@@ -179,6 +256,9 @@ public class Manager {
      * Deletes the given page 
      */
     public void deletePage(Page page) {
+    	if(selectedTutorial != null) {
+    		selectedTutorial.pages.remove(selectedPage);
+    	}
    	 System.out.println("In CSTutor.Model.Manager.deletePage()");
     }
 

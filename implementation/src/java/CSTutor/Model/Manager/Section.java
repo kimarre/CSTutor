@@ -1,5 +1,5 @@
 package CSTutor.Model.Manager;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * Class Section is a subsection of a class. It can have a specific professor, but otherwise
@@ -7,30 +7,28 @@ import java.util.Collection;
  * 
  * @author Simon Vurens
  */
-public abstract class Section {
+public class Section {
 	/* The name of the section */
-	private String name;
+   public String name;
 	/* The enrolled students in the section. A subset of students enrolled in the class*/
-   private Collection<User> students;
+   public Collection<User> students;
    /* The set of units within the section*/
-   private Collection<Unit> units;
+   public Collection<Unit> units;
    /* the professor in charge of the section */
-   private User professor;
+   public User professor;
    /* The class that this section is a part of */
-   private Class parent;
-    /** 
-    * AddStudent adds the specified student to the section
-    */
-   abstract void addStudent(User student);
-
-   /**
-    * RemoveStudent removes the specified student from the section if
-    * the student is in the section.
-    */
-   abstract void removeStudent(User student);
-
-   /**
-    * ChangeProfessor changes the professor of the section to the specified professor
-    */
-   abstract void changeProfessor(User professor);
+   public Class parent;
+   
+   public Section(String name, Collection<User> students, User professor, Class parent) {
+	   this.name = name;
+	   this.students = students;
+	   this.professor = professor;
+	   this.parent = parent;
+	   
+	   this.units = new HashSet<Unit>();
+	   this.units.add(new Unit("Uncategorized", this));
+   }
+   public String toString() {
+	   return name;
+   }
 }
