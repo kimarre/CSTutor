@@ -367,6 +367,9 @@ public class Tutorial extends javax.swing.JPanel {
      */
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
         //sideModule.toEnd();
+        currentIndex = tutorialTrack.track.size()-1;
+        setAllTheThings(tutorialTrack.track.get(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
     }//GEN-LAST:event_toEndButtonActionPerformed
     
     /** Disables buttons for the purpose of previewing the tutorial. */
@@ -405,7 +408,9 @@ public class Tutorial extends javax.swing.JPanel {
      */
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
         //sideModule.toBeginning(tutorialTrack);
-        System.out.println("To beginning!");
+        currentIndex = 0;
+        setAllTheThings(tutorialTrack.track.peekFirst());
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
     }//GEN-LAST:event_toBeginningButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
