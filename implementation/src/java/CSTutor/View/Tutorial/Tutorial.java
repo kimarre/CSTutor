@@ -42,13 +42,13 @@ public class Tutorial extends javax.swing.JPanel {
         first.setSyntax("for (int i=start; i<upperLimit; i++) {<br>   ...<br>}");
         first.setExampleOutput("Hello world<br>Hello world<br>Hello world<br>Hello world<br>Hello world");
         first.setExampleCode("for (int i=0; i<5; i++) {<br>    printf(\"Hello world\\n\");<br>}");
-        tutorialTrack.add(first);
+        tutorialTrack.track.add(first);
         
         // Second sample tutorial content
         TutorialData second = new TutorialData();
         second.setTitle("While Loops");
         second.setDescription("While loops are only sometimes as cool as for loops.");
-        tutorialTrack.add(second);
+        tutorialTrack.track.add(second);
         
         setAllTheThings(tutorialTrack.getFirst());
         
@@ -83,7 +83,7 @@ public class Tutorial extends javax.swing.JPanel {
      * @param pageData The element to be added to the tutorial track
      */
     public void addTutorial(TutorialData pageData) {
-        tutorialTrack.add(pageData);
+        tutorialTrack.track.add(pageData);
     }
    
     

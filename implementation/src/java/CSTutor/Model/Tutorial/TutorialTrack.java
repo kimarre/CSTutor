@@ -17,9 +17,9 @@ public class TutorialTrack {
         track = new LinkedList<TutorialData>();
     }
     
-    public void add(TutorialData toAdd) {
+    /*public void add(TutorialData toAdd) {
         track.add(toAdd);
-    }
+    }*/
     
     public TutorialData getFirst() {
         return track.peekFirst();

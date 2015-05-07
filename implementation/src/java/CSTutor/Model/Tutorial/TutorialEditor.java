@@ -50,7 +50,7 @@ public class TutorialEditor {
    */
    public void save(TutorialData pageData) {
       System.out.println("Called tutorial save() method.");
-      tutorialTrack.add(pageData);
+      tutorialTrack.track.add(pageData);
       //System.out.println("String received was: " + tryItYourself);
    }
    
