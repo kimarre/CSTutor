@@ -17,7 +17,7 @@ import javax.swing.JFrame;
  */
 public class Tutorial extends javax.swing.JPanel {
     /** Overall structure containing tutorial content */
-    private LinkedList<TutorialData> tutorialTrack = new LinkedList();
+    private TutorialTrack tutorialTrack = new TutorialTrack();
     private int currentIndex = 0;
     
     /** Provides a quick way to jump between tutorial lessons */
@@ -50,7 +50,7 @@ public class Tutorial extends javax.swing.JPanel {
         second.setDescription("While loops are only sometimes as cool as for loops.");
         tutorialTrack.add(second);
         
-        setAllTheThings(tutorialTrack.peekFirst());
+        setAllTheThings(tutorialTrack.getFirst());
         
         
         this.setVisible(true);
@@ -366,7 +366,7 @@ public class Tutorial extends javax.swing.JPanel {
      * Jump to the end of the tutorial track.
      */
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
-        sideModule.toEnd(tutorialTrack);
+        //sideModule.toEnd();
     }//GEN-LAST:event_toEndButtonActionPerformed
     
     /** Disables buttons for the purpose of previewing the tutorial. */
@@ -385,27 +385,27 @@ public class Tutorial extends javax.swing.JPanel {
         if (currentIndex > 0) {
             currentIndex--;
         }
-        setAllTheThings(tutorialTrack.get(currentIndex));
-        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.size());
+        setAllTheThings(tutorialTrack.track.get(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
     }//GEN-LAST:event_previousLessonButtonActionPerformed
 
     /**
      * Load content for the next lesson
      */
     private void nextLessonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextLessonButtonActionPerformed
-        if (currentIndex < tutorialTrack.size() - 1) {
+        if (currentIndex < tutorialTrack.track.size() - 1) {
             currentIndex++;
         }
-        setAllTheThings(tutorialTrack.get(currentIndex));
-        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.size());
+        setAllTheThings(tutorialTrack.track.get(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
     }//GEN-LAST:event_nextLessonButtonActionPerformed
 
     /**
      * Jump to the beginning of the tutorial track
      */
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
-        sideModule.toBeginning(tutorialTrack);
-        
+        //sideModule.toBeginning(tutorialTrack);
+        System.out.println("To beginning!");
     }//GEN-LAST:event_toBeginningButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed

@@ -16,9 +16,6 @@ public class TutorialData {
    /** Describes the overall concept of the subject at hand.*/
    public Description description;
    
-   /** Contains the example code and output */
-   public CodeExample example;
-   
    /** Contains the instructor's problem for the student */
    public String tryItYourself;
    
@@ -36,7 +33,6 @@ public class TutorialData {
    
    public TutorialData() {
        description = new Description();
-       example = new CodeExample();
        tryItYourself = "";
    }
    
@@ -57,12 +53,12 @@ public class TutorialData {
    
    /** Retrieves the tutorial's example code*/
    public String getExampleCode() {
-       return example.sampleCode;
+       return description.exampleCode;
    }
    
    /** Retrieves the tutorial's example output */
    public String getExampleOutput() {
-       return example.sampleOutput;
+       return description.exampleOutput;
    }
    
    /** Sets the tutorial's title */
@@ -82,12 +78,12 @@ public class TutorialData {
    
    /** Sets the tutorial's example code */
    public void setExampleCode(String code) {
-       example.sampleCode = code;
+       description.exampleCode = code;
    }
    
    /** Sets the tutorial's example output */
    public void setExampleOutput(String output) {
-       example.sampleOutput = output;
+       description.exampleOutput = output;
    }
 
    /**

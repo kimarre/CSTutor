@@ -14,6 +14,12 @@ public class Description {
    /** String text to hold the syntax of the tutorial's subject */
    public String syntax;
    
+   /** Contains the example's sample code provided by the instructor */
+   public String exampleCode;
+   
+   /** Contains the example's sample output provided by the instructor */
+   public String exampleOutput;
+   
    /**
     * Initiates a new instance of a description
     */

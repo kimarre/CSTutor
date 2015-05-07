@@ -2,7 +2,6 @@
 package CSTutor.View.Tutorial;
 
 import CSTutor.Model.Tutorial.*;
-
 import javax.swing.*;
 import java.util.*;
 import static javax.swing.JOptionPane.*;
@@ -231,7 +230,6 @@ public class EditTutorial extends javax.swing.JPanel {
         TutorialData pageData = retrieveData();
         
         previewTutorial = new Tutorial(pageData);
-        
         previewTutorial.disableButtons();
         
         tempFrame.add(previewTutorial);
@@ -264,9 +262,9 @@ public class EditTutorial extends javax.swing.JPanel {
         
         if (result == YES_OPTION) {
             System.out.println("Confirmed!");
-            editTut = new CSTutor.Model.Tutorial.TutorialEditor();
+            editTutorial = new CSTutor.Model.Tutorial.TutorialEditor();
             TutorialData temp = retrieveData();
-            editTut.save();
+            editTutorial.save(temp);
             
         }
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -278,7 +276,7 @@ public class EditTutorial extends javax.swing.JPanel {
     public Tutorial previewTutorial;
     
     /** Data structure for tutorial editing functionality. */
-    public CSTutor.Model.Tutorial.TutorialEditor editTut;
+    public CSTutor.Model.Tutorial.TutorialEditor editTutorial;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codeExampleLabel;
