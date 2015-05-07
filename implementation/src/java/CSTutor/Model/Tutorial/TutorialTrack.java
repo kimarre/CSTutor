@@ -14,7 +14,7 @@ public class TutorialTrack {
     public static LinkedList<TutorialData> track;
     
     public TutorialTrack() {
-        
+        track = new LinkedList<TutorialData>();
     }
     
     public void add(TutorialData toAdd) {
