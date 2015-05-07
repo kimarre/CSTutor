@@ -230,8 +230,9 @@ public class EditTutorial extends javax.swing.JPanel {
         
         TutorialData pageData = retrieveData();
         
-        //previewTutorial = new Tutorial(pageData);
         previewTutorial = new Tutorial(pageData);
+        
+        previewTutorial.disableButtons();
         
         tempFrame.add(previewTutorial);
         tempFrame.setVisible(true);

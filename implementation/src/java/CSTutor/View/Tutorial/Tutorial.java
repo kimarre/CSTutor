@@ -28,7 +28,7 @@ public class Tutorial extends javax.swing.JPanel {
      */
     public Tutorial() {
         initComponents();
-        enableLineWrap();
+        
         sideModule = new RoadmapModule();
         
         // First sample tutorial Content
@@ -36,12 +36,12 @@ public class Tutorial extends javax.swing.JPanel {
         first.setTitle("For Loops");
         first.setDescription("For loops are a type of control structure that "
           + "allow code to be repeatedly executed. They take three arguments"
-          + " in the order of:\n     1. starting condition;\n     2. condition "
-          + "to exit the loop;\n     3. post loop increment");
+          + " in the order of:<br>     1. starting condition;<br>     2. condition "
+          + "to exit the loop;<br>     3. post loop increment");
         
-        first.setSyntax("for (int i=start; i<upperLimit; i++) {\n   ...\n}");
-        first.setExampleOutput("Hello world\nHello world\nHello world\nHello world\nHello world");
-        first.setExampleCode("for (int i=0; i<5; i++) {\n    printf(\"Hello world\\n\");\n}");
+        first.setSyntax("for (int i=start; i<upperLimit; i++) {<br>   ...<br>}");
+        first.setExampleOutput("Hello world<br>Hello world<br>Hello world<br>Hello world<br>Hello world");
+        first.setExampleCode("for (int i=0; i<5; i++) {<br>    printf(\"Hello world\\n\");<br>}");
         tutorialTrack.add(first);
         
         // Second sample tutorial content
@@ -52,6 +52,7 @@ public class Tutorial extends javax.swing.JPanel {
         
         setAllTheThings(tutorialTrack.peekFirst());
         
+        
         this.setVisible(true);
     }
     
@@ -61,7 +62,6 @@ public class Tutorial extends javax.swing.JPanel {
      */
     public Tutorial(TutorialData pageData) {
         initComponents();
-        enableLineWrap();
         setAllTheThings(pageData);
     }
     
@@ -71,11 +71,11 @@ public class Tutorial extends javax.swing.JPanel {
      */
     public void setAllTheThings(TutorialData pageData) {
         titleLabel.setText("<html><b>" + pageData.title + "</b></html>");
-        descText.setText(pageData.getDescription());
-        syntaxText.setText(pageData.getSyntax());
-        sampleCodeText.setText(pageData.getExampleCode());
-        sampleOutputText.setText(pageData.getExampleOutput());
-        tryItText.setText(pageData.tryItYourself);
+        descText.setText("<html><body style='width: 300px'>" + pageData.getDescription() + "</body></html>");
+        syntaxText.setText("<html><body style='width: 300px'>" + pageData.getSyntax() + "</body></html>");
+        sampleCodeText.setText("<html><body style='width: 300px'>" + pageData.getExampleCode() + "</body></html>");
+        outputText.setText("<html><body style='width: 300px'>" + pageData.getExampleOutput() + "</body></html>");
+        tryItText.setText("<html><body style='width: 300px'>" + pageData.tryItYourself + "</body></html>");
     }
     
     /** 
@@ -85,26 +85,7 @@ public class Tutorial extends javax.swing.JPanel {
     public void addTutorial(TutorialData pageData) {
         tutorialTrack.add(pageData);
     }
-    
-    /** Enables line wrap for all text elements since NetBeans is a control 
-     * freak and won't let me edit the init function. 
-     */
-    private void enableLineWrap() {
-        descText.setLineWrap(true);
-        descText.setWrapStyleWord(true);
-        
-        syntaxText.setLineWrap(true);
-        syntaxText.setWrapStyleWord(true);
-        
-        sampleCodeText.setLineWrap(true);
-        sampleCodeText.setWrapStyleWord(true);
-        
-        sampleOutputText.setLineWrap(true);
-        sampleOutputText.setWrapStyleWord(true);
-        
-        tryItText.setLineWrap(true);
-        tryItText.setWrapStyleWord(true);
-    }
+   
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,27 +102,22 @@ public class Tutorial extends javax.swing.JPanel {
         jScrollPane9 = new javax.swing.JScrollPane();
         roadmapList = new javax.swing.JList();
         descriptionPanel = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        descText = new javax.swing.JTextArea();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        sampleCodeText = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        sampleOutputText = new javax.swing.JTextArea();
         sampleCodeLabel = new javax.swing.JLabel();
         sampleOutputLabel = new javax.swing.JLabel();
         syntaxLabel = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        syntaxText = new javax.swing.JTextArea();
         descLabel = new javax.swing.JLabel();
         TryItYourself = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         codeInputText = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         consoleText = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
+        runButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tryItText = new javax.swing.JTextArea();
+        tryItText = new javax.swing.JLabel();
+        descText = new javax.swing.JLabel();
+        syntaxText = new javax.swing.JLabel();
+        sampleCodeText = new javax.swing.JLabel();
+        outputText = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
         previousLessonButton = new javax.swing.JButton();
         nextLessonButton = new javax.swing.JButton();
@@ -191,30 +167,11 @@ public class Tutorial extends javax.swing.JPanel {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        descText.setColumns(20);
-        descText.setRows(5);
-        jScrollPane5.setViewportView(descText);
-
-        sampleCodeText.setColumns(20);
-        sampleCodeText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        sampleCodeText.setRows(5);
-        jScrollPane6.setViewportView(sampleCodeText);
-
-        sampleOutputText.setColumns(20);
-        sampleOutputText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        sampleOutputText.setRows(5);
-        jScrollPane7.setViewportView(sampleOutputText);
-
         sampleCodeLabel.setText("<html><b>Code Example</html></b>");
 
         sampleOutputLabel.setText("<html><b>Output</html></b>");
 
         syntaxLabel.setText("<html><b>Syntax</html></b>");
-
-        syntaxText.setColumns(20);
-        syntaxText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        syntaxText.setRows(5);
-        jScrollPane8.setViewportView(syntaxText);
 
         descLabel.setText("<html><b>Description</b></html>");
 
@@ -228,13 +185,16 @@ public class Tutorial extends javax.swing.JPanel {
         consoleText.setRows(5);
         jScrollPane4.setViewportView(consoleText);
 
-        jButton3.setText("Run");
+        runButton.setText("Run");
+        runButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("<html><b>Try It Yourself!</html></b>");
 
-        tryItText.setColumns(20);
-        tryItText.setRows(5);
-        jScrollPane2.setViewportView(tryItText);
+        tryItText.setText("jLabel2");
 
         javax.swing.GroupLayout TryItYourselfLayout = new javax.swing.GroupLayout(TryItYourself);
         TryItYourself.setLayout(TryItYourselfLayout);
@@ -243,16 +203,21 @@ public class Tutorial extends javax.swing.JPanel {
             .addGroup(TryItYourselfLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
                     .addGroup(TryItYourselfLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TryItYourselfLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
+                        .addGap(6, 6, 6)
+                        .addComponent(tryItText)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(TryItYourselfLayout.createSequentialGroup()
+                        .addGroup(TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                            .addGroup(TryItYourselfLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TryItYourselfLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(runButton))
+                            .addComponent(jScrollPane3))
+                        .addContainerGap())))
         );
         TryItYourselfLayout.setVerticalGroup(
             TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,15 +225,28 @@ public class Tutorial extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tryItText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(runButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        descText.setText("jLabel2");
+
+        syntaxText.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        syntaxText.setText("jLabel2");
+
+        sampleCodeText.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        sampleCodeText.setText("jLabel2");
+
+        outputText.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        outputText.setText("jLabel2");
+
+        titleLabel.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout descriptionPanelLayout = new javax.swing.GroupLayout(descriptionPanel);
         descriptionPanel.setLayout(descriptionPanelLayout);
@@ -276,47 +254,53 @@ public class Tutorial extends javax.swing.JPanel {
             descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(descriptionPanelLayout.createSequentialGroup()
                 .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                     .addGroup(descriptionPanelLayout.createSequentialGroup()
                         .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sampleOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sampleCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(descLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(descriptionPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(descText)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(descriptionPanelLayout.createSequentialGroup()
+                        .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(descriptionPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sampleCodeText)
+                                    .addComponent(outputText)
+                                    .addComponent(syntaxText)))
+                            .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(titleLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(TryItYourself, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(descriptionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         descriptionPanelLayout.setVerticalGroup(
             descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(descriptionPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(42, 42, 42)
+                .addComponent(TryItYourself, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(descriptionPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(descLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(descText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(syntaxText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sampleCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sampleCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sampleCodeText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sampleOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(TryItYourself, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(outputText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         previousLessonButton.setText("Previous Lesson");
@@ -343,13 +327,14 @@ public class Tutorial extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(descriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(35, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(previousLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(nextLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(333, 333, 333))))
+                        .addGap(333, 333, 333))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(descriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +351,7 @@ public class Tutorial extends javax.swing.JPanel {
                             .addComponent(previousLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nextLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(5, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     /** 
@@ -381,9 +366,18 @@ public class Tutorial extends javax.swing.JPanel {
      * Jump to the end of the tutorial track.
      */
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
-        sideModule.toEnd();
+        sideModule.toEnd(tutorialTrack);
     }//GEN-LAST:event_toEndButtonActionPerformed
-
+    
+    /** Disables buttons for the purpose of previewing the tutorial. */
+    public void disableButtons() {
+        nextLessonButton.setEnabled(false);
+        previousLessonButton.setEnabled(false);
+        toBeginningButton.setEnabled(false);
+        toEndButton.setEnabled(false);
+        runButton.setEnabled(false);
+    }
+    
     /**
      * Load content for the previous lesson.
      */
@@ -410,8 +404,13 @@ public class Tutorial extends javax.swing.JPanel {
      * Jump to the beginning of the tutorial track
      */
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
-        sideModule.toBeginning();
+        sideModule.toBeginning(tutorialTrack);
+        
     }//GEN-LAST:event_toBeginningButtonActionPerformed
+
+    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
+        System.out.println("Run!");
+    }//GEN-LAST:event_runButtonActionPerformed
 
     /**
      * Opens and shows the Tutorial
@@ -454,31 +453,26 @@ public class Tutorial extends javax.swing.JPanel {
     private javax.swing.JTextArea codeInputText;
     private javax.swing.JTextArea consoleText;
     private javax.swing.JLabel descLabel;
-    private javax.swing.JTextArea descText;
+    private javax.swing.JLabel descText;
     private javax.swing.JPanel descriptionPanel;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JButton nextLessonButton;
+    private javax.swing.JLabel outputText;
     private javax.swing.JButton previousLessonButton;
     private javax.swing.JList roadmapList;
+    private javax.swing.JButton runButton;
     private javax.swing.JLabel sampleCodeLabel;
-    private javax.swing.JTextArea sampleCodeText;
+    private javax.swing.JLabel sampleCodeText;
     private javax.swing.JLabel sampleOutputLabel;
-    private javax.swing.JTextArea sampleOutputText;
     private javax.swing.JLabel syntaxLabel;
-    private javax.swing.JTextArea syntaxText;
+    private javax.swing.JLabel syntaxText;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton toBeginningButton;
     private javax.swing.JButton toEndButton;
-    private javax.swing.JTextArea tryItText;
+    private javax.swing.JLabel tryItText;
     // End of variables declaration//GEN-END:variables
 }

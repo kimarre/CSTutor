@@ -37,6 +37,7 @@ public class TutorialData {
    public TutorialData() {
        description = new Description();
        example = new CodeExample();
+       tryItYourself = "";
    }
    
    /** Retrieves the tutorial's title */

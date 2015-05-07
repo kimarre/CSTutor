@@ -11,30 +11,27 @@ import CSTutor.Model.Tutorial.*;
  * @version 20Apr2015
  */
 public class RoadmapModule {
-	/** (Temporary?) List of all tutorial pages to reference */
-   LinkedList<Integer> pageLinks;
 
    /** 
     * Initializes the Roadmap Module to have an empty LinkedList.
     * */
    public RoadmapModule() {
-      pageLinks = new LinkedList();
-
-      // TO-DO: fill the array with StudentPage entries from the database.
+      
    }
 
    /**
    * Jumps to the very first tutorial page.
    */
-   public void toBeginning() {
-      Integer newPage = pageLinks.getFirst();
+   public void toBeginning(LinkedList<TutorialData> pageLinks) {
+      TutorialData newPage = pageLinks.getFirst();
       System.out.println("Called RoadmapModule's toBeginning() method.");
    }
 
    /**
    * Jumps to the very last tutorial page.
    */
-   public void toEnd() {
+   public void toEnd(LinkedList<TutorialData> pageLinks) {
+       TutorialData newPage = pageLinks.getLast();
        System.out.println("Called RoadmapModule's toEnd() method.");
 
    }
