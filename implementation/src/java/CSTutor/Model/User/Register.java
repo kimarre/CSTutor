@@ -7,15 +7,15 @@ import org.apache.commons.validator.routines.EmailValidator;
  * and adding the user to the UserDB. It is is derived from
  * <a href="../../requirements/functionalRequirements/login.html"> Section 2.6 
  * </a> the requirements.
- * 
+ *
  * @author Kyle Reis
  */
 public class Register {
     /**
      * The user database
      */
-    UserDB database;
-    
+    private UserDB database;
+
     /**
      * Creates the Register object.
      * @param database the user database.
@@ -26,17 +26,17 @@ public class Register {
     }
     /**
      * Validates that all of the needed information for a User was entered and
-     * adds the user to the UserDB if all of the information was entered and 
+     * adds the user to the UserDB if all of the information was entered and
      * there isn't already a user with that information.
-     * 
+     *
      * @param firstName The user's first name.
      * @param lastName The user's last name.
      * @param email The user's email address.
      * @param pass The user's password.
      * @param instructor Whether or not a user is an instructor.
-     * 
-       post:
-         database.users.length() > 0;
+     *
+    post:
+    database.users.length() > 0;
      */
     public boolean createUser(String firstName, String lastName, String email, String pass, boolean instructor)
     {
@@ -47,6 +47,7 @@ public class Register {
             database.addUser(user);
             return true;
         } else {
+            System.out.println("email already exists or is invalid");
             return false;
         }
         //System.out.println("New User Created.");
