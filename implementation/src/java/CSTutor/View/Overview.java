@@ -52,7 +52,7 @@ public class Overview extends JFrame implements Observer {
         {
             e.printStackTrace();
         }*/
-/*
+
     	try {
             
             UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
@@ -65,7 +65,7 @@ public class Overview extends JFrame implements Observer {
            ex.printStackTrace();
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
            ex.printStackTrace();
-        }*/
+        }
         userDB = new UserDB();
         init();
         mainPanel = new JPanel();
