@@ -52,11 +52,9 @@ public class Overview extends JFrame implements Observer {
         {
             e.printStackTrace();
         }*/
-/*
+
     	try {
-            
-            UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
- 
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (InstantiationException ex) {
@@ -65,7 +63,7 @@ public class Overview extends JFrame implements Observer {
            ex.printStackTrace();
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
            ex.printStackTrace();
-        }*/
+        }
         userDB = new UserDB();
         init();
         mainPanel = new JPanel();

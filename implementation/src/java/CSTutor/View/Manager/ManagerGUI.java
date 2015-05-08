@@ -30,6 +30,8 @@ public class ManagerGUI extends JPanel {
         
         newObject = new NewObjectGUI();
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
+        
+        
         addManagerContent();
         this.setVisible(true);
     }
