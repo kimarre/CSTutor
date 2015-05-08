@@ -38,6 +38,7 @@ public class Manager {
        selectedSection'.equals(select);
     */
    public void selectSection(Section select) {
+   	System.out.println("Selecting " + select);
 	   if (select == null) {
 		   selectedSection = null;
 		   selectedClass = null;
@@ -57,6 +58,7 @@ public class Manager {
        selectedClass'.equals(select);
     */ 
    public void selectClass(Class select) {
+   	System.out.println("Selecting " + select);
 	   selectedClass = select;
    }
    /**
@@ -69,6 +71,7 @@ public class Manager {
        selectedUnit'.equals(select);
     */ 
    public void selectUnit(Unit select){
+   	System.out.println("Selecting " + select);
 	   if (select == null) {
 		   selectedUnit = null;
 		   selectedSection = null;
@@ -89,6 +92,7 @@ public class Manager {
        selectedTutorial'.equals(select);
     */ 
    public void selectTutorial(Tutorial select){
+   	System.out.println("Selecting " + select);
 	   if (select == null) {
 		   selectedTutorial = null;
 		   selectedUnit = null;

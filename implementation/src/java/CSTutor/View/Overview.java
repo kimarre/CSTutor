@@ -16,8 +16,10 @@ import CSTutor.View.Quiz.*;
 import CSTutor.Model.User.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Overview extends JFrame {
+public class Overview extends JFrame implements Observer {
     private JMenuBar jMenuBar;
     private JMenu jMenuHome;
     private JMenu jMenuTutorials;
@@ -50,6 +52,18 @@ public class Overview extends JFrame {
         {
             e.printStackTrace();
         }*/
+
+    	try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+           ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+           ex.printStackTrace();
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+           ex.printStackTrace();
+        }
         userDB = new UserDB();
         init();
         mainPanel = new JPanel();
@@ -68,6 +82,11 @@ public class Overview extends JFrame {
         add(mainPanel);
         pack();
         setVisible(true);
+    }
+
+    private void addObservables()
+    {
+        //login.addObserver(this);
     }
    
     private void init()
@@ -172,5 +191,13 @@ public class Overview extends JFrame {
     
     private void ProgressAction(java.awt.event.MouseEvent evt) {
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Progress");
+    }
+
+    public void LoggedIn()
+    {
+        getJMenuBar().getMenu(5).setName("Logout");
+    }
+
+    public void update(Observable o, Object arg) {
     }
 }
