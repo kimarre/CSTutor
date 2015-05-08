@@ -64,13 +64,12 @@ jar:		$(FILE)
 
 doc:		
 		javadoc -Xdoclint:none -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
-		mv .javadoc ../../../design/javadoc
 		rm -rf ../../../design/javadoc
+		mv .javadoc ../../../design/javadoc
 
 doc7:		
 		javadoc -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
 		mv .javadoc ../../../design/javadoc
-		rm -rf ../../../design/javadoc
 
 
 dir:	
