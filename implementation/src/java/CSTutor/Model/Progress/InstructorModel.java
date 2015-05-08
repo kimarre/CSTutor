@@ -11,9 +11,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 
 /****
- * Class Student is a model class for the Calendar Tool progress and
+ * Class InstructorModel is a model class for the Calendar Tool progress and
  * assessment feature. It contains methods for all of the operations defined
- * for Student users, including retrieving data from the database.
+ * for Instructor users, including retrieving data from the database.
  * @author Erica Solum (esolum@calpoly.edu)
  * @version 13Apr15
  */
