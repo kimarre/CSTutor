@@ -6,30 +6,28 @@ import java.util.*;
  * 
  * @author Simon Vurens (svurens@calpoly.edu)
  */
-public abstract class Unit {
+public class Unit {
 	/* The tutorial tracks */
-   private List<Tutorial> tutorials;
+   public List<Tutorial> tutorials;
    /* The name of the unit*/
-   private String name;
+   public String name;
+   
+   public Section parent;
 
-   /**
-    * Rename changes the name of the unit.
-    */ 
-   abstract void rename(String newName);
-   /**
-    * AddTutorial adds the given tutorial to the unit.
-    */ 
-   abstract void addTutorial(Tutorial tutorial);
-   /**
-    * RemoveTutorial removes the tutorial from the unit, if it exists.
-    */ 
-   abstract void removeTutorial(Tutorial tutorial);
+   public Unit(String name, Section parent) {
+	   this.name = name;
+	   this.parent = parent;
+	   this.tutorials = new ArrayList<Tutorial>();
+   }
    /**
     * MoveTutorialUp moves the given tutorial up in the list
     */ 
-   abstract void moveTutorialUp(Tutorial tutorial);
+   void moveTutorialUp(Tutorial tutorial){}
    /**
     * MoveTutorialDown moves the given tutorial down in the list
     */ 
-   abstract void moveTutorialDown(Tutorial tutorial);
+   void moveTutorialDown(Tutorial tutorial){}
+   public String toString() {
+	   return name;
+   }
 }

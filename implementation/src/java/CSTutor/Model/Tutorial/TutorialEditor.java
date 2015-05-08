@@ -11,11 +11,11 @@ import CSTutor.Model.Tutorial.*;
 * @version 20Apr2015
 */
 public class TutorialEditor {
-	/** Describes the overall concept of the subject at hand.*/
+    /** Gate to the tutorial track */
+    public TutorialTrack tutorialTrack;
+    
+    /** Describes the overall concept of the subject at hand.*/
    public Description description;
-   
-   /** Contains the example code and output */
-   public CodeExample example;
    
    /** Contains the instructor's problem for the student */
    public String tryItYourself;
@@ -27,7 +27,7 @@ public class TutorialEditor {
     * Constructs a new instance of a TutorialEditor
     */
    public TutorialEditor() {
-	   
+       //new instance of tutorial track?
    }
 
    /*
@@ -48,9 +48,10 @@ public class TutorialEditor {
    /**
    * Saves the changes on the editing page to the tutorial.
    */
-   public void save() {
+   public void save(TutorialData pageData) {
       System.out.println("Called tutorial save() method.");
-      System.out.println("String received was: " + tryItYourself);
+      tutorialTrack.track.add(pageData);
+      //System.out.println("String received was: " + tryItYourself);
    }
    
    /**

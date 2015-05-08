@@ -7,7 +7,7 @@ package CSTutor.Model.Tutorial;
  * @version 20Apr2015
  */
 public class CodeExample {
-	/** Contains the example's sample code provided by the instructor */
+    /** Contains the example's sample code provided by the instructor */
    public String sampleCode;
    
    /** Contains the example's sample output provided by the instructor */

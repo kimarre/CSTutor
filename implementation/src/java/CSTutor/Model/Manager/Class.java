@@ -10,71 +10,24 @@ import java.util.*;
  */
 public class Class {
 	/* All sections contained by this class */
-   private List<Section> sections;
+   public List<Section> sections;
 
 	/* All students enrolled in this class */
-   private List<User> students;
+   public List<User> students;
    
 	/* The minimum level of access required to view this class */
-   private ClassAccessLevel access;
+   public ClassAccessLevel access;
    
+   public String name;
    /**
     * Creates a new class.
     */
-   public Class() {
-   	
-   }
-   /**
-    * AddSection adds a given section to the class, if the section contains
-    * students from the class.
-    */
-   public void addSection(Section section){
-	   sections.add(section);
-   }
-
-   /**
-    * RemoveSection removes the given section from the class. RemoveSection
-    * also removes all the students in that section from the class.
-    */
-   public void removeSection(Section section){
-	   sections.remove(section);
-   }
-
-   /**
-    * RemoveStudent removes the specified student from the class and any
-    * sections they are in.
-     * <pre>
-      pre:
-       student != null && students != null && students.contains(student);
-      post:
-       !students'.contains(student);
-    */
-   public void removeStudent(User student){
-	   students.remove(student);
-   	System.out.println("In CSTutor.Model.Class.removeStudent()");
-   }
-
-   /**
-    * AddStudent adds the student to the class. They are not a part of
-    * any section, initially.
-     * <pre>
-      pre:
-       student != null && students != null && !students.contains(student);
-      post:
-       students'.contains(student);
-    */
-   public void addStudent(User student){
-	   students.add(student);
-   	   System.out.println("In CSTutor.Model.Class.addStudent()");
-   }
-
-   /**
-    * ChangeAccessLevel changes the class' access level to the new specified
-    * level.
-    */
-   public void changeAccessLevel(ClassAccessLevel newAccess){
-	   access = newAccess;
-   	System.out.println("In CSTutor.Model.Class.changeAccessLevel()");
+   public Class(String name) {
+	   this.name = name;
+	   sections = new ArrayList<Section>();
+	   students = new ArrayList<User>();
+	   access = ClassAccessLevel.Guest;
+	   sections.add(new Section("All sections", new ArrayList<User>(students), null, this));
    }
 
    /**
@@ -95,7 +48,10 @@ public class Class {
     * Assistant allows TA's and professors to view the class.
     * Professor is only viewable to the professor.
     */
-   enum ClassAccessLevel {
+   public String toString() {
+	   return name;
+   }
+   public enum ClassAccessLevel {
       Guest, Student, Assistant, Professor
    }
 }

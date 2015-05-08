@@ -24,6 +24,8 @@ JAVA =CSTutor/View/*.java \
 		CSTutor/View/Manager/*.java \
 		CSTutor/View/Tutorial/*.java \
 		CSTutor/Model/Chat/*.java \
+		CSTutor/Model/Chat/Client/*.java \
+		CSTutor/Model/Chat/Server/*.java \
 		CSTutor/Model/Database/*.java \
 		CSTutor/Model/Manager/*.java \
 		CSTutor/Model/Progress/*.java \
@@ -39,6 +41,8 @@ CLASS=CSTutor/View/*.class \
 		CSTutor/View/Manager/*.class \
 		CSTutor/View/Tutorial/*.class \
 		CSTutor/Model/Chat/*.class \
+		CSTutor/Model/Chat/Client/*.java \
+		CSTutor/Model/Chat/Server/*.java \
 		CSTutor/Model/Database/*.class \
 		CSTutor/Model/Manager/*.class \
 		CSTutor/Model/Progress/*.class \

@@ -4,11 +4,14 @@ import CSTutor.View.Overview;
 import CSTutor.View.*;
 import CSTutor.Model.User.*;
 
+import javax.swing.*;
+import java.util.Observable;
+
 /**
  *
  * @author Kyle Reis
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends JFrame{
 
     Overview parent;
     /**
@@ -154,6 +157,7 @@ public class Login extends javax.swing.JFrame {
             parent.user = tempUser;
             System.out.println("Logged in: " + tempUser.getName());
             this.setVisible(false);
+
         }
         
         // TODO add your handling code here:

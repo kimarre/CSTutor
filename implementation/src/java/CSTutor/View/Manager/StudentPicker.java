@@ -32,7 +32,7 @@ public class StudentPicker extends JFrame{
 		selPanel.setLayout(new BoxLayout(selPanel, BoxLayout.Y_AXIS));
 		JTextField searchField = new JTextField("John");
 		String[] options = {"John Masanori", "Raymond Flint", "Elizabeth Mills", "Caprice Nisei", "Toshiyuki Sakai", "Mark Yale"};
-		JList stuList = new JList(options);
+		JList<String> stuList = new JList<String>(options);
 		selPanel.add(searchField);
 		selPanel.add(stuList);
 		this.add(selPanel);
@@ -57,7 +57,7 @@ public class StudentPicker extends JFrame{
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   NewClassGUI.newClass.addStudent(null);
+        	   NewClassGUI.newClass.students.add(null);
         	   setVisible(false);
            }
         });

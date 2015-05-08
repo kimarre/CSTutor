@@ -14,9 +14,11 @@ import java.util.*;
  */
 public class NewClassGUI extends JPanel{
 	StudentPicker picker;
+	JTextField nameField;
+	JList<String> enrollList;
 	public static CSTutor.Model.Manager.Class newClass;
 	public NewClassGUI() {
-		  newClass = new CSTutor.Model.Manager.Class();
+		newClass = new CSTutor.Model.Manager.Class("");
         
         picker = new StudentPicker();
         picker.setVisible(false);
@@ -33,7 +35,7 @@ public class NewClassGUI extends JPanel{
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
 		JLabel nameLabel = new JLabel("Class Name: ");
-		JTextField nameField = new JTextField("Untitled");
+		nameField = new JTextField("Untitled");
 		namePanel.add(nameLabel);
 		namePanel.add(nameField);
 		this.add(namePanel);
@@ -43,7 +45,7 @@ public class NewClassGUI extends JPanel{
 		studPanel.setLayout(new BoxLayout(studPanel, BoxLayout.X_AXIS));
 		JLabel studLabel = new JLabel("Students: ");
 		String[] exampleNames = {"Thomas Haas", "Jackson Howard", "Bernice Mai", "Jack Weyland"}; 
-		final JList enrollList = new JList(exampleNames);
+		enrollList = new JList<String>(exampleNames);
 
 		enrollList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -69,7 +71,7 @@ public class NewClassGUI extends JPanel{
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   newClass.removeStudent(null);
+        	   newClass.students.remove(null);
            }
         });
         options.add(remBut);
@@ -89,7 +91,7 @@ public class NewClassGUI extends JPanel{
 		final JComboBox perOptions = new JComboBox(permissions);
 		perOptions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				newClass.changeAccessLevel(null);
+				newClass.access = null;
 				System.out.println(perOptions.getSelectedItem());
 			}
 		});
@@ -119,6 +121,7 @@ public class NewClassGUI extends JPanel{
         {
            public void actionPerformed(ActionEvent event)
            {
+        	   newClass.name = nameField.getText();
         	   ManagerGUI.managerModel.createClass(newClass);
         	   setVisible(false);
            }

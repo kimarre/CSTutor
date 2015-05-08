@@ -8,6 +8,7 @@ import javax.swing.tree.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 
+
 import java.util.*;
 import java.io.*;
 /**
@@ -17,38 +18,21 @@ import java.io.*;
 public class ManagerGUI extends JPanel {
 	public NewObjectGUI newObject;
 	public MoveGUI moveTut;
+	
+	DefaultMutableTreeNode root;
+	DefaultTreeModel treeModel;
+	JTree tree;
+	
 	public static CSTutor.Model.Manager.Manager managerModel = new CSTutor.Model.Manager.Manager();
-    public static void main(String[] args)
-    {
-        new ManagerGUI();
-    }
+
     public ManagerGUI() {
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setTitle("Manager");
-        //this.setSize(800, 600);
-        //this.setLocationRelativeTo(null);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
-        
-        //addMenuBar();        
+        managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
         addManagerContent();
-        //addBottomBar();
-        //this.pack();
         this.setVisible(true);
     }
-    /*public void addMenuBar() {
-    	JPanel menu = new JPanel();
-    	menu.setSize(300, 100);
-    	menu.add(new JButton("MENU GOES HERE!!!"));
-    	this.add(menu);
-    }*/
-    /*public void addBottomBar() {
-    	JPanel botMenu = new JPanel();
-    	botMenu.setSize(300, 100);
-    	botMenu.add(new JButton("BOTMENU GOES HERE!!!"));
-    	this.add(botMenu);
-    }*/
     public void addManagerContent() {
         JPanel manPanel = new JPanel();
         manPanel.setLayout(new BoxLayout(manPanel, BoxLayout.X_AXIS));
@@ -100,7 +84,21 @@ public class ManagerGUI extends JPanel {
                 	System.out.println("Nothing selected");
                 }
                 else {
-                	System.out.println(node.toString() + " selected");
+   	          	System.out.println(node.toString() + " " + node.getLevel());
+   	          	switch(node.getLevel()) {
+	   	          	case 1:
+	   	          		managerModel.selectClass((CSTutor.Model.Manager.Class)node.getUserObject());
+	   	          		break;
+	   	          	case 2:
+	   	          		managerModel.selectSection((CSTutor.Model.Manager.Section)node.getUserObject());
+	   	          		break;
+	   	          	case 3:
+	   	          		managerModel.selectUnit((CSTutor.Model.Manager.Unit)node.getUserObject());
+	   	          		break;
+	   	          	case 4:
+	   	          		managerModel.selectTutorial((CSTutor.Model.Manager.Tutorial)node.getUserObject());
+	   	          		break;
+   	          	 }
                 }
             }
         });
@@ -151,11 +149,44 @@ public class ManagerGUI extends JPanel {
         // Make classnode for each in class in db
         java.util.List<String> classes = CSTutor.Model.Database.TutorDAO.getClasses();
         java.util.List<DefaultMutableTreeNode> classNodes = new ArrayList<DefaultMutableTreeNode>();
+        /*
         for (int i = 0; i < classes.size(); i++) {
-            classNodes.add(new DefaultMutableTreeNode(classes.get(i)));
-        }
+            //classNodes.add(new DefaultMutableTreeNode(classes.get(i)));
+        	managerModel.createClass(new CSTutor.Model.Manager.Class(classes.get(i)));
+        }*/
 
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Classes");
+        root = new DefaultMutableTreeNode("Classes");
+        treeModel = new DefaultTreeModel(root);
+        treeModel.addTreeModelListener(new MyTreeModelListener());
+        tree = new JTree(treeModel);
+        tree.setEditable(true);
+        tree.getSelectionModel().setSelectionMode
+                (TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.setShowsRootHandles(true);
+        /*
+        root.removeAllChildren();
+        treeModel.reload();
+        */
+        for (int i = 0; i < managerModel.data.size(); i++) {
+      	   DefaultMutableTreeNode node = new DefaultMutableTreeNode(managerModel.data.get(i));
+        	   treeModel.insertNodeInto(node, root, root.getChildCount());
+        	   for (int j = 0; j < managerModel.data.get(i).sections.size(); j++) {
+        	   	 DefaultMutableTreeNode node2 = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j));
+        	   	 treeModel.insertNodeInto(node2, node, node.getChildCount());
+        	   	 for(int k = 0; k < managerModel.data.get(i).sections.get(j).units.size(); k++) {
+        	   		 DefaultMutableTreeNode node3
+        	   		     = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j).units.get(k));
+        	   		 treeModel.insertNodeInto(node3, node2, node2.getChildCount());
+          	        for(int l = 0; l <managerModel.data.get(i).sections.get(j).units.get(k).tutorials.size(); l++) {
+            	   		 DefaultMutableTreeNode node4
+          	   		     = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j).units.get(k).tutorials.get(l));
+              	   		 treeModel.insertNodeInto(node4, node3, node3.getChildCount());
+          	        }
+        	   	 }
+        	   }
+        }
+        
+        /*
         DefaultMutableTreeNode s1 = new DefaultMutableTreeNode("Section 1");
         DefaultMutableTreeNode s2 = new DefaultMutableTreeNode("Section 2");
         DefaultMutableTreeNode s3 = new DefaultMutableTreeNode("Section 3");
@@ -188,20 +219,37 @@ public class ManagerGUI extends JPanel {
         s1.add(u1);
         s1.add(u2);
 
-        final JTree fileTree = new JTree(root);
-        fileTree.addTreeSelectionListener(new TreeSelectionListener() {
+        final JTree fileTree = new JTree(root); */
+        tree.addTreeSelectionListener(new TreeSelectionListener() {
             public void valueChanged(TreeSelectionEvent e) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode)fileTree.getLastSelectedPathComponent();
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
                 if (node == null){
                 	System.out.println("Nothing selected");
                 }
                 else {
                 	System.out.println(node.toString() + " selected");
+   	          	System.out.println(node.toString() + " " + node.getLevel());
+   	          	switch(node.getLevel()) {
+	   	          	case 1:
+	   	          		managerModel.selectClass((CSTutor.Model.Manager.Class)node.getUserObject());
+	   	          		break;
+	   	          	case 2:
+	   	          		managerModel.selectSection((CSTutor.Model.Manager.Section)node.getUserObject());
+	   	          		break;
+	   	          	case 3:
+	   	          		managerModel.selectUnit((CSTutor.Model.Manager.Unit)node.getUserObject());
+	   	          		break;
+	   	          	case 4:
+	   	          		managerModel.selectTutorial((CSTutor.Model.Manager.Tutorial)node.getUserObject());
+	   	          		break;
+   	          	}
                 }
             }
         });
+        /*
         //fileTree.setVisibleRowCount(15);
-        JScrollPane fileTreeScroll = new JScrollPane(fileTree);
+        JScrollPane fileTreeScroll = new JScrollPane(fileTree);*/
+        JScrollPane fileTreeScroll = new JScrollPane(tree);
         classPanel.add(fileTreeScroll);
         
         
@@ -234,9 +282,9 @@ public class ManagerGUI extends JPanel {
         {
            public void actionPerformed(ActionEvent event)
            {
-         	  
+         	 
          	 System.out.println("Delete button pressed");
-	        	 DefaultMutableTreeNode node = (DefaultMutableTreeNode)fileTree.getLastSelectedPathComponent();
+	        	 DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 	          if (node == null){
 	          	System.out.println("Nothing selected");
 	          }
@@ -262,6 +310,16 @@ public class ManagerGUI extends JPanel {
 	          	default:
 	          		//root or error
 	          	}
+               TreePath currentSelection = tree.getSelectionPath();
+               if (currentSelection != null) {
+                   DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
+                                (currentSelection.getLastPathComponent());
+                   MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
+                   if (parent != null) {
+                       treeModel.removeNodeFromParent(currentNode);
+                   }
+               }
+
 	          }
            }
         });
@@ -314,5 +372,39 @@ public class ManagerGUI extends JPanel {
         
         classPanel.add(buttonPanel);
         panel.add(classPanel);
+    }
+    
+    class MyTreeModelListener implements TreeModelListener {
+        public void treeNodesChanged(TreeModelEvent e) {
+            DefaultMutableTreeNode node;
+            node = (DefaultMutableTreeNode)(e.getTreePath().getLastPathComponent());
+ 
+            /*
+             * If the event lists children, then the changed
+             * node is the child of the node we've already
+             * gotten.  Otherwise, the changed node and the
+             * specified node are the same.
+             */
+ 
+                int index;
+                try {
+                index = e.getChildIndices()[0];
+                }catch (Exception ex) { //NPE
+                	System.out.println("Error, were you editing the root?");
+                    return;	
+                }
+                node = (DefaultMutableTreeNode)(node.getChildAt(index));
+ 
+            System.out.println("The user has finished editing the node.");
+            System.out.println("New value: " + node.getUserObject());
+            
+            //TODO: Push the updated name back to the model
+        }
+        public void treeNodesInserted(TreeModelEvent e) {
+        }
+        public void treeNodesRemoved(TreeModelEvent e) {
+        }
+        public void treeStructureChanged(TreeModelEvent e) {
+        }
     }
 }
