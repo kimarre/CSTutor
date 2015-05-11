@@ -14,7 +14,7 @@ import java.util.*;
 public class StudentText {
 	//The text that's being input.
     String text;
-    //The student's screan name.
+    //The student's screen name.
     int studentID;
     //The time at which the input was given
     Date time;
@@ -37,7 +37,7 @@ public class StudentText {
     /**
      * Converts a regular string into student text. 
      */
-    public String strToStudentText(String s) {
+    public String strToStudentText() {
     	return (formatTime() + studentID + text);
     }
 }

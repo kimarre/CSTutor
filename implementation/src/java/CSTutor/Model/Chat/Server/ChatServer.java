@@ -1,6 +1,5 @@
 package CSTutor.Model.Chat.Server;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ public class ChatServer extends UnicastRemoteObject implements ServerIF{
 	 * @throws RemoteException
 	 */
 	protected ChatServer() throws RemoteException {
+		super(0);
 		chatClients = new ArrayList<ClientIF>();
 	}
 	
