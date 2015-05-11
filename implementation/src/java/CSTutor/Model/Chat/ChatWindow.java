@@ -12,16 +12,13 @@ import java.util.*;
  */
 
 public class ChatWindow {
-    Console chatOutput;
-    TextBox textInput;
+    public TextBox textInput;
 	Boolean isShowing;
 	
 	/**
 	 * Constructor
 	 */
-	public ChatWindow() {
-		
-	}
+	public ChatWindow() {}
 	
     /**
      * Enter is a button that transfers the text from the text box from a given student and adds it to the
@@ -39,8 +36,6 @@ public class ChatWindow {
 
     public Boolean Enter(String text){
     	if(!text.equals("") && text.trim().length() > 0) {
-    		textInput = new TextBox(text);
-    		textInput.pushText();
     		return true;
     	}
     	return false;

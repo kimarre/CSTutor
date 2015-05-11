@@ -26,7 +26,7 @@ public class TextBox{
          (text != null);
      *
      */
-     public void pushText() {
-    	 convertedText = new StudentText(buffer);
+     public String pushText() {
+    	 return new StudentText(buffer).strToStudentText();
      }
 }

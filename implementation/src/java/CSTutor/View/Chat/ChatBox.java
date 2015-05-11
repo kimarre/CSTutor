@@ -15,17 +15,17 @@ import java.awt.*;
  */
 public class ChatBox extends JFrame {
 	
-	ChatWindow chatWindow;
+	ChatOverlay chatOverlay;
     JTextArea msgArea;
     JTextArea displayArea;
     JFrame selfRef = this;
     /**
      * Creates new form ChatBox
      */
-    public ChatBox(ChatWindow CW) {
+    public ChatBox(ChatOverlay CW) {
         initComponents();
         
-        this.chatWindow = CW;
+        this.chatOverlay = CW;
         this.setVisible(true);
         this.setSize(300, 400);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -39,24 +39,14 @@ public class ChatBox extends JFrame {
    	 
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
-             if(chatWindow.Enter(msgArea.getText())) {
-            	 // ******************************************************
-            	 // LOOOOK HEEEEEERE
-            	 // ******************************************************
-            	 //use displayArea.setText(string) to set the whole text.
-            	 //alternatively, use displayArea.append(string) to add to the existing string.
-            	 //so if you have a queue, you can either convert the queue into a giant string
-            	 //and set the text, or you can start with an empty string and append strings.
-            	 
-            	 //in this case all I do is get the text from the user's input, and add it
-            	 //to the displayArea, with a new line.
-            	 displayArea.append(msgArea.getText() + "\n");
-            	 
-            	 //clear out the enter area
-            	 msgArea.setText("");
-            	 
-            	 //redraw the screen (I'm not actually sure this is needed, but best be safe?)
-            	 selfRef.repaint();
+             ChatWindow cw = chatOverlay.chatWindow;
+   			 String messageText = msgArea.getText();
+   			 //if the text that's entered is valid
+   			 if(cw.Enter(messageText)) {
+				 cw.textInput = new TextBox(messageText);
+				 String convertedText = cw.textInput.pushText();
+				 
+				 chatOverlay.rmiClient.broadcastMessage(convertedText);
              }
    		 }
    	 });

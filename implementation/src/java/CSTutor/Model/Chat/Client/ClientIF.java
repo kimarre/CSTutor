@@ -10,5 +10,5 @@ import java.rmi.*;
  */
 
 public interface ClientIF extends Remote {
-	void recieveMessage (String message) throws RemoteException;
+	String recieveMessage (String message) throws RemoteException;
 }

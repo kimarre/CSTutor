@@ -12,11 +12,22 @@ import java.util.*;
  *  @author Stephen Daily
  */
 
-public abstract class OnlineWindow {
+public class OnlineWindow {
 
     Collection<Student> students;
 	Boolean isShowing;
 
+	
+	/**
+	 * Constructor
+	 * @return 
+	 * 
+	 */
+	
+	public OnlineWindow() {
+		students = new ArrayList<Student>();
+	}
+	
 	/**
      * showWindow will pop the window out if isShowing is false
      /
@@ -27,7 +38,9 @@ public abstract class OnlineWindow {
         (isShowing != true);
     *
     */
-    abstract void showWindow(Boolean isShowing);
+    void showWindow(Boolean isShowing) {
+    	return;
+    }
 
     /**
      * hideWindow will minimize the ChatWindow if isShowing is true;
@@ -39,5 +52,7 @@ public abstract class OnlineWindow {
          (isShowing != true);
      *
      */
-    abstract void hideWindow(Boolean isShowing);
+    void hideWindow(Boolean isShowing) {
+    	return;
+    }
 }
