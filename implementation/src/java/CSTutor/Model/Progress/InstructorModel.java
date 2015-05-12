@@ -1,5 +1,6 @@
 package CSTutor.Model.Progress;
 
+import CSTutor.Model.Database.*;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -27,7 +28,7 @@ public class InstructorModel
     {
         retrieveClassesData();
         retrieveStudentData();
-        retrieveTutorialData(); 
+        retrieveTutorialData();
     }
     
     /**
@@ -123,6 +124,7 @@ public class InstructorModel
      */
     private void retrieveClassesData()
     {
+        List<String> classes = TutorDAO.getClasses();
         System.out.println("In InstructorModel.retrieveClassesData");
         
         /*
