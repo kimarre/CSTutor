@@ -1,14 +1,12 @@
 package CSTutor.Model.Progress;
 
 import CSTutor.Model.Database.*;
+
+import java.util.*;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.JTree;
-import javax.swing.ListSelectionModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-
 
 
 /****
@@ -125,6 +123,8 @@ public class InstructorModel
     private void retrieveClassesData()
     {
         List<String> classes = TutorDAO.getClasses();
+        String[] classesStr = (String[] )classes.toArray();
+        //JList<String> classStrList = new JList<String>(classesStr);
         System.out.println("In InstructorModel.retrieveClassesData");
         
         /*
@@ -132,16 +132,22 @@ public class InstructorModel
          */
         DefaultListModel<Class> classesModel = new DefaultListModel<Class>();
         
+        for(String str: classesStr)
+        {
+            classesModel.addElement(new Class(str));
+        }
+        
+        
         /*
          * Add sample elements to the list.
          */
-        classesModel.addElement(new Class("CPE 123"));
-        classesModel.addElement(new Class("CPE 101"));
-        classesModel.addElement(new Class("CPE 102"));
-        classesModel.addElement(new Class("CPE 103"));
-        classesModel.addElement(new Class("CPE 357"));
-        classesModel.addElement(new Class("CPE 305"));
-        classesModel.addElement(new Class("CPE 308"));
+        //classesModel.addElement(new Class("CPE 123"));
+        //classesModel.addElement(new Class("CPE 101"));
+        //classesModel.addElement(new Class("CPE 102"));
+        //classesModel.addElement(new Class("CPE 103"));
+        //classesModel.addElement(new Class("CPE 357"));
+        //classesModel.addElement(new Class("CPE 305"));
+        //classesModel.addElement(new Class("CPE 308"));
         classList = new JList<Class>(classesModel);
     }
     
