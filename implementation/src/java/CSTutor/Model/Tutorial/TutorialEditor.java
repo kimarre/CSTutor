@@ -14,12 +14,6 @@ import javax.swing.JOptionPane;
 public class TutorialEditor {
     /** Gate to the tutorial track */
     public TutorialTrack tutorialTrack;
-    
-    /** Describes the overall concept of the subject at hand.*/
-   public Description description;
-   
-   /** Contains the instructor's problem for the student */
-   public String tryItYourself;
 
    /** Contains the editing options for a Tutorial Editor page*/
    public EditTextButtons toolbar;

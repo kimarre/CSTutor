@@ -105,12 +105,17 @@ public class Tutorial extends javax.swing.JPanel {
         previousLessonButton = new javax.swing.JButton();
         nextLessonButton = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         toEndButton.setText("Jump to End");
         toEndButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 toEndButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(toEndButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 512, 159, 40));
 
         toBeginningButton.setText("Jump to Beginning");
         toBeginningButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +123,7 @@ public class Tutorial extends javax.swing.JPanel {
                 toBeginningButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(toBeginningButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, -1, 40));
 
         roadmapList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -126,37 +132,25 @@ public class Tutorial extends javax.swing.JPanel {
         });
         jScrollPane9.setViewportView(roadmapList);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane9)
-                    .addComponent(toEndButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(toBeginningButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(toBeginningButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(toEndButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        jPanel1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 63, 159, 443));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 10, -1, 588));
+
+        descriptionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sampleCodeLabel.setText("<html><b>Code Example</html></b>");
+        descriptionPanel.add(sampleCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 297, -1, -1));
 
         sampleOutputLabel.setText("<html><b>Output</html></b>");
+        descriptionPanel.add(sampleOutputLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 409, -1, -1));
 
         syntaxLabel.setText("<html><b>Syntax</html></b>");
+        descriptionPanel.add(syntaxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
 
         descLabel.setText("<html><b>Description</b></html>");
+        descriptionPanel.add(descLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 71, -1, -1));
+
+        TryItYourself.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         codeInputText.setColumns(20);
         codeInputText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
@@ -164,9 +158,13 @@ public class Tutorial extends javax.swing.JPanel {
         codeInputText.setText("1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n");
         jScrollPane3.setViewportView(codeInputText);
 
+        TryItYourself.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 109, 388, 204));
+
         consoleText.setColumns(20);
         consoleText.setRows(5);
         jScrollPane4.setViewportView(consoleText);
+
+        TryItYourself.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 360, 388, 116));
 
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
@@ -174,117 +172,35 @@ public class Tutorial extends javax.swing.JPanel {
                 runButtonActionPerformed(evt);
             }
         });
+        TryItYourself.add(runButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 325, -1, -1));
 
         jLabel1.setText("<html><b>Try It Yourself!</html></b>");
+        TryItYourself.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
         tryItText.setText("jLabel2");
+        TryItYourself.add(tryItText, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 28, -1, -1));
 
-        javax.swing.GroupLayout TryItYourselfLayout = new javax.swing.GroupLayout(TryItYourself);
-        TryItYourself.setLayout(TryItYourselfLayout);
-        TryItYourselfLayout.setHorizontalGroup(
-            TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TryItYourselfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TryItYourselfLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(tryItText)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(TryItYourselfLayout.createSequentialGroup()
-                        .addGroup(TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                            .addGroup(TryItYourselfLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TryItYourselfLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(runButton))
-                            .addComponent(jScrollPane3))
-                        .addContainerGap())))
-        );
-        TryItYourselfLayout.setVerticalGroup(
-            TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TryItYourselfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tryItText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(runButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        descriptionPanel.add(TryItYourself, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 400, -1));
 
         descText.setText("jLabel2");
+        descriptionPanel.add(descText, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 93, -1, -1));
 
         syntaxText.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         syntaxText.setText("jLabel2");
+        descriptionPanel.add(syntaxText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         sampleCodeText.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         sampleCodeText.setText("jLabel2");
+        descriptionPanel.add(sampleCodeText, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 319, -1, -1));
 
         outputText.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         outputText.setText("jLabel2");
+        descriptionPanel.add(outputText, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 431, -1, -1));
 
         titleLabel.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        descriptionPanel.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 23, -1, -1));
 
-        javax.swing.GroupLayout descriptionPanelLayout = new javax.swing.GroupLayout(descriptionPanel);
-        descriptionPanel.setLayout(descriptionPanelLayout);
-        descriptionPanelLayout.setHorizontalGroup(
-            descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(descriptionPanelLayout.createSequentialGroup()
-                .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(descriptionPanelLayout.createSequentialGroup()
-                        .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sampleOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sampleCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(descriptionPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(descText)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(descriptionPanelLayout.createSequentialGroup()
-                        .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(descriptionPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sampleCodeText)
-                                    .addComponent(outputText)
-                                    .addComponent(syntaxText)))
-                            .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(titleLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(TryItYourself, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        descriptionPanelLayout.setVerticalGroup(
-            descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(descriptionPanelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(TryItYourself, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(descriptionPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(titleLabel)
-                .addGap(18, 18, 18)
-                .addComponent(descLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(syntaxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(syntaxText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sampleCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sampleCodeText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sampleOutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(outputText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        add(descriptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 10, 789, -1));
 
         previousLessonButton.setText("Previous Lesson");
         previousLessonButton.addActionListener(new java.awt.event.ActionListener() {
@@ -292,6 +208,7 @@ public class Tutorial extends javax.swing.JPanel {
                 previousLessonButtonActionPerformed(evt);
             }
         });
+        add(previousLessonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(389, 550, -1, 43));
 
         nextLessonButton.setText("Next Lesson");
         nextLessonButton.addActionListener(new java.awt.event.ActionListener() {
@@ -299,43 +216,7 @@ public class Tutorial extends javax.swing.JPanel {
                 nextLessonButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(previousLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(nextLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(333, 333, 333))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(descriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(descriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(previousLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nextLessonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)))
-                .addContainerGap(5, Short.MAX_VALUE))
-        );
+        add(nextLessonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 550, 145, 43));
     }// </editor-fold>//GEN-END:initComponents
     /** 
      * Update the tutorial to the current roadmap selection. 

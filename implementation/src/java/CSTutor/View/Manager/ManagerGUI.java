@@ -30,6 +30,16 @@ public class ManagerGUI extends JPanel {
         
         newObject = new NewObjectGUI();
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
+        managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
+        managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 103"));
+        managerModel.selectClass(managerModel.data.get(0));
+        managerModel.createSection(new CSTutor.Model.Manager.Section("Section 1", null, null, managerModel.selectedClass));
+        managerModel.selectSection(managerModel.selectedClass.sections.get(1));
+        managerModel.createUnit(new CSTutor.Model.Manager.Unit("Printing Text", managerModel.selectedSection));
+        managerModel.selectUnit(managerModel.selectedSection.units.get(1));
+        managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Hello World", managerModel.selectedUnit));
+        managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Conditionals", managerModel.selectedUnit));
+        managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Loops", managerModel.selectedUnit));
         
         
         addManagerContent();
@@ -327,12 +337,12 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(delBut);
         
-        JButton renameBut = new JButton("Rename...");
+        JButton renameBut = new JButton("Save");
         renameBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Rename button pressed");
+        	   System.out.println("Save button pressed");
            }
         });
         buttonPanel.add(renameBut);
@@ -376,31 +386,38 @@ public class ManagerGUI extends JPanel {
         panel.add(classPanel);
     }
     
-    class MyTreeModelListener implements TreeModelListener {
-        public void treeNodesChanged(TreeModelEvent e) {
-            DefaultMutableTreeNode node;
-            node = (DefaultMutableTreeNode)(e.getTreePath().getLastPathComponent());
+    	class MyTreeModelListener implements TreeModelListener {
+    		public void treeNodesChanged(TreeModelEvent e) {
+				DefaultMutableTreeNode node;
+				node = (DefaultMutableTreeNode)(e.getTreePath().getLastPathComponent());
  
-            /*
-             * If the event lists children, then the changed
-             * node is the child of the node we've already
-             * gotten.  Otherwise, the changed node and the
-             * specified node are the same.
-             */
- 
-                int index;
-                try {
-                index = e.getChildIndices()[0];
-                }catch (Exception ex) { //NPE
-                	System.out.println("Error, were you editing the root?");
-                    return;	
-                }
-                node = (DefaultMutableTreeNode)(node.getChildAt(index));
- 
-            System.out.println("The user has finished editing the node.");
-            System.out.println("New value: " + node.getUserObject());
-            
-            //TODO: Push the updated name back to the model
+				int index;
+				try {
+					index = e.getChildIndices()[0];
+				}catch (Exception ex) { //NPE
+					System.out.println("Error, were you editing the root?");
+					return;	
+				}
+				node = (DefaultMutableTreeNode)(node.getChildAt(index));
+				switch(node.getLevel()) {
+          	case 1:
+          		managerModel.selectedClass.name = node.getUserObject().toString();
+          		node.setUserObject(managerModel.selectedClass);
+          		break;
+          	case 2:
+          		managerModel.selectedSection.name = node.getUserObject().toString();
+          		node.setUserObject(managerModel.selectedSection);
+          		break;
+          	case 3:
+          		managerModel.selectedUnit.name = node.getUserObject().toString();
+          		node.setUserObject(managerModel.selectedUnit);
+          		break;
+          	case 4:
+          		managerModel.selectedTutorial.name = node.getUserObject().toString();
+          		node.setUserObject(managerModel.selectedTutorial);
+          		break;
+				}
+				System.out.println("Renamed the node to " + node.getUserObject());
         }
         public void treeNodesInserted(TreeModelEvent e) {
         }
