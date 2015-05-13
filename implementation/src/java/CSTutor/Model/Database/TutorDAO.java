@@ -53,8 +53,8 @@ public class TutorDAO {
     *
     * @param username user's username
     * @param hash user's hash
-    * @param first user's first name
-    * @param last user's last name
+    * @param firstname user's first name
+    * @param lastname user's last name
     * @param permissions the permission identifier (ie instructor) of the user
     */
    public static void addUser(String username, String hash, String firstname,
