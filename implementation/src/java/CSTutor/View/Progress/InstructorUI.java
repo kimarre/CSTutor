@@ -17,11 +17,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
-import model.Tutorial;
-import view.ListListener;
-import view.ListRenderer;
-import view.MainContent;
-
 
 import CSTutor.Model.Progress.InstructorModel;
 import CSTutor.Model.Progress.Student;
@@ -55,7 +50,7 @@ public class InstructorUI extends JPanel
     private final int searchHeight = 30;
     private InstructorModel model;
     private JList<Tutorial> tutorialList;
-    private JList<model.Class> classList;
+    private JList<CSTutor.Model.Progress.Class> classList;
     private JList<Student> studentList;
     
     public InstructorUI(InstructorModel model)

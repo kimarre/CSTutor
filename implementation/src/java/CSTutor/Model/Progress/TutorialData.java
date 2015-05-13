@@ -1,6 +1,5 @@
 package CSTutor.Model.Progress;
 
-import model.Tutorial;
 
 /****
  * Class TutorialData is a data structure that represents a tutorial listed
