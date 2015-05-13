@@ -3,6 +3,8 @@ package CSTutor.Model.Progress;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import model.Student;
+
 /****
  * Class Student is a data structure that represents a student who is enrolled
  * in an instructor's class and completing tutorials. Class Student provides
@@ -53,5 +55,14 @@ public class Student
     {
         System.out.println("In Student.addClass");
         enrolledClasses.add(cl);
+    }
+    
+    public boolean equals(Student student)
+    {
+        if(student.toString().equals(name))
+        {
+            return true;
+        }
+        return false;
     }
 }

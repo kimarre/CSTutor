@@ -3,6 +3,8 @@ package CSTutor.View.Progress;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,6 +17,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
+import model.Tutorial;
+import view.ListListener;
+import view.ListRenderer;
+import view.MainContent;
+
 
 import CSTutor.Model.Progress.InstructorModel;
 import CSTutor.Model.Progress.Student;
@@ -22,33 +29,34 @@ import CSTutor.Model.Progress.TutorialData;
 import CSTutor.Model.Progress.Class;
 
 /**
- * 
+ * InstructorUI is the view class that displays the information 
+ * from the InstructorModel class.
  * @author Erica Solum (esolum@calpoly.edu)
- * @version 13Apr15
+ * @version 11May15
  */
 public class InstructorUI extends JPanel
 {
     
     private JPanel topSpace;
     private JPanel bottomSpace;
-    private JPanel finalTutorialPane;
-    private JPanel finalClassesPane;
-    private JPanel finalStudentPane;
+    private JPanel finalClassesPane, finalStudentPane, finalTutorialPane;
     private JPanel content;
+    private JPanel classSpace, studentSpace, tutorialSpace;
+    private JPanel classCorner, studentCorner, tutorialCorner;
     private MainContent main;
     private JTabbedPane tabPane;
-    private JScrollPane tutorialScroll;
-    private JScrollPane studentScroll;
-    private JScrollPane classScroll;
-    private JPanel classPanel;
-    private JPanel tutorialPanel;
-    private JPanel studentPanel;
+    private JTextField classField, studentField, tutorialField;
+    private JScrollPane classScroll, studentScroll, tutorialScroll;
+    private JPanel classPanel, studentPanel, tutorialPanel;
+    private JPanel classSearchPanel, studentSearchPanel, tutorialSearchPanel;
     private ListRenderer renderer;
     private final int barWidth = 200;
-    private final int barHeight = 460;
+    private final int barHeight = 465;
     private final int searchHeight = 30;
     private InstructorModel model;
-    private JTree tree;
+    private JList<Tutorial> tutorialList;
+    private JList<model.Class> classList;
+    private JList<Student> studentList;
     
     public InstructorUI(InstructorModel model)
     {
@@ -59,7 +67,7 @@ public class InstructorUI extends JPanel
     
     /**
      * Initializes the Instructor UI.
-     */
+     */    
     public void init()
     {
        
@@ -76,16 +84,16 @@ public class InstructorUI extends JPanel
         
     
     }
-        
+    
     /**
      * Provides the code for the middle portion of the GUI.
      */
     public void layoutMiddle()
     {
+        
+        
         content = new JPanel();
         main = new MainContent();
-        main.setLayout(new BoxLayout(main, BoxLayout.X_AXIS));
-        //content.setLayout(new BoxLayout(content, BoxLayout.X_AXIS));
         makeSideBar();
         content.add(Box.createHorizontalStrut(20));
         content.add(tabPane);
@@ -115,12 +123,10 @@ public class InstructorUI extends JPanel
     }
     
     /**
-     * Formats the instructor's side bar.
+     * Code to format the side bar's top and bottom frame.
      */
-    public void makeSideBar()
+    private void formatSpaces()
     {
-        /* Sidebar Formatting*/
-        
         JPanel classSpace = new JPanel();
         classSpace.setMinimumSize(new Dimension(200, 25));
         classSpace.setPreferredSize(new Dimension(200,25));
@@ -142,8 +148,6 @@ public class InstructorUI extends JPanel
         tutorialSpace.setBackground(new Color(153, 153, 153));
         tutorialSpace.setVisible(true);
         
-        
-        
         JPanel classCorner = new JPanel();
         classCorner.setBackground(new Color(153, 153, 153));
         classCorner.setVisible(true);
@@ -155,9 +159,33 @@ public class InstructorUI extends JPanel
         JPanel tutorialCorner = new JPanel();
         tutorialCorner.setBackground(new Color(153, 153, 153));
         tutorialCorner.setVisible(true);
-        
-        
-        
+    }
+    
+    /**
+     * Gets the data from the model and creates JLists to populate the sidebar.
+     */
+    private void formatContent()
+    {
+        /* JList Sturf */
+        tutorialList = model.getTutorialList();
+        classList = model.getClassList();
+        studentList = model.getStudentList();
+        tutorialList.setCellRenderer(new ListRenderer());
+        tutorialList.addListSelectionListener(
+                new ListListener(main));
+        classList.setCellRenderer(new ListRenderer());
+        classList.addListSelectionListener(
+                new ListListener(main));
+        studentList.setCellRenderer(new ListRenderer());
+        studentList.addListSelectionListener(
+                new ListListener(main));
+    }
+    
+    /**
+     * Creates the final panes that are placed in the tabbed pane in the side bar.
+     */
+    private void createFinalPanes()
+    {
         /* Final Panes/Tabs */
         finalTutorialPane = new JPanel();
         finalTutorialPane.setLayout(new BoxLayout(finalTutorialPane, BoxLayout.Y_AXIS));
@@ -185,54 +213,87 @@ public class InstructorUI extends JPanel
         finalStudentPane.setMaximumSize(new Dimension(barWidth, barHeight));
         finalStudentPane.setBackground(new Color(208, 226, 245));
         finalStudentPane.setVisible(true);
+    }
+    
+    private void makeSearchFields()
+    {
+        classField = new JTextField();
+        studentField = new JTextField();
+        tutorialField = new JTextField();
         
-        /* JList Sturf */
-        JList<TutorialData> tutorialJList = model.getTutorialList();
-        JList<Class> classJList = model.getClassList();
-        JList<Student> studentJList = model.getStudentList();
-        tutorialJList.setCellRenderer(new ListRenderer());
-        tutorialJList.addListSelectionListener(
-                new ListListener(main));
-        classJList.setCellRenderer(new ListRenderer());
-        classJList.addListSelectionListener(
-                new ListListener(main));
-        studentJList.setCellRenderer(new ListRenderer());
-        studentJList.addListSelectionListener(
-                new ListListener(main));
+        classField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+              String searchString = classField.getText();
+              
+              System.out.println("Searching for " + searchString);
+              model.searchForClass(searchString);
+              
+            }
+          });
         
-        /* Panel Stuff */
-        tutorialPanel = new JPanel();
-        tutorialPanel.setLayout(new BoxLayout(tutorialPanel, BoxLayout.Y_AXIS));
-        tutorialPanel.setMinimumSize(new Dimension(barWidth, barHeight));
-        tutorialPanel.setMaximumSize(new Dimension(barWidth, barHeight));
-        tutorialPanel.setBackground(new Color(208, 226, 245));
-        tutorialPanel.add(tutorialJList);
-        tutorialPanel.add(Box.createVerticalGlue());
-        tutorialPanel.setVisible(true);
+        studentField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+              String searchString = classField.getText();
+              
+              System.out.println("Searching for " + searchString);
+              model.searchForStudent(searchString);
+            }
+          });
+        tutorialField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+              String searchString = classField.getText();
+              
+              System.out.println("Searching for " + searchString);
+              model.searchForTutorial(searchString);
+            }
+          });
+    }
+    
+    /**
+     * Creates the search box on the bottom of the side bar.
+     */
+    private void createSearchPanels()
+    {
+        makeSearchFields();
+        tutorialSearchPanel = new JPanel();
+        tutorialSearchPanel.setLayout(new BoxLayout(tutorialSearchPanel, BoxLayout.X_AXIS));
+        tutorialSearchPanel.setBackground(new Color(153, 153, 153));
+        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
+        tutorialSearchPanel.add(new JLabel("Search"));
+        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
+        tutorialSearchPanel.add(tutorialField);
+        tutorialSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
+        tutorialSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
+        tutorialSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
         
-        classPanel = new JPanel();
-        classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
-        classPanel.setMinimumSize(new Dimension(barWidth, barHeight));
-        classPanel.setMaximumSize(new Dimension(barWidth, barHeight));
-        classPanel.add(classJList);
-        classPanel.add(Box.createVerticalGlue());
-        classPanel.setBackground(new Color(208, 226, 245));
-        classPanel.setVisible(true);
+        classSearchPanel = new JPanel();
+        classSearchPanel.setLayout(new BoxLayout(classSearchPanel, BoxLayout.X_AXIS));
+        classSearchPanel.setBackground(new Color(153, 153, 153));
+        classSearchPanel.add(Box.createHorizontalStrut(5));
+        classSearchPanel.add(new JLabel("Search"));
+        classSearchPanel.add(Box.createHorizontalStrut(5));
+        classSearchPanel.add(classField);
+        classSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
+        classSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
+        classSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
         
-        studentPanel = new JPanel();
-        studentPanel.setLayout(new BoxLayout(studentPanel, BoxLayout.Y_AXIS));
-        studentPanel.setMinimumSize(new Dimension(barWidth, barHeight));
-        studentPanel.setMaximumSize(new Dimension(barWidth, barHeight));
-        studentPanel.setBackground(new Color(208, 226, 245));
-        studentPanel.add(studentJList);
-        studentPanel.add(Box.createVerticalGlue());
-        studentPanel.setVisible(true);
-        
-        
-        
-        
-        
-        
+        studentSearchPanel = new JPanel();
+        studentSearchPanel.setLayout(new BoxLayout(studentSearchPanel, BoxLayout.X_AXIS));
+        studentSearchPanel.setBackground(new Color(153, 153, 153));
+        studentSearchPanel.add(Box.createHorizontalStrut(5));
+        studentSearchPanel.add(new JLabel("Search"));
+        studentSearchPanel.add(Box.createHorizontalStrut(5));
+        studentSearchPanel.add(studentField);
+        studentSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
+        studentSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
+        studentSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
+    }
+    
+    /**
+     * Creates the scroll panels for the side bar.
+     */
+    private void createScrollPanels()
+    {
         /* Scroll Stuff */
         tutorialScroll = new JScrollPane(tutorialPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -254,61 +315,67 @@ public class InstructorUI extends JPanel
         studentScroll.setColumnHeaderView(tutorialSpace);
         studentScroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
                     studentCorner);
+    }
+    
+    /**
+     * Creates the panels that house the JLists in the side bar.
+     */
+    private void createListPanels()
+    {
+        /* Panel Stuff */
+        tutorialPanel = new JPanel();
+        tutorialPanel.setLayout(new BoxLayout(tutorialPanel, BoxLayout.Y_AXIS));
+        tutorialPanel.setMinimumSize(new Dimension(barWidth, barHeight));
+        tutorialPanel.setMaximumSize(new Dimension(barWidth, barHeight));
+        tutorialPanel.setBackground(new Color(208, 226, 245));
+        tutorialPanel.add(tutorialList);
+        tutorialPanel.add(Box.createVerticalGlue());
+        tutorialPanel.setVisible(true);
         
+        classPanel = new JPanel();
+        classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
+        classPanel.setMinimumSize(new Dimension(barWidth, barHeight));
+        classPanel.setMaximumSize(new Dimension(barWidth, barHeight));
+        classPanel.add(classList);
+        classPanel.add(Box.createVerticalGlue());
+        classPanel.setBackground(new Color(208, 226, 245));
+        classPanel.setVisible(true);
         
+        studentPanel = new JPanel();
+        studentPanel.setLayout(new BoxLayout(studentPanel, BoxLayout.Y_AXIS));
+        studentPanel.setMinimumSize(new Dimension(barWidth, barHeight));
+        studentPanel.setMaximumSize(new Dimension(barWidth, barHeight));
+        studentPanel.setBackground(new Color(208, 226, 245));
+        studentPanel.add(studentList);
+        studentPanel.add(Box.createVerticalGlue());
+        studentPanel.setVisible(true);
+    }
+    
+    /**
+     * Formats the instructor's side bar.
+     */
+    public void makeSideBar()
+    {    
+        /* Sidebar Formatting*/
+        formatSpaces();     
+        createFinalPanes();
+        formatContent();
+        createListPanels();
+        createScrollPanels();
+        createSearchPanels();
         
         /* Final Pane stuff */
         finalTutorialPane.add(tutorialScroll);
-        //finalClassesPane.add(classSpace);
         finalClassesPane.add(classScroll);
-        
-        //finalClassesPane.add(treeView);
-        
-        finalStudentPane.add(studentScroll);
-        
-        JPanel tutorialSearchPanel = new JPanel();
-        tutorialSearchPanel.setLayout(new BoxLayout(tutorialSearchPanel, BoxLayout.X_AXIS));
-        tutorialSearchPanel.setBackground(new Color(153, 153, 153));
-        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
-        tutorialSearchPanel.add(new JLabel("Search"));
-        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
-        tutorialSearchPanel.add(new JTextField());
-        tutorialSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
-        tutorialSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
-        tutorialSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
+        finalStudentPane.add(studentScroll);       
         finalTutorialPane.add(tutorialSearchPanel);
-        
-        JPanel classSearchPanel = new JPanel();
-        classSearchPanel.setLayout(new BoxLayout(classSearchPanel, BoxLayout.X_AXIS));
-        classSearchPanel.setBackground(new Color(153, 153, 153));
-        classSearchPanel.add(Box.createHorizontalStrut(5));
-        classSearchPanel.add(new JLabel("Search"));
-        classSearchPanel.add(Box.createHorizontalStrut(5));
-        classSearchPanel.add(new JTextField());
-        classSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
-        classSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
-        classSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
         finalClassesPane.add(classSearchPanel);
-        
-        JPanel studentSearchPanel = new JPanel();
-        studentSearchPanel.setLayout(new BoxLayout(studentSearchPanel, BoxLayout.X_AXIS));
-        studentSearchPanel.setBackground(new Color(153, 153, 153));
-        studentSearchPanel.add(Box.createHorizontalStrut(5));
-        studentSearchPanel.add(new JLabel("Search"));
-        studentSearchPanel.add(Box.createHorizontalStrut(5));
-        studentSearchPanel.add(new JTextField());
-        studentSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
-        studentSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
-        studentSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
-        finalStudentPane.add(studentSearchPanel);
-        
+        finalStudentPane.add(studentSearchPanel);  
         
         /* TABBED PANE STUFF */
         tabPane = new JTabbedPane();
         tabPane.addTab("Classes", finalClassesPane);
         tabPane.addTab("Students", finalStudentPane);
-        tabPane.addTab("Tutorials", finalTutorialPane);
-        
-        
+        tabPane.addTab("Tutorials", finalTutorialPane); 
     }
 }
