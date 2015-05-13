@@ -49,7 +49,7 @@ public class InstructorUI extends JPanel
     private final int barHeight = 465;
     private final int searchHeight = 30;
     private InstructorModel model;
-    private JList<Tutorial> tutorialList;
+    private JList<TutorialData> tutorialList;
     private JList<CSTutor.Model.Progress.Class> classList;
     private JList<Student> studentList;
     
