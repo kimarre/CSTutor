@@ -150,15 +150,21 @@ public class Tutorial extends javax.swing.JPanel {
         descLabel.setText("<html><b>Description</b></html>");
         descriptionPanel.add(descLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 71, -1, -1));
 
+        TryItYourself.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         codeInputText.setColumns(20);
         codeInputText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         codeInputText.setRows(5);
         codeInputText.setText("1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n");
         jScrollPane3.setViewportView(codeInputText);
 
+        TryItYourself.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 109, 388, 204));
+
         consoleText.setColumns(20);
         consoleText.setRows(5);
         jScrollPane4.setViewportView(consoleText);
+
+        TryItYourself.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 360, 388, 116));
 
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
@@ -166,49 +172,13 @@ public class Tutorial extends javax.swing.JPanel {
                 runButtonActionPerformed(evt);
             }
         });
+        TryItYourself.add(runButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 325, -1, -1));
 
         jLabel1.setText("<html><b>Try It Yourself!</html></b>");
+        TryItYourself.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
         tryItText.setText("jLabel2");
-
-        javax.swing.GroupLayout TryItYourselfLayout = new javax.swing.GroupLayout(TryItYourself);
-        TryItYourself.setLayout(TryItYourselfLayout);
-        TryItYourselfLayout.setHorizontalGroup(
-            TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TryItYourselfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TryItYourselfLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(tryItText)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(TryItYourselfLayout.createSequentialGroup()
-                        .addGroup(TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                            .addGroup(TryItYourselfLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TryItYourselfLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(runButton))
-                            .addComponent(jScrollPane3))
-                        .addContainerGap())))
-        );
-        TryItYourselfLayout.setVerticalGroup(
-            TryItYourselfLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TryItYourselfLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tryItText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(runButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        TryItYourself.add(tryItText, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 28, -1, -1));
 
         descriptionPanel.add(TryItYourself, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 400, -1));
 

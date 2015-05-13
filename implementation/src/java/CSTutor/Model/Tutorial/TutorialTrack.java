@@ -36,8 +36,9 @@ public class TutorialTrack {
         TutorialData second = new TutorialData();
         newTitle = "While Loops";
         desc = "While loops are only sometimes as cool as for loops.";
+        syn = "while (condition) { <br><br>}";
         
-        second.setAll(newTitle, desc, "", "", "", "");
+        second.setAll(newTitle, desc, syn, "", "", "");
         track.add(second);
     }
 }
