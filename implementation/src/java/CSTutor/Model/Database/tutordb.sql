@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Users (
    hash TEXT,
    firstname TEXT,
    lastname TEXT,
-   instructor BOOLEAN
+   permissions TEXT
 );
 
 REPLACE INTO classes(name) VALUES
