@@ -11,15 +11,15 @@ public class Manager {
 	/* A list of all classes */
    public List<Class> data;
 	/* The selected class */
-   Class selectedClass;
+   public Class selectedClass;
 	/* The selected section */
-   Section selectedSection;
+   public Section selectedSection;
 	/* The selected unit */
-   Unit selectedUnit;
+   public Unit selectedUnit;
 	/* The selected tutorial */
-   Tutorial selectedTutorial;
+   public Tutorial selectedTutorial;
 	/* The selected page */
-   Page selectedPage;
+   public Page selectedPage;
    /**
     * Creates a manager model. Should only be one per site.
     */
@@ -40,12 +40,13 @@ public class Manager {
    public void selectSection(Section select) {
    	System.out.println("Selecting " + select);
 	   if (select == null) {
+	   	System.out.println("Warning: nothing selected");
 		   selectedSection = null;
 		   selectedClass = null;
 	   }
 	   else {
 		   selectedSection = select;
-		   selectedClass = select.parent;
+		   selectClass(select.parent);
 	   }
    }
    /**
@@ -73,14 +74,14 @@ public class Manager {
    public void selectUnit(Unit select){
    	System.out.println("Selecting " + select);
 	   if (select == null) {
+	   	System.out.println("Warning: nothing selected");
 		   selectedUnit = null;
 		   selectedSection = null;
 		   selectedClass = null;
 	   }
 	   else {
 		   selectedUnit = select;
-		   selectedSection = select.parent;
-		   selectedClass = select.parent.parent; //lookin good
+		   selectSection(select.parent);
 	   }
    }
    /**
@@ -94,6 +95,7 @@ public class Manager {
    public void selectTutorial(Tutorial select){
    	System.out.println("Selecting " + select);
 	   if (select == null) {
+	   	System.out.println("Warning: nothing selected");
 		   selectedTutorial = null;
 		   selectedUnit = null;
 		   selectedSection = null;
@@ -101,9 +103,7 @@ public class Manager {
 	   }
 	   else {
 		   selectedTutorial = select;
-		   selectedUnit = select.parent;
-		   selectedSection = select.parent.parent;
-		   selectedClass = select.parent.parent.parent; //perfect.
+		   selectUnit(select.parent);
 	   }
    }
    /**
@@ -116,6 +116,7 @@ public class Manager {
     */ 
    public void selectPage(Page select){
 	   if (select == null) {
+	   	System.out.println("Warning: nothing selected");
 		   selectedPage = null;
 		   selectedTutorial = null;
 		   selectedUnit = null;
@@ -124,10 +125,7 @@ public class Manager {
 	   }
 	   else {
 		   selectedPage = select;
-		   selectedTutorial = select.parent;
-		   selectedUnit = select.parent.parent;
-		   selectedSection = select.parent.parent.parent;
-		   selectedClass = select.parent.parent.parent.parent; //beautiful.
+		   selectTutorial(select.parent);
 	   }
    }
 
