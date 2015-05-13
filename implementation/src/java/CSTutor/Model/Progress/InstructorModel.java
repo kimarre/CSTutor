@@ -7,10 +7,6 @@ import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-import model.Class;
-import model.Student;
-import model.Tutorial;
-
 
 /****
  * Class InstructorModel is a model class for the Calendar Tool progress and
@@ -21,7 +17,7 @@ import model.Tutorial;
  */
 public class InstructorModel
 {
-    private JList<Tutorial> tutorialList;
+    private JList<TutorialData> tutorialList;
     private JList<Class> classList;
     private JList<Student> studentList;
     private DefaultListModel<TutorialData> tutorialsModel;
