@@ -123,7 +123,7 @@ public class InstructorModel
     private void retrieveClassesData()
     {
         List<String> classes = TutorDAO.getClasses();
-        String[] classesStr = (String[] )classes.toArray();
+        
         //JList<String> classStrList = new JList<String>(classesStr);
         System.out.println("In InstructorModel.retrieveClassesData");
         
@@ -132,9 +132,9 @@ public class InstructorModel
          */
         DefaultListModel<Class> classesModel = new DefaultListModel<Class>();
         
-        for(String str: classesStr)
+        for(int i=0; i<classes.size(); i++)
         {
-            classesModel.addElement(new Class(str));
+            classesModel.addElement(new Class(classes.get(i)));
         }
         
         
