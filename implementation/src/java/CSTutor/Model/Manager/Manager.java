@@ -47,6 +47,7 @@ public class Manager {
 	   else {
 		   selectedSection = select;
 		   selectClass(select.parent);
+           System.out.println("Selected Section: " + selectedSection.name);
 	   }
    }
    /**
@@ -59,8 +60,9 @@ public class Manager {
        selectedClass'.equals(select);
     */ 
    public void selectClass(Class select) {
-   	System.out.println("Selecting " + select);
 	   selectedClass = select;
+
+       System.out.println("Selected Class: " + selectedClass.name);
    }
    /**
     * SelectUnit sets the selectedUnit to the given unit, if it is within the selected class or section.
@@ -82,6 +84,7 @@ public class Manager {
 	   else {
 		   selectedUnit = select;
 		   selectSection(select.parent);
+           System.out.println("Selected Unit: " + selectedUnit.name);
 	   }
    }
    /**
@@ -104,6 +107,7 @@ public class Manager {
 	   else {
 		   selectedTutorial = select;
 		   selectUnit(select.parent);
+           System.out.println("Selected Tutorial: " + selectedTutorial.name);
 	   }
    }
    /**
