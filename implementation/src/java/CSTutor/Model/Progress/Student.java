@@ -3,8 +3,6 @@ package CSTutor.Model.Progress;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import model.Student;
-
 /****
  * Class Student is a data structure that represents a student who is enrolled
  * in an instructor's class and completing tutorials. Class Student provides
