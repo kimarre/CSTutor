@@ -155,7 +155,7 @@ public class InstructorModel
     /**
      * Returns the JList filled with tutorial data.
      */
-    public JList<Tutorial> getTutorialList()
+    public JList<TutorialData> getTutorialList()
     {
         return tutorialList;
     }
