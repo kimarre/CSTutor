@@ -11,27 +11,26 @@ import java.util.*;
  * @author dlgordon
  */
 public class TutorDAO {
-   private static final String db_path = "tutordb.db";
-   private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
-   private static Connection c = connect();
+  private static final String db_path = "tutordb.db";
+  private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
+  private static Connection c = connect();
    
-   /**
-    * Connect to the db
-    * 
-    */
-   private static Connection connect() {
-      try {
-        Class.forName("org.sqlite.JDBC");
+  /**
+  * Connect to the db
+  * 
+  */
+  private static Connection connect() {
+    try {
+      Class.forName("org.sqlite.JDBC");
         Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
         init_db(c);
         return c;
       } catch(Exception e) {
         System.err.println("Couldn't open db connection.");
         System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(1);
+        System.exit(1); return null;
       }
-      return null;
-   }  
+    }  
    
    /**
     * Initialize the database by running the SQL statements in tutordb.sql.
@@ -58,7 +57,8 @@ public class TutorDAO {
     * @param last user's last name
     * @param permissions the permission identifier (ie instructor) of the user
     */
-   public static void addUser(String username, String hash, String firstname, String lastname, String permissions) {
+   public static void addUser(String username, String hash, String firstname,
+    String lastname, String permissions) {
       try {
          Statement s = c.createStatement();
          String statement = "INSERT OR IGNORE INTO Users VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\")";
@@ -71,7 +71,7 @@ public class TutorDAO {
    }
 
    /**
-    * Get user (as string list) by username.
+    * Get user info (as column/value map) by username.
     *
     * @param username user's username
     * @return Map of columns to values, or null if not found.
