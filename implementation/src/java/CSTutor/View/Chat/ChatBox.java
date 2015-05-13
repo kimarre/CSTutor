@@ -2,6 +2,7 @@
 package CSTutor.View.Chat;
 
 import CSTutor.Model.Chat.*;
+import CSTutor.Model.Chat.Server.ServerIF;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -9,18 +10,29 @@ import javax.swing.border.*;
 
 import java.awt.event.*;
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 /**
  *
- * @author Simon Vurens
+ * @author Simon Vurens Stephen Daily
  */
 public class ChatBox extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 	
 	ChatOverlay chatOverlay;
     JTextArea msgArea;
     JTextArea displayArea;
     JFrame selfRef = this;
+	
     /**
      * Creates new form ChatBox
+     * @throws NotBoundException 
+     * @throws RemoteException 
+     * @throws MalformedURLException 
      */
     public ChatBox(ChatOverlay CW) {
         initComponents();
@@ -39,18 +51,13 @@ public class ChatBox extends JFrame {
    	 
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
-             ChatWindow cw = chatOverlay.chatWindow;
-   			 String messageText = msgArea.getText();
-   			 //if the text that's entered is valid
-   			 if(cw.Enter(messageText)) {
-				 cw.textInput = new TextBox(messageText);
-				 String convertedText = cw.textInput.pushText();
-				 
-				 chatOverlay.rmiClient.broadcastMessage(convertedText);
-             }
+   			 if (chatOverlay.Enter(msgArea.getText())) {
+   				 chatOverlay.pushText(msgArea.getText());
+   				 msgArea.setText("");
+   			 }
    		 }
    	 });
-   	 
+
    	 msgArea = new JTextArea();
    	 
    	 sendPanel.setLayout(new BoxLayout(sendPanel, BoxLayout.X_AXIS));
@@ -70,6 +77,10 @@ public class ChatBox extends JFrame {
      this.setResizable(false);
        // pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+  	 public void updateConsole() {
+   		 displayArea.append(chatOverlay.getLastString());
+   	 }
 
     /**
      * @param args the command line arguments

@@ -7,7 +7,7 @@ import CSTutor.View.Progress.*;
 
 
 /****
- * Class Student is a model class for the Calendar Tool progress and
+ * Class Student is a model class for the CSTutor progress and
  * assessment feature. It contains methods for all of the operations defined
  * for Student users, including retrieving data from the database.
  * @author Erica Solum (esolum@calpoly.edu)

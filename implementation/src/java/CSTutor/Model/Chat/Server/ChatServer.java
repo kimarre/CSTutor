@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import CSTutor.Model.Chat.Client.ClientIF;
+import CSTutor.Model.Chat.Client.*;
 
 /**
  * Class that represents the chat server.  Holds a list of chat clients, and broadcasts messages.
