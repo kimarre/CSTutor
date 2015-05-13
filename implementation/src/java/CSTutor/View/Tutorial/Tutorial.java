@@ -31,26 +31,9 @@ public class Tutorial extends javax.swing.JPanel {
         
         sideModule = new RoadmapModule();
         
-        // First sample tutorial Content
-        TutorialData first = new TutorialData();
-        first.setTitle("For Loops");
-        first.setDescription("For loops are a type of control structure that "
-          + "allow code to be repeatedly executed. They take three arguments"
-          + " in the order of:<br>     1. starting condition;<br>     2. condition "
-          + "to exit the loop;<br>     3. post loop increment");
         
-        first.setSyntax("for (int i=start; i<upperLimit; i++) {<br>   ...<br>}");
-        first.setExampleOutput("Hello world<br>Hello world<br>Hello world<br>Hello world<br>Hello world");
-        first.setExampleCode("for (int i=0; i<5; i++) {<br>    printf(\"Hello world\\n\");<br>}");
-        tutorialTrack.track.add(first);
         
-        // Second sample tutorial content
-        TutorialData second = new TutorialData();
-        second.setTitle("While Loops");
-        second.setDescription("While loops are only sometimes as cool as for loops.");
-        tutorialTrack.track.add(second);
-        
-        setAllTheThings(tutorialTrack.getFirst());
+        setAllTheThings(tutorialTrack.track.peekFirst());
         
         
         this.setVisible(true);
@@ -367,6 +350,9 @@ public class Tutorial extends javax.swing.JPanel {
      */
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
         //sideModule.toEnd();
+        currentIndex = tutorialTrack.track.size()-1;
+        setAllTheThings(tutorialTrack.track.get(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
     }//GEN-LAST:event_toEndButtonActionPerformed
     
     /** Disables buttons for the purpose of previewing the tutorial. */
@@ -405,7 +391,9 @@ public class Tutorial extends javax.swing.JPanel {
      */
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
         //sideModule.toBeginning(tutorialTrack);
-        System.out.println("To beginning!");
+        currentIndex = 0;
+        setAllTheThings(tutorialTrack.track.peekFirst());
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
     }//GEN-LAST:event_toBeginningButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
