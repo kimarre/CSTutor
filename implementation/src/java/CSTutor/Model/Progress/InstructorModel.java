@@ -24,7 +24,7 @@ public class InstructorModel
     private JList<Tutorial> tutorialList;
     private JList<Class> classList;
     private JList<Student> studentList;
-    private DefaultListModel<Tutorial> tutorialsModel;
+    private DefaultListModel<TutorialData> tutorialsModel;
     private DefaultListModel<Student> studentModel;
     private DefaultListModel<Class> classesModel;
     
@@ -47,24 +47,24 @@ public class InstructorModel
         
         /* Tutorials list */
         tutorialsModel
-            = new DefaultListModel<Tutorial>(); /* List model for the JList */
+            = new DefaultListModel<TutorialData>(); /* List model for the JList */
         
         /* Add sample elements to the list */
-        tutorialsModel.addElement(new Tutorial("Hello World!"));
-        tutorialsModel.addElement(new Tutorial("Intro. to C"));
-        tutorialsModel.addElement(new Tutorial("Data Types"));
-        tutorialsModel.addElement(new Tutorial("If Statements"));
-        tutorialsModel.addElement(new Tutorial("Loops in C"));
-        tutorialsModel.addElement(new Tutorial("Functions"));
-        tutorialsModel.addElement(new Tutorial("The Stack"));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialsModel.addElement(new Tutorial("     ..."));
-        tutorialList = new JList<Tutorial>(tutorialsModel);
+        tutorialsModel.addElement(new TutorialData("Hello World!"));
+        tutorialsModel.addElement(new TutorialData("Intro. to C"));
+        tutorialsModel.addElement(new TutorialData("Data Types"));
+        tutorialsModel.addElement(new TutorialData("If Statements"));
+        tutorialsModel.addElement(new TutorialData("Loops in C"));
+        tutorialsModel.addElement(new TutorialData("Functions"));
+        tutorialsModel.addElement(new TutorialData("The Stack"));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialList = new JList<TutorialData>(tutorialsModel);
     }
     
     /**
@@ -201,9 +201,9 @@ public class InstructorModel
      */
     public void searchForTutorial(String searchString)
     {
-        if(tutorialsModel.contains(new Tutorial(searchString)))
+        if(tutorialsModel.contains(new TutorialData(searchString)))
         {
-            int index = tutorialsModel.indexOf(new Tutorial(searchString));
+            int index = tutorialsModel.indexOf(new TutorialData(searchString));
             System.out.println(index);
         }
     }
