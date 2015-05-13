@@ -337,12 +337,12 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(delBut);
         
-        JButton renameBut = new JButton("Rename...");
+        JButton renameBut = new JButton("Save");
         renameBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Rename button pressed");
+        	   System.out.println("Save button pressed");
            }
         });
         buttonPanel.add(renameBut);
