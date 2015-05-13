@@ -41,15 +41,15 @@ public class ChatBar extends JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		
-		try {
-			chatOverlay = new ChatOverlay(this);
-		} catch (MalformedURLException | RemoteException | NotBoundException e1) {
-			e1.printStackTrace();
-		}
+//		try {
+//			chatOverlay = new ChatOverlay(this);
+//		} catch (MalformedURLException | RemoteException | NotBoundException e1) {
+//			e1.printStackTrace();
+//		}
 
 		online = new Online(new Student());
-		box = new ChatBox(chatOverlay);
-		box.setVisible(false);
+		//box = new ChatBox(chatOverlay);
+		//box.setVisible(false);
 		online.setVisible(false);
 		JPanel butPanel = new JPanel();
 		JButton onlineBut = new JButton("Online");
