@@ -53,7 +53,7 @@ CLASS=CSTutor/View/*.class \
 all:		dir compile jar clean
 
 compile:	$(FILE)
-		javac -cp CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/Model/Database/*:CSTutor/View/JTattoo-1.6.11.jar:. -g -d .classes $(JAVA)
+		javac -cp CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/Model/Database/*:CSTutor/View/*:. -g -d .classes $(JAVA)
 
 jar:		$(FILE)
 		cd .classes ; \
@@ -81,4 +81,4 @@ clean:
 		rm -rf .classes/* .javadoc/*
 
 run:
-		java -cp CSTutor.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/View/JTattoo-1.6.11.jar:CSTutor/Model/Database/sqlite-jdbc-3.8.7.jar CSTutor.View.Overview
+		java -cp CSTutor.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/View/JTattoo-1.6.11.jar:CSTutor/View/AbsoluteLayout.jar:CSTutor/Model/Database/sqlite-jdbc-3.8.7.jar CSTutor.View.Overview
