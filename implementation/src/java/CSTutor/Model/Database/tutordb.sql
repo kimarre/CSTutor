@@ -1,31 +1,37 @@
-CREATE TABLE IF NOT EXISTS users (
-   username TEXT PRIMARY KEY,
-   first TEXT NOT NULL,
-   last TEXT NOT NULL,
-   permissions TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS classes (
+CREATE TABLE IF NOT EXISTS Classes (
    name TEXT PRIMARY KEY
 );
-CREATE TABLE IF NOT EXISTS sections (
+
+CREATE TABLE IF NOT EXISTS Sections (
    className TEXT,
    sectionNum INTEGER,
-   FOREIGN KEY(className) REFERENCES classes(Name),
+   FOREIGN KEY(className) REFERENCES Classes(name),
    PRIMARY KEY(className, sectionNum)
 );
-CREATE TABLE IF NOT EXISTS units (
+
+CREATE TABLE IF NOT EXISTS Units (
    name TEXT,
    className TEXT,
    sectionNum INTEGER,
-   FOREIGN KEY(className, sectionNum) REFERENCES sections(className, sectionNum)
+   FOREIGN KEY(className, sectionNum) REFERENCES Sections(className, sectionNum)
    PRIMARY KEY(name, className, sectionNum)
 );
-CREATE TABLE IF NOT EXISTS quizzes (
+
+CREATE TABLE IF NOT EXISTS Quizzes (
    id INTEGER AUTO_INCREMENT PRIMARY KEY,
    name TEXT NOT NULL,
    permissions TEXT NOT NULL,
    owner TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS Users (
+   username TEXT PRIMARY KEY,
+   hash TEXT,
+   firstname TEXT,
+   lastname TEXT,
+   instructor BOOLEAN
+);
+
 REPLACE INTO classes(name) VALUES
    ("CSC 101"),
    ("CSC 102"),
@@ -41,6 +47,7 @@ REPLACE INTO classes(name) VALUES
    ("CSC 357"),
    ("CSC 365"),
    ("CSC 378");
+
 REPLACE INTO sections(className, sectionNum) VALUES
    ("CSC 101", 1),
    ("CSC 101", 2),

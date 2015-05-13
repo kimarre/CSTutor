@@ -13,24 +13,13 @@ import java.util.*;
 public class TutorDAO {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
-   private static Connection c = init();
-   
-   private static final String upsertUser_query =
-    "INSERT OR REPLACE INTO users VALUES (\"%s\", \"%s\", \"%s\", \"%s\");";
-   private static final String getUser_query =
-    "SELECT * FROM users WHERE username=\"%s\";";
-   private static final String upsertQuiz_query =
-    "INSERT OR REPLACE INTO quizzes VALUES (\"%s\", \"%s\", \"%s\", \"%s\");";
-   private static final String getQuiz_query =
-    "SELECT * FROM quizzes WHERE id=\"%s\";";
+   private static Connection c = connect();
    
    /**
-    * Constructor.
+    * Connect to the db
     * 
-    * @precondition Database exists in directory and JDBC is imported.
-    * @postcondition Connection opened to database.
     */
-   private static Connection init() {
+   private static Connection connect() {
       try {
         Class.forName("org.sqlite.JDBC");
         Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
@@ -48,13 +37,12 @@ public class TutorDAO {
     * Initialize the database by running the SQL statements in tutordb.sql.
     * Create tables if they don't exist, and populate with initial data.
     *
-    * @precondition Database exists.
-    * @postcondition Database is initialized.
+    * @param con connection to the db
     */
    private static void init_db(Connection con) throws Exception { 
       Statement s = con.createStatement();
       java.io.InputStream input = TutorDAO.class.getResourceAsStream(init_db_path);
-      java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";");
+      java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";\n*");
       while (scan.hasNext()) {
         s.executeUpdate(scan.next());
       }
@@ -64,70 +52,76 @@ public class TutorDAO {
    /**
     * Given a user, update the user if already exists or create if not.
     *
-    * @precondition user table exists.
-    * @postcondition user is upserted into table.
     * @param username user's username
+    * @param hash user's hash
     * @param first user's first name
     * @param last user's last name
+    * @param permissions the permission identifier (ie instructor) of the user
     */
-   public static void upsertUser(String username, String first, String last, String permissions) throws Exception {
-      Statement s = c.createStatement();
-      s.executeUpdate(String.format(upsertUser_query, username, first, last, permissions));
-      s.close();
+   public static void addUser(String username, String hash, String firstname, String lastname, String permissions) {
+      try {
+         Statement s = c.createStatement();
+         String statement = "INSERT OR IGNORE INTO Users VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\")";
+         s.executeUpdate(String.format(statement, username, hash, firstname, lastname, permissions));
+         s.close();
+      } catch(Exception e) {
+        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        System.exit(1);
+      }
    }
 
    /**
     * Get user (as string list) by username.
     *
-    * @precondition user exists in table.
-    * @postcondition None.
     * @param username user's username
-    * @return String list of the user's columns
+    * @return Map of columns to values, or null if not found.
     */
-   public static List<String> getUser(String username) throws Exception {
-      Statement s = c.createStatement();
-      ResultSet r = s.executeQuery(String.format(getUser_query, username));
-      ArrayList<String> user = new ArrayList<String>(Arrays.asList(
-       r.getString("username"), r.getString("first"), r.getString("last")));
-      s.close();
-      return user;
+   public static Map<String, String> getUser(String username) {
+      try {
+         Statement s = c.createStatement();
+         String statement = "SELECT * FROM Users WHERE username=\"" + username + "\"";
+         ResultSet r = s.executeQuery(statement);
+         Map<String, String> user = new HashMap<String, String>();
+         List<String> cols = Arrays.asList("username", "hash", "firstname", "lastname", "instructor");
+         for (String col : cols) {
+            user.put(col, r.getString(col));
+         }
+         s.close();
+         return user;
+      } catch(Exception e) { // user not in db
+        return null;
+      }
    }
 
    /**
     * Given a quiz, update the quiz if already exists or create if not.
     *
-    * @precondition Quiz table exists.
-    * @postcondition Quiz is upserted into table.
     * @param id Quiz id
     * @param quiz Content of the quiz
     */
    public static void upsertQuiz(int id, String quiz, String permissions, String owner) throws Exception {
       Statement s = c.createStatement();
-      s.executeUpdate(String.format(upsertQuiz_query, String.valueOf(id), quiz, permissions, owner));
+      //s.executeUpdate(String.format(upsertQuiz_query, String.valueOf(id), quiz, permissions, owner));
       s.close();
    }
 
    /**
     * Get quiz by id
     *
-    * @precondition Quiz exists in table.
-    * @postcondition None.
     * @param id Quiz id
     * @return Content of the quiz.
     */
    public static String getQuiz(int id) throws Exception {
       Statement s = c.createStatement();
-      ResultSet r = s.executeQuery(String.format(getQuiz_query, String.valueOf(id)));
-      String quiz = r.getString("name");
-      s.close();
-      return quiz;
+      //ResultSet r = s.executeQuery(String.format(getQuiz_query, String.valueOf(id)));
+      //String quiz = r.getString("name");
+      //s.close();
+      return null;//quiz;
    }
 
    /**
     * Get a list of class names.
     *
-    * @precondition None.
-    * @postcondition None.
     * @return List of class names.
     */
    public static List<String> getClasses() {
@@ -138,34 +132,38 @@ public class TutorDAO {
         while (r.next()) {
           classes.add(r.getString("name"));
         }
-      } catch(Exception e) {System.out.println(e);}
-      return classes;
+        return classes;
+      } catch(Exception e) {
+        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        System.exit(1); return null;
+      }
    }
 
    /**
     * Get a list of section numbers for a class.
     *
-    * @precondition None.
-    * @postcondition None.
     * @param className Name of the class for which to look up sections.
     * @return List of section numbers (as a String)
     */
-   public static List<String> getSections(String className) throws Exception {
-      Statement s = c.createStatement();
-      ResultSet r = s.executeQuery(String.format(
-       "SELECT sectionNum FROM sections WHERE className = \"%s\";", className));
-      List<String> sections = new ArrayList<String>();
-      while (r.next()) {
-        sections.add(r.getString("sectionNum"));
+   public static List<String> getSections(String className) {
+      try {
+         Statement s = c.createStatement();
+         ResultSet r = s.executeQuery(String.format(
+          "SELECT sectionNum FROM sections WHERE className = \"%s\";", className));
+         List<String> sections = new ArrayList<String>();
+         while (r.next()) {
+           sections.add(r.getString("sectionNum"));
+         }
+         return sections;
+      } catch(Exception e) {
+        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        System.exit(1); return null;
       }
-      return sections;
    }
 
    /**
     * Get class hierarchy from database.
     *
-    * @precondition None.
-    * @postcondition None.
     * @return List of list of strings representing class hierarchy from database.
     */
    public static List<List<String>> getClassHierarchy() throws Exception {
@@ -173,43 +171,5 @@ public class TutorDAO {
       List<String> classes = getClasses();
       List<List<String>> hierarchy = null;
       return hierarchy;
-   }
-
-   /**
-    * Test each method, throw Exception on error
-    *
-    * @precondition None.
-    * @postcondition None.
-    */
-   public static void test() {
-      TutorDAO d;
-      List<String> user;
-      String quiz;
-      List<String> classes;
-      try {
-         d = new TutorDAO();
-         d.upsertUser("dlgordon", "Luke", "Gordon", "student");
-         user = d.getUser("dlgordon");
-         if (!user.get(1).equals("Luke"))
-            throw new Exception();
-         d.upsertQuiz(1, "Test", "all", "dlgordon");
-         quiz = d.getQuiz(1);
-         if (!quiz.equals("Test"))
-            throw new Exception();
-         classes = d.getClasses();
-         System.out.println(classes);
-
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(1);
-      }
-      System.out.println("Test successful.");
-   }
-
-   /**
-    * Main for testing only
-    */
-   public static void main(String[] args) {
-      test();
    }
 }
