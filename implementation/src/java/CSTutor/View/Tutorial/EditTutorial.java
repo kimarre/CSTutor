@@ -242,12 +242,7 @@ public class EditTutorial extends javax.swing.JPanel {
     private TutorialData retrieveData() {
         TutorialData pageData = new TutorialData();
         
-        pageData.setTitle(titleField.getText());
-        pageData.setDescription(descText.getText());
-        pageData.setSyntax(syntaxText.getText());
-        pageData.setExampleCode(sampleCodeText.getText());
-        pageData.setExampleOutput(outputText.getText());
-        pageData.tryItYourself = tryItText.getText();
+        pageData.setAll(titleField.getText(), descText.getText(), syntaxText.getText(), sampleCodeText.getText(), outputText.getText(), tryItText.getText());
         
         return pageData;
     }
@@ -261,14 +256,13 @@ public class EditTutorial extends javax.swing.JPanel {
         int result = confirmation.showConfirmDialog(null, "Are you sure you want to save?", "Confirm Save", YES_NO_OPTION);
         
         if (result == YES_OPTION) {
-            System.out.println("Confirmed!");
             editTutorial = new CSTutor.Model.Tutorial.TutorialEditor();
             TutorialData temp = retrieveData();
             editTutorial.save(temp);
-            
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    
     /** Contains the editing tools needed for authors to personalize tutorial text */
     public EditingTools toolbar;
     

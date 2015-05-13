@@ -36,6 +36,15 @@ public class TutorialData {
        tryItYourself = "";
    }
    
+   public TutorialData(String t, String desc, String syn, String ec, String eo, String tryIt) {
+       this.title = t;
+       this.description.intro = desc;
+       this.description.syntax = syn;
+       this.description.exampleCode = ec;
+       this.description.exampleOutput = eo;
+       this.tryItYourself = tryIt;
+   }
+   
    /** Retrieves the tutorial's title */
    public String getTitle() {
        return title;
@@ -61,29 +70,14 @@ public class TutorialData {
        return description.exampleOutput;
    }
    
-   /** Sets the tutorial's title */
-   public void setTitle(String newTitle) {
+   /** Sets all the fields for TutorialData */
+   public void setAll(String newTitle, String desc, String syn, String code, String output, String tryIt) {
        title = newTitle;
-   }
-   
-   /** Sets the tutorial's description */
-   public void setDescription(String desc) {
        description.intro = desc;
-   }
-   
-   /** Sets the tutorial's syntax */
-   public void setSyntax(String syntax) {
-       description.syntax = syntax;
-   }
-   
-   /** Sets the tutorial's example code */
-   public void setExampleCode(String code) {
+       description.syntax = syn;
        description.exampleCode = code;
-   }
-   
-   /** Sets the tutorial's example output */
-   public void setExampleOutput(String output) {
        description.exampleOutput = output;
+       tryItYourself = tryIt;
    }
 
    /**
