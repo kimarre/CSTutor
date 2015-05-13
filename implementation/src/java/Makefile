@@ -69,6 +69,7 @@ doc:
 
 doc7:		
 		javadoc -private -d .javadoc -doctitle "CSTutor Prototype" -windowtitle "CSTutor Prototype" -overview CSTutor/View/overview.html $(JAVA)
+		rm -rf ../../../design/javadoc
 		mv .javadoc ../../../design/javadoc
 
 
