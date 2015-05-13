@@ -2,7 +2,7 @@ package CSTutor.Model.Chat.Server;
 
 import java.rmi.*;
 
-import CSTutor.Model.Chat.Client.ClientIF;
+import CSTutor.Model.Chat.Client.*;
 
 /**
  * An interface for the server class.

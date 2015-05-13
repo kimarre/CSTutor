@@ -42,14 +42,13 @@ public class ChatBar extends JPanel {
 	private void initComponents() {
 		
 		try {
-			chatOverlay = new ChatOverlay();
+			chatOverlay = new ChatOverlay(this);
 		} catch (MalformedURLException | RemoteException | NotBoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		box = new ChatBox(chatOverlay);
 		online = new Online(new Student());
+		box = new ChatBox(chatOverlay);
 		box.setVisible(false);
 		online.setVisible(false);
 		JPanel butPanel = new JPanel();
