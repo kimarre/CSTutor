@@ -24,9 +24,9 @@ public class TutorialTrack {
           + " in the order of:<br>     1. starting condition;<br>     2. condition "
           + "to exit the loop;<br>     3. post loop increment";
         
-        String syn = "for (int i=start; i<upperLimit; i++) {<br>   ...<br>}";
+        String syn = "for (int i=start; i&#60;upperLimit; i++) {<br>&#32;&#32;&#32;...<br>}";
         String output = "Hello world<br>Hello world<br>Hello world<br>Hello world<br>Hello world";
-        String code = "for (int i=0; i<5; i++) {<br>    printf(\"Hello world\\n\");<br>}";
+        String code = "for (int i=0; i&#60;5; i++) {<br>&#32;&#32;&#32;printf(\"Hello world\\n\");<br>}";
         String tryIt = "Write a program that outputs every multiple of 5 from 0 to 25. (ex. 0 5 10 15 20 15)";
         
         first.setAll(newTitle, desc, syn, output, code, tryIt);
