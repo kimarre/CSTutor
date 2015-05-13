@@ -1,5 +1,6 @@
 package CSTutor.Model.Progress;
 
+
 /****
  * Class Class is a data structure that represents a real-life class
  * taught by an instructor. Class Class provides methods to get the name of
@@ -36,6 +37,18 @@ public class Class
     public void getSections()
     {
         System.out.println("In Class.getSections");
+    }
+    
+    /**
+     * Returns if the names of the classes are the same.
+     */
+    public boolean equals(Class cl)
+    {
+        if(cl.toString().equals(name))
+        {
+            return true;
+        }
+        return false;
     }
 
 }
