@@ -54,7 +54,7 @@ public class Overview extends JFrame implements Observer {
         }*/
 
     	try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+            UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (InstantiationException ex) {
