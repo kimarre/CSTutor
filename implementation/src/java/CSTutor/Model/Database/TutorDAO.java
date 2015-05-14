@@ -107,7 +107,7 @@ public class TutorDAO {
     * @param tryitYourself the try it yourself text for the tutorial
     * @param hasSeen whether the tutorial has been seen, yes/no.
     */
-   public static void addTutorial(int id, String title, String description,
+   public static void addTutorialData(int id, String title, String description,
     String syntax, String exampleCode, String tryitYourself, String hasSeen) {
       try {
          PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO TutorialData VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
@@ -129,7 +129,7 @@ public class TutorDAO {
     * @param id the identifier for the tutorial
     * @return Map of columns to values, or null if not found
     */
-   public static Map<String, String> getTutorial(int id) {
+   public static Map<String, String> getTutorialData(int id) {
       try {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM TutorialData WHERE id=?");
          s.setInt(1, id);
@@ -141,60 +141,45 @@ public class TutorDAO {
          }
          s.close();
          return data;
-      } catch(Exception e) { // tutorial not in db
+      } catch(Exception e) { // tutorial data not in db
          return null;
       }
    }
 
    /**
-    * Get a list of class names.
+    * Get list of Pages for the specified tutorial
     *
-    * @return List of class names.
+    * @return List of Pages
     */
-   public static List<String> getClasses() {
-      List<String> classes = new ArrayList<String>();
+   public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
+      List<CSTutor.Model.Manager.Page> pages = new ArrayList<CSTutor.Model.Manager.Page>();
+      CSTutor.Model.Manager.Page p;
       try {
-        Statement s = conn.createStatement();
-        ResultSet r = s.executeQuery("SELECT name FROM classes;");
-        while (r.next()) {
-          classes.add(r.getString("name"));
-        }
-        s.close();
-        return classes;
-      } catch(Exception e) {
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
-      }
-   }
-
-   /**
-    * Get a list of section numbers for a class.
-    *
-    * @param className Name of the class for which to look up sections.
-    * @return List of section numbers (as a String)
-    */
-   public static List<String> getSections(String className) {
-      try {
-         Statement s = conn.createStatement();
-         ResultSet r = s.executeQuery(String.format(
-          "SELECT sectionNum FROM sections WHERE className = \"%s\";", className));
-         List<String> sections = new ArrayList<String>();
-         while (r.next()) {
-           sections.add(r.getString("sectionNum"));
+         PreparedStatement s = conn.prepareStatement(
+          "SELECT * FROM Pages WHERE tutorialName=? AND unitName=? AND sectionName=? AND className=?");
+         List<String> values = Arrays.asList(tutorial.name, tutorial.parent.name,
+          tutorial.parent.parent.name, tutorial.parent.parent.parent.name);
+         for (int i = 0; i < values.size(); i++) {
+            s.setString(i+1, values.get(i));
          }
-         return sections;
-      } catch(Exception e) {
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
+         ResultSet r = s.executeQuery();
+         while (r.next()) {
+            p = new CSTutor.Model.Manager.Page(r.getString("name"), tutorial);
+            pages.add(p);
+         }
+         s.close();
+         return pages;
+      } catch(Exception e) { // tutorial not in db
+         return pages;
       }
    }
 
    /**
     * Get class hierarchy from database.
     *
-    * @return List of list of strings representing class hierarchy from database.
+    * @return List of classes
     */
-   public static List<CSTutor.Model.Manager.Class> getClassHierarchy() {
+   /*public static List<CSTutor.Model.Manager.Class> getClasses() {
       List<CSTutor.Model.Manager.Class> classes = new ArrayList<CSTutor.Model.Manager.Class>();
       CSTutor.Model.Manager.Class c;
       try {
@@ -206,6 +191,28 @@ public class TutorDAO {
          }
          s.close();
          return classes;
+
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1); return null;
+      }
+   }*/
+
+   /**
+    * Get a list of class names.
+    *
+    * @return List of class names.
+    */
+   public static List<String> getClassNames() {
+      List<String> classes = new ArrayList<String>();
+      try {
+        Statement s = conn.createStatement();
+        ResultSet r = s.executeQuery("SELECT name FROM classes;");
+        while (r.next()) {
+          classes.add(r.getString("name"));
+        }
+        s.close();
+        return classes;
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;

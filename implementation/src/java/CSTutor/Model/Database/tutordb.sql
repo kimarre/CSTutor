@@ -1,23 +1,42 @@
 CREATE TABLE IF NOT EXISTS Classes (
-   name TEXT PRIMARY KEY,
+   className TEXT PRIMARY KEY,
    accessLevel TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Sections (
-   className TEXT,
    sectionName TEXT,
+   className TEXT,
    professor TEXT,
-   FOREIGN KEY(className) REFERENCES Classes(name),
+   FOREIGN KEY(className) REFERENCES Classes(className),
    FOREIGN KEY(professor) REFERENCES Users(username),
-   PRIMARY KEY(className, sectionNum)
+   PRIMARY KEY(sectionNum, className)
 );
 
 CREATE TABLE IF NOT EXISTS Units (
-   name TEXT,
+   unitName TEXT,
+   sectionName TEXT,
    className TEXT,
-   sectionNum INTEGER,
-   FOREIGN KEY(className, sectionNum) REFERENCES Sections(className, sectionNum)
-   PRIMARY KEY(name, className, sectionNum)
+   FOREIGN KEY(sectionName, className) REFERENCES Sections(sectionName, className),
+   PRIMARY KEY(name, sectionName, className)
+);
+
+CREATE TABLE IF NOT EXISTS Tutorials (
+   tutorialName TEXT,
+   unitName TEXT,
+   sectionName TEXT,
+   className TEXT,
+   FOREIGN KEY(unitName, sectionName, className) REFERENCES Units(unitName, sectionName, className),
+   PRIMARY KEY(name, unitName, sectionName, className)
+);
+
+CREATE TABLE IF NOT Exists Pages (
+   pageName TEXT,
+   tutorialName TEXT,
+   unitName TEXT,
+   sectionName TEXT,
+   className TEXT,
+   FOREIGN KEY(tutorialName, unitName, sectionName, className) REFERENCES Tutorials(tutorialName, unitName, sectionName, className),
+   PRIMARY KEY(name, tutorialName, unitName, className, sectionName)
 );
 
 CREATE TABLE IF NOT EXISTS Quizzes (
@@ -61,35 +80,3 @@ REPLACE INTO classes(name) VALUES
    ("CSC 357"),
    ("CSC 365"),
    ("CSC 378");
-
-REPLACE INTO sections(className, sectionNum) VALUES
-   ("CSC 101", 1),
-   ("CSC 101", 2),
-   ("CSC 101", 3),
-   ("CSC 101", 4),
-   ("CSC 101", 5),
-   ("CSC 102", 1),
-   ("CSC 102", 2),
-   ("CSC 102", 3),
-   ("CSC 102", 4),
-   ("CSC 102", 5),
-   ("CSC 103", 1),
-   ("CSC 103", 2),
-   ("CSC 103", 3),
-   ("CSC 103", 4),
-   ("CSC 103", 5),
-   ("CSC 121", 1),
-   ("CSC 121", 2),
-   ("CSC 121", 3),
-   ("CSC 121", 4),
-   ("CSC 121", 5),
-   ("CSC 225", 1),
-   ("CSC 225", 2),
-   ("CSC 225", 3),
-   ("CSC 225", 4),
-   ("CSC 225", 5),
-   ("CSC 300", 1),
-   ("CSC 300", 2),
-   ("CSC 300", 3),
-   ("CSC 300", 4),
-   ("CSC 300", 5);
