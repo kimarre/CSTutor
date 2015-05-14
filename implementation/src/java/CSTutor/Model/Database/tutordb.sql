@@ -1,11 +1,14 @@
 CREATE TABLE IF NOT EXISTS Classes (
-   name TEXT PRIMARY KEY
+   name TEXT PRIMARY KEY,
+   accessLevel TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Sections (
    className TEXT,
-   sectionNum INTEGER,
+   sectionName TEXT,
+   professor TEXT,
    FOREIGN KEY(className) REFERENCES Classes(name),
+   FOREIGN KEY(professor) REFERENCES Users(username),
    PRIMARY KEY(className, sectionNum)
 );
 

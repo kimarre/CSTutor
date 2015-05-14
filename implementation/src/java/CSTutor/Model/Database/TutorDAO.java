@@ -11,26 +11,26 @@ import java.util.*;
  * @author dlgordon
  */
 public class TutorDAO {
-  private static final String db_path = "tutordb.db";
-  private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
-  private static Connection c = connect();
+   private static final String db_path = "tutordb.db";
+   private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
+   private static Connection conn = connect();
    
-  /**
-  * Connect to the db
-  * 
-  */
-  private static Connection connect() {
-    try {
-      Class.forName("org.sqlite.JDBC");
-        Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
-        init_db(c);
-        return c;
+   /**
+   * Connect to the db
+   * 
+   */
+   private static Connection connect() {
+      try {
+         Class.forName("org.sqlite.JDBC");
+         Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
+         init_db(c);
+         return c;
       } catch(Exception e) {
-        System.err.println("Couldn't open db connection.");
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(1); return null;
+         System.err.println("Couldn't open db connection.");
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1); return null;
       }
-    }  
+   }  
    
    /**
     * Initialize the database by running the SQL statements in tutordb.sql.
@@ -43,7 +43,7 @@ public class TutorDAO {
       java.io.InputStream input = TutorDAO.class.getResourceAsStream(init_db_path);
       java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";\n*");
       while (scan.hasNext()) {
-        s.executeUpdate(scan.next());
+         s.executeUpdate(scan.next());
       }
       s.close();
    }
@@ -60,13 +60,16 @@ public class TutorDAO {
    public static void addUser(String username, String hash, String firstname,
     String lastname, String permissions) {
       try {
-         Statement s = c.createStatement();
-         String statement = "INSERT OR IGNORE INTO Users VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\")";
-         s.executeUpdate(String.format(statement, username, hash, firstname, lastname, permissions));
+         PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Users VALUES (?, ?, ?, ?, ?)");
+         List<String> values = Arrays.asList(username, hash, firstname, lastname, permissions);
+         for (int i = 0; i < values.size(); i++) {
+            s.setString(i+1, values.get(i));
+         }
+         s.executeUpdate();
          s.close();
       } catch(Exception e) {
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(1);
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
       }
    }
 
@@ -78,9 +81,9 @@ public class TutorDAO {
     */
    public static Map<String, String> getUser(String username) {
       try {
-         Statement s = c.createStatement();
-         String statement = "SELECT * FROM Users WHERE username=\"" + username + "\"";
-         ResultSet r = s.executeQuery(statement);
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
+         s.setString(1, username);
+         ResultSet r = s.executeQuery();
          Map<String, String> user = new HashMap<String, String>();
          List<String> cols = Arrays.asList("username", "hash", "firstname", "lastname", "instructor");
          for (String col : cols) {
@@ -89,7 +92,7 @@ public class TutorDAO {
          s.close();
          return user;
       } catch(Exception e) { // user not in db
-        return null;
+         return null;
       }
    }
 
@@ -107,13 +110,16 @@ public class TutorDAO {
    public static void addTutorial(int id, String title, String description,
     String syntax, String exampleCode, String tryitYourself, String hasSeen) {
       try {
-         Statement s = c.createStatement();
-         String statement = "INSERT OR IGNORE INTO TutorialData VALUES (%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")";
-         s.executeUpdate(String.format(id, title, description, syntax, exampleCode, tryitYourself, hasSeen));
+         PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO TutorialData VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+         List<String> values = Arrays.asList(String.valueOf(id), title, description, syntax, exampleCode, tryitYourself, hasSeen);
+         for (int i = 0; i < values.size(); i++) {
+            s.setString(i+1, values.get(i));
+         }
+         s.executeUpdate();
          s.close();
       } catch(Exception e) {
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(1);
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
       }
    }
 
@@ -125,9 +131,9 @@ public class TutorDAO {
     */
    public static Map<String, String> getTutorial(int id) {
       try {
-         Statement s = c.createStatement();
-         String statement = "SELECT * FROM TutorialData WHERE id=\"" + id + "\"";
-         ResultSet r = s.executeQuery(statement);
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM TutorialData WHERE id=?");
+         s.setInt(1, id);
+         ResultSet r = s.executeQuery();
          Map<String, String> data = new HashMap<String, String>();
          List<String> cols = Arrays.asList("id", "title", "description", "syntax", "exampleCode", "tryitYourself", "hasSeen");
          for (String col : cols) {
@@ -136,8 +142,9 @@ public class TutorDAO {
          s.close();
          return data;
       } catch(Exception e) { // tutorial not in db
-        return null;
+         return null;
       }
+   }
 
    /**
     * Get a list of class names.
@@ -147,15 +154,16 @@ public class TutorDAO {
    public static List<String> getClasses() {
       List<String> classes = new ArrayList<String>();
       try {
-        Statement s = c.createStatement();
+        Statement s = conn.createStatement();
         ResultSet r = s.executeQuery("SELECT name FROM classes;");
         while (r.next()) {
           classes.add(r.getString("name"));
         }
+        s.close();
         return classes;
       } catch(Exception e) {
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(1); return null;
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1); return null;
       }
    }
 
@@ -167,7 +175,7 @@ public class TutorDAO {
     */
    public static List<String> getSections(String className) {
       try {
-         Statement s = c.createStatement();
+         Statement s = conn.createStatement();
          ResultSet r = s.executeQuery(String.format(
           "SELECT sectionNum FROM sections WHERE className = \"%s\";", className));
          List<String> sections = new ArrayList<String>();
@@ -176,8 +184,8 @@ public class TutorDAO {
          }
          return sections;
       } catch(Exception e) {
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(1); return null;
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1); return null;
       }
    }
 
@@ -186,10 +194,21 @@ public class TutorDAO {
     *
     * @return List of list of strings representing class hierarchy from database.
     */
-   public static List<List<String>> getClassHierarchy() throws Exception {
-      Statement s = c.createStatement();
-      List<String> classes = getClasses();
-      List<List<String>> hierarchy = null;
-      return hierarchy;
+   public static List<CSTutor.Model.Manager.Class> getClassHierarchy() {
+      List<CSTutor.Model.Manager.Class> classes = new ArrayList<CSTutor.Model.Manager.Class>();
+      CSTutor.Model.Manager.Class c;
+      try {
+         Statement s = conn.createStatement();
+         ResultSet r = s.executeQuery("SELECT name FROM classes;");
+         while (r.next()) {
+            c = new CSTutor.Model.Manager.Class(r.getString("name"));
+            classes.add(c);
+         }
+         s.close();
+         return classes;
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1); return null;
+      }
    }
 }
