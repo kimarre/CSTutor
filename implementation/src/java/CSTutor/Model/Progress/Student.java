@@ -54,4 +54,13 @@ public class Student
         System.out.println("In Student.addClass");
         enrolledClasses.add(cl);
     }
+    
+    public boolean equals(Student student)
+    {
+        if(student.toString().equals(name))
+        {
+            return true;
+        }
+        return false;
+    }
 }

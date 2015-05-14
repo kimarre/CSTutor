@@ -1,5 +1,6 @@
 package CSTutor.Model.Progress;
 
+
 /****
  * Class TutorialData is a data structure that represents a tutorial listed
  * under a class. Class TutorialData provides methods to get the name of
@@ -29,6 +30,15 @@ public class TutorialData
     public String toString()
     {
         return name;
+    }
+    
+    public boolean equals(TutorialData tutorial)
+    {
+        if(tutorial.toString().equals(name))
+        {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -3,7 +3,6 @@ package CSTutor.Model.Progress;
 import CSTutor.Model.Database.*;
 
 import java.util.*;
-import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -21,12 +20,15 @@ public class InstructorModel
     private JList<TutorialData> tutorialList;
     private JList<Class> classList;
     private JList<Student> studentList;
+    private DefaultListModel<TutorialData> tutorialsModel;
+    private DefaultListModel<Student> studentModel;
+    private DefaultListModel<Class> classesModel;
     
     public InstructorModel()
     {
         retrieveClassesData();
         retrieveStudentData();
-        retrieveTutorialData();
+        retrieveTutorialData(); 
     }
     
     /**
@@ -40,7 +42,7 @@ public class InstructorModel
         System.out.println("In InstructorModel.retrieveTutorialData");
         
         /* Tutorials list */
-        DefaultListModel<TutorialData> tutorialsModel
+        tutorialsModel
             = new DefaultListModel<TutorialData>(); /* List model for the JList */
         
         /* Add sample elements to the list */
@@ -74,7 +76,7 @@ public class InstructorModel
         /*
          * List model for the JList.
          */
-        DefaultListModel<Student> studentModel
+        studentModel
             = new DefaultListModel<Student>(); 
         
         /*
@@ -122,32 +124,23 @@ public class InstructorModel
      */
     private void retrieveClassesData()
     {
-        List<String> classes = TutorDAO.getClasses();
-        
-        //JList<String> classStrList = new JList<String>(classesStr);
         System.out.println("In InstructorModel.retrieveClassesData");
         
         /*
          * List model for the JList.
          */
-        DefaultListModel<Class> classesModel = new DefaultListModel<Class>();
-        
-        for(int i=0; i<classes.size(); i++)
-        {
-            classesModel.addElement(new Class(classes.get(i)));
-        }
-        
+        classesModel = new DefaultListModel<Class>();
         
         /*
          * Add sample elements to the list.
          */
-        //classesModel.addElement(new Class("CPE 123"));
-        //classesModel.addElement(new Class("CPE 101"));
-        //classesModel.addElement(new Class("CPE 102"));
-        //classesModel.addElement(new Class("CPE 103"));
-        //classesModel.addElement(new Class("CPE 357"));
-        //classesModel.addElement(new Class("CPE 305"));
-        //classesModel.addElement(new Class("CPE 308"));
+        classesModel.addElement(new Class("CPE 123"));
+        classesModel.addElement(new Class("CPE 101"));
+        classesModel.addElement(new Class("CPE 102"));
+        classesModel.addElement(new Class("CPE 103"));
+        classesModel.addElement(new Class("CPE 357"));
+        classesModel.addElement(new Class("CPE 305"));
+        classesModel.addElement(new Class("CPE 308"));
         classList = new JList<Class>(classesModel);
     }
     
@@ -173,6 +166,42 @@ public class InstructorModel
     public JList<Class> getClassList()
     {
         return classList;
+    }
+    
+    /**
+     * Returns a list of classes that match the search string.
+     */
+    public void searchForClass(String searchString)
+    {
+        if(classesModel.contains(new Class(searchString)))
+        {
+            int index = classesModel.indexOf(new Class(searchString));
+            System.out.println(index);
+        }
+    }
+    
+    /**
+     * Returns a list of students that match the search string.
+     */
+    public void searchForStudent(String searchString)
+    {
+        if(studentModel.contains(new Student(searchString)))
+        {
+            int index = studentModel.indexOf(new Student(searchString));
+            System.out.println(index);
+        }
+    }
+    
+    /**
+     * Returns a list of students that match the search string.
+     */
+    public void searchForTutorial(String searchString)
+    {
+        if(tutorialsModel.contains(new TutorialData(searchString)))
+        {
+            int index = tutorialsModel.indexOf(new TutorialData(searchString));
+            System.out.println(index);
+        }
     }
 
 }
