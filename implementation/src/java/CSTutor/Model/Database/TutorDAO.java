@@ -49,7 +49,7 @@ public class TutorDAO {
    }
 
    /**
-    * Given a user, update the user if already exists or create if not.
+    * Add new user
     *
     * @param username user's username
     * @param hash user's hash
@@ -71,7 +71,7 @@ public class TutorDAO {
    }
 
    /**
-    * Get user info (as column/value map) by username.
+    * Get user info (as column/value map) by username
     *
     * @param username user's username
     * @return Map of columns to values, or null if not found.
@@ -94,30 +94,50 @@ public class TutorDAO {
    }
 
    /**
-    * Given a quiz, update the quiz if already exists or create if not.
+    * Add new tutorial 
     *
-    * @param id Quiz id
-    * @param quiz Content of the quiz
+    * @param id the identifier for the tutorial
+    * @param title the title for the tutorial
+    * @param description the description for the tutorial
+    * @param syntax the syntax for the tutorial
+    * @param exampleCode the example code for the tutorial
+    * @param tryitYourself the try it yourself text for the tutorial
+    * @param hasSeen whether the tutorial has been seen, yes/no.
     */
-   public static void upsertQuiz(int id, String quiz, String permissions, String owner) throws Exception {
-      Statement s = c.createStatement();
-      //s.executeUpdate(String.format(upsertQuiz_query, String.valueOf(id), quiz, permissions, owner));
-      s.close();
+   public static void addTutorial(int id, String title, String description,
+    String syntax, String exampleCode, String tryitYourself, String hasSeen) {
+      try {
+         Statement s = c.createStatement();
+         String statement = "INSERT OR IGNORE INTO TutorialData VALUES (%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\")";
+         s.executeUpdate(String.format(id, title, description, syntax, exampleCode, tryitYourself, hasSeen));
+         s.close();
+      } catch(Exception e) {
+        System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        System.exit(1);
+      }
    }
 
    /**
-    * Get quiz by id
+    * Get tutorial data (as column/value map) by id
     *
-    * @param id Quiz id
-    * @return Content of the quiz.
+    * @param id the identifier for the tutorial
+    * @return Map of columns to values, or null if not found
     */
-   public static String getQuiz(int id) throws Exception {
-      Statement s = c.createStatement();
-      //ResultSet r = s.executeQuery(String.format(getQuiz_query, String.valueOf(id)));
-      //String quiz = r.getString("name");
-      //s.close();
-      return null;//quiz;
-   }
+   public static Map<String, String> getTutorial(int id) {
+      try {
+         Statement s = c.createStatement();
+         String statement = "SELECT * FROM TutorialData WHERE id=\"" + id + "\"";
+         ResultSet r = s.executeQuery(statement);
+         Map<String, String> data = new HashMap<String, String>();
+         List<String> cols = Arrays.asList("id", "title", "description", "syntax", "exampleCode", "tryitYourself", "hasSeen");
+         for (String col : cols) {
+            data.put(col, r.getString(col));
+         }
+         s.close();
+         return data;
+      } catch(Exception e) { // tutorial not in db
+        return null;
+      }
 
    /**
     * Get a list of class names.

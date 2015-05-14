@@ -32,6 +32,17 @@ CREATE TABLE IF NOT EXISTS Users (
    permissions TEXT
 );
 
+CREATE TABLE IF NOT EXISTS TutorialData (
+   id INTEGER PRIMARY KEY,
+   title TEXT,
+   description TEXT,
+   syntax TEXT,
+   exampleCode TEXT,
+   exampleOutput TEXT,
+   tryItYourself TEXT,
+   hasSeen TEXT
+);
+
 REPLACE INTO classes(name) VALUES
    ("CSC 101"),
    ("CSC 102"),
