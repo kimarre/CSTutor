@@ -1,12 +1,22 @@
 package CSTutor.Model.Database;
 
-import java.nio.file.*;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import CSTutor.Model.Manager.Class.ClassAccessLevel;
 
 /**
  * CSTutor Data Access Object.
- * Interfaces with the sqlite database.
+ * Interfaces with the sqlite database. Contains methods for getting and setting
+ * values to and from the database. Connection to database is initialized
+ * at startup.
  *
  * @author dlgordon
  */
@@ -14,10 +24,31 @@ public class TutorDAO {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
+   private static List<CSTutor.Model.Manager.Class> classes = getClasses();
+
+   /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
+      for (CSTutor.Model.Manager.Class c : classes) {
+         System.out.println("<" + c.name + ">");
+         for (CSTutor.Model.Manager.Section s : c.sections) {
+            System.out.println("  <" + s.name + ">");
+            for (CSTutor.Model.Manager.Unit u : s.units) {
+               System.out.println("    <" + u.name + ">");
+               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {
+                  System.out.println("      <" + t.name + ">");
+                  for (CSTutor.Model.Manager.Page p : t.pages) {
+                     System.out.println("        <" + p.name + ">");
+                  }
+               }
+            }
+         }
+      }
+      return 0;
+   }*/
    
    /**
-   * Connect to the db
-   * 
+   * Connect to the database
+   *
+   * @return Connection to the database
    */
    private static Connection connect() {
       try {
@@ -36,7 +67,7 @@ public class TutorDAO {
     * Initialize the database by running the SQL statements in tutordb.sql.
     * Create tables if they don't exist, and populate with initial data.
     *
-    * @param con connection to the db
+    * @param con Connection to the database
     */
    private static void init_db(Connection con) throws Exception { 
       Statement s = con.createStatement();
@@ -48,6 +79,9 @@ public class TutorDAO {
       s.close();
    }
 
+   
+/*** User methods *********************************************************************************/
+
    /**
     * Add new user
     *
@@ -55,13 +89,13 @@ public class TutorDAO {
     * @param hash user's hash
     * @param firstname user's first name
     * @param lastname user's last name
-    * @param permissions the permission identifier (ie instructor) of the user
+    * @param accessLevel the access identifier (Guest, Student, Assistant, Professor) of the user
     */
    public static void addUser(String username, String hash, String firstname,
-    String lastname, String permissions) {
+    String lastname, String accessLevel) {
       try {
          PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Users VALUES (?, ?, ?, ?, ?)");
-         List<String> values = Arrays.asList(username, hash, firstname, lastname, permissions);
+         List<String> values = Arrays.asList(username, hash, firstname, lastname, accessLevel);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
@@ -96,22 +130,20 @@ public class TutorDAO {
       }
    }
 
+
+/*** TutorialData methods *************************************************************************/
+
    /**
     * Add new tutorial 
     *
-    * @param id the identifier for the tutorial
-    * @param title the title for the tutorial
-    * @param description the description for the tutorial
-    * @param syntax the syntax for the tutorial
-    * @param exampleCode the example code for the tutorial
-    * @param tryitYourself the try it yourself text for the tutorial
-    * @param hasSeen whether the tutorial has been seen, yes/no.
+    * @param tutorial the Tutorial to add
     */
-   public static void addTutorialData(int id, String title, String description,
-    String syntax, String exampleCode, String tryitYourself, String hasSeen) {
+   public static void addTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
       try {
          PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO TutorialData VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-         List<String> values = Arrays.asList(String.valueOf(id), title, description, syntax, exampleCode, tryitYourself, hasSeen);
+         List<String> values = Arrays.asList(String.valueOf(tutorial.pageId), tutorial.title,
+          tutorial.description.intro, tutorial.description.syntax, tutorial.description.exampleCode,
+          tutorial.description.exampleOutput, tutorial.tryItYourself);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
@@ -124,21 +156,19 @@ public class TutorDAO {
    }
 
    /**
-    * Get tutorial data (as column/value map) by id
+    * Get TutorialData by id
     *
-    * @param id the identifier for the tutorial
-    * @return Map of columns to values, or null if not found
+    * @param id the identifier for the TutorialData
+    * @return specified TutorialData object, or null if not found
     */
-   public static Map<String, String> getTutorialData(int id) {
+   public static CSTutor.Model.Tutorial.TutorialData getTutorialData(int id) {
       try {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM TutorialData WHERE id=?");
          s.setInt(1, id);
          ResultSet r = s.executeQuery();
-         Map<String, String> data = new HashMap<String, String>();
-         List<String> cols = Arrays.asList("id", "title", "description", "syntax", "exampleCode", "tryitYourself", "hasSeen");
-         for (String col : cols) {
-            data.put(col, r.getString(col));
-         }
+         CSTutor.Model.Tutorial.TutorialData data = new CSTutor.Model.Tutorial.TutorialData(
+          id, r.getString("title"), r.getString("description"), r.getString("syntax"),
+          r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"));
          s.close();
          return data;
       } catch(Exception e) { // tutorial data not in db
@@ -146,9 +176,13 @@ public class TutorDAO {
       }
    }
 
+
+/*** Page methods *********************************************************************************/
+
    /**
     * Get list of Pages for the specified Tutorial
     *
+    * @param tutorial the Tutorial to look up Pages for
     * @return List of Pages
     */
    public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
@@ -174,9 +208,13 @@ public class TutorDAO {
       }
    }
 
+
+/*** Tutorial methods *****************************************************************************/
+
    /**
     * Get list of Tutorials for the specified Unit
     *
+    * @param unit the Unit to look up Tutorials for
     * @return List of Tutorials
     */
    public static List<CSTutor.Model.Manager.Tutorial> getTutorials(CSTutor.Model.Manager.Unit unit) {
@@ -202,9 +240,13 @@ public class TutorDAO {
       }
    }
 
+
+/*** Unit methods *********************************************************************************/
+
    /**
     * Get list of Units for the specified Section
     *
+    * @param section the Section to look up Units for
     * @return List of Units
     */
    public static List<CSTutor.Model.Manager.Unit> getUnits(CSTutor.Model.Manager.Section section) {
@@ -230,9 +272,12 @@ public class TutorDAO {
       }
    }
 
+/*** Section methods ******************************************************************************/
+
    /**
     * Get list of Sections for the specified Class
     *
+    * @param clas the Class to look up Sections for
     * @return List of Sections
     */
    public static List<CSTutor.Model.Manager.Section> getSections(CSTutor.Model.Manager.Class clas) {
@@ -240,14 +285,14 @@ public class TutorDAO {
       CSTutor.Model.Manager.Section sec;
       try {
          PreparedStatement s = conn.prepareStatement(
-          "SELECT * FROM Units WHERE className=?");
+          "SELECT * FROM Sections WHERE className=?");
          List<String> values = Arrays.asList(clas.name);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
          ResultSet r = s.executeQuery();
          while (r.next()) {
-            sec = new CSTutor.Model.Manager.Section(r.getString("unitName"), clas);
+            sec = new CSTutor.Model.Manager.Section(r.getString("sectionName"), clas);
             sec.units = getUnits(sec);
             sections.add(sec);
          }
@@ -259,6 +304,28 @@ public class TutorDAO {
    }
 
 
+/*** Class methods ********************************************************************************/
+
+   /**
+    * Determine the ClassAccessLevel enum for the access string
+    *
+    * @param access string representing the access level (Guest, Student, Assistant, Professor)
+    * @return ClassAccessLevel enum
+    */
+   private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
+      switch (access) {
+         case "Guest":
+            return ClassAccessLevel.Guest;
+         case "Student":
+            return ClassAccessLevel.Student;
+         case "Assistant":
+            return ClassAccessLevel.Assistant;
+         case "Professor":
+            return ClassAccessLevel.Professor;
+      }
+      return null;
+   }
+
    /**
     * Get a list of classes from the database
     *
@@ -269,10 +336,11 @@ public class TutorDAO {
       CSTutor.Model.Manager.Class c;
       try {
          Statement s = conn.createStatement();
-         ResultSet r = s.executeQuery("SELECT name FROM classes;");
+         ResultSet r = s.executeQuery("SELECT * FROM classes;");
          while (r.next()) {
-            c = new CSTutor.Model.Manager.Class(r.getString("name"));
+            c = new CSTutor.Model.Manager.Class(r.getString("className"));
             c.sections = getSections(c);
+            c.access = getAccessEnum(r.getString("accessLevel"));
             classes.add(c);
          }
          s.close();
@@ -292,9 +360,9 @@ public class TutorDAO {
       List<String> classes = new ArrayList<String>();
       try {
         Statement s = conn.createStatement();
-        ResultSet r = s.executeQuery("SELECT name FROM classes;");
+        ResultSet r = s.executeQuery("SELECT className FROM classes;");
         while (r.next()) {
-          classes.add(r.getString("name"));
+          classes.add(r.getString("className"));
         }
         s.close();
         return classes;

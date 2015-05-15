@@ -26,7 +26,7 @@ public class TutorialData {
    public String console;
    
    /** Unique identifier for the page for the database */
-   int pageId;
+   public int pageId;
    
    /** Tracker for Progress that indicates if a tutorial has been seen or not. */
    boolean hasSeen;
