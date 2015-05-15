@@ -36,8 +36,9 @@ public class TutorDAO {
    }*/
    
    /**
-   * Connect to the db
-   * 
+   * Connect to the database
+   *
+   * @return Connection to the database
    */
    private static Connection connect() {
       try {
@@ -56,7 +57,7 @@ public class TutorDAO {
     * Initialize the database by running the SQL statements in tutordb.sql.
     * Create tables if they don't exist, and populate with initial data.
     *
-    * @param con connection to the db
+    * @param con Connection to the database
     */
    private static void init_db(Connection con) throws Exception { 
       Statement s = con.createStatement();
@@ -125,7 +126,7 @@ public class TutorDAO {
    /**
     * Add new tutorial 
     *
-    * @param tutorial the tutorial to add
+    * @param tutorial the Tutorial to add
     */
    public static void addTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
       try {
@@ -147,7 +148,7 @@ public class TutorDAO {
    /**
     * Get TutorialData by id
     *
-    * @param id the identifier for the tutorial
+    * @param id the identifier for the TutorialData
     * @return specified TutorialData object, or null if not found
     */
    public static CSTutor.Model.Tutorial.TutorialData getTutorialData(int id) {
@@ -166,11 +167,12 @@ public class TutorDAO {
    }
 
 
-/*** Class hierarchy methods **********************************************************************/
+/*** Page methods *********************************************************************************/
 
    /**
     * Get list of Pages for the specified Tutorial
     *
+    * @param tutorial the Tutorial to look up Pages for
     * @return List of Pages
     */
    public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
@@ -196,9 +198,13 @@ public class TutorDAO {
       }
    }
 
+
+/*** Tutorial methods *****************************************************************************/
+
    /**
     * Get list of Tutorials for the specified Unit
     *
+    * @param unit the Unit to look up Tutorials for
     * @return List of Tutorials
     */
    public static List<CSTutor.Model.Manager.Tutorial> getTutorials(CSTutor.Model.Manager.Unit unit) {
@@ -224,9 +230,13 @@ public class TutorDAO {
       }
    }
 
+
+/*** Unit methods *********************************************************************************/
+
    /**
     * Get list of Units for the specified Section
     *
+    * @param section the Section to look up Units for
     * @return List of Units
     */
    public static List<CSTutor.Model.Manager.Unit> getUnits(CSTutor.Model.Manager.Section section) {
@@ -252,9 +262,12 @@ public class TutorDAO {
       }
    }
 
+/*** Section methods ******************************************************************************/
+
    /**
     * Get list of Sections for the specified Class
     *
+    * @param clas the Class to look up Sections for
     * @return List of Sections
     */
    public static List<CSTutor.Model.Manager.Section> getSections(CSTutor.Model.Manager.Class clas) {
@@ -279,6 +292,9 @@ public class TutorDAO {
          return sections;
       }
    }
+
+
+/*** Class methods ********************************************************************************/
 
    /**
     * Determine the ClassAccessLevel enum for the access string
