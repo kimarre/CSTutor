@@ -2,6 +2,8 @@ package CSTutor.View.User;
 
 import CSTutor.Model.User.*;
 
+import javax.swing.*;
+
 /**
  *
  * @author Kyle Reis
@@ -114,7 +116,14 @@ public class RegisterGUI extends javax.swing.JFrame {
         register = new CSTutor.Model.User.Register(users);
         boolean valid = register.createUser(fisrtNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), false);
         System.out.println("User Registered: " + valid);
-        this.setVisible(false);
+        if (valid)
+        {
+            this.setVisible(false);
+        } else {
+            JOptionPane.showConfirmDialog(null,
+                    "Invalid email entered",
+                    "Validation error", JOptionPane.OK_CANCEL_OPTION);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_SubmitAction
 
