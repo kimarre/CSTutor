@@ -99,19 +99,14 @@ public class TutorDAO {
    /**
     * Add new tutorial 
     *
-    * @param id the identifier for the tutorial
-    * @param title the title for the tutorial
-    * @param description the description for the tutorial
-    * @param syntax the syntax for the tutorial
-    * @param exampleCode the example code for the tutorial
-    * @param tryitYourself the try it yourself text for the tutorial
-    * @param hasSeen whether the tutorial has been seen, yes/no.
+    * @param tutorial the tutorial to add
     */
-   public static void addTutorialData(int id, String title, String description,
-    String syntax, String exampleCode, String tryitYourself, String hasSeen) {
+   public static void addTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
       try {
          PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO TutorialData VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-         List<String> values = Arrays.asList(String.valueOf(id), title, description, syntax, exampleCode, tryitYourself, hasSeen);
+         List<String> values = Arrays.asList(String.valueOf(tutorial.pageId), tutorial.title,
+          tutorial.description.intro, tutorial.description.syntax, tutorial.description.exampleCode,
+          tutorial.description.exampleOutput, tutorial.tryItYourself);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
@@ -124,21 +119,19 @@ public class TutorDAO {
    }
 
    /**
-    * Get tutorial data (as column/value map) by id
+    * Get TutorialData by id
     *
     * @param id the identifier for the tutorial
-    * @return Map of columns to values, or null if not found
+    * @return specified TutorialData object, or null if not found
     */
-   public static Map<String, String> getTutorialData(int id) {
+   public static CSTutor.Model.Tutorial.TutorialData getTutorialData(int id) {
       try {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM TutorialData WHERE id=?");
          s.setInt(1, id);
          ResultSet r = s.executeQuery();
-         Map<String, String> data = new HashMap<String, String>();
-         List<String> cols = Arrays.asList("id", "title", "description", "syntax", "exampleCode", "tryitYourself", "hasSeen");
-         for (String col : cols) {
-            data.put(col, r.getString(col));
-         }
+         CSTutor.Model.Tutorial.TutorialData data = new CSTutor.Model.Tutorial.TutorialData(
+          id, r.getString("title"), r.getString("description"), r.getString("syntax"),
+          r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"));
          s.close();
          return data;
       } catch(Exception e) { // tutorial data not in db
@@ -258,7 +251,6 @@ public class TutorDAO {
       }
    }
 
-
    /**
     * Get a list of classes from the database
     *
@@ -269,9 +261,9 @@ public class TutorDAO {
       CSTutor.Model.Manager.Class c;
       try {
          Statement s = conn.createStatement();
-         ResultSet r = s.executeQuery("SELECT name FROM classes;");
+         ResultSet r = s.executeQuery("SELECT className FROM classes;");
          while (r.next()) {
-            c = new CSTutor.Model.Manager.Class(r.getString("name"));
+            c = new CSTutor.Model.Manager.Class(r.getString("className"));
             c.sections = getSections(c);
             classes.add(c);
          }
@@ -292,9 +284,9 @@ public class TutorDAO {
       List<String> classes = new ArrayList<String>();
       try {
         Statement s = conn.createStatement();
-        ResultSet r = s.executeQuery("SELECT name FROM classes;");
+        ResultSet r = s.executeQuery("SELECT className FROM classes;");
         while (r.next()) {
-          classes.add(r.getString("name"));
+          classes.add(r.getString("className"));
         }
         s.close();
         return classes;

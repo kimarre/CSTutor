@@ -26,7 +26,7 @@ public class TutorialData {
    public String console;
    
    /** Unique identifier for the page for the database */
-   int pageId;
+   public int pageId;
    
    /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
    RoadmapModule module;

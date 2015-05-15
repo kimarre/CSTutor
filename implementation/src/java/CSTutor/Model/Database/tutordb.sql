@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Sections (
    professor TEXT,
    FOREIGN KEY(className) REFERENCES Classes(className),
    FOREIGN KEY(professor) REFERENCES Users(username),
-   PRIMARY KEY(sectionNum, className)
+   PRIMARY KEY(sectionName, className)
 );
 
 CREATE TABLE IF NOT EXISTS Units (
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Units (
    sectionName TEXT,
    className TEXT,
    FOREIGN KEY(sectionName, className) REFERENCES Sections(sectionName, className),
-   PRIMARY KEY(name, sectionName, className)
+   PRIMARY KEY(unitName, sectionName, className)
 );
 
 CREATE TABLE IF NOT EXISTS Tutorials (
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Tutorials (
    sectionName TEXT,
    className TEXT,
    FOREIGN KEY(unitName, sectionName, className) REFERENCES Units(unitName, sectionName, className),
-   PRIMARY KEY(name, unitName, sectionName, className)
+   PRIMARY KEY(tutorialName, unitName, sectionName, className)
 );
 
 CREATE TABLE IF NOT Exists Pages (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT Exists Pages (
    sectionName TEXT,
    className TEXT,
    FOREIGN KEY(tutorialName, unitName, sectionName, className) REFERENCES Tutorials(tutorialName, unitName, sectionName, className),
-   PRIMARY KEY(name, tutorialName, unitName, className, sectionName)
+   PRIMARY KEY(pageName, tutorialName, unitName, className, sectionName)
 );
 
 CREATE TABLE IF NOT EXISTS Quizzes (
@@ -61,11 +61,10 @@ CREATE TABLE IF NOT EXISTS TutorialData (
    syntax TEXT,
    exampleCode TEXT,
    exampleOutput TEXT,
-   tryItYourself TEXT,
-   hasSeen TEXT
+   tryItYourself TEXT
 );
 
-REPLACE INTO classes(name) VALUES
+REPLACE INTO classes(className) VALUES
    ("CSC 101"),
    ("CSC 102"),
    ("CSC 103"),
