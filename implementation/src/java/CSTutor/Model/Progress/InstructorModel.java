@@ -131,7 +131,7 @@ public class InstructorModel
     private void retrieveClassesData()
     {
         System.out.println("In InstructorModel.retrieveClassesData");
-        List<String> dbClasses = TutorDAO.getClasses();
+        List<CSTutor.Model.Manager.Class> dbClasses = TutorDAO.getClasses();
         //String[] classesArr = (String[]) dbClasses.toArray();
         
         
@@ -144,7 +144,7 @@ public class InstructorModel
         
         for(int i=0; i<dbClasses.size(); i++)
         {
-            fullClassesModel.addElement(new Class(dbClasses.get(i)));
+            fullClassesModel.addElement(new Class(dbClasses.get(i).toString()));
         }
         
         classList = new JList<Class>(fullClassesModel);
