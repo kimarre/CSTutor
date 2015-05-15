@@ -1,5 +1,6 @@
 package CSTutor.Model.User;
 
+import CSTutor.Model.Database.TutorDAO;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
@@ -11,19 +12,6 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @author Kyle Reis
  */
 public class Register {
-    /**
-     * The user database
-     */
-    private UserDB database;
-
-    /**
-     * Creates the Register object.
-     * @param database the user database.
-     */
-    public Register(UserDB database)
-    {
-        this.database = database;
-    }
     /**
      * Validates that all of the needed information for a User was entered and
      * adds the user to the UserDB if all of the information was entered and
@@ -38,13 +26,13 @@ public class Register {
     post:
     database.users.length() > 0;
      */
-    public boolean createUser(String firstName, String lastName, String email, String pass, boolean instructor)
+    public static boolean createUser(String firstName, String lastName, String email, String pass, boolean instructor)
     {
         EmailValidator validator = EmailValidator.getInstance(false);
-        if (validator.isValid(email) && database.getUser(email) == null)
+        if (validator.isValid(email) && TutorDAO.getUser(email) == null)
         {
             User user = new User(firstName, lastName, email, pass, instructor);
-            database.addUser(user);
+            TutorDAO.addUser(firstName, lastName, email, user.getPassword().getHash(), String.valueOf(instructor));
             return true;
         } else {
             System.out.println("email already exists or is invalid");
