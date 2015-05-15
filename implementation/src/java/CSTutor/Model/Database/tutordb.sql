@@ -64,18 +64,81 @@ CREATE TABLE IF NOT EXISTS TutorialData (
    tryItYourself TEXT
 );
 
-REPLACE INTO classes(className) VALUES
-   ("CSC 101"),
-   ("CSC 102"),
-   ("CSC 103"),
-   ("CSC 121"),
-   ("CSC 225"),
-   ("CSC 300"),
-   ("CSC 305"),
-   ("CSC 307"),
-   ("CSC 308"),
-   ("CSC 309"),
-   ("CSC 349"),
-   ("CSC 357"),
-   ("CSC 365"),
-   ("CSC 378");
+REPLACE INTO Classes(className, accessLevel) VALUES
+   ("CSC 101", "Guest"),
+   ("CSC 102", "Guest"),
+   ("CSC 103", "Guest"),
+   ("CSC 121", "Guest"),
+   ("CSC 225", "Guest"),
+   ("CSC 300", "Guest"),
+   ("CSC 305", "Guest"),
+   ("CSC 307", "Guest"),
+   ("CSC 308", "Guest"),
+   ("CSC 309", "Guest"),
+   ("CSC 349", "Guest"),
+   ("CSC 357", "Guest"),
+   ("CSC 365", "Guest"),
+   ("CSC 378", "Guest"),
+   ("CSC 453", "Guest");
+
+REPLACE INTO Sections(sectionName, className, professor) VALUES
+   ("Section1", "CSC 101", ""),
+   ("Section2", "CSC 101", ""),
+   ("Section3", "CSC 101", ""),
+   ("Section1", "CSC 102", ""),
+   ("Section2", "CSC 102", ""),
+   ("Section3", "CSC 102", ""),
+   ("Section1", "CSC 103", ""),
+   ("Section2", "CSC 103", ""),
+   ("Section3", "CSC 103", "");
+
+REPLACE INTO Units(unitName, sectionName, className) VALUES
+   ("Unit1", "Section1", "CSC 101"),
+   ("Unit1", "Section2", "CSC 101"),
+   ("Unit1", "Section3", "CSC 101"),
+   ("Unit1", "Section1", "CSC 102"),
+   ("Unit1", "Section2", "CSC 102"),
+   ("Unit1", "Section3", "CSC 102"),
+   ("Unit1", "Section1", "CSC 103"),
+   ("Unit1", "Section2", "CSC 103"),
+   ("Unit1", "Section3", "CSC 103");
+
+REPLACE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES
+   ("Tutorial", "Unit1", "Section1", "CSC 101"),
+   ("Tutorial", "Unit1", "Section2", "CSC 101"),
+   ("Tutorial", "Unit1", "Section3", "CSC 101"),
+   ("Tutorial", "Unit1", "Section1", "CSC 102"),
+   ("Tutorial", "Unit1", "Section2", "CSC 102"),
+   ("Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Tutorial", "Unit1", "Section1", "CSC 103"),
+   ("Tutorial", "Unit1", "Section2", "CSC 103"),
+   ("Tutorial", "Unit1", "Section3", "CSC 103");
+
+REPLACE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES
+   ("Page1", "Tutorial", "Unit1", "Section1", "CSC 101"),
+   ("Page2", "Tutorial", "Unit1", "Section1", "CSC 101"),
+   ("Page3", "Tutorial", "Unit1", "Section1", "CSC 101"),
+   ("Page1", "Tutorial", "Unit1", "Section2", "CSC 101"),
+   ("Page2", "Tutorial", "Unit1", "Section2", "CSC 101"),
+   ("Page3", "Tutorial", "Unit1", "Section2", "CSC 101"),
+   ("Page1", "Tutorial", "Unit1", "Section3", "CSC 101"),
+   ("Page2", "Tutorial", "Unit1", "Section3", "CSC 101"),
+   ("Page3", "Tutorial", "Unit1", "Section3", "CSC 101"),
+   ("Page1", "Tutorial", "Unit1", "Section1", "CSC 102"),
+   ("Page2", "Tutorial", "Unit1", "Section1", "CSC 102"),
+   ("Page3", "Tutorial", "Unit1", "Section1", "CSC 102"),
+   ("Page1", "Tutorial", "Unit1", "Section2", "CSC 102"),
+   ("Page2", "Tutorial", "Unit1", "Section2", "CSC 102"),
+   ("Page3", "Tutorial", "Unit1", "Section2", "CSC 102"),
+   ("Page1", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page2", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page3", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page1", "Tutorial", "Unit1", "Section1", "CSC 103"),
+   ("Page2", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page3", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page1", "Tutorial", "Unit1", "Section2", "CSC 103"),
+   ("Page2", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page3", "Tutorial", "Unit1", "Section3", "CSC 102"),
+   ("Page1", "Tutorial", "Unit1", "Section3", "CSC 103"),
+   ("Page2", "Tutorial", "Unit1", "Section3", "CSC 103"),
+   ("Page3", "Tutorial", "Unit1", "Section3", "CSC 103");

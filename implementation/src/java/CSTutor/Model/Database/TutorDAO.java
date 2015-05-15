@@ -14,6 +14,25 @@ public class TutorDAO {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
+
+   /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
+      for (CSTutor.Model.Manager.Class c : classes) {
+         System.out.println("<" + c.name + ">");
+         for (CSTutor.Model.Manager.Section s : c.sections) {
+            System.out.println("  <" + s.name + ">");
+            for (CSTutor.Model.Manager.Unit u : s.units) {
+               System.out.println("    <" + u.name + ">");
+               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {
+                  System.out.println("      <" + t.name + ">");
+                  for (CSTutor.Model.Manager.Page p : t.pages) {
+                     System.out.println("        <" + p.name + ">");
+                  }
+               }
+            }
+         }
+      }
+      return 0;
+   }*/
    
    /**
    * Connect to the db
@@ -233,14 +252,14 @@ public class TutorDAO {
       CSTutor.Model.Manager.Section sec;
       try {
          PreparedStatement s = conn.prepareStatement(
-          "SELECT * FROM Units WHERE className=?");
+          "SELECT * FROM Sections WHERE className=?");
          List<String> values = Arrays.asList(clas.name);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
          ResultSet r = s.executeQuery();
          while (r.next()) {
-            sec = new CSTutor.Model.Manager.Section(r.getString("unitName"), clas);
+            sec = new CSTutor.Model.Manager.Section(r.getString("sectionName"), clas);
             sec.units = getUnits(sec);
             sections.add(sec);
          }
