@@ -23,7 +23,7 @@ import CSTutor.Model.Progress.Student;
 import CSTutor.Model.Progress.TutorialData;
 import CSTutor.Model.Progress.Class;
 
-/**
+/****
  * InstructorUI is the view class that displays the information 
  * from the InstructorModel class.
  * @author Erica Solum (esolum@calpoly.edu)

@@ -125,22 +125,31 @@ public class InstructorModel
     private void retrieveClassesData()
     {
         System.out.println("In InstructorModel.retrieveClassesData");
+        List<String> dbClasses = TutorDAO.getClasses();
+        //String[] classesArr = (String[]) dbClasses.toArray();
+        
         
         /*
          * List model for the JList.
          */
+        
+        
         classesModel = new DefaultListModel<Class>();
         
+        for(int i=0; i<dbClasses.size(); i++)
+        {
+            classesModel.addElement(new Class(dbClasses.get(i)));
+        }
         /*
          * Add sample elements to the list.
          */
-        classesModel.addElement(new Class("CPE 123"));
-        classesModel.addElement(new Class("CPE 101"));
-        classesModel.addElement(new Class("CPE 102"));
-        classesModel.addElement(new Class("CPE 103"));
-        classesModel.addElement(new Class("CPE 357"));
-        classesModel.addElement(new Class("CPE 305"));
-        classesModel.addElement(new Class("CPE 308"));
+        //classesModel.addElement(new Class("CPE 123"));
+        //classesModel.addElement(new Class("CPE 101"));
+        //classesModel.addElement(new Class("CPE 102"));
+        //classesModel.addElement(new Class("CPE 103"));
+        //classesModel.addElement(new Class("CPE 357"));
+        //classesModel.addElement(new Class("CPE 305"));
+        //classesModel.addElement(new Class("CPE 308"));
         classList = new JList<Class>(classesModel);
     }
     
