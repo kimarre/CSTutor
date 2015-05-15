@@ -18,9 +18,6 @@ public class TutorialEditor {
    /** Contains the editing options for a Tutorial Editor page*/
    public EditTextButtons toolbar;
    
-   /** Verification box for proper tutorial content */
-   JOptionPane invalidContent;
-   
    /** 
     * Constructs a new instance of a TutorialEditor
     */
@@ -45,13 +42,15 @@ public class TutorialEditor {
 
    /**
    * Saves the changes on the editing page to the tutorial.
+   * @return Boolean indicating if the content was valid or not.
    */
-   public void save(TutorialData pageData) {
+   public boolean save(TutorialData pageData) {
       if (pageData.description.intro.equals("") || pageData.description.syntax.equals("") || pageData.title.equals("")) {
-          invalidContent.showMessageDialog(null, "A tutorial must contain a title, description, and syntax.");
+          return false;
       } else {
         tutorialTrack.track.add(pageData);
         System.out.println("Saved! There are now " + tutorialTrack.track.size() + " tutorials.");
+        return true;
       }
    }
    

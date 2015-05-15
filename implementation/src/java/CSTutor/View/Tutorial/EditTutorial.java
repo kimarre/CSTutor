@@ -258,11 +258,13 @@ public class EditTutorial extends javax.swing.JPanel {
         if (result == YES_OPTION) {
             editTutorial = new CSTutor.Model.Tutorial.TutorialEditor();
             TutorialData temp = retrieveData();
-            editTutorial.save(temp);
+            boolean wasSaved = editTutorial.save(temp);
+            if (!wasSaved) {
+                JOptionPane.showMessageDialog(null, "A tutorial must contain a title, description, and syntax.");
+            }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    
     /** Contains the editing tools needed for authors to personalize tutorial text */
     public EditingTools toolbar;
     

@@ -72,7 +72,6 @@ doc7:
 		rm -rf ../../../design/javadoc
 		mv .javadoc ../../../design/javadoc
 
-
 dir:	
 		mkdir -p .classes
 		cp Manifest.txt .classes/Manifest.txt

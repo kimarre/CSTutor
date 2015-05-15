@@ -16,14 +16,28 @@ public class Password {
      * The hash of the password.
      */
     private String hash;
-    
+
+    /**
+     * For constructing a Password object for an existing user.
+     * @param hash The existing hash of the User's password.
+     */
+    protected Password(String hash)
+    {
+        this.hash = hash;
+    }
+
+    /**
+     * For constructing a new Password ovject for a new User.
+     */
+    public Password(){}
+
     /**
      * Gets the hashed version of the password.
      * @return the hash of the password.
       pre:
         Hash.length() > 0;
      */
-    public boolean validateHash(String password)
+    public static boolean validateHash(String password, String hash)
     {
         return BCrypt.checkpw(password, hash);
     }
@@ -36,7 +50,7 @@ public class Password {
       post:
         hash.length() > 0;
      */
-    boolean setPassword(String password)
+    public boolean setPassword(String password)
     {
         boolean valid = false;
         
@@ -61,5 +75,10 @@ public class Password {
         Pattern regex = Pattern.compile("[^!@#$%^&*()a-zA-Z0-9]");
         Matcher m = regex.matcher(password);
         return (password.length() > 5 && password.length() < 40 && !m.find());
+    }
+
+    public String getHash()
+    {
+        return hash;
     }
 }

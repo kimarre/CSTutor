@@ -146,7 +146,7 @@ public class Login extends JFrame{
         // TODO: check if tempUser exists
         if (tempUser != null)
         {
-             valid = tempUser.getPassword().validateHash(passwordField.getText());
+             valid = tempUser.getPassword().validateHash(passwordField.getText(), "");
         }
         if(!valid)
         {

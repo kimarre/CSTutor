@@ -55,6 +55,14 @@ public class User {
         password = new Password();
         password.setPassword(pass);
     }
+
+    public User(String firstName, String lastName, String email, boolean instructor)
+    {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.instructor = instructor;
+    }
     
     /**
      * Gets a copy of the password object.
