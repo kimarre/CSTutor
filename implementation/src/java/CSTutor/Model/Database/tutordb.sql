@@ -42,7 +42,7 @@ CREATE TABLE IF NOT Exists Pages (
 CREATE TABLE IF NOT EXISTS Quizzes (
    id INTEGER AUTO_INCREMENT PRIMARY KEY,
    name TEXT NOT NULL,
-   permissions TEXT NOT NULL,
+   accessLevel TEXT NOT NULL,
    owner TEXT NOT NULL
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS Users (
    hash TEXT,
    firstname TEXT,
    lastname TEXT,
-   permissions TEXT
+   accessLevel TEXT
 );
 
 CREATE TABLE IF NOT EXISTS TutorialData (
@@ -62,6 +62,14 @@ CREATE TABLE IF NOT EXISTS TutorialData (
    exampleCode TEXT,
    exampleOutput TEXT,
    tryItYourself TEXT
+);
+
+CREATE TABLE IF NOT EXISTS Authorizations (
+   username TEXT,
+   sectionName TEXT,
+   className TEXT,
+   FOREIGN KEY(username) REFERENCES Users(username),
+   PRIMARY KEY(username, sectionName, className)
 );
 
 REPLACE INTO Classes(className, accessLevel) VALUES

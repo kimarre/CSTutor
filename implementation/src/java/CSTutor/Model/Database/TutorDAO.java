@@ -14,6 +14,7 @@ public class TutorDAO {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
+   //private static List<CSTutor.Model.Manager.Class> classes = getClasses();
 
    /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
       for (CSTutor.Model.Manager.Class c : classes) {
@@ -67,6 +68,9 @@ public class TutorDAO {
       s.close();
    }
 
+   
+/*** User methods *********************************************************************************/
+
    /**
     * Add new user
     *
@@ -74,13 +78,13 @@ public class TutorDAO {
     * @param hash user's hash
     * @param firstname user's first name
     * @param lastname user's last name
-    * @param permissions the permission identifier (ie instructor) of the user
+    * @param accessLevel the access identifier (Guest, Student, Assistant, Professor) of the user
     */
    public static void addUser(String username, String hash, String firstname,
-    String lastname, String permissions) {
+    String lastname, String accessLevel) {
       try {
          PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Users VALUES (?, ?, ?, ?, ?)");
-         List<String> values = Arrays.asList(username, hash, firstname, lastname, permissions);
+         List<String> values = Arrays.asList(username, hash, firstname, lastname, accessLevel);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
@@ -114,6 +118,9 @@ public class TutorDAO {
          return null;
       }
    }
+
+
+/*** TutorialData methods *************************************************************************/
 
    /**
     * Add new tutorial 
@@ -157,6 +164,9 @@ public class TutorDAO {
          return null;
       }
    }
+
+
+/*** Class hierarchy methods **********************************************************************/
 
    /**
     * Get list of Pages for the specified Tutorial
@@ -271,6 +281,26 @@ public class TutorDAO {
    }
 
    /**
+    * Determine the ClassAccessLevel enum for the access string
+    *
+    * @param access string representing the access level (Guest, Student, Assistant, Professor)
+    * @return ClassAccessLevel enum
+    */
+   private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
+      switch (access) {
+         case "Guest":
+            return CSTutor.Model.Manager.Class.ClassAccessLevel.Guest;
+         case "Student":
+            return CSTutor.Model.Manager.Class.ClassAccessLevel.Student;
+         case "Assistant":
+            return CSTutor.Model.Manager.Class.ClassAccessLevel.Assistant;
+         case "Professor":
+            return CSTutor.Model.Manager.Class.ClassAccessLevel.Professor;
+      }
+      return null;
+   }
+
+   /**
     * Get a list of classes from the database
     *
     * @return List of classes
@@ -280,10 +310,11 @@ public class TutorDAO {
       CSTutor.Model.Manager.Class c;
       try {
          Statement s = conn.createStatement();
-         ResultSet r = s.executeQuery("SELECT className FROM classes;");
+         ResultSet r = s.executeQuery("SELECT * FROM classes;");
          while (r.next()) {
             c = new CSTutor.Model.Manager.Class(r.getString("className"));
             c.sections = getSections(c);
+            c.access = getAccessEnum(r.getString("accessLevel"));
             classes.add(c);
          }
          s.close();
