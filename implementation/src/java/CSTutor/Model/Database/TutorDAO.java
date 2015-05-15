@@ -1,12 +1,22 @@
 package CSTutor.Model.Database;
 
-import java.nio.file.*;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
+import CSTutor.Model.Manager.Class.ClassAccessLevel;
 
 /**
  * CSTutor Data Access Object.
- * Interfaces with the sqlite database.
+ * Interfaces with the sqlite database. Contains methods for getting and setting
+ * values to and from the database. Connection to database is initialized
+ * at startup.
  *
  * @author dlgordon
  */
@@ -14,7 +24,7 @@ public class TutorDAO {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
-   //private static List<CSTutor.Model.Manager.Class> classes = getClasses();
+   private static List<CSTutor.Model.Manager.Class> classes = getClasses();
 
    /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
       for (CSTutor.Model.Manager.Class c : classes) {
@@ -305,13 +315,13 @@ public class TutorDAO {
    private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
       switch (access) {
          case "Guest":
-            return CSTutor.Model.Manager.Class.ClassAccessLevel.Guest;
+            return ClassAccessLevel.Guest;
          case "Student":
-            return CSTutor.Model.Manager.Class.ClassAccessLevel.Student;
+            return ClassAccessLevel.Student;
          case "Assistant":
-            return CSTutor.Model.Manager.Class.ClassAccessLevel.Assistant;
+            return ClassAccessLevel.Assistant;
          case "Professor":
-            return CSTutor.Model.Manager.Class.ClassAccessLevel.Professor;
+            return ClassAccessLevel.Professor;
       }
       return null;
    }
