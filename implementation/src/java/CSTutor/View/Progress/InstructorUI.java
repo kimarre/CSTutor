@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
+import javax.swing.*;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -52,6 +52,8 @@ public class InstructorUI extends JPanel
     private JList<TutorialData> tutorialList;
     private JList<CSTutor.Model.Progress.Class> classList;
     private JList<Student> studentList;
+    private JButton classSearchButton, tutorialSearchButton, studentSearchButton;
+    
     
     public InstructorUI(InstructorModel model)
     {
@@ -167,13 +169,13 @@ public class InstructorUI extends JPanel
         studentList = model.getStudentList();
         tutorialList.setCellRenderer(new ListRenderer());
         tutorialList.addListSelectionListener(
-                new ListListener(main));
+                new ListListener(main, model));
         classList.setCellRenderer(new ListRenderer());
         classList.addListSelectionListener(
-                new ListListener(main));
+                new ListListener(main, model));
         studentList.setCellRenderer(new ListRenderer());
         studentList.addListSelectionListener(
-                new ListListener(main));
+                new ListListener(main, model));
     }
     
     /**
@@ -216,32 +218,74 @@ public class InstructorUI extends JPanel
         studentField = new JTextField();
         tutorialField = new JTextField();
         
-        classField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-              String searchString = classField.getText();
-              
-              System.out.println("Searching for " + searchString);
-              model.searchForClass(searchString);
-              
-            }
-          });
+        classSearchButton = new JButton("Search");
+        tutorialSearchButton = new JButton("Search");
+        studentSearchButton = new JButton("Search");
         
-        studentField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-              String searchString = classField.getText();
-              
-              System.out.println("Searching for " + searchString);
-              model.searchForStudent(searchString);
+        classSearchButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String searchString = classField.getText();
+                
+                System.out.print("Searching for " + searchString);
+                classList = model.searchForClass(searchString);
+                
+                classList.setCellRenderer(new ListRenderer());
+                classList.addListSelectionListener(
+                        new ListListener(main, model));
+                classPanel.removeAll();
+                classPanel.add(classList);
+                classPanel.add(Box.createVerticalGlue());
+                classPanel.revalidate();
+                classPanel.repaint();
+                
             }
-          });
-        tutorialField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-              String searchString = classField.getText();
-              
-              System.out.println("Searching for " + searchString);
-              model.searchForTutorial(searchString);
+            
+        });
+        
+        studentSearchButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String searchString = studentField.getText();
+                
+                System.out.print("Searching for " + searchString);
+                studentList = model.searchForStudent(searchString);
+                
+                studentList.setCellRenderer(new ListRenderer());
+                studentList.addListSelectionListener(
+                        new ListListener(main, model));
+                studentPanel.removeAll();
+                studentPanel.add(studentList);
+                studentPanel.add(Box.createVerticalGlue());
+                studentPanel.revalidate();
+                studentPanel.repaint();
+                
             }
-          });
+        });
+        
+        tutorialSearchButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String searchString = tutorialField.getText();
+                
+                System.out.print("Searching for " + searchString);
+                tutorialList = model.searchForTutorial(searchString);
+                
+                tutorialList.setCellRenderer(new ListRenderer());
+                tutorialList.addListSelectionListener(
+                        new ListListener(main, model));
+                tutorialPanel.removeAll();
+                tutorialPanel.add(tutorialList);
+                tutorialPanel.add(Box.createVerticalGlue());
+                tutorialPanel.revalidate();
+                tutorialPanel.repaint();
+                
+            }
+        });
+          
     }
     
     /**
@@ -254,9 +298,9 @@ public class InstructorUI extends JPanel
         tutorialSearchPanel.setLayout(new BoxLayout(tutorialSearchPanel, BoxLayout.X_AXIS));
         tutorialSearchPanel.setBackground(new Color(153, 153, 153));
         tutorialSearchPanel.add(Box.createHorizontalStrut(5));
-        tutorialSearchPanel.add(new JLabel("Search"));
-        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
         tutorialSearchPanel.add(tutorialField);
+        tutorialSearchPanel.add(Box.createHorizontalStrut(5));
+        tutorialSearchPanel.add(tutorialSearchButton);
         tutorialSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
         tutorialSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
         tutorialSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
@@ -265,9 +309,9 @@ public class InstructorUI extends JPanel
         classSearchPanel.setLayout(new BoxLayout(classSearchPanel, BoxLayout.X_AXIS));
         classSearchPanel.setBackground(new Color(153, 153, 153));
         classSearchPanel.add(Box.createHorizontalStrut(5));
-        classSearchPanel.add(new JLabel("Search"));
-        classSearchPanel.add(Box.createHorizontalStrut(5));
         classSearchPanel.add(classField);
+        classSearchPanel.add(Box.createHorizontalStrut(5));
+        classSearchPanel.add(classSearchButton);
         classSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
         classSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
         classSearchPanel.setMaximumSize(new Dimension(200, searchHeight));
@@ -276,9 +320,9 @@ public class InstructorUI extends JPanel
         studentSearchPanel.setLayout(new BoxLayout(studentSearchPanel, BoxLayout.X_AXIS));
         studentSearchPanel.setBackground(new Color(153, 153, 153));
         studentSearchPanel.add(Box.createHorizontalStrut(5));
-        studentSearchPanel.add(new JLabel("Search"));
-        studentSearchPanel.add(Box.createHorizontalStrut(5));
         studentSearchPanel.add(studentField);
+        studentSearchPanel.add(Box.createHorizontalStrut(5));
+        studentSearchPanel.add(studentSearchButton);
         studentSearchPanel.setMinimumSize(new Dimension(200, searchHeight));
         studentSearchPanel.setPreferredSize(new Dimension(200, searchHeight));
         studentSearchPanel.setMaximumSize(new Dimension(200, searchHeight));

@@ -22,7 +22,13 @@ public class InstructorModel
     private JList<Student> studentList;
     private DefaultListModel<TutorialData> tutorialsModel;
     private DefaultListModel<Student> studentModel;
-    private DefaultListModel<Class> classesModel;
+    private ClassListModel<Class> fullClassesModel;
+    private StudentListModel<Student> fullStudentsModel;
+    private TutorialListModel<TutorialData> fullTutorialsModel;
+    private ClassListModel<Class> searchClassesModel;
+    private StudentListModel<Student> searchStudentsModel;
+    private TutorialListModel<TutorialData> searchTutorialsModel;
+    private Class currentClass;
     
     public InstructorModel()
     {
@@ -42,25 +48,25 @@ public class InstructorModel
         System.out.println("In InstructorModel.retrieveTutorialData");
         
         /* Tutorials list */
-        tutorialsModel
-            = new DefaultListModel<TutorialData>(); /* List model for the JList */
+        fullTutorialsModel
+            = new TutorialListModel<TutorialData>(); /* List model for the JList */
         
         /* Add sample elements to the list */
-        tutorialsModel.addElement(new TutorialData("Hello World!"));
-        tutorialsModel.addElement(new TutorialData("Intro. to C"));
-        tutorialsModel.addElement(new TutorialData("Data Types"));
-        tutorialsModel.addElement(new TutorialData("If Statements"));
-        tutorialsModel.addElement(new TutorialData("Loops in C"));
-        tutorialsModel.addElement(new TutorialData("Functions"));
-        tutorialsModel.addElement(new TutorialData("The Stack"));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialList = new JList<TutorialData>(tutorialsModel);
+        fullTutorialsModel.addElement(new TutorialData("Hello World!"));
+        fullTutorialsModel.addElement(new TutorialData("Intro. to C"));
+        fullTutorialsModel.addElement(new TutorialData("Data Types"));
+        fullTutorialsModel.addElement(new TutorialData("If Statements"));
+        fullTutorialsModel.addElement(new TutorialData("Loops in C"));
+        fullTutorialsModel.addElement(new TutorialData("Functions"));
+        fullTutorialsModel.addElement(new TutorialData("The Stack"));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        fullTutorialsModel.addElement(new TutorialData("     ..."));
+        tutorialList = new JList<TutorialData>(fullTutorialsModel);
     }
     
     /**
@@ -71,49 +77,49 @@ public class InstructorModel
      */
     private void retrieveStudentData()
     {
-        System.out.println("In InstructorModel.retrieveStudentData");
+        //System.out.println("In InstructorModel.retrieveStudentData");
         
         /*
          * List model for the JList.
          */
-        studentModel
-            = new DefaultListModel<Student>(); 
+        fullStudentsModel
+            = new StudentListModel<Student>(); 
         
         /*
          * Add sample elements to the list.
          */
-        studentModel.addElement(new Student("Maria Auxier"));
-        studentModel.addElement(new Student("Marian Bell"));
-        studentModel.addElement(new Student("Eugene Brown"));
-        studentModel.addElement(new Student("Jamie Bryant"));
-        studentModel.addElement(new Student("Danielle Carter"));
-        studentModel.addElement(new Student("Vernon Chilton"));
-        studentModel.addElement(new Student("Mary Clark"));
-        studentModel.addElement(new Student("Laurie Crawford"));
-        studentModel.addElement(new Student("Geoffrey Dunning"));
-        studentModel.addElement(new Student("Lester Flores"));
-        studentModel.addElement(new Student("Suzanne Gridley"));
-        studentModel.addElement(new Student("Bruce Griffin"));
-        studentModel.addElement(new Student("Jennifer Headrick"));
-        studentModel.addElement(new Student("Kevin Hoover"));
-        studentModel.addElement(new Student("Constance Jackson"));
-        studentModel.addElement(new Student("Chris Kapp"));
-        studentModel.addElement(new Student("Leon Lewis"));
-        studentModel.addElement(new Student("Victor Massey"));
-        studentModel.addElement(new Student("Blanche Natal"));
-        studentModel.addElement(new Student("Dianne Ohara"));
-        studentModel.addElement(new Student("Charlotte Perry"));
-        studentModel.addElement(new Student("Eric Prince"));
-        studentModel.addElement(new Student("Frank Reed"));
-        studentModel.addElement(new Student("Nicole Rios"));
-        studentModel.addElement(new Student("David Rodriguez"));
-        studentModel.addElement(new Student("James Scott"));
-        studentModel.addElement(new Student("Robert Taylor"));
-        studentModel.addElement(new Student("Anna Turley"));
-        studentModel.addElement(new Student("Paula Webb"));
-        studentModel.addElement(new Student("James Welsh"));
-        studentModel.addElement(new Student("Marlene Williams"));
-        studentList = new JList<Student>(studentModel);  
+        fullStudentsModel.addElement(new Student("Maria Auxier"));
+        fullStudentsModel.addElement(new Student("Marian Bell"));
+        fullStudentsModel.addElement(new Student("Eugene Brown"));
+        fullStudentsModel.addElement(new Student("Jamie Bryant"));
+        fullStudentsModel.addElement(new Student("Danielle Carter"));
+        fullStudentsModel.addElement(new Student("Vernon Chilton"));
+        fullStudentsModel.addElement(new Student("Mary Clark"));
+        fullStudentsModel.addElement(new Student("Laurie Crawford"));
+        fullStudentsModel.addElement(new Student("Geoffrey Dunning"));
+        fullStudentsModel.addElement(new Student("Lester Flores"));
+        fullStudentsModel.addElement(new Student("Suzanne Gridley"));
+        fullStudentsModel.addElement(new Student("Bruce Griffin"));
+        fullStudentsModel.addElement(new Student("Jennifer Headrick"));
+        fullStudentsModel.addElement(new Student("Kevin Hoover"));
+        fullStudentsModel.addElement(new Student("Constance Jackson"));
+        fullStudentsModel.addElement(new Student("Chris Kapp"));
+        fullStudentsModel.addElement(new Student("Leon Lewis"));
+        fullStudentsModel.addElement(new Student("Victor Massey"));
+        fullStudentsModel.addElement(new Student("Blanche Natal"));
+        fullStudentsModel.addElement(new Student("Dianne Ohara"));
+        fullStudentsModel.addElement(new Student("Charlotte Perry"));
+        fullStudentsModel.addElement(new Student("Eric Prince"));
+        fullStudentsModel.addElement(new Student("Frank Reed"));
+        fullStudentsModel.addElement(new Student("Nicole Rios"));
+        fullStudentsModel.addElement(new Student("David Rodriguez"));
+        fullStudentsModel.addElement(new Student("James Scott"));
+        fullStudentsModel.addElement(new Student("Robert Taylor"));
+        fullStudentsModel.addElement(new Student("Anna Turley"));
+        fullStudentsModel.addElement(new Student("Paula Webb"));
+        fullStudentsModel.addElement(new Student("James Welsh"));
+        fullStudentsModel.addElement(new Student("Marlene Williams"));
+        studentList = new JList<Student>(fullStudentsModel);  
     }
     
     /**
@@ -134,23 +140,14 @@ public class InstructorModel
          */
         
         
-        classesModel = new DefaultListModel<Class>();
+        fullClassesModel = new ClassListModel<Class>();
         
         for(int i=0; i<dbClasses.size(); i++)
         {
-            classesModel.addElement(new Class(dbClasses.get(i)));
+            fullClassesModel.addElement(new Class(dbClasses.get(i)));
         }
-        /*
-         * Add sample elements to the list.
-         */
-        //classesModel.addElement(new Class("CPE 123"));
-        //classesModel.addElement(new Class("CPE 101"));
-        //classesModel.addElement(new Class("CPE 102"));
-        //classesModel.addElement(new Class("CPE 103"));
-        //classesModel.addElement(new Class("CPE 357"));
-        //classesModel.addElement(new Class("CPE 305"));
-        //classesModel.addElement(new Class("CPE 308"));
-        classList = new JList<Class>(classesModel);
+        
+        classList = new JList<Class>(fullClassesModel);
     }
     
     /**
@@ -180,37 +177,51 @@ public class InstructorModel
     /**
      * Returns a list of classes that match the search string.
      */
-    public void searchForClass(String searchString)
+    public JList<Class> searchForClass(String searchString)
     {
-        if(classesModel.contains(new Class(searchString)))
+        ArrayList<Class> simClasses = fullClassesModel.getSimilarClasses(new Class(searchString));
+ 
+        searchClassesModel = new ClassListModel<Class>();
+        for(Class cl: simClasses)
         {
-            int index = classesModel.indexOf(new Class(searchString));
-            System.out.println(index);
+            searchClassesModel.addElement(cl);
         }
+        
+        return new JList<Class>(searchClassesModel);
+        
     }
     
     /**
      * Returns a list of students that match the search string.
      */
-    public void searchForStudent(String searchString)
+    public JList<Student> searchForStudent(String searchString)
     {
-        if(studentModel.contains(new Student(searchString)))
+        ArrayList<Student> simStudents = fullStudentsModel.getSimilarStudents(new Student(searchString));
+        
+        searchStudentsModel = new StudentListModel<Student>();
+        for(Student stu: simStudents)
         {
-            int index = studentModel.indexOf(new Student(searchString));
-            System.out.println(index);
+            searchStudentsModel.addElement(stu);
         }
+        
+        return new JList<Student>(searchStudentsModel);
     }
     
     /**
      * Returns a list of students that match the search string.
      */
-    public void searchForTutorial(String searchString)
+    public JList<TutorialData> searchForTutorial(String searchString)
     {
-        if(tutorialsModel.contains(new TutorialData(searchString)))
+        ArrayList<TutorialData> simTutorials = fullTutorialsModel.getSimilarTutorials(new TutorialData(searchString));
+        
+        searchTutorialsModel = new TutorialListModel<TutorialData>();
+        for(TutorialData tut: simTutorials)
         {
-            int index = tutorialsModel.indexOf(new TutorialData(searchString));
-            System.out.println(index);
+            searchTutorialsModel.addElement(tut);
         }
+        
+        return new JList<TutorialData>(searchTutorialsModel);
     }
+    
 
 }

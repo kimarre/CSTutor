@@ -5,6 +5,8 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import CSTutor.Model.Progress.InstructorModel;
+
 /**
  * @author Erica Solum
  *
@@ -12,9 +14,11 @@ import javax.swing.event.*;
 public class ListListener implements ListSelectionListener
 {
     private MainContent main;
-    public ListListener(MainContent main)
+    private InstructorModel model;
+    public ListListener(MainContent main, InstructorModel model)
     {
         this.main = main;
+        this.model = model;
     }
 
     /**
@@ -38,6 +42,9 @@ public class ListListener implements ListSelectionListener
             testLabel.setFont(new Font("Avenir", Font.PLAIN, 25));
             main.removeAll();
             main.add(testLabel);
+            
+            
+            
             
             main.revalidate();
             main.repaint();
