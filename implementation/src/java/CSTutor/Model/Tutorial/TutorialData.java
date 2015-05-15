@@ -36,7 +36,8 @@ public class TutorialData {
        tryItYourself = "";
    }
    
-   public TutorialData(String t, String desc, String syn, String ec, String eo, String tryIt) {
+   public TutorialData(int pageNum, String t, String desc, String syn, String ec, String eo, String tryIt) {
+       this.pageId = pageNum;
        this.title = t;
        this.description.intro = desc;
        this.description.syntax = syn;
