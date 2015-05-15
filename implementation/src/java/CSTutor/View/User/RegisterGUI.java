@@ -113,7 +113,7 @@ public class RegisterGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitAction
-        register = new CSTutor.Model.User.Register(users);
+        register = new CSTutor.Model.User.Register();
         boolean valid = register.createUser(fisrtNameField.getText(), lastNameField.getText(), emailField.getText(), passwordField.getText(), false);
         System.out.println("User Registered: " + valid);
         if (valid)
