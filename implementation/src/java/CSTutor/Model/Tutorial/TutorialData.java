@@ -28,6 +28,9 @@ public class TutorialData {
    /** Unique identifier for the page for the database */
    int pageId;
    
+   /** Tracker for Progress that indicates if a tutorial has been seen or not. */
+   boolean hasSeen;
+   
    /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
    RoadmapModule module;
    
@@ -36,7 +39,7 @@ public class TutorialData {
        tryItYourself = "";
    }
    
-   public TutorialData(int pageNum, String t, String desc, String syn, String ec, String eo, String tryIt) {
+   public TutorialData(int pageNum, String t, String desc, String syn, String ec, String eo, String tryIt, boolean seen) {
        this.pageId = pageNum;
        this.title = t;
        this.description.intro = desc;
@@ -44,6 +47,8 @@ public class TutorialData {
        this.description.exampleCode = ec;
        this.description.exampleOutput = eo;
        this.tryItYourself = tryIt;
+       this.hasSeen = seen;
+       
    }
    
    /** Retrieves the tutorial's title */
