@@ -30,7 +30,7 @@ public class TutorialData {
    
    /** Tracker for Progress that indicates if a tutorial has been seen or not. */
    boolean hasSeen;
-   
+
    /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
    RoadmapModule module;
    
@@ -48,7 +48,6 @@ public class TutorialData {
        this.description.exampleOutput = eo;
        this.tryItYourself = tryIt;
        this.hasSeen = seen;
-       
    }
    
    /** Retrieves the tutorial's title */
