@@ -147,6 +147,7 @@ public class TutorDAO {
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
+         s.setBoolean(values.size(), tutorial.hasSeen);
          s.executeUpdate();
          s.close();
       } catch(Exception e) {
@@ -168,7 +169,7 @@ public class TutorDAO {
          ResultSet r = s.executeQuery();
          CSTutor.Model.Tutorial.TutorialData data = new CSTutor.Model.Tutorial.TutorialData(
           id, r.getString("title"), r.getString("description"), r.getString("syntax"),
-          r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"));
+          r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"), r.getBoolean("hasSeen"));
          s.close();
          return data;
       } catch(Exception e) { // tutorial data not in db

@@ -61,7 +61,8 @@ CREATE TABLE IF NOT EXISTS TutorialData (
    syntax TEXT,
    exampleCode TEXT,
    exampleOutput TEXT,
-   tryItYourself TEXT
+   tryItYourself TEXT,
+   hasSeen BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS Authorizations (

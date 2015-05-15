@@ -29,7 +29,7 @@ public class TutorialData {
    public int pageId;
    
    /** Tracker for Progress that indicates if a tutorial has been seen or not. */
-   boolean hasSeen;
+   public boolean hasSeen;
 
    /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
    RoadmapModule module;

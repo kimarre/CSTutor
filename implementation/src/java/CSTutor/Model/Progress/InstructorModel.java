@@ -131,7 +131,7 @@ public class InstructorModel
     private void retrieveClassesData()
     {
         System.out.println("In InstructorModel.retrieveClassesData");
-        List<String> dbClasses = TutorDAO.getClasses();
+        List<String> dbClasses = TutorDAO.getClassNames();
         //String[] classesArr = (String[]) dbClasses.toArray();
         
         
