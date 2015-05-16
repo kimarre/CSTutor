@@ -159,7 +159,7 @@ public class ManagerGUI extends JPanel {
         classPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Make classnode for each in class in db
-        java.util.List<String> classes = CSTutor.Model.Database.TutorDAO.getClassNames();
+        java.util.List<String> classes = CSTutor.Model.Database.TutorDB.getClassNames();
         java.util.List<DefaultMutableTreeNode> classNodes = new ArrayList<DefaultMutableTreeNode>();
         /*
         for (int i = 0; i < classes.size(); i++) {

@@ -20,7 +20,7 @@ import CSTutor.Model.Manager.Class.ClassAccessLevel;
  *
  * @author dlgordon
  */
-public class TutorDAO {
+public class TutorDB {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
@@ -71,7 +71,7 @@ public class TutorDAO {
     */
    private static void init_db(Connection con) throws Exception { 
       Statement s = con.createStatement();
-      java.io.InputStream input = TutorDAO.class.getResourceAsStream(init_db_path);
+      java.io.InputStream input = TutorDB.class.getResourceAsStream(init_db_path);
       java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";\n*");
       while (scan.hasNext()) {
          s.executeUpdate(scan.next());
