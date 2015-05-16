@@ -21,4 +21,11 @@ public class TutorDAOTest {
    @After
    public void tearDown() {
    }
+
+   /**
+     * Test of getHash method, of class Password.
+     */
+    @Test
+   public void testValidateHash() {
+   }
 }
