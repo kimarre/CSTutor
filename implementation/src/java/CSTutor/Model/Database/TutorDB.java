@@ -25,26 +25,9 @@ public class TutorDB {
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
    private static List<CSTutor.Model.Manager.Class> classes = getClasses();
-
-   /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
-      for (CSTutor.Model.Manager.Class c : classes) {
-         System.out.println("<" + c.name + ">");
-         for (CSTutor.Model.Manager.Section s : c.sections) {
-            System.out.println("  <" + s.name + ">");
-            for (CSTutor.Model.Manager.Unit u : s.units) {
-               System.out.println("    <" + u.name + ">");
-               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {
-                  System.out.println("      <" + t.name + ">");
-                  for (CSTutor.Model.Manager.Page p : t.pages) {
-                     System.out.println("        <" + p.name + ">");
-                  }
-               }
-            }
-         }
-      }
-      return 0;
-   }*/
    
+/*** Helper methods *******************************************************************************/
+
    /**
    * Connect to the database
    *
@@ -58,6 +41,7 @@ public class TutorDB {
       try {
          Class.forName("org.sqlite.JDBC");
          Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
+         c.setAutoCommit(false);
          init_db(c);
          return c;
       } catch(Exception e) {
@@ -82,7 +66,23 @@ public class TutorDB {
       while (scan.hasNext()) {
          s.executeUpdate(scan.next());
       }
+      con.commit();
       s.close();
+   }
+
+   /**
+    * Commit changes to the database. Must be called for db writes to take effect.
+    *
+      pre:
+       conn != null;
+    */
+   public static void commit() {
+      try {
+         conn.commit();
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+      }
    }
 
    
@@ -109,6 +109,7 @@ public class TutorDB {
             s.setString(i+1, values.get(i));
          }
          s.executeUpdate();
+         commit();
          s.close();
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -162,6 +163,7 @@ public class TutorDB {
          }
          s.setBoolean(values.size(), tutorial.hasSeen);
          s.executeUpdate();
+         commit();
          s.close();
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -229,6 +231,31 @@ public class TutorDB {
       }
    }
 
+   /**
+    * Save a list of Pages to the database
+    *
+    * @param pages list of Pages to save
+      pre:
+       pages != null;
+    */
+   public static void savePages(List<CSTutor.Model.Manager.Page> pages) {
+      try {
+         for (CSTutor.Model.Manager.Page p : pages) {
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Pages VALUES (?, ?, ?, ?, ?)");
+            s.setString(1, p.name);
+            s.setString(2, p.parent.name);
+            s.setString(3, p.parent.parent.name);
+            s.setString(4, p.parent.parent.parent.name);
+            s.setString(5, p.parent.parent.parent.parent.name);
+            s.executeUpdate();
+            s.close();
+         }
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+      }
+   }
+
 
 /*** Tutorial methods *****************************************************************************/
 
@@ -262,6 +289,31 @@ public class TutorDB {
          return tutorials;
       } catch(Exception e) { // unit not in db
          return tutorials;
+      }
+   }
+
+   /**
+    * Save a list of Tutorials to the database
+    *
+    * @param tutorials list of Tutorials to save
+      pre:
+       tutorials != null;
+    */
+   public static void saveTutorials(List<CSTutor.Model.Manager.Tutorial> tutorials) {
+      try {
+         for (CSTutor.Model.Manager.Tutorial t : tutorials) {
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Tutorials VALUES (?, ?, ?, ?)");
+            s.setString(1, t.name);
+            s.setString(2, t.parent.name);
+            s.setString(3, t.parent.parent.name);
+            s.setString(4, t.parent.parent.parent.name);
+            s.executeUpdate();
+            s.close();
+            savePages(t.pages);
+         }
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
       }
    }
 
@@ -301,6 +353,31 @@ public class TutorDB {
       }
    }
 
+   /**
+    * Save a list of Units to the database
+    *
+    * @param units list of Units to save
+      pre:
+       units != null;
+    */
+   public static void saveUnits(List<CSTutor.Model.Manager.Unit> units) {
+      try {
+         for (CSTutor.Model.Manager.Unit u : units) {
+            PreparedStatement s = conn.prepareStatement(
+             "INSERT OR IGNORE INTO Units(className, sectionName, unitName) VALUES (?, ?, ?)");
+            s.setString(1, u.name);
+            s.setString(2, u.parent.name);
+            s.setString(3, u.parent.parent.name);
+            s.executeUpdate();
+            s.close();
+            saveTutorials(u.tutorials);
+         }
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+      }
+   }
+
 /*** Section methods ******************************************************************************/
 
    /**
@@ -336,6 +413,29 @@ public class TutorDB {
       }
    }
 
+   /**
+    * Save a list of Sections to the database
+    *
+    * @param sections list of Sections to save
+      pre:
+       sections != null;
+    */
+   public static void saveSections(List<CSTutor.Model.Manager.Section> sections) {
+      try {
+         for (CSTutor.Model.Manager.Section sec : sections) {
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Sections(className, sectionName) VALUES (?, ?)");
+            s.setString(1, sec.name);
+            s.setString(2, sec.parent.name);
+            s.executeUpdate();
+            s.close();
+            saveUnits(sec.units);
+         }
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+      }
+   }
+
 
 /*** Class methods ********************************************************************************/
 
@@ -359,6 +459,25 @@ public class TutorDB {
       return null;
    }
 
+   /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
+      for (CSTutor.Model.Manager.Class c : classes) {
+         System.out.println("<" + c.name + ">");
+         for (CSTutor.Model.Manager.Section s : c.sections) {
+            System.out.println("  <" + s.name + ">");
+            for (CSTutor.Model.Manager.Unit u : s.units) {
+               System.out.println("    <" + u.name + ">");
+               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {
+                  System.out.println("      <" + t.name + ">");
+                  for (CSTutor.Model.Manager.Page p : t.pages) {
+                     System.out.println("        <" + p.name + ">");
+                  }
+               }
+            }
+         }
+      }
+      return 0;
+   }*/
+
    /**
     * Get a list of classes from the database
     *
@@ -379,6 +498,7 @@ public class TutorDB {
             classes.add(c);
          }
          s.close();
+         saveClasses(classes);
          return classes;
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -406,6 +526,44 @@ public class TutorDB {
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
+      }
+   }
+
+   /**
+    * Delete rows from tables in class hierarchy
+    *
+    */
+   private static void deleteClassHierarchy() throws Exception {
+      List<String> values = Arrays.asList("Classes", "Sections", "Units", "Tutorials", "Pages");
+      for (String val : values) {
+         PreparedStatement s = conn.prepareStatement("DELETE FROM " + val + " WHERE 1=1");
+         s.executeUpdate();
+         s.close();
+      }
+      commit();
+   }
+
+   /**
+    * Save a list of Classes to the database. Drops all classes, sections, etc not in list.
+    *
+    * @param classes list of Classes to save
+      pre:
+       classes != null;
+    */
+   public static void saveClasses(List<CSTutor.Model.Manager.Class> classes) {
+      try {
+         deleteClassHierarchy();
+         for (CSTutor.Model.Manager.Class c : classes) {
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Classes(className) VALUES (?)");
+            s.setString(1, c.name);
+            s.executeUpdate();
+            s.close();
+            saveSections(c.sections);
+         }
+         commit();
+      } catch(Exception e) {
+         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
       }
    }
 }
