@@ -49,6 +49,10 @@ public class TutorDB {
    * Connect to the database
    *
    * @return Connection to the database
+     pre:
+      new java.io.File(db_path).exists();
+     post:
+      c != null;
    */
    private static Connection connect() {
       try {
@@ -68,6 +72,8 @@ public class TutorDB {
     * Create tables if they don't exist, and populate with initial data.
     *
     * @param con Connection to the database
+      pre:
+       con != null && TutorDB.class.getResourceAsStream(init_db_path) != null;
     */
    private static void init_db(Connection con) throws Exception { 
       Statement s = con.createStatement();
@@ -90,6 +96,9 @@ public class TutorDB {
     * @param firstname user's first name
     * @param lastname user's last name
     * @param accessLevel the access identifier (Guest, Student, Assistant, Professor) of the user
+      pre:
+       username != null && hash != null && firstname != null
+       && lastname != null && accessLevel != null;
     */
    public static void addUser(String username, String hash, String firstname,
     String lastname, String accessLevel) {
@@ -112,6 +121,8 @@ public class TutorDB {
     *
     * @param username user's username
     * @return Map of columns to values, or null if not found.
+      pre:
+       username != null;
     */
    public static Map<String, String> getUser(String username) {
       try {
@@ -137,6 +148,8 @@ public class TutorDB {
     * Add new tutorial 
     *
     * @param tutorial the Tutorial to add
+      pre:
+       tutorial != null && tutorial.description != null;
     */
    public static void addTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
       try {
@@ -161,6 +174,8 @@ public class TutorDB {
     *
     * @param id the identifier for the TutorialData
     * @return specified TutorialData object, or null if not found
+      pre:
+       id >= 0;
     */
    public static CSTutor.Model.Tutorial.TutorialData getTutorialData(int id) {
       try {
@@ -185,6 +200,11 @@ public class TutorDB {
     *
     * @param tutorial the Tutorial to look up Pages for
     * @return List of Pages
+      pre:
+       tutorial != null && tutorial.parent != null && tutorial.parent.parent != null
+       && tutorial.parent.parent.parent != null;
+      post:
+       pages != null;
     */
    public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
       List<CSTutor.Model.Manager.Page> pages = new ArrayList<CSTutor.Model.Manager.Page>();
@@ -217,6 +237,10 @@ public class TutorDB {
     *
     * @param unit the Unit to look up Tutorials for
     * @return List of Tutorials
+      pre:
+       unit != null && unit.parent != null && unit.parent.parent != null;
+      post:
+       tutorials != null;
     */
    public static List<CSTutor.Model.Manager.Tutorial> getTutorials(CSTutor.Model.Manager.Unit unit) {
       List<CSTutor.Model.Manager.Tutorial> tutorials = new ArrayList<CSTutor.Model.Manager.Tutorial>();
@@ -249,6 +273,10 @@ public class TutorDB {
     *
     * @param section the Section to look up Units for
     * @return List of Units
+      pre:
+       section != null && section.parent != null;
+      post:
+       units != null;
     */
    public static List<CSTutor.Model.Manager.Unit> getUnits(CSTutor.Model.Manager.Section section) {
       List<CSTutor.Model.Manager.Unit> units = new ArrayList<CSTutor.Model.Manager.Unit>();
@@ -280,6 +308,10 @@ public class TutorDB {
     *
     * @param clas the Class to look up Sections for
     * @return List of Sections
+      pre:
+       clas != null;
+      post:
+       sections != null;
     */
    public static List<CSTutor.Model.Manager.Section> getSections(CSTutor.Model.Manager.Class clas) {
       List<CSTutor.Model.Manager.Section> sections = new ArrayList<CSTutor.Model.Manager.Section>();
@@ -331,6 +363,8 @@ public class TutorDB {
     * Get a list of classes from the database
     *
     * @return List of classes
+      post:
+       classes != null;
     */
    public static List<CSTutor.Model.Manager.Class> getClasses() {
       List<CSTutor.Model.Manager.Class> classes = new ArrayList<CSTutor.Model.Manager.Class>();
@@ -356,6 +390,8 @@ public class TutorDB {
     * Get a list of class names.
     *
     * @return List of class names.
+      post:
+       classes != null;
     */
    public static List<String> getClassNames() {
       List<String> classes = new ArrayList<String>();
