@@ -13,47 +13,31 @@ import java.util.*;
  * @author Simon Vurens (svurens@calpoly.edu)
  */
 public class NewTutGUI extends JPanel{
+	JTextField nameField;
+	CSTutor.Model.Manager.Tutorial newTut;
+	
 	public NewTutGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        
-      addName();
+		addName();
+	}
+	
+	public void onOpenPanel() {
+		newTut = new CSTutor.Model.Manager.Tutorial("", null);
 	}
 	
 	public void addName() {
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
 		JLabel nameLabel = new JLabel("Name: ");
-		JTextField nameField = new JTextField("Untitled");
+		nameField = new JTextField("Untitled");
 		namePanel.add(nameLabel);
 		namePanel.add(nameField);
 		this.add(namePanel);
 	}
 	
-	public void addButtons() {
-		JPanel butPanel = new JPanel();
-		
-        JButton canBut = new JButton("Cancel");
-        canBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Cancel button pressed");
-        	   setVisible(false);
-           }
-        });
-        butPanel.add(canBut);
-        
-        JButton kBut = new JButton("OK");
-        kBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("OK button pressed");
-        	   setVisible(false);
-           }
-        });
-        butPanel.add(kBut);
-        
-        this.add(butPanel);
+	public CSTutor.Model.Manager.Tutorial getNewTut() {
+		newTut.name = nameField.getText();
+		newTut.parent = ManagerGUI.managerModel.selectedUnit;
+		return newTut;
 	}
 }

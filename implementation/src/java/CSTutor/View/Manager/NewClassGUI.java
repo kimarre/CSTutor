@@ -18,18 +18,17 @@ public class NewClassGUI extends JPanel{
 	JList<String> enrollList;
 	public static CSTutor.Model.Manager.Class newClass;
 	public NewClassGUI() {
-		newClass = new CSTutor.Model.Manager.Class("");
         
         picker = new StudentPicker();
         picker.setVisible(false);
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        
-        
-        
         addNamePanel();
         addStudentPanel();
         addPermissions();
+	}
+	public void onOpenPanel() {
+		newClass = new CSTutor.Model.Manager.Class("");
 	}
 	public void addNamePanel() {
 		JPanel namePanel = new JPanel();
@@ -88,10 +87,18 @@ public class NewClassGUI extends JPanel{
 		JPanel perPanel = new JPanel();
 		JLabel perLabel = new JLabel("Permissions: ");
 		String[] permissions = {"All Users", "Students", "Professors"};
-		final JComboBox perOptions = new JComboBox(permissions);
+		final JComboBox<String> perOptions = new JComboBox<String>(permissions);
 		perOptions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				newClass.access = null;
+				if (perOptions.getSelectedItem().equals("All Users")) {
+					newClass.access = CSTutor.Model.Manager.Class.ClassAccessLevel.Guest;
+				}
+				if (perOptions.getSelectedItem().equals("Students")) {
+					newClass.access = CSTutor.Model.Manager.Class.ClassAccessLevel.Student;
+				}
+				if (perOptions.getSelectedItem().equals("Professors")) {
+					newClass.access = CSTutor.Model.Manager.Class.ClassAccessLevel.Professor;
+				}
 				System.out.println(perOptions.getSelectedItem());
 			}
 		});
@@ -102,32 +109,9 @@ public class NewClassGUI extends JPanel{
 	
 	}
 	
-	public void addButtons() {
-		JPanel butPanel = new JPanel();
-		
-        JButton canBut = new JButton("Cancel");
-        canBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Cancel button pressed");
-        	   setVisible(false);
-           }
-        });
-        butPanel.add(canBut);
-        
-        JButton kBut = new JButton("OK");
-        kBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   newClass.name = nameField.getText();
-        	   ManagerGUI.managerModel.createClass(newClass);
-        	   setVisible(false);
-           }
-        });
-        butPanel.add(kBut);
-        
-        this.add(butPanel);
+	public CSTutor.Model.Manager.Class getNewClass() {
+		newClass.name = nameField.getText();
+		System.out.println("New class of " + newClass);
+	   return newClass;
 	}
 }
