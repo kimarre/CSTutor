@@ -43,12 +43,11 @@ public class TutorDBTest {
       List<String> cols, vals;
       Map<String, String> correctrow, testrow;
       cols = Arrays.asList("username, hash, firstname, lastname, accessLevel");
-      
       vals = Arrays.asList("sdali", "DEADBEEF", "Salvador", "Dali", "Professor");
       correctrow  = mapFromLists(cols, vals);
       TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
       testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test user row.", correctrow, testrow);
+      assertEquals("Comparing correct and test row", correctrow, testrow);
    }
 
    /**
@@ -59,18 +58,76 @@ public class TutorDBTest {
    public void testSetGetUserTwice() {
       List<String> cols, vals;
       Map<String, String> correctrow, testrow;
-      cols = Arrays.asList("username, hash, firstname, lastname, accessLevel");
-      
+      cols = Arrays.asList("username, hash, firstname, lastname, accessLevel"); 
       vals = Arrays.asList("bobsmith", "DEADBEEF", "Bob", "Smith", "Student");
       correctrow  = mapFromLists(cols, vals);
       TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
       testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row.", correctrow, testrow);
+      assertEquals("Comparing correct and test row", correctrow, testrow);
 
       vals = Arrays.asList("bobsmith", "808FACED", "Bob", "Smith", "Student");
       correctrow  = mapFromLists(cols, vals);
       testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row.", correctrow, testrow);
+      assertEquals("Comparing correct and test row", correctrow, testrow);
+   }
+
+   /**
+     * Test methods setTutorialData and getTutorialData by adding a new entry,
+     * getting it back, and verifying its values.
+     */
+   @Test
+   public void testSetGetTutorialData() {
+      CSTutor.Model.Tutorial.TutorialData correctdata, testdata;
+      correctdata = new CSTutor.Model.Tutorial.TutorialData(
+       1111, "title", "description", "syntax", "example code",
+       "example output", "try it yourself", "has seen");
+      TutorDB.setTutorialData(data);
+      testdata = TutorDB.getTutorialData(1111);
+      assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
+      assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
+      assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
+      assertEquals("Comparing correct data and test data", correctdata.syntax, testdata.syntax);
+      assertEquals("Comparing correct data and test data", correctdata.exampleCode, testdata.exampleCode);
+      assertEquals("Comparing correct data and test data", correctdata.exampleOutput, testdata.exampleOutput);
+      assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
+      assertEquals("Comparing correct data and test data", correctdata.hasSeen, testdata.hasSeen);
+   }
+
+   /**
+     * Test methods setTutorialData and getTutorialData by adding a new entry,
+     * getting it back, and verifying its values. Then do it again to the same
+     * pageId but with different values
+     */
+   @Test
+   public void testSetGetTutorialDataTwice() {
+      CSTutor.Model.Tutorial.TutorialData correctdata, testdata;
+      correctdata = new CSTutor.Model.Tutorial.TutorialData(
+       1111, "title", "description", "syntax", "example code",
+       "example output", "try it yourself", "has seen");
+      TutorDB.setTutorialData(data);
+      testdata = TutorDB.getTutorialData(1111);
+      assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
+      assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
+      assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
+      assertEquals("Comparing correct data and test data", correctdata.syntax, testdata.syntax);
+      assertEquals("Comparing correct data and test data", correctdata.exampleCode, testdata.exampleCode);
+      assertEquals("Comparing correct data and test data", correctdata.exampleOutput, testdata.exampleOutput);
+      assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
+      assertEquals("Comparing correct data and test data", correctdata.hasSeen, testdata.hasSeen);
+
+      correctdata = new CSTutor.Model.Tutorial.TutorialData(
+       1111, "title", "different description", "syntax", "example code",
+       "example output", "try it yourself", "has seen");
+      TutorDB.setTutorialData(data);
+      testdata = TutorDB.getTutorialData(1111);
+      assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
+      assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
+      assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
+      assertEquals("Comparing correct data and test data", correctdata.syntax, testdata.syntax);
+      assertEquals("Comparing correct data and test data", correctdata.exampleCode, testdata.exampleCode);
+      assertEquals("Comparing correct data and test data", correctdata.exampleOutput, testdata.exampleOutput);
+      assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
+      assertEquals("Comparing correct data and test data", correctdata.hasSeen, testdata.hasSeen);
    }
 
 
