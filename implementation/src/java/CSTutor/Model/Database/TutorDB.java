@@ -24,7 +24,7 @@ public class TutorDB {
    private static final String db_path = "tutordb.db";
    private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
    private static Connection conn = connect();
-   private static List<CSTutor.Model.Manager.Class> classes = getClasses();
+   //private static List<CSTutor.Model.Manager.Class> classes = getClasses();
    
 /*** Helper methods *******************************************************************************/
 
@@ -89,7 +89,8 @@ public class TutorDB {
 /*** User methods *********************************************************************************/
 
    /**
-    * Add new user
+    * Set a user's attributes. If the username does not exist in the database, add a new entry.
+    * Otherwise overwrite the entry.
     *
     * @param username user's username
     * @param hash user's hash
@@ -100,10 +101,10 @@ public class TutorDB {
        username != null && hash != null && firstname != null
        && lastname != null && accessLevel != null;
     */
-   public static void addUser(String username, String hash, String firstname,
+   public static void setUser(String username, String hash, String firstname,
     String lastname, String accessLevel) {
       try {
-         PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Users VALUES (?, ?, ?, ?, ?)");
+         PreparedStatement s = conn.prepareStatement("INSERT OR REPLACE INTO Users VALUES (?, ?, ?, ?, ?)");
          List<String> values = Arrays.asList(username, hash, firstname, lastname, accessLevel);
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
@@ -146,15 +147,16 @@ public class TutorDB {
 /*** TutorialData methods *************************************************************************/
 
    /**
-    * Add new tutorial 
+    * Set a TutorialData row'a attributes. If the pageId does not exist in the database, add a new entry.
+    * Otherwise overwrite the entry.
     *
     * @param tutorial the Tutorial to add
       pre:
        tutorial != null && tutorial.description != null;
     */
-   public static void addTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
+   public static void setTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
       try {
-         PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO TutorialData VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+         PreparedStatement s = conn.prepareStatement("INSERT OR REPLACE INTO TutorialData VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
          List<String> values = Arrays.asList(String.valueOf(tutorial.pageId), tutorial.title,
           tutorial.description.intro, tutorial.description.syntax, tutorial.description.exampleCode,
           tutorial.description.exampleOutput, tutorial.tryItYourself);
