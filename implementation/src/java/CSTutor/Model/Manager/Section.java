@@ -28,6 +28,12 @@ public class Section {
 	   this.units = new ArrayList<Unit>();
 	   this.units.add(new Unit("Uncategorized", this));
    }
+
+   public Section(String name, Class parent) {
+      this.name = name;
+      this.parent = parent;
+   }
+   
    public String toString() {
 	   return name;
    }

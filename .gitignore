@@ -4,3 +4,8 @@
 design/
 implementation/src/java/CSTutor.jar
 *.form
+implementation/src/java/CSTutor/View/Tutorial/TutorialDriver.java
+makedammit
+migrate-here
+migrate-tests
+rundammit

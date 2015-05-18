@@ -72,7 +72,6 @@ doc7:
 		rm -rf ../../../design/javadoc
 		mv .javadoc ../../../design/javadoc
 
-
 dir:	
 		mkdir -p .classes
 		cp Manifest.txt .classes/Manifest.txt
@@ -83,3 +82,7 @@ clean:
 
 run:
 		java -cp CSTutor.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/View/weblaf-complete-1.28.jar:CSTutor/View/AbsoluteLayout.jar:CSTutor/Model/Database/sqlite-jdbc-3.8.7.jar CSTutor.View.Overview
+
+test:
+		cd ../../../testing/implementation/src/java/
+		
