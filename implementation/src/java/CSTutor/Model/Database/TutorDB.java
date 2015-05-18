@@ -35,7 +35,7 @@ public class TutorDB {
      pre:
       new java.io.File(db_path).exists();
      post:
-      c != null;
+      return != null;
    */
    private static Connection connect() {
       try {
@@ -110,8 +110,8 @@ public class TutorDB {
             s.setString(i+1, values.get(i));
          }
          s.executeUpdate();
-         commit();
          s.close();
+         commit();
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
@@ -165,8 +165,8 @@ public class TutorDB {
          }
          s.setBoolean(values.size(), tutorial.hasSeen);
          s.executeUpdate();
-         commit();
          s.close();
+         commit();
       } catch(Exception e) {
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
@@ -208,7 +208,7 @@ public class TutorDB {
        tutorial != null && tutorial.parent != null && tutorial.parent.parent != null
        && tutorial.parent.parent.parent != null;
       post:
-       pages != null;
+       return != null;
     */
    public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
       List<CSTutor.Model.Manager.Page> pages = new ArrayList<CSTutor.Model.Manager.Page>();
@@ -269,7 +269,7 @@ public class TutorDB {
       pre:
        unit != null && unit.parent != null && unit.parent.parent != null;
       post:
-       tutorials != null;
+       return != null;
     */
    public static List<CSTutor.Model.Manager.Tutorial> getTutorials(CSTutor.Model.Manager.Unit unit) {
       List<CSTutor.Model.Manager.Tutorial> tutorials = new ArrayList<CSTutor.Model.Manager.Tutorial>();
@@ -330,7 +330,7 @@ public class TutorDB {
       pre:
        section != null && section.parent != null;
       post:
-       units != null;
+       return != null;
     */
    public static List<CSTutor.Model.Manager.Unit> getUnits(CSTutor.Model.Manager.Section section) {
       List<CSTutor.Model.Manager.Unit> units = new ArrayList<CSTutor.Model.Manager.Unit>();
@@ -390,7 +390,7 @@ public class TutorDB {
       pre:
        clas != null;
       post:
-       sections != null;
+       return != null;
     */
    public static List<CSTutor.Model.Manager.Section> getSections(CSTutor.Model.Manager.Class clas) {
       List<CSTutor.Model.Manager.Section> sections = new ArrayList<CSTutor.Model.Manager.Section>();
@@ -485,7 +485,7 @@ public class TutorDB {
     *
     * @return List of classes
       post:
-       classes != null;
+       return != null;
     */
    public static List<CSTutor.Model.Manager.Class> getClasses() {
       List<CSTutor.Model.Manager.Class> classes = new ArrayList<CSTutor.Model.Manager.Class>();
