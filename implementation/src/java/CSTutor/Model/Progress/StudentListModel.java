@@ -18,7 +18,7 @@ public class StudentListModel<Student> extends DefaultListModel<Student>
      pre:
        // String name must not be null.
        obj != null;
-     *
+     *                                                  </pre>
      */
     public boolean contains(Object obj)
     {
@@ -39,7 +39,7 @@ public class StudentListModel<Student> extends DefaultListModel<Student>
      pre:
        // Object obj must not be null.
        obj != null;
-     *
+     *                                                  </pre>
      */
     public int indexOf(Object obj)
     {
@@ -67,7 +67,7 @@ public class StudentListModel<Student> extends DefaultListModel<Student>
      pre:
        // Student st must not be null.
        st != null;
-     *
+     *                                                  </pre>
      */
     public ArrayList<Student> getSimilarStudents(Student st)
     {

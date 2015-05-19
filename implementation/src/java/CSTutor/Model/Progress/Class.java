@@ -24,7 +24,7 @@ public class Class
      pre:
        // String name must not be null.
        name != null && !name.isEmpty();
-     *
+     *                                                  </pre>
      */
     public String toString()
     {
@@ -47,7 +47,7 @@ public class Class
        name != null && !name.isEmpty();
        // Class cl must not be null.
        cl != null;
-     *
+     *                                                  </pre>
      */
     public boolean equals(Class cl)
     {

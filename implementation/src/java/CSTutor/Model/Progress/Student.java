@@ -29,7 +29,7 @@ public class Student
      pre:
        // String name must not be null.
        name != null && !name.isEmpty();
-     *
+     *                                                  </pre>
      */
     public String toString()
     {
@@ -47,7 +47,7 @@ public class Student
      post:
        // The class cl is now in this.enrolledClasses.
        enrolledClasses'.contains(cl);
-     *
+     *                                                  </pre>
      */
     public void addClass(Class cl)
     {
@@ -63,7 +63,7 @@ public class Student
        name != null && !name.isEmpty();
        // Student st must not be null.
        st != null;
-     *
+     *                                                  </pre>
      */
     public boolean equals(Student student)
     {
