@@ -17,6 +17,25 @@ import static org.junit.Assert.*;
  * @author Kim Arre (karre@calpoly.edu)
  * @version 18May2015
  */
+
+/****
+ *
+ * Class TutorialEditorTest is the companion testing class for TutorialEditor.  
+ * It implements the following module test plan:
+ *									  <pre>
+ *    Phase 1 (Save): Verify it won't add bad data.
+ *              - Linked list size stays 2.
+ *              - Result from the save() call returns false for if it was added.
+ *
+ *    Phase 2 (Save): Verify it will add valid data (title, desc, syntax).
+ *              - save() call returns true .
+ *              - The size of the track increases.
+ * 
+ *    Phase 3 (Save): Verify the correct data was added to the new node in the list.
+ * 
+ *    Phase 4 (Preview): Check that it's only a preview and not able to be navigated around in.
+ *									 </pre>
+ */
 public class TutorialEditorTest {
     TutorialTrack track = new TutorialTrack();
     
