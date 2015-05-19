@@ -350,6 +350,7 @@ public class ManagerGUI extends JPanel {
  		 treeModel.insertNodeInto(sectNode, classNode, 0);
  		 DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(toInsert.sections.get(0).units.get(0));
  		 treeModel.insertNodeInto(unitNode, sectNode, 0);
+ 		 managerModel.data.add(toInsert);
     }
     public static void addSection(CSTutor.Model.Manager.Section toInsert) {
     	DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
@@ -366,6 +367,8 @@ public class ManagerGUI extends JPanel {
 		treeModel.insertNodeInto(sectNode, node, 0);
  		DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(toInsert.units.get(0));
  		treeModel.insertNodeInto(unitNode, sectNode, 0);
+
+		 managerModel.selectedClass.sections.add(toInsert);
     }
     
     public static void addTutorial(CSTutor.Model.Manager.Tutorial toInsert) {
@@ -380,6 +383,7 @@ public class ManagerGUI extends JPanel {
     	System.out.println("Inserting tutorial " + toInsert +" into tree");
     	DefaultMutableTreeNode tutNode = new DefaultMutableTreeNode(toInsert);
     	treeModel.insertNodeInto(tutNode, node, 0);
+		 managerModel.selectedUnit.tutorials.add(toInsert);
     }    
     public static void addUnit(CSTutor.Model.Manager.Unit toInsert) {
     	DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
@@ -393,5 +397,6 @@ public class ManagerGUI extends JPanel {
     	System.out.println("Inserting tutorial " + toInsert +" into tree");
     	DefaultMutableTreeNode tutNode = new DefaultMutableTreeNode(toInsert);
     	treeModel.insertNodeInto(tutNode, node, 0);
+		 managerModel.selectedSection.units.add(toInsert);
     }
 }

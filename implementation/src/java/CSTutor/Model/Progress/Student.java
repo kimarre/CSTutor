@@ -55,6 +55,16 @@ public class Student
         enrolledClasses.add(cl);
     }
     
+    /**
+     * Returns if the names of the students are the same.
+     *                                                  <pre>
+     pre:
+       // String name must not be null.
+       name != null && !name.isEmpty();
+       // Student st must not be null.
+       st != null;
+     *
+     */
     public boolean equals(Student student)
     {
         if(student.toString().equals(name))

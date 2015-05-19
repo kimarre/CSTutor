@@ -8,13 +8,17 @@ import javax.swing.event.*;
 import CSTutor.Model.Progress.InstructorModel;
 
 /**
- * @author Erica Solum
- *
+ * Class ListListener provides the method that is called when changes occur
+ * in the list displayed in the side bar, such as when a user selects a new
+ * list item. 
+ * @author Erica Solum (esolum@calpoly.edu)
+ * @version 18May15
  */
 public class ListListener implements ListSelectionListener
 {
     private MainContent main;
     private InstructorModel model;
+    
     public ListListener(MainContent main, InstructorModel model)
     {
         this.main = main;
@@ -22,6 +26,8 @@ public class ListListener implements ListSelectionListener
     }
 
     /**
+     * This method is called every time a change occurs in the list
+     * displayed in the left side bar. If a selection change occurs,
      * 
      */
     public void valueChanged(ListSelectionEvent event)
@@ -38,16 +44,7 @@ public class ListListener implements ListSelectionListener
             
             System.out.println("Selected " + obj.toString());
             
-            JLabel testLabel = new JLabel(obj.toString());
-            testLabel.setFont(new Font("Avenir", Font.PLAIN, 25));
-            main.removeAll();
-            main.add(testLabel);
-            
-            
-            
-            
-            main.revalidate();
-            main.repaint();
+            main.setTitleText(obj.toString());
             
             
         }
