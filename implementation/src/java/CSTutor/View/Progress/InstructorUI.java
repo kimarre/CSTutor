@@ -216,7 +216,7 @@ public class InstructorUI extends JPanel
      * Sets up the search field and button on the Class tab and implements a
      * corresponding action listener for it.
      */
-    private makeClassSearchField()
+    private void makeClassSearchField()
     {
     
     }
