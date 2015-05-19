@@ -75,6 +75,11 @@ public class TutorialData {
        return description.exampleOutput;
    }
    
+   /** Retrieves the tutorial's Try It Yourself question */
+   public String getTryIt() {
+       return tryItYourself;
+   }
+   
    /** Sets all the fields for TutorialData */
    public void setAll(String newTitle, String desc, String syn, String code, String output, String tryIt) {
        title = newTitle;

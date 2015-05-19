@@ -34,9 +34,10 @@ public class TutorialEditor {
 
       post:
          //
-         // The edited page exists or has been added to the tutorial track.
+         // All pages in tutorialTrack are valid pages containing titles, syntax, and a description.
          //
-         authorPages'.contains(this);
+         forall(PageData page; tutorialTrack.contains(page); 
+          !page.title.equals("") && !page.description.intro.equals("") && !page.description.syntax.equals("");
 
    */
 
