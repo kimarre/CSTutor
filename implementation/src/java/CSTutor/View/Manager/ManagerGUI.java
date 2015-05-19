@@ -28,6 +28,12 @@ public class ManagerGUI extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
+        
+        System.out.println("Attempt to get data");
+        managerModel.data = CSTutor.Model.Database.TutorDB.getClasses();
+        System.out.println("Data got?");
+        
+        /*
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 103"));
@@ -39,6 +45,7 @@ public class ManagerGUI extends JPanel {
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Hello World", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Conditionals", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Loops", managerModel.selectedUnit));
+        */
         
         
         addManagerContent();
@@ -264,6 +271,7 @@ public class ManagerGUI extends JPanel {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("Move Section button pressed");
+        	   System.out.println("Moving not yet implemented");
            }
         });
         buttonPanel.add(moveBut);
@@ -279,15 +287,16 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(moveupBut);*/
         
-        JButton movedownBut = new JButton("Move Down");
-        movedownBut.addActionListener(new ActionListener()
+        JButton saveBut = new JButton("Save");
+        saveBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Move Section button pressed");
+        	   System.out.println("Save pressed");
+        	   CSTutor.Model.Database.TutorDB.saveClasses(managerModel.data);
            }
         });
-        buttonPanel.add(movedownBut);
+        buttonPanel.add(saveBut);
         
         classPanel.add(buttonPanel, BorderLayout.SOUTH);
         panel.add(classPanel);
