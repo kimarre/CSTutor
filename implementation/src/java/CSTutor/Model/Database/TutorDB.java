@@ -476,14 +476,14 @@ public class TutorDB {
     */
    private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
       switch (access) {
-         case ClassAccessLevel.Guest:
+         case Guest:
             return "Guest";
-         case ClassAccessLevel.Student:
-            return "Guest";
-         case ClassAccessLevel.Assistant:
-            return "Guest";
-         case ClassAccessLevel.Professor:
-            return "Guest";
+         case Student:
+            return "Student";
+         case Assistant:
+            return "Assistant";
+         case Professor:
+            return "Professor";
       }
       return null;
    }
@@ -522,10 +522,7 @@ public class TutorDB {
          ResultSet r = s.executeQuery("SELECT * FROM classes;");
          while (r.next()) {
             c = new CSTutor.Model.Manager.Class(r.getString("className"));
-            System.err.println("...");
             c.sections = getSections(c);
-            System.err.println("...");
-            System.err.println(r.getString("accessLevel"));
             c.access = getAccessEnum(r.getString("accessLevel"));
             classes.add(c);
          }
