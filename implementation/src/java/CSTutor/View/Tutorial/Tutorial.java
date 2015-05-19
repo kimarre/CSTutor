@@ -6,6 +6,7 @@
 package CSTutor.View.Tutorial;
 
 import CSTutor.Model.Tutorial.*;
+import java.awt.Color;
 import java.util.*;
 import javax.swing.JFrame;
 
@@ -29,12 +30,14 @@ public class Tutorial extends javax.swing.JPanel {
     public Tutorial() {
         initComponents();
         
+        /*setBackground(new Color(250, 250, 250));
+        TryItYourself.setBackground(new Color(250, 250, 250));
+        jPanel1.setBackground(new Color(250, 250, 250));
+        descriptionPanel.setBackground(new Color(250, 250, 250));*/
+        
         sideModule = new RoadmapModule();
         
-        
-        
         setAllTheThings(tutorialTrack.track.peekFirst());
-        
         
         this.setVisible(true);
     }
@@ -315,6 +318,8 @@ public class Tutorial extends javax.swing.JPanel {
             }
         });
     }
+    
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

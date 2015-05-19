@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Kim Arre (karre@calpoly.edu)
+ * @version 18May2015
  */
 public class TutorialEditorTest {
     TutorialTrack track = new TutorialTrack();
@@ -70,7 +71,7 @@ public class TutorialEditorTest {
      */
     @Test
     public void testPreview() {
-        
+       
     }
     
 }
