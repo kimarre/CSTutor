@@ -54,11 +54,13 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Tutorial/*.java \
 		$(TEST_SRC_DIR)/Progress/*.java \
 		$(TEST_SRC_DIR)/Database/*.java \
+		$(TEST_SRC_DIR)/Manager/*.java 
 
 TEST_CLASS = .TestClasses/test/CSTutor/Model//User/*. \
-		.TestClasses/test/CSTutor/Model//Tutorial/*.java \
-		.TestClasses/test/CSTutor/Model//Progress/*.java \
-		.TestClasses/test/CSTutor/Model//Database/*.java \
+		.TestClasses/CSTutor/Model/Tutorial/*.class \
+		.TestClasses/CSTutor/Model/Progress/*.class \
+		.TestClasses/CSTutor/Model/Database/*.class \
+		.TestClasses/CSTutor/Model/Manager/*.class
 
 #
 # Define the path to the implementation source files.
@@ -95,7 +97,7 @@ dir:
 		ls -a
 
 clean:
-		rm -rf .classes/* .javadoc/*
+		rm -rf .classes/ .javadoc/
 
 run:
 		java -cp CSTutor.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/View/weblaf-complete-1.28.jar:CSTutor/View/AbsoluteLayout.jar:CSTutor/Model/Database/sqlite-jdbc-3.8.7.jar CSTutor.View.Overview
@@ -104,7 +106,12 @@ TestDir:
 		mkdir -p .TestClasses
 
 test_comp:
-		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TESTS)
+		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TEST_SRC_DIR)/Manager/*.java
 
-test:
-		java -cp .:CSTutor.jar:junit-4.7.jar org.junit.runner.JUnitCore .TestClasses/test/CSTutor/Model/User/*.class
+test_run:
+		java -cp .:CSTutor.jar:junit-4.7.jar org.junit.runner.JUnitCore .TestClasses/CSTutor/Model/Manager/*.class
+
+test_clean:
+		rm -rf .TestClasses/
+
+test:	TestDir test_comp test_run
