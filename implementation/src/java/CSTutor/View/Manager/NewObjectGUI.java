@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import java.util.*;
 /****
@@ -28,6 +29,7 @@ public class NewObjectGUI extends JFrame {
 	private NewUnitGUI newUnit;
 	private NewTutGUI newTut;
 	private JPanel midPanel;
+	JComboBox<String> objectSelect;
 	
 	/**
 	 * Initializes private variables, generates the frame, and adds
@@ -49,6 +51,8 @@ public class NewObjectGUI extends JFrame {
       
       addObjectSelect();
       add(midPanel);
+
+      newClass.onOpenPanel();
       addComp(newClass);
       addButtons();
       this.pack();
@@ -69,22 +73,25 @@ public class NewObjectGUI extends JFrame {
     */
    public void addObjectSelect() {
       String[] options = {"Class", "Section", "Unit", "Tutorial"};
-      final JComboBox<String> objectSelect = new JComboBox<String>(options);
+      objectSelect = new JComboBox<String>(options);
       objectSelect.addActionListener(new ActionListener()
       {
          public void actionPerformed(ActionEvent event)
          {
          	if (objectSelect.getSelectedItem().equals("Class")) {
+         		newClass.onOpenPanel();
          		addComp(newClass);
          	}
-
          	else if (objectSelect.getSelectedItem().equals("Section")) {
+         		newSect.onOpenPanel();
          		addComp(newSect);
          	}
          	else if (objectSelect.getSelectedItem().equals("Unit")) {
+         		newUnit.onOpenPanel();
          		addComp(newUnit);
          	}
          	else if (objectSelect.getSelectedItem().equals("Tutorial")) {
+         		newTut.onOpenPanel();
          		addComp(newTut);
          	}
       	
@@ -117,7 +124,24 @@ public class NewObjectGUI extends JFrame {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("OK button pressed");
-        	   setVisible(false);
+	         	if (objectSelect.getSelectedItem().equals("Class")) {
+	         		System.out.println("adding new class: " + newClass.getNewClass());
+	         		ManagerGUI.addClass(newClass.getNewClass());
+	         	}
+	         	else if (objectSelect.getSelectedItem().equals("Section")) {
+	         		System.out.println("adding new section: " + newSect.getNewSection());
+	         		ManagerGUI.addSection(newSect.getNewSection());
+	         	}
+	         	else if (objectSelect.getSelectedItem().equals("Unit")) {
+	         		System.out.println("adding new unit: " + newUnit.getNewUnit());
+	         		ManagerGUI.addUnit(newUnit.getNewUnit());
+	         	}
+	         	else if (objectSelect.getSelectedItem().equals("Tutorial")) {
+	         		System.out.println("adding new tutorial: " + newTut.getNewTut());
+	         		ManagerGUI.addTutorial(newTut.getNewTut());
+	         		addComp(newTut);
+	         	}
+	        	setVisible(false);
            }
         });
         butPanel.add(kBut);

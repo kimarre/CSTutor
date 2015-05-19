@@ -14,6 +14,8 @@ import java.util.*;
 
 public class NewSectionGUI extends JPanel{
 	SectionStudentPicker picker;
+	CSTutor.Model.Manager.Section newSect;
+	JTextField nameField;
 	public NewSectionGUI() {
         
         picker = new SectionStudentPicker();
@@ -28,11 +30,15 @@ public class NewSectionGUI extends JPanel{
         addPermissions();
         addProf();
 	}
+	public void onOpenPanel() {
+		newSect = new CSTutor.Model.Manager.Section("", null, null, null);
+		newSect.parent = ManagerGUI.managerModel.selectedClass;
+	}
 	public void addNamePanel() {
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
 		JLabel nameLabel = new JLabel("Section Name: ");
-		JTextField nameField = new JTextField("Untitled");
+		nameField = new JTextField("Untitled");
 		namePanel.add(nameLabel);
 		namePanel.add(nameField);
 		this.add(namePanel);
@@ -85,7 +91,7 @@ public class NewSectionGUI extends JPanel{
 		JPanel perPanel = new JPanel();
 		JLabel perLabel = new JLabel("Permissions: ");
 		String[] permissions = {"All Users", "Students", "Professors"};
-		final JComboBox perOptions = new JComboBox(permissions);
+		final JComboBox<String> perOptions = new JComboBox<String>(permissions);
 		perOptions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(perOptions.getSelectedItem());
@@ -135,5 +141,10 @@ public class NewSectionGUI extends JPanel{
         butPanel.add(kBut);
         
         this.add(butPanel);
+	}
+	public CSTutor.Model.Manager.Section getNewSection() {
+		newSect.name = nameField.getText();
+		//students?
+		return newSect;
 	}
 }

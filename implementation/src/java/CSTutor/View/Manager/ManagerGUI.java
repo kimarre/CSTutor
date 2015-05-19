@@ -8,7 +8,6 @@ import javax.swing.tree.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 
-
 import java.util.*;
 import java.io.*;
 /**
@@ -19,9 +18,9 @@ public class ManagerGUI extends JPanel {
 	public NewObjectGUI newObject;
 	public MoveGUI moveTut;
 	
-	DefaultMutableTreeNode root;
-	DefaultTreeModel treeModel;
-	JTree tree;
+	public static DefaultMutableTreeNode root;
+	public static DefaultTreeModel treeModel;
+	public static JTree tree;
 	
 	public static CSTutor.Model.Manager.Manager managerModel = new CSTutor.Model.Manager.Manager();
 
@@ -29,6 +28,12 @@ public class ManagerGUI extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
+        
+        System.out.println("Attempt to get data");
+        managerModel.data = CSTutor.Model.Database.TutorDB.getClasses();
+        System.out.println("Data got?");
+        
+        /*
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 103"));
@@ -40,6 +45,7 @@ public class ManagerGUI extends JPanel {
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Hello World", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Conditionals", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Loops", managerModel.selectedUnit));
+        */
         
         
         addManagerContent();
@@ -47,44 +53,16 @@ public class ManagerGUI extends JPanel {
     }
     public void addManagerContent() {
         JPanel manPanel = new JPanel();
-        manPanel.setLayout(new BoxLayout(manPanel, BoxLayout.X_AXIS));
+        manPanel.setLayout(new GridLayout(1, 2, 1, 50));
+        manPanel.setBorder(new EmptyBorder(10, 50, 10, 50));
         addClassSection(manPanel);
         addTutorialSection(manPanel);
-        addRightButtons(manPanel);
         this.add(manPanel);
-    }
-    
-    public void addRightButtons(JPanel panel) {
-    	JPanel butPanel = new JPanel();
-        butPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-    	butPanel.setLayout(new GridLayout(5, 1, 1, 50));
-    	
-        JButton progBut = new JButton("Student Progress");
-        progBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Student Progress button pressed");
-           }
-        });
-        butPanel.add(progBut); 
-        
-        JButton offBut = new JButton("Office Hours");
-        offBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Office Hours button pressed");
-           }
-        });
-        butPanel.add(offBut);
-        
-    	panel.add(butPanel);
     }
     
     public void addTutorialSection(JPanel panel) {
     	JPanel tutPanel = new JPanel();
-    	tutPanel.setLayout(new BoxLayout(tutPanel, BoxLayout.Y_AXIS));
+    	tutPanel.setLayout(new BorderLayout());
         tutPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("PREVIEW GOES HERE");
 
@@ -96,34 +74,19 @@ public class ManagerGUI extends JPanel {
                 	System.out.println("Nothing selected");
                 }
                 else {
-   	          	System.out.println(node.toString() + " " + node.getLevel());
-   	          	switch(node.getLevel()) {
-	   	          	case 1:
-	   	          		managerModel.selectClass((CSTutor.Model.Manager.Class)node.getUserObject());
-	   	          		break;
-	   	          	case 2:
-	   	          		managerModel.selectSection((CSTutor.Model.Manager.Section)node.getUserObject());
-	   	          		break;
-	   	          	case 3:
-	   	          		managerModel.selectUnit((CSTutor.Model.Manager.Unit)node.getUserObject());
-	   	          		break;
-	   	          	case 4:
-	   	          		managerModel.selectTutorial((CSTutor.Model.Manager.Tutorial)node.getUserObject());
-	   	          		break;
-   	          	 }
+   	          		System.out.println(node.toString() + " " + node.getLevel());
                 }
             }
         });
         //fileTree.setVisibleRowCount(15);
         JScrollPane fileTreeScroll = new JScrollPane(fileTree);
-        tutPanel.add(fileTreeScroll);
+        tutPanel.add(fileTreeScroll, BorderLayout.CENTER);
         
         
         
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 2, 10, 10));
+        buttonPanel.setLayout(new GridLayout(1, 2, 10, 10));
 
-        buttonPanel.add(new JPanel());
         buttonPanel.add(new JPanel());
         
         JButton editBut = new JButton("Edit");
@@ -146,16 +109,15 @@ public class ManagerGUI extends JPanel {
         });
         buttonPanel.add(viewBut);
         buttonPanel.add(new JPanel());
-        buttonPanel.add(new JPanel());
         
-        tutPanel.add(buttonPanel);
+        tutPanel.add(buttonPanel, BorderLayout.SOUTH);
         
         panel.add(tutPanel);
     }
     
     public void addClassSection(JPanel panel) {
     	JPanel classPanel = new JPanel();
-    	classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
+    	classPanel.setLayout(new BorderLayout());
         classPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         // Make classnode for each in class in db
@@ -198,40 +160,6 @@ public class ManagerGUI extends JPanel {
         	   }
         }
         
-        /*
-        DefaultMutableTreeNode s1 = new DefaultMutableTreeNode("Section 1");
-        DefaultMutableTreeNode s2 = new DefaultMutableTreeNode("Section 2");
-        DefaultMutableTreeNode s3 = new DefaultMutableTreeNode("Section 3");
-        DefaultMutableTreeNode s4 = new DefaultMutableTreeNode("Section 4");
-        
-        classNodes.get(0).add(s1);
-        classNodes.get(0).add(s2);
-        classNodes.get(0).add(s3);
-        classNodes.get(0).add(s4);
-
-        // Add all class nodes
-        for (int i = 0; i < classNodes.size(); i++) {
-            root.add(classNodes.get(i));
-        }
-        
-        DefaultMutableTreeNode u1 = new DefaultMutableTreeNode("(no unit)");
-        DefaultMutableTreeNode u2 = new DefaultMutableTreeNode("Final Review");
-        DefaultMutableTreeNode t1 = new DefaultMutableTreeNode("Hello World");
-        DefaultMutableTreeNode t2 = new DefaultMutableTreeNode("Variables");
-        DefaultMutableTreeNode t3 = new DefaultMutableTreeNode("Conditionals");
-        DefaultMutableTreeNode p1 = new DefaultMutableTreeNode("Introduction");
-        DefaultMutableTreeNode p2 = new DefaultMutableTreeNode("Printing Text");
-        DefaultMutableTreeNode p3 = new DefaultMutableTreeNode("Special Characters");
-        t1.add(p1);
-        t1.add(p2);
-        t1.add(p3);
-        u1.add(t1);
-        u1.add(t2);
-        u1.add(t3);
-        s1.add(u1);
-        s1.add(u2);
-
-        final JTree fileTree = new JTree(root); */
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             public void valueChanged(TreeSelectionEvent e) {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
@@ -262,7 +190,7 @@ public class ManagerGUI extends JPanel {
         //fileTree.setVisibleRowCount(15);
         JScrollPane fileTreeScroll = new JScrollPane(fileTree);*/
         JScrollPane fileTreeScroll = new JScrollPane(tree);
-        classPanel.add(fileTreeScroll);
+        classPanel.add(fileTreeScroll, BorderLayout.CENTER);
         
         
         
@@ -270,7 +198,7 @@ public class ManagerGUI extends JPanel {
         
         //-------------------BUTTONS-------------------
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 3, 10, 10));
+        buttonPanel.setLayout(new GridLayout(1, 4, 10, 10));
         
         JButton newCBut = new JButton("New...");
         /**
@@ -336,27 +264,19 @@ public class ManagerGUI extends JPanel {
            }
         });
         buttonPanel.add(delBut);
-        
-        JButton renameBut = new JButton("Save");
-        renameBut.addActionListener(new ActionListener()
-        {
-           public void actionPerformed(ActionEvent event)
-           {
-        	   System.out.println("Save button pressed");
-           }
-        });
-        buttonPanel.add(renameBut);
-        
+
         JButton moveBut = new JButton("Move...");
         moveBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("Move Section button pressed");
+        	   System.out.println("Moving not yet implemented");
            }
         });
         buttonPanel.add(moveBut);
         
+        /*
         JButton moveupBut = new JButton("Move Up");
         moveupBut.addActionListener(new ActionListener()
         {
@@ -365,24 +285,20 @@ public class ManagerGUI extends JPanel {
         	   System.out.println("Move Section button pressed");
            }
         });
-        buttonPanel.add(moveupBut);
+        buttonPanel.add(moveupBut);*/
         
-        JButton movedownBut = new JButton("Move Down");
-        movedownBut.addActionListener(new ActionListener()
+        JButton saveBut = new JButton("Save");
+        saveBut.addActionListener(new ActionListener()
         {
            public void actionPerformed(ActionEvent event)
            {
-        	   System.out.println("Move Section button pressed");
+        	   System.out.println("Save pressed");
+        	   CSTutor.Model.Database.TutorDB.saveClasses(managerModel.data);
            }
         });
-        buttonPanel.add(movedownBut);
-
-
-        buttonPanel.add(new JPanel());
-        buttonPanel.add(new JPanel());
-        buttonPanel.add(new JPanel());
+        buttonPanel.add(saveBut);
         
-        classPanel.add(buttonPanel);
+        classPanel.add(buttonPanel, BorderLayout.SOUTH);
         panel.add(classPanel);
     }
     
@@ -425,5 +341,57 @@ public class ManagerGUI extends JPanel {
         }
         public void treeStructureChanged(TreeModelEvent e) {
         }
+    }
+    	
+    public static void addClass(CSTutor.Model.Manager.Class toInsert) {
+   	 DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(toInsert);
+ 		 treeModel.insertNodeInto(classNode, root, 0);
+ 		 DefaultMutableTreeNode sectNode = new DefaultMutableTreeNode(toInsert.sections.get(0));
+ 		 treeModel.insertNodeInto(sectNode, classNode, 0);
+ 		 DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(toInsert.sections.get(0).units.get(0));
+ 		 treeModel.insertNodeInto(unitNode, sectNode, 0);
+    }
+    public static void addSection(CSTutor.Model.Manager.Section toInsert) {
+    	DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+    	System.out.println("Node is " + node);
+    	while (node.getLevel() > 1) {
+    		node = (DefaultMutableTreeNode)node.getParent();
+    	}
+    	if (node.getLevel() != 1) {
+    		System.out.println("Error: No class selected");
+    		return;
+    	}
+		System.out.println("Inserting section " + toInsert + " into tree");
+		DefaultMutableTreeNode sectNode = new DefaultMutableTreeNode(toInsert);
+		treeModel.insertNodeInto(sectNode, node, 0);
+ 		DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(toInsert.units.get(0));
+ 		treeModel.insertNodeInto(unitNode, sectNode, 0);
+    }
+    
+    public static void addTutorial(CSTutor.Model.Manager.Tutorial toInsert) {
+    	DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+    	while (node.getLevel() > 3) {
+    		node = (DefaultMutableTreeNode)node.getParent();
+    	}
+    	if (node.getLevel() != 3) {
+    		System.out.println("Error: No unit selected");
+    		return;
+    	}
+    	System.out.println("Inserting tutorial " + toInsert +" into tree");
+    	DefaultMutableTreeNode tutNode = new DefaultMutableTreeNode(toInsert);
+    	treeModel.insertNodeInto(tutNode, node, 0);
+    }    
+    public static void addUnit(CSTutor.Model.Manager.Unit toInsert) {
+    	DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+    	while (node.getLevel() > 2) {
+    		node = (DefaultMutableTreeNode)node.getParent();
+    	}
+    	if (node.getLevel() != 2) {
+    		System.out.println("Error: No section selected");
+    		return;
+    	}
+    	System.out.println("Inserting tutorial " + toInsert +" into tree");
+    	DefaultMutableTreeNode tutNode = new DefaultMutableTreeNode(toInsert);
+    	treeModel.insertNodeInto(tutNode, node, 0);
     }
 }
