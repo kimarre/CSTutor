@@ -139,7 +139,6 @@ public class NewObjectGUI extends JFrame {
 	         	else if (objectSelect.getSelectedItem().equals("Tutorial")) {
 	         		System.out.println("adding new tutorial: " + newTut.getNewTut());
 	         		ManagerGUI.addTutorial(newTut.getNewTut());
-	         		addComp(newTut);
 	         	}
 	        	setVisible(false);
            }
