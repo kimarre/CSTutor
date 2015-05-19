@@ -123,7 +123,7 @@ public class Tutorial extends javax.swing.JPanel {
                 toBeginningButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(toBeginningButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, -1, 40));
+        jPanel1.add(toBeginningButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, 160, 40));
 
         roadmapList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
