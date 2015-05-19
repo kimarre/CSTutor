@@ -462,8 +462,6 @@ public class TutorDB {
             return ClassAccessLevel.Guest;
          case "Student":
             return ClassAccessLevel.Student;
-         case "Assistant":
-            return ClassAccessLevel.Assistant;
          case "Professor":
             return ClassAccessLevel.Professor;
       }
@@ -482,8 +480,6 @@ public class TutorDB {
             return "Guest";
          case Student:
             return "Student";
-         case Assistant:
-            return "Assistant";
          case Professor:
             return "Professor";
       }
