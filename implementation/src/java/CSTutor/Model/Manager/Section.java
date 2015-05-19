@@ -31,6 +31,9 @@ public class Section {
 
    public Section(String name, Class parent) {
       this.name = name;
+      this.students = new ArrayList<User>();
+      this.professor = null;
+      this.units = new ArrayList<Unit>();
       this.parent = parent;
    }
    
