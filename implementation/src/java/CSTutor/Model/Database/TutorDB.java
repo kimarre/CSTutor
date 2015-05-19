@@ -80,6 +80,7 @@ public class TutorDB {
       try {
          conn.commit();
       } catch(Exception e) {
+         System.err.println("Error in commit()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -113,6 +114,7 @@ public class TutorDB {
          s.close();
          commit();
       } catch(Exception e) {
+         System.err.println("Error in setUser()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -168,6 +170,7 @@ public class TutorDB {
          s.close();
          commit();
       } catch(Exception e) {
+         System.err.println("Error in setTutorialData()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -253,6 +256,7 @@ public class TutorDB {
             s.close();
          }
       } catch(Exception e) {
+         System.err.println("Error in savePages()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -314,6 +318,7 @@ public class TutorDB {
             savePages(t.pages);
          }
       } catch(Exception e) {
+         System.err.println("Error in saveTutorials()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -375,6 +380,7 @@ public class TutorDB {
             saveTutorials(u.tutorials);
          }
       } catch(Exception e) {
+         System.err.println("Error in saveUnits()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -433,6 +439,7 @@ public class TutorDB {
             saveUnits(sec.units);
          }
       } catch(Exception e) {
+         System.err.println("Error in saveSections()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -457,6 +464,26 @@ public class TutorDB {
             return ClassAccessLevel.Assistant;
          case "Professor":
             return ClassAccessLevel.Professor;
+      }
+      return null;
+   }
+
+   /**
+    * Determine the accessLevel string for the ClassAccessLevel enum
+    *
+    * @param ClassAccessLevel enum
+    * @return access string representing the access level (Guest, Student, Assistant, Professor)
+    */
+   private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
+      switch (access) {
+         case Guest:
+            return "Guest";
+         case Student:
+            return "Student";
+         case Assistant:
+            return "Assistant";
+         case Professor:
+            return "Professor";
       }
       return null;
    }
@@ -500,9 +527,9 @@ public class TutorDB {
             classes.add(c);
          }
          s.close();
-         saveClasses(classes);
          return classes;
       } catch(Exception e) {
+         System.err.println("Error in getClasses()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
       }
@@ -526,6 +553,7 @@ public class TutorDB {
         s.close();
         return classes;
       } catch(Exception e) {
+         System.err.println("Error in getClassNames()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
       }
@@ -556,14 +584,16 @@ public class TutorDB {
       try {
          deleteClassHierarchy();
          for (CSTutor.Model.Manager.Class c : classes) {
-            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Classes(className) VALUES (?)");
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Classes VALUES (?, ?)");
             s.setString(1, c.name);
+            s.setString(2, getAccessString(c.access));
             s.executeUpdate();
             s.close();
             saveSections(c.sections);
          }
          commit();
       } catch(Exception e) {
+         System.err.println("Error in saveClasses()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
