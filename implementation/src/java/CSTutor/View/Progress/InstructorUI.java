@@ -212,6 +212,34 @@ public class InstructorUI extends JPanel
         finalStudentPane.setVisible(true);
     }
     
+    /**
+     * Sets up the search field and button on the Class tab and implements a
+     * corresponding action listener for it.
+     */
+    private makeClassSearchField()
+    {
+    
+    }
+
+    /**
+     * Sets up the search field and button on the Students tab and implements a
+     * corresponding action listener for it.
+     */
+    private void makeStudentSearchField()
+    {
+        
+    }
+    
+    /**
+     * Sets up the search field and button on the Tutorials tab and implements a
+     * corresponding action listener for it.
+     */
+    private void makeTutorialSearchField()
+    {
+        tutorialField = new JTextField();
+    }
+
+
     private void makeSearchFields()
     {
         classField = new JTextField();
