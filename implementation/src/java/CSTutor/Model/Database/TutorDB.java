@@ -80,6 +80,7 @@ public class TutorDB {
       try {
          conn.commit();
       } catch(Exception e) {
+         System.err.println("Error in commit()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -113,6 +114,7 @@ public class TutorDB {
          s.close();
          commit();
       } catch(Exception e) {
+         System.err.println("Error in setUser()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -168,6 +170,7 @@ public class TutorDB {
          s.close();
          commit();
       } catch(Exception e) {
+         System.err.println("Error in setTutorialData()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -253,6 +256,7 @@ public class TutorDB {
             s.close();
          }
       } catch(Exception e) {
+         System.err.println("Error in savePages()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -314,6 +318,7 @@ public class TutorDB {
             savePages(t.pages);
          }
       } catch(Exception e) {
+         System.err.println("Error in saveTutorials()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -375,6 +380,7 @@ public class TutorDB {
             saveTutorials(u.tutorials);
          }
       } catch(Exception e) {
+         System.err.println("Error in saveUnits()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -433,6 +439,7 @@ public class TutorDB {
             saveUnits(sec.units);
          }
       } catch(Exception e) {
+         System.err.println("Error in saveSections()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
@@ -503,6 +510,7 @@ public class TutorDB {
          saveClasses(classes);
          return classes;
       } catch(Exception e) {
+         System.err.println("Error in getClasses()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
       }
@@ -526,6 +534,7 @@ public class TutorDB {
         s.close();
         return classes;
       } catch(Exception e) {
+         System.err.println("Error in getClassNames()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
       }
@@ -564,6 +573,7 @@ public class TutorDB {
          }
          commit();
       } catch(Exception e) {
+         System.err.println("Error in saveClasses()");
          System.err.println(e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
