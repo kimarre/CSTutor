@@ -468,6 +468,26 @@ public class TutorDB {
       return null;
    }
 
+   /**
+    * Determine the accessLevel string for the ClassAccessLevel enum
+    *
+    * @param ClassAccessLevel enum
+    * @return access string representing the access level (Guest, Student, Assistant, Professor)
+    */
+   private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
+      switch (access) {
+         case ClassAccessLevel.Guest:
+            return "Guest";
+         case ClassAccessLevel.Student:
+            return "Guest";
+         case ClassAccessLevel.Assistant:
+            return "Guest";
+         case ClassAccessLevel.Professor:
+            return "Guest";
+      }
+      return null;
+   }
+
    /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
       for (CSTutor.Model.Manager.Class c : classes) {
          System.out.println("<" + c.name + ">");
@@ -502,12 +522,14 @@ public class TutorDB {
          ResultSet r = s.executeQuery("SELECT * FROM classes;");
          while (r.next()) {
             c = new CSTutor.Model.Manager.Class(r.getString("className"));
+            System.err.println("...");
             c.sections = getSections(c);
+            System.err.println("...");
+            System.err.println(r.getString("accessLevel"));
             c.access = getAccessEnum(r.getString("accessLevel"));
             classes.add(c);
          }
          s.close();
-         saveClasses(classes);
          return classes;
       } catch(Exception e) {
          System.err.println("Error in getClasses()");
@@ -565,8 +587,9 @@ public class TutorDB {
       try {
          deleteClassHierarchy();
          for (CSTutor.Model.Manager.Class c : classes) {
-            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Classes(className) VALUES (?)");
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Classes VALUES (?, ?)");
             s.setString(1, c.name);
+            s.setString(2, getAccessString(c.access));
             s.executeUpdate();
             s.close();
             saveSections(c.sections);
