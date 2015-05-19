@@ -346,10 +346,13 @@ public class ManagerGUI extends JPanel {
     public static void addClass(CSTutor.Model.Manager.Class toInsert) {
    	 DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(toInsert);
  		 treeModel.insertNodeInto(classNode, root, 0);
+ 		 
  		 DefaultMutableTreeNode sectNode = new DefaultMutableTreeNode(toInsert.sections.get(0));
  		 treeModel.insertNodeInto(sectNode, classNode, 0);
+ 		 
  		 DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(toInsert.sections.get(0).units.get(0));
  		 treeModel.insertNodeInto(unitNode, sectNode, 0);
+ 		 
  		 managerModel.data.add(toInsert);
     }
     public static void addSection(CSTutor.Model.Manager.Section toInsert) {

@@ -33,12 +33,16 @@ public class Class {
    /**
     * MoveUnitUp moves the unit up one space in the list.
     */ 
-   public void moveUnitUp(Unit unit){}
+   public void moveSectionUp(Section sect){
+   	System.out.println("Moveup not yet implemented");
+   }
 
    /**
     * MoveUnitDown moves the unit down one space in the list.
     */ 
-   public void moveUnitDown(Unit unit){}
+   public void moveUnitDown(Section sect){
+   	System.out.println("Movedown not yet implemented");
+   }
 
    /** 
     * ClassAccessLevel represents the possible access levels a class can have.
@@ -52,6 +56,6 @@ public class Class {
 	   return name;
    }
    public enum ClassAccessLevel {
-      Guest, Student, Assistant, Professor
+      Guest, Student, Professor;
    }
 }
