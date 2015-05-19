@@ -49,8 +49,10 @@ public class TutorialEditor {
       if (pageData.description.intro.equals("") || pageData.description.syntax.equals("") || pageData.title.equals("")) {
           return false;
       } else {
-        tutorialTrack.track.add(pageData);
-        System.out.println("Saved! There are now " + tutorialTrack.track.size() + " tutorials.");
+        pageData.pageId = tutorialTrack.getNextID();
+        tutorialTrack.database.setTutorialData(pageData);
+        
+        System.out.println("Saved! There are now " + tutorialTrack.maxIndex + " tutorials.");
         return true;
       }
    }

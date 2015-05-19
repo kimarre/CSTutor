@@ -37,7 +37,7 @@ public class Tutorial extends javax.swing.JPanel {
         
         sideModule = new RoadmapModule();
         
-        setAllTheThings(tutorialTrack.track.peekFirst());
+        setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         
         this.setVisible(true);
     }
@@ -69,7 +69,8 @@ public class Tutorial extends javax.swing.JPanel {
      * @param pageData The element to be added to the tutorial track
      */
     public void addTutorial(TutorialData pageData) {
-        tutorialTrack.track.add(pageData);
+        pageData.pageId = tutorialTrack.getNextID();
+        tutorialTrack.database.setTutorialData(pageData);
     }
    
     
@@ -234,9 +235,9 @@ public class Tutorial extends javax.swing.JPanel {
      */
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
         //sideModule.toEnd();
-        currentIndex = tutorialTrack.track.size()-1;
-        setAllTheThings(tutorialTrack.track.get(currentIndex));
-        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
+        currentIndex = tutorialTrack.maxIndex-1;
+        setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toEndButtonActionPerformed
     
     /** Disables buttons for the purpose of previewing the tutorial. */
@@ -255,19 +256,19 @@ public class Tutorial extends javax.swing.JPanel {
         if (currentIndex > 0) {
             currentIndex--;
         }
-        setAllTheThings(tutorialTrack.track.get(currentIndex));
-        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
+        setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_previousLessonButtonActionPerformed
 
     /**
      * Load content for the next lesson
      */
     private void nextLessonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextLessonButtonActionPerformed
-        if (currentIndex < tutorialTrack.track.size() - 1) {
+        if (currentIndex < tutorialTrack.maxIndex-1) {
             currentIndex++;
         }
-        setAllTheThings(tutorialTrack.track.get(currentIndex));
-        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
+        setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_nextLessonButtonActionPerformed
 
     /**
@@ -276,8 +277,8 @@ public class Tutorial extends javax.swing.JPanel {
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
         //sideModule.toBeginning(tutorialTrack);
         currentIndex = 0;
-        setAllTheThings(tutorialTrack.track.peekFirst());
-        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.track.size());
+        setAllTheThings(tutorialTrack.database.getTutorialData(0));
+        System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toBeginningButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
