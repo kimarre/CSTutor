@@ -26,11 +26,8 @@ public class ListRenderer extends JLabel implements ListCellRenderer<Object>
     {
         Color background;
         setText("   " + value.toString());
-        
-       
         if(isSelected)
         {
-            
             background = new Color(183, 183, 183);
             setFont(new Font("Avenir", Font.PLAIN, 16));
             
@@ -40,21 +37,11 @@ public class ListRenderer extends JLabel implements ListCellRenderer<Object>
             background = new Color(208, 226, 245);
             setFont(new Font("Avenir", Font.PLAIN, 16));
         }
-        
 
-            setMinimumSize(new Dimension(200, 35));
-            setPreferredSize(new Dimension(200, 35));
-            setMaximumSize(new Dimension(200, 35));
-        
-        
+        setMinimumSize(new Dimension(200, 35));
+        setPreferredSize(new Dimension(200, 35));
+        setMaximumSize(new Dimension(200, 35));
         setBackground(background);
-        
-        /*if(isSelected)
-        {
-            System.out.println(value.toString());
-        }*/
-        
-        
         return this;
     }
 
