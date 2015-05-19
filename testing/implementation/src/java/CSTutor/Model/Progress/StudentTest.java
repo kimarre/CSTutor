@@ -1,5 +1,6 @@
 package CSTutor.Model.Progress;
 
+
 /****
  * Class StudentTest is the companion testing class for Student.
  * It implements the following module test plan:
@@ -9,6 +10,6 @@ package CSTutor.Model.Progress;
  * Phase 2: Unit test the get methods.
  *
  * Phase 3: Unit test the toString method.
- *                                                         <pre>
+ *                                                         </pre>
  */
 public class StudentTest extends Student{}

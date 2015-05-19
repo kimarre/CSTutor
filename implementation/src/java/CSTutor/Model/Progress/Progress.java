@@ -50,7 +50,7 @@ public class Progress
      pre:
        // JPanel vewPanel must be initialized.
        viewPanel != null;
-     *
+     *                                                  </pre>
      */
     public JPanel getView()
     {

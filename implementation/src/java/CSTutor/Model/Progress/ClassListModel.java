@@ -27,7 +27,7 @@ public class ClassListModel<Class> extends DefaultListModel<Class>
      pre:
        // String name must not be null.
        obj != null;
-     *
+     *                                                  </pre>
      */
     public boolean contains(Object obj)
     {
@@ -48,7 +48,7 @@ public class ClassListModel<Class> extends DefaultListModel<Class>
      pre:
        // Object obj must not be null.
        obj != null;
-     *
+     *                                                  </pre>
      */
     public int indexOf(Object obj)
     {
@@ -76,7 +76,7 @@ public class ClassListModel<Class> extends DefaultListModel<Class>
      pre:
        // Class cl must not be null.
        cl != null;
-     *
+     *                                                  </pre>
      */
     public ArrayList<Class> getSimilarClasses(Class cl)
     {

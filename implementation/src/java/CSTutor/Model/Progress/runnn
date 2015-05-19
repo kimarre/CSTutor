@@ -1,0 +1,4 @@
+#!/bin/csh -f
+cd ~/Documents/CalPolyDocs/CPE309/CSTutor/implementation/src/java
+make
+make run
