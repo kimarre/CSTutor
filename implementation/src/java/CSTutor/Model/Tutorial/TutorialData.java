@@ -39,9 +39,22 @@ public class TutorialData {
        tryItYourself = "";
    }
    
+   public TutorialData(int pageNum, String t, String desc, String syn, String ec, String eo, String tryIt) {
+       this.pageId = pageNum;
+       this.title = t;
+       this.description = new Description();
+       this.description.intro = desc;
+       this.description.syntax = syn;
+       this.description.exampleCode = ec;
+       this.description.exampleOutput = eo;
+       this.tryItYourself = tryIt;
+       this.hasSeen = false;
+   }
+   
    public TutorialData(int pageNum, String t, String desc, String syn, String ec, String eo, String tryIt, boolean seen) {
        this.pageId = pageNum;
        this.title = t;
+       this.description = new Description();
        this.description.intro = desc;
        this.description.syntax = syn;
        this.description.exampleCode = ec;

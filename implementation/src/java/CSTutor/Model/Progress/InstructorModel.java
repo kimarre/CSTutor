@@ -148,7 +148,7 @@ public class InstructorModel
      pre:
        // The JList studentList must not be null.
        studentList != null;
-     *
+     *                                                  </pre>
      */
     public JList<Student> getStudentList()
     {
@@ -161,7 +161,7 @@ public class InstructorModel
      pre:
        // The JList tutorialList must not be null.
        tutorialList != null;
-     *
+     *                                                  </pre>
      */
     public JList<TutorialData> getTutorialList()
     {
@@ -174,7 +174,7 @@ public class InstructorModel
      pre:
        // The JList classList must not be null.
        classList != null;
-     *
+     *                                                  </pre>
      */
     public JList<Class> getClassList()
     {
@@ -187,7 +187,7 @@ public class InstructorModel
      pre:
        // fullClassesModel must be initialized.
        fullClassesModel != null;
-     *
+     *                                                  </pre>
      */
     public JList<Class> searchForClass(String searchString)
     {
@@ -207,7 +207,7 @@ public class InstructorModel
      pre:
        // fullStudentsModel must be initialized.
        fullStudentsModel != null;
-     *
+     *                                                  </pre>
      */
     public JList<Student> searchForStudent(String searchString)
     {
@@ -227,7 +227,7 @@ public class InstructorModel
      pre:
        // fullTutorialsModel must be initialized.
        fullTutorialsModel != null;
-     *
+     *                                                  </pre>
      */
     public JList<TutorialData> searchForTutorial(String searchString)
     {

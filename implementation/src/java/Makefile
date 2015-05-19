@@ -1,7 +1,7 @@
 #
 # Makefile for CSTutor prototype.
 #
-MODULES=CSTutor/View/Progress \
+MODULES = CSTutor/View/Progress \
 		CSTutor/View/Quiz \
 		CSTutor/View/Chat \
 		CSTutor/View/User \
@@ -16,7 +16,7 @@ MODULES=CSTutor/View/Progress \
 		CSTutor/Model/Tutorial \
 		CSTutor/Model/User
 
-JAVA =CSTutor/View/*.java \
+JAVA = CSTutor/View/*.java \
 		CSTutor/View/Progress/*.java \
 		CSTutor/View/Quiz/*.java \
 		CSTutor/View/Chat/*.java \
@@ -33,7 +33,7 @@ JAVA =CSTutor/View/*.java \
 		CSTutor/Model/Tutorial/*.java \
 		CSTutor/Model/User/*.java
 
-CLASS=CSTutor/View/*.class \
+CLASS = CSTutor/View/*.class \
 		CSTutor/View/Progress/*.class \
 		CSTutor/View/Quiz/*.class \
 		CSTutor/View/Chat/*.class \
@@ -49,6 +49,23 @@ CLASS=CSTutor/View/*.class \
 		CSTutor/Model/Quiz/*.class \
 		CSTutor/Model/Tutorial/*.class \
 		CSTutor/Model/User/*.class
+
+TESTS = $(TEST_SRC_DIR)/User/*.java \
+		$(TEST_SRC_DIR)/Tutorial/*.java \
+		$(TEST_SRC_DIR)/Progress/*.java \
+		$(TEST_SRC_DIR)/Database/*.java \
+
+TEST_CLASS = .TestClasses/test/CSTutor/Model//User/*. \
+		.TestClasses/test/CSTutor/Model//Tutorial/*.java \
+		.TestClasses/test/CSTutor/Model//Progress/*.java \
+		.TestClasses/test/CSTutor/Model//Database/*.java \
+
+#
+# Define the path to the implementation source files.
+#
+TEST_SRC_DIR = ../../../testing/implementation/src/java/CSTutor/Model
+
+
 
 all:		dir compile jar clean
 
@@ -83,6 +100,11 @@ clean:
 run:
 		java -cp CSTutor.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar:CSTutor/View/weblaf-complete-1.28.jar:CSTutor/View/AbsoluteLayout.jar:CSTutor/Model/Database/sqlite-jdbc-3.8.7.jar CSTutor.View.Overview
 
+TestDir:	
+		mkdir -p .TestClasses
+
+test_comp:
+		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TESTS)
+
 test:
-		cd ../../../testing/implementation/src/java/
-		
+		java -cp .:CSTutor.jar:junit-4.7.jar org.junit.runner.JUnitCore .TestClasses/test/CSTutor/Model/User/*.class

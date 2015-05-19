@@ -246,7 +246,8 @@ public class TutorDB {
    public static void savePages(List<CSTutor.Model.Manager.Page> pages) {
       try {
          for (CSTutor.Model.Manager.Page p : pages) {
-            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Pages VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement s = conn.prepareStatement(
+             "INSERT OR IGNORE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?, ?)");
             s.setString(1, p.name);
             s.setString(2, p.parent.name);
             s.setString(3, p.parent.parent.name);
@@ -308,7 +309,8 @@ public class TutorDB {
    public static void saveTutorials(List<CSTutor.Model.Manager.Tutorial> tutorials) {
       try {
          for (CSTutor.Model.Manager.Tutorial t : tutorials) {
-            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Tutorials VALUES (?, ?, ?, ?)");
+            PreparedStatement s = conn.prepareStatement(
+             "INSERT OR IGNORE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?)");
             s.setString(1, t.name);
             s.setString(2, t.parent.name);
             s.setString(3, t.parent.parent.name);
@@ -371,7 +373,7 @@ public class TutorDB {
       try {
          for (CSTutor.Model.Manager.Unit u : units) {
             PreparedStatement s = conn.prepareStatement(
-             "INSERT OR IGNORE INTO Units(className, sectionName, unitName) VALUES (?, ?, ?)");
+             "INSERT OR IGNORE INTO Units(unitName, sectionName, className) VALUES (?, ?, ?)");
             s.setString(1, u.name);
             s.setString(2, u.parent.name);
             s.setString(3, u.parent.parent.name);
@@ -431,7 +433,7 @@ public class TutorDB {
    public static void saveSections(List<CSTutor.Model.Manager.Section> sections) {
       try {
          for (CSTutor.Model.Manager.Section sec : sections) {
-            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Sections(className, sectionName) VALUES (?, ?)");
+            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)");
             s.setString(1, sec.name);
             s.setString(2, sec.parent.name);
             s.executeUpdate();
@@ -488,7 +490,7 @@ public class TutorDB {
       return null;
    }
 
-   /*private static int print_hierarchy(List<CSTutor.Model.Manager.Class> classes) {
+   private static int printClassHierarchy(List<CSTutor.Model.Manager.Class> classes) {
       for (CSTutor.Model.Manager.Class c : classes) {
          System.out.println("<" + c.name + ">");
          for (CSTutor.Model.Manager.Section s : c.sections) {
@@ -505,7 +507,7 @@ public class TutorDB {
          }
       }
       return 0;
-   }*/
+   }
 
    /**
     * Get a list of classes from the database
@@ -527,6 +529,7 @@ public class TutorDB {
             classes.add(c);
          }
          s.close();
+         printClassHierarchy(classes);
          return classes;
       } catch(Exception e) {
          System.err.println("Error in getClasses()");
@@ -582,6 +585,7 @@ public class TutorDB {
     */
    public static void saveClasses(List<CSTutor.Model.Manager.Class> classes) {
       try {
+         printClassHierarchy(classes);
          deleteClassHierarchy();
          for (CSTutor.Model.Manager.Class c : classes) {
             PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Classes VALUES (?, ?)");

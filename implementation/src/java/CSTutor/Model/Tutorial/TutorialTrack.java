@@ -3,6 +3,7 @@ package CSTutor.Model.Tutorial;
 
 import java.util.*;
 import CSTutor.Model.Tutorial.*;
+import CSTutor.Model.Database.*;
 
 /**
  * Overall structure for the list of tutorials.
@@ -11,13 +12,20 @@ import CSTutor.Model.Tutorial.*;
  */
 public class TutorialTrack {
     /** Overall structure that houses the list of tutorials. */
-    public static LinkedList<TutorialData> track;
+    public static ArrayList<Integer> track;
+    public static int maxIndex = 0;
+    public static TutorDB database;
+    
+    public static int getNextID() {
+        maxIndex++;
+        return maxIndex-1;
+    }
     
     public TutorialTrack() {
-        track = new LinkedList<TutorialData>();
+        track = new ArrayList<Integer>();
+        database = new TutorDB();
         
         // First sample tutorial Content
-        TutorialData first = new TutorialData();
         String newTitle = "For Loops";
         String desc = "For loops are a type of control structure that "
           + "allow code to be repeatedly executed. They take three arguments"
@@ -29,16 +37,18 @@ public class TutorialTrack {
         String code = "for (int i=0; i&#60;5; i++) {<br>&#32;&#32;&#32;printf(\"Hello world\\n\");<br>}";
         String tryIt = "Write a program that outputs every multiple of 5 from 0 to 25. (ex. 0 5 10 15 20 15)";
         
-        first.setAll(newTitle, desc, syn, output, code, tryIt);
-        track.add(first);
+        int ndx = getNextID();
+        TutorialData first = new TutorialData(ndx, newTitle, desc, syn, code, output, tryIt);
+        
+        database.setTutorialData(first);
         
         // Second sample tutorial content
-        TutorialData second = new TutorialData();
+        
         newTitle = "While Loops";
         desc = "While loops are only sometimes as cool as for loops.";
         syn = "while (condition) { <br><br>}";
         
-        second.setAll(newTitle, desc, syn, "", "", "");
-        track.add(second);
+        TutorialData second = new TutorialData(getNextID(), newTitle, desc, syn, "", "", "");
+        database.setTutorialData(second);
     }
 }
