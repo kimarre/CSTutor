@@ -32,6 +32,16 @@ public class TutorialData
         return name;
     }
     
+    /**
+     * Returns if the names of the tutorials are the same.
+     *                                                  <pre>
+     pre:
+       // String name must not be null.
+       name != null && !name.isEmpty();
+       // TutorialData tutorial must not be null.
+       tutorial != null;
+     *
+     */
     public boolean equals(TutorialData tutorial)
     {
         if(tutorial.toString().equals(name))

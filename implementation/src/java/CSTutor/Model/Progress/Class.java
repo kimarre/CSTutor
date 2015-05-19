@@ -41,6 +41,13 @@ public class Class
     
     /**
      * Returns if the names of the classes are the same.
+     *                                                  <pre>
+     pre:
+       // String name must not be null.
+       name != null && !name.isEmpty();
+       // Class cl must not be null.
+       cl != null;
+     *
      */
     public boolean equals(Class cl)
     {

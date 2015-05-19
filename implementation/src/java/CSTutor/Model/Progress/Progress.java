@@ -46,6 +46,11 @@ public class Progress
     
     /**
      * Returns the panel that is made from launching the Progress feature.
+     *                                                  <pre>
+     pre:
+       // JPanel vewPanel must be initialized.
+       viewPanel != null;
+     *
      */
     public JPanel getView()
     {

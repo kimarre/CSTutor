@@ -132,14 +132,6 @@ public class InstructorModel
     {
         System.out.println("In InstructorModel.retrieveClassesData");
         List<String> dbClasses = TutorDB.getClassNames();
-        //String[] classesArr = (String[]) dbClasses.toArray();
-        
-        
-        /*
-         * List model for the JList.
-         */
-        
-        
         fullClassesModel = new ClassListModel<Class>();
         
         for(int i=0; i<dbClasses.size(); i++)
@@ -152,6 +144,11 @@ public class InstructorModel
     
     /**
      * Returns the JList filled with student data.
+     *                                                 <pre>
+     pre:
+       // The JList studentList must not be null.
+       studentList != null;
+     *
      */
     public JList<Student> getStudentList()
     {
@@ -160,6 +157,11 @@ public class InstructorModel
     
     /**
      * Returns the JList filled with tutorial data.
+     *                                                 <pre>
+     pre:
+       // The JList tutorialList must not be null.
+       tutorialList != null;
+     *
      */
     public JList<TutorialData> getTutorialList()
     {
@@ -168,6 +170,11 @@ public class InstructorModel
     
     /**
      * Returns the JList filled with class data.
+     *                                                 <pre>
+     pre:
+       // The JList classList must not be null.
+       classList != null;
+     *
      */
     public JList<Class> getClassList()
     {
@@ -176,50 +183,61 @@ public class InstructorModel
     
     /**
      * Returns a list of classes that match the search string.
+     *                                                 <pre>
+     pre:
+       // fullClassesModel must be initialized.
+       fullClassesModel != null;
+     *
      */
     public JList<Class> searchForClass(String searchString)
     {
         ArrayList<Class> simClasses = fullClassesModel.getSimilarClasses(new Class(searchString));
- 
         searchClassesModel = new ClassListModel<Class>();
+        
         for(Class cl: simClasses)
         {
             searchClassesModel.addElement(cl);
         }
-        
-        return new JList<Class>(searchClassesModel);
-        
+        return new JList<Class>(searchClassesModel); 
     }
     
     /**
      * Returns a list of students that match the search string.
+     *                                                 <pre>
+     pre:
+       // fullStudentsModel must be initialized.
+       fullStudentsModel != null;
+     *
      */
     public JList<Student> searchForStudent(String searchString)
     {
         ArrayList<Student> simStudents = fullStudentsModel.getSimilarStudents(new Student(searchString));
-        
         searchStudentsModel = new StudentListModel<Student>();
+        
         for(Student stu: simStudents)
         {
             searchStudentsModel.addElement(stu);
         }
-        
         return new JList<Student>(searchStudentsModel);
     }
     
     /**
      * Returns a list of students that match the search string.
+     *                                                 <pre>
+     pre:
+       // fullTutorialsModel must be initialized.
+       fullTutorialsModel != null;
+     *
      */
     public JList<TutorialData> searchForTutorial(String searchString)
     {
-        ArrayList<TutorialData> simTutorials = fullTutorialsModel.getSimilarTutorials(new TutorialData(searchString));
-        
+        ArrayList<TutorialData> simTutorials = fullTutorialsModel.getSimilarTutorials(new TutorialData(searchString));  
         searchTutorialsModel = new TutorialListModel<TutorialData>();
+        
         for(TutorialData tut: simTutorials)
         {
             searchTutorialsModel.addElement(tut);
         }
-        
         return new JList<TutorialData>(searchTutorialsModel);
     }
     
