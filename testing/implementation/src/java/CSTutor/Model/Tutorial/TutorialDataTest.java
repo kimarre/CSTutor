@@ -9,9 +9,24 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Kim Arre (karre@calpoly.edu)
  * @version 18May2015
+ */
+
+/****
+ *
+ * Class TutorialDataTest is the companion testing class for TutorialData.  
+ * It implements the following module test plan:
+ *									  <pre>
+ *    Phase 1: Unit test getters for all components
+ *      - getTitle, getDescription, getSyntax, getExampleCode, getExampleOutput, getTryIt
+ * 
+ *    Phase 2: Unit test setAll and verify correct data
+ * 
+ *    Phase 3: Unit test the run method
+ * 
+ *    Phase 4: Unit test the previous and next methods
+ *									 </pre>
  */
 public class TutorialDataTest {
     TutorialData instance;
@@ -98,11 +113,7 @@ public class TutorialDataTest {
      */
     @Test
     public void testRun() {
-        System.out.println("run");
-        TutorialData instance = new TutorialData();
-        instance.run();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -110,11 +121,7 @@ public class TutorialDataTest {
      */
     @Test
     public void testNext() {
-        System.out.println("next");
-        TutorialData instance = new TutorialData();
-        instance.next();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -122,11 +129,7 @@ public class TutorialDataTest {
      */
     @Test
     public void testPrev() {
-        System.out.println("prev");
-        TutorialData instance = new TutorialData();
-        instance.prev();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
     }
     
 }

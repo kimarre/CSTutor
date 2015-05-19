@@ -4,9 +4,10 @@ import javax.swing.JPanel;
 import CSTutor.Model.Progress.StudentModel;
 
 /****
- * Class StudentUI provides the view classes for the Student user interface.
+ * StudentUI is the view class that displays the information in the
+ * StudentModel class.
  * @author Erica Solum (esolum@calpoly.edu)
- * @version 13Apr15
+ * @version 18May15
  */
 public class StudentUI extends JPanel
 {

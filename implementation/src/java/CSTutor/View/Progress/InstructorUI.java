@@ -27,7 +27,7 @@ import CSTutor.Model.Progress.Class;
  * InstructorUI is the view class that displays the information 
  * from the InstructorModel class.
  * @author Erica Solum (esolum@calpoly.edu)
- * @version 11May15
+ * @version 18May15
  */
 public class InstructorUI extends JPanel
 {
@@ -212,15 +212,14 @@ public class InstructorUI extends JPanel
         finalStudentPane.setVisible(true);
     }
     
-    private void makeSearchFields()
+    /**
+     * Sets up the search field and button on the Class tab and implements a
+     * corresponding action listener for it.
+     */
+    private void makeClassSearchField()
     {
-        classField = new JTextField();
-        studentField = new JTextField();
-        tutorialField = new JTextField();
-        
+        classField = new JTextField();   
         classSearchButton = new JButton("Search");
-        tutorialSearchButton = new JButton("Search");
-        studentSearchButton = new JButton("Search");
         
         classSearchButton.addActionListener(new ActionListener()
         {
@@ -243,6 +242,17 @@ public class InstructorUI extends JPanel
             }
             
         });
+    }
+
+    /**
+     * Sets up the search field and button on the Students tab and implements a
+     * corresponding action listener for it.
+     */
+    private void makeStudentSearchField()
+    {
+        studentField = new JTextField();
+        
+        studentSearchButton = new JButton("Search");
         
         studentSearchButton.addActionListener(new ActionListener()
         {
@@ -264,6 +274,16 @@ public class InstructorUI extends JPanel
                 
             }
         });
+    }
+    
+    /**
+     * Sets up the search field and button on the Tutorials tab and implements a
+     * corresponding action listener for it.
+     */
+    private void makeTutorialSearchField()
+    {
+        tutorialField = new JTextField();
+        tutorialSearchButton = new JButton("Search");
         
         tutorialSearchButton.addActionListener(new ActionListener()
         {
@@ -285,7 +305,6 @@ public class InstructorUI extends JPanel
                 
             }
         });
-          
     }
     
     /**
@@ -293,7 +312,9 @@ public class InstructorUI extends JPanel
      */
     private void createSearchPanels()
     {
-        makeSearchFields();
+        makeClassSearchField();
+        makeStudentSearchField();
+        makeTutorialSearchField();
         tutorialSearchPanel = new JPanel();
         tutorialSearchPanel.setLayout(new BoxLayout(tutorialSearchPanel, BoxLayout.X_AXIS));
         tutorialSearchPanel.setBackground(new Color(153, 153, 153));
