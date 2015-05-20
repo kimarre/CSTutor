@@ -106,10 +106,10 @@ TestDir:
 		mkdir -p .TestClasses
 
 test_comp:
-		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TEST_SRC_DIR)/Manager/*.java
+		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TESTS)
 
 test_run:
-		java -cp .:CSTutor.jar:junit-4.7.jar org.junit.runner.JUnitCore .TestClasses/CSTutor/Model/Manager/*.class
+		java -cp .:CSTutor.jar:junit-4.7.jar org.junit.runner.JUnitCore $(TEST_CLASS)
 
 test_clean:
 		rm -rf .TestClasses/
