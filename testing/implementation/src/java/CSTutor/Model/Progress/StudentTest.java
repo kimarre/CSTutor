@@ -13,4 +13,4 @@ import CSTutor.Model.Progress.Student;
  * Phase 3: Unit test the toString method.
  *                                                         </pre>
  */
-public class StudentTest extends Student{}
+public class StudentTest{}

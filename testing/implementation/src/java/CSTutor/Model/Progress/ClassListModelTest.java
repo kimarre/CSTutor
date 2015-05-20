@@ -1,6 +1,6 @@
 package CSTutor.Model.Progress;
 
-import CSTutor.Model.Progress.ClassListMode;
+import CSTutor.Model.Progress.ClassListModel;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -13,4 +13,4 @@ import CSTutor.Model.Progress.Progress;
  *           one Progress object ever.
  *                                                         </pre>
  */
-public class ProgressTest extends Progress{}
+public class ProgressTest{}
