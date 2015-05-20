@@ -1,5 +1,6 @@
 package CSTutor.Model.Progress;
 
+import CSTutor.Model.Progress.TutorialListModel;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
