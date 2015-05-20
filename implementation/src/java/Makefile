@@ -56,11 +56,24 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Database/*.java \
 		$(TEST_SRC_DIR)/Manager/*.java 
 
-TEST_CLASS = .TestClasses/test/CSTutor/Model//User/*. \
-		.TestClasses/CSTutor/Model/Tutorial/*.class \
-		.TestClasses/CSTutor/Model/Progress/*.class \
-		.TestClasses/CSTutor/Model/Database/*.class \
-		.TestClasses/CSTutor/Model/Manager/*.class
+TEST_CLASS = .TestClasses/test/CSTutor/Model/User/PasswordTest \
+		.TestClasses/test/CSTutor/Model/User/RegisterTest \
+		.TestClasses/test/CSTutor/Model/User/UserTest \
+		.TestClasses/CSTutor/Model/Tutorial/TutorialData \
+		.TestClasses/CSTutor/Model/Tutorial/TutorialDataTest \
+		.TestClasses/CSTutor/Model/Tutorial/TutorialEditor \
+		.TestClasses/CSTutor/Model/Tutorial/TutorialEditorTest \
+		.TestClasses/CSTutor/Model/Tutorial/TutorialTrack \
+		.TestClasses/CSTutor/Model/Progress/ClassListModelTest \
+		.TestClasses/CSTutor/Model/Progress/ProgressTest \
+		.TestClasses/CSTutor/Model/Progress/StudentListModelTest \
+		.TestClasses/CSTutor/Model/Progress/StudentTest \
+		.TestClasses/CSTutor/Model/Progress/TutorialDataTest \
+		.TestClasses/CSTutor/Model/Progress/TutorialListModelTest \
+		.TestClasses/CSTutor/Model/Database/TutorDB \
+		.TestClasses/CSTutor/Model/Database/TutorDBTest \
+		.TestClasses/CSTutor/Model/Manager/Class \
+		.TestClasses/CSTutor/Model/Manager/ManagerTest \
 
 #
 # Define the path to the implementation source files.
