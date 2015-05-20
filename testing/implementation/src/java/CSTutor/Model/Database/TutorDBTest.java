@@ -2,6 +2,8 @@ package CSTutor.Model.Database;
 
 import org.junit.*;
 import java.util.*;
+import static org.junit.Assert.*;
+import CSTutor.Model.Database.TutorDB;
 
 public class TutorDBTest {
    public TutorDBTest() {
@@ -82,14 +84,14 @@ public class TutorDBTest {
       correctdata = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "description", "syntax", "example code",
        "example output", "try it yourself");
-      TutorDB.setTutorialData(data);
+      TutorDB.setTutorialData(correctdata);
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
       assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
       assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
-      assertEquals("Comparing correct data and test data", correctdata.syntax, testdata.syntax);
-      assertEquals("Comparing correct data and test data", correctdata.exampleCode, testdata.exampleCode);
-      assertEquals("Comparing correct data and test data", correctdata.exampleOutput, testdata.exampleOutput);
+      assertEquals("Comparing correct data and test data", correctdata.description.syntax, testdata.description.syntax);
+      assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
+      assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);
       assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
    }
 
@@ -104,27 +106,27 @@ public class TutorDBTest {
       correctdata = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "description", "syntax", "example code",
        "example output", "try it yourself");
-      TutorDB.setTutorialData(data);
+      TutorDB.setTutorialData(correctdata);
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
       assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
       assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
-      assertEquals("Comparing correct data and test data", correctdata.syntax, testdata.syntax);
-      assertEquals("Comparing correct data and test data", correctdata.exampleCode, testdata.exampleCode);
-      assertEquals("Comparing correct data and test data", correctdata.exampleOutput, testdata.exampleOutput);
+      assertEquals("Comparing correct data and test data", correctdata.description.syntax, testdata.description.syntax);
+      assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
+      assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);
       assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
 
       correctdata = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "different description", "syntax", "example code",
        "example output", "try it yourself");
-      TutorDB.setTutorialData(data);
+      TutorDB.setTutorialData(correctdata);
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
       assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
       assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
-      assertEquals("Comparing correct data and test data", correctdata.syntax, testdata.syntax);
-      assertEquals("Comparing correct data and test data", correctdata.exampleCode, testdata.exampleCode);
-      assertEquals("Comparing correct data and test data", correctdata.exampleOutput, testdata.exampleOutput);
+      assertEquals("Comparing correct data and test data", correctdata.description.syntax, testdata.description.syntax);
+      assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
+      assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);
       assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
    }
 
