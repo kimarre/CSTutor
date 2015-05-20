@@ -56,24 +56,24 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Database/*.java \
 		$(TEST_SRC_DIR)/Manager/*.java 
 
-TEST_CLASS = .TestClasses/test/CSTutor/Model/User/PasswordTest \
-		.TestClasses/test/CSTutor/Model/User/RegisterTest \
-		.TestClasses/test/CSTutor/Model/User/UserTest \
-		.TestClasses/CSTutor/Model/Tutorial/TutorialData \
-		.TestClasses/CSTutor/Model/Tutorial/TutorialDataTest \
-		.TestClasses/CSTutor/Model/Tutorial/TutorialEditor \
-		.TestClasses/CSTutor/Model/Tutorial/TutorialEditorTest \
-		.TestClasses/CSTutor/Model/Tutorial/TutorialTrack \
-		.TestClasses/CSTutor/Model/Progress/ClassListModelTest \
-		.TestClasses/CSTutor/Model/Progress/ProgressTest \
-		.TestClasses/CSTutor/Model/Progress/StudentListModelTest \
-		.TestClasses/CSTutor/Model/Progress/StudentTest \
-		.TestClasses/CSTutor/Model/Progress/TutorialDataTest \
-		.TestClasses/CSTutor/Model/Progress/TutorialListModelTest \
-		.TestClasses/CSTutor/Model/Database/TutorDB \
-		.TestClasses/CSTutor/Model/Database/TutorDBTest \
-		.TestClasses/CSTutor/Model/Manager/Class \
-		.TestClasses/CSTutor/Model/Manager/ManagerTest \
+TEST_CLASS = test.CSTutor.Model.User.PasswordTest \
+		test.CSTutor.Model.User.RegisterTest \
+		test.CSTutor.Model.User.UserTest \
+		CSTutor.Model.Tutorial.TutorialData \
+		CSTutor.Model.Tutorial.TutorialDataTest \
+		CSTutor.Model.Tutorial.TutorialEditor \
+		CSTutor.Model.Tutorial.TutorialEditorTest \
+		CSTutor.Model.Tutorial.TutorialTrack \
+		CSTutor.Model.Progress.ClassListModelTest \
+		CSTutor.Model.Progress.ProgressTest \
+		CSTutor.Model.Progress.StudentListModelTest \
+		CSTutor.Model.Progress.StudentTest \
+		CSTutor.Model.Progress.TutorialDataTest \
+		CSTutor.Model.Progress.TutorialListModelTest \
+		CSTutor.Model.Database.TutorDB \
+		CSTutor.Model.Database.TutorDBTest \
+		CSTutor.Model.Manager.Class \
+		CSTutor.Model.Manager.ManagerTest \
 
 #
 # Define the path to the implementation source files.
@@ -122,7 +122,8 @@ test_comp:
 		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TESTS)
 
 test_run:
-		java -cp .:CSTutor.jar:junit-4.7.jar org.junit.runner.JUnitCore $(TEST_CLASS)
+		cd .TestClasses ; \
+		java -cp .:../CSTutor.jar:../junit-4.7.jar:../CSTutor/Model/Database/* org.junit.runner.JUnitCore $(TEST_CLASS)
 
 test_clean:
 		rm -rf .TestClasses/
