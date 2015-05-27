@@ -81,10 +81,6 @@ public class ChatBox extends JFrame {
   	 public void updateConsole() {
    		 displayArea.append(chatOverlay.getLastString());
    	 }
-
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
