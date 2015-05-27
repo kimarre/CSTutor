@@ -46,7 +46,7 @@ public class InstructorUI extends JPanel
     private JPanel classSearchPanel, studentSearchPanel, tutorialSearchPanel;
     private ListRenderer renderer;
     private final int barWidth = 200;
-    private final int barHeight = 465;
+    private final int barHeight = 515;
     private final int searchHeight = 30;
     private InstructorModel model;
     private JList<TutorialData> tutorialList;
@@ -438,4 +438,7 @@ public class InstructorUI extends JPanel
         tabPane.addTab("Students", finalStudentPane);
         tabPane.addTab("Tutorials", finalTutorialPane); 
     }
+    
+    
+  
 }

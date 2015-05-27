@@ -1,6 +1,6 @@
 package CSTutor.Model.Progress;
 
-
+import java.util.*;
 /****
  * Class Class is a data structure that represents a real-life class
  * taught by an instructor. Class Class provides methods to get the name of
@@ -11,10 +11,12 @@ package CSTutor.Model.Progress;
 public class Class
 {
     private String name;
+    private List<String> instructors;
     
     public Class(String name)
     {
         this.name = name;
+        instructors = new ArrayList<String>();
     }
     
     /**
@@ -57,5 +59,7 @@ public class Class
         }
         return false;
     }
+    
+    
 
 }

@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import CSTutor.Model.Progress.InstructorModel;
+import CSTutor.Model.Progress.Student;
+import CSTutor.Model.Progress.TutorialData;
 
 /**
  * Class ListListener provides the method that is called when changes occur
@@ -45,6 +47,25 @@ public class ListListener implements ListSelectionListener
             System.out.println("Selected " + obj.toString());
             
             main.setTitleText(obj.toString());
+            
+            if(obj instanceof CSTutor.Model.Progress.Class)
+            {
+                CSTutor.Model.Progress.Class selectedClass = (CSTutor.Model.Progress.Class) obj;
+                main.displayClassStatistics(selectedClass);
+            }
+            
+            else if(obj instanceof Student)
+            {
+                Student selectedStudent = (Student) obj;
+                main.displayStudentStatistics(selectedStudent);
+            }
+            
+            else if(obj instanceof TutorialData)
+            {
+                TutorialData selectedTut = (TutorialData) obj;
+                main.displayTutorialStatistics(selectedTut);
+            }
+            
             
             
         }
