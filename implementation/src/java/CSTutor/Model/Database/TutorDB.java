@@ -471,7 +471,7 @@ public class TutorDB {
    /**
     * Determine the accessLevel string for the ClassAccessLevel enum
     *
-    * @param ClassAccessLevel enum
+    * @param access ClassAccessLevel enum
     * @return access string representing the access level (Guest, Student, Assistant, Professor)
     */
    private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
