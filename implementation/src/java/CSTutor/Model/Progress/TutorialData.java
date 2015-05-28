@@ -105,10 +105,6 @@ public class TutorialData
             averageQuizScores[col] = total/students.length;
         }
         
-        for(int score: averageQuizScores)
-        {
-            System.out.println(score);
-        }
         
         return averageQuizScores;
     }
