@@ -69,13 +69,13 @@ public class StudentListModel<Student> extends DefaultListModel<Student>
        st != null;
      *                                                  </pre>
      */
-    public ArrayList<Student> getSimilarStudents(Student st)
+    public ArrayList<Student> getSimilarStudents(String st)
     {
         ArrayList<Student> simStudents  = new ArrayList<Student>();
         
         for(int i=0; i<this.size(); i++)
         {
-            if(this.get(i).toString().contains(st.toString()))
+            if(this.get(i).toString().contains(st))
             {
                 simStudents.add(this.get(i));
             }

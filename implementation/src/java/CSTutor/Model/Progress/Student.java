@@ -1,7 +1,6 @@
 package CSTutor.Model.Progress;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 /****
  * Class Student is a data structure that represents a student who is enrolled
@@ -14,12 +13,12 @@ import java.util.Collection;
 public class Student
 { 
     private String name;
-    private Collection<Class> enrolledClasses;
+    private ArrayList<Class> enrolledClasses;
     
-    public Student(String name)
+    public Student(String name, ArrayList<Class> enrolled)
     {
         this.name = name;
-        enrolledClasses = new ArrayList<Class>();
+        enrolledClasses = enrolled;
     }
     
     /**
@@ -72,5 +71,14 @@ public class Student
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Returns the list of classes this student is enrolled in.
+     * @return  enrolledClasses
+     */
+    public ArrayList<Class> getEnrolledClasses()
+    {
+        return enrolledClasses;
     }
 }

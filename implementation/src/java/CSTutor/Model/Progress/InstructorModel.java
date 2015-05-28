@@ -67,6 +67,7 @@ public class InstructorModel
         fullTutorialsModel.addElement(new TutorialData("     ..."));
         fullTutorialsModel.addElement(new TutorialData("     ..."));
         tutorialList = new JList<TutorialData>(fullTutorialsModel);
+        
     }
     
     /**
@@ -85,41 +86,65 @@ public class InstructorModel
         fullStudentsModel
             = new StudentListModel<Student>(); 
         
+        ArrayList<Class> enrolledClasses = new ArrayList<Class>();
+        enrolledClasses.add(new Class("CPE 225"));
+        enrolledClasses.add(new Class("CPE 357"));
+        
+        ArrayList<Class> enrolledClasses2 = new ArrayList<Class>();
+        enrolledClasses2.add(new Class("CPE 101"));
+        enrolledClasses2.add(new Class("CPE 102"));
+        
+        ArrayList<Class> enrolledClasses3 = new ArrayList<Class>();
+        enrolledClasses3.add(new Class("CPE 305"));
+        enrolledClasses3.add(new Class("CPE 308"));
+        
+        ArrayList<Class> enrolledClasses4 = new ArrayList<Class>();
+        enrolledClasses4.add(new Class("CPE 300"));
+        enrolledClasses4.add(new Class("CPE 349"));
+        
+        ArrayList<Class> enrolledClasses5 = new ArrayList<Class>();
+        enrolledClasses5.add(new Class("CPE 378"));
+        enrolledClasses5.add(new Class("CPE 453"));
+        
         /*
          * Add sample elements to the list.
          */
-        fullStudentsModel.addElement(new Student("Maria Auxier"));
-        fullStudentsModel.addElement(new Student("Marian Bell"));
-        fullStudentsModel.addElement(new Student("Eugene Brown"));
-        fullStudentsModel.addElement(new Student("Jamie Bryant"));
-        fullStudentsModel.addElement(new Student("Danielle Carter"));
-        fullStudentsModel.addElement(new Student("Vernon Chilton"));
-        fullStudentsModel.addElement(new Student("Mary Clark"));
-        fullStudentsModel.addElement(new Student("Laurie Crawford"));
-        fullStudentsModel.addElement(new Student("Geoffrey Dunning"));
-        fullStudentsModel.addElement(new Student("Lester Flores"));
-        fullStudentsModel.addElement(new Student("Suzanne Gridley"));
-        fullStudentsModel.addElement(new Student("Bruce Griffin"));
-        fullStudentsModel.addElement(new Student("Jennifer Headrick"));
-        fullStudentsModel.addElement(new Student("Kevin Hoover"));
-        fullStudentsModel.addElement(new Student("Constance Jackson"));
-        fullStudentsModel.addElement(new Student("Chris Kapp"));
-        fullStudentsModel.addElement(new Student("Leon Lewis"));
-        fullStudentsModel.addElement(new Student("Victor Massey"));
-        fullStudentsModel.addElement(new Student("Blanche Natal"));
-        fullStudentsModel.addElement(new Student("Dianne Ohara"));
-        fullStudentsModel.addElement(new Student("Charlotte Perry"));
-        fullStudentsModel.addElement(new Student("Eric Prince"));
-        fullStudentsModel.addElement(new Student("Frank Reed"));
-        fullStudentsModel.addElement(new Student("Nicole Rios"));
-        fullStudentsModel.addElement(new Student("David Rodriguez"));
-        fullStudentsModel.addElement(new Student("James Scott"));
-        fullStudentsModel.addElement(new Student("Robert Taylor"));
-        fullStudentsModel.addElement(new Student("Anna Turley"));
-        fullStudentsModel.addElement(new Student("Paula Webb"));
-        fullStudentsModel.addElement(new Student("James Welsh"));
-        fullStudentsModel.addElement(new Student("Marlene Williams"));
+        fullStudentsModel.addElement(new Student("Maria Auxier", enrolledClasses));
+        fullStudentsModel.addElement(new Student("Marian Bell", enrolledClasses2));
+        fullStudentsModel.addElement(new Student("Eugene Brown", enrolledClasses3));
+        fullStudentsModel.addElement(new Student("Jamie Bryant", enrolledClasses4));
+        fullStudentsModel.addElement(new Student("Danielle Carter", enrolledClasses5));
+        fullStudentsModel.addElement(new Student("Vernon Chilton", enrolledClasses));
+        
+        fullStudentsModel.addElement(new Student("Mary Clark", enrolledClasses2));
+        fullStudentsModel.addElement(new Student("Laurie Crawford", enrolledClasses3));
+        fullStudentsModel.addElement(new Student("Geoffrey Dunning", enrolledClasses4));
+        fullStudentsModel.addElement(new Student("Lester Flores", enrolledClasses5));
+        fullStudentsModel.addElement(new Student("Suzanne Gridley", enrolledClasses));
+        fullStudentsModel.addElement(new Student("Bruce Griffin", enrolledClasses2));
+        
+        fullStudentsModel.addElement(new Student("Jennifer Headrick", enrolledClasses3));
+        fullStudentsModel.addElement(new Student("Kevin Hoover", enrolledClasses4));
+        fullStudentsModel.addElement(new Student("Constance Jackson", enrolledClasses5));
+        fullStudentsModel.addElement(new Student("Chris Kapp", enrolledClasses));
+        fullStudentsModel.addElement(new Student("Leon Lewis", enrolledClasses2));
+        fullStudentsModel.addElement(new Student("Victor Massey", enrolledClasses3));
+        
+        fullStudentsModel.addElement(new Student("Blanche Natal", enrolledClasses4));
+        fullStudentsModel.addElement(new Student("Dianne Ohara", enrolledClasses5));
+        fullStudentsModel.addElement(new Student("Charlotte Perry", enrolledClasses));
+        fullStudentsModel.addElement(new Student("Eric Prince", enrolledClasses2));
+        fullStudentsModel.addElement(new Student("Frank Reed", enrolledClasses3));
+        fullStudentsModel.addElement(new Student("Nicole Rios", enrolledClasses4));
+        
+        fullStudentsModel.addElement(new Student("David Rodriguez", enrolledClasses5));
+        fullStudentsModel.addElement(new Student("James Scott", enrolledClasses));
+        fullStudentsModel.addElement(new Student("Robert Taylor", enrolledClasses2));
+        fullStudentsModel.addElement(new Student("Anna Turley", enrolledClasses3));
+        fullStudentsModel.addElement(new Student("James Welsh", enrolledClasses4));
+        fullStudentsModel.addElement(new Student("Marlene Williams", enrolledClasses5));
         studentList = new JList<Student>(fullStudentsModel);  
+        
     }
     
     /**
@@ -130,7 +155,7 @@ public class InstructorModel
      */
     private void retrieveClassesData()
     {
-        System.out.println("In InstructorModel.retrieveClassesData");
+        //System.out.println("In InstructorModel.retrieveClassesData");
         List<String> dbClasses = TutorDB.getClassNames();
         fullClassesModel = new ClassListModel<Class>();
         
@@ -211,7 +236,7 @@ public class InstructorModel
      */
     public JList<Student> searchForStudent(String searchString)
     {
-        ArrayList<Student> simStudents = fullStudentsModel.getSimilarStudents(new Student(searchString));
+        ArrayList<Student> simStudents = fullStudentsModel.getSimilarStudents(searchString);
         searchStudentsModel = new StudentListModel<Student>();
         
         for(Student stu: simStudents)
