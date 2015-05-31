@@ -37,9 +37,10 @@ import static org.junit.Assert.*;
  *									 </pre>
  */
 public class TutorialEditorTest {
-    TutorialTrack track = new TutorialTrack();
+    TutorialTrack track; 
     
     public TutorialEditorTest() {
+	track = new TutorialTrack();
     }
 
     /**

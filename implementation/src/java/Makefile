@@ -1,4 +1,9 @@
 #
+# Define the path to the implementation source files.
+#
+TEST_SRC_DIR = ../../../testing/implementation/src/java/CSTutor/Model
+
+#
 # Makefile for CSTutor prototype.
 #
 MODULES = CSTutor/View/Progress \
@@ -59,26 +64,16 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 TEST_CLASS = test.CSTutor.Model.User.PasswordTest \
 		test.CSTutor.Model.User.RegisterTest \
 		test.CSTutor.Model.User.UserTest \
-		CSTutor.Model.Tutorial.TutorialData \
 		CSTutor.Model.Tutorial.TutorialDataTest \
-		CSTutor.Model.Tutorial.TutorialEditor \
 		CSTutor.Model.Tutorial.TutorialEditorTest \
-		CSTutor.Model.Tutorial.TutorialTrack \
 		CSTutor.Model.Progress.ClassListModelTest \
 		CSTutor.Model.Progress.ProgressTest \
 		CSTutor.Model.Progress.StudentListModelTest \
 		CSTutor.Model.Progress.StudentTest \
 		CSTutor.Model.Progress.TutorialDataTest \
 		CSTutor.Model.Progress.TutorialListModelTest \
-		CSTutor.Model.Database.TutorDB \
 		CSTutor.Model.Database.TutorDBTest \
-		CSTutor.Model.Manager.Class \
 		CSTutor.Model.Manager.ManagerTest \
-
-#
-# Define the path to the implementation source files.
-#
-TEST_SRC_DIR = ../../../testing/implementation/src/java/CSTutor/Model
 
 
 
@@ -119,13 +114,16 @@ TestDir:
 		mkdir -p .TestClasses
 
 test_comp:
-		javac -cp .:CSTutor.jar:junit-4.7.jar -g -d .TestClasses $(TESTS)
+		javac -cp .:CSTutor.jar:junit-4.7.jar:CSTutor/Model/User/commons-validator-1.4.1.jar:CSTutor/Model/User/jbcrypt.jar -g -d .TestClasses $(TESTS)
 
 test_run:
 		cd .TestClasses ; \
-		java -cp .:../CSTutor.jar:../junit-4.7.jar:../CSTutor/Model/Database/* org.junit.runner.JUnitCore $(TEST_CLASS)
+		java -cp .:../CSTutor.jar:../junit-4.7.jar:../CSTutor/Model/Database/*:../CSTutor/Model/User/commons-validator-1.4.1.jar:../CSTutor/Model/User/jbcrypt.jar org.junit.runner.JUnitCore $(TEST_CLASS)
 
 test_clean:
+		cd ../; \
 		rm -rf .TestClasses/
 
-test:	TestDir test_comp test_run
+test:	TestDir all test_comp test_run test_clean
+
+test7:	TestDir test_comp test_run test_clean
