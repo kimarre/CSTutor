@@ -68,6 +68,8 @@ public class TutorDB {
       }
       con.commit();
       s.close();
+      System.out.println("Initialized database.");
+
    }
 
    /**
@@ -134,11 +136,12 @@ public class TutorDB {
          s.setString(1, username);
          ResultSet r = s.executeQuery();
          Map<String, String> user = new HashMap<String, String>();
-         List<String> cols = Arrays.asList("username", "hash", "firstname", "lastname", "instructor");
+         List<String> cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
          for (String col : cols) {
             user.put(col, r.getString(col));
          }
          s.close();
+
          return user;
       } catch(Exception e) { // user not in db
          return null;
@@ -165,7 +168,7 @@ public class TutorDB {
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
-         s.setBoolean(values.size(), tutorial.hasSeen);
+         s.setBoolean(values.size()+1, tutorial.hasSeen);
          s.executeUpdate();
          s.close();
          commit();
@@ -191,7 +194,8 @@ public class TutorDB {
          ResultSet r = s.executeQuery();
          CSTutor.Model.Tutorial.TutorialData data = new CSTutor.Model.Tutorial.TutorialData(
           id, r.getString("title"), r.getString("description"), r.getString("syntax"),
-          r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"), r.getBoolean("hasSeen"));
+          r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"),
+          r.getBoolean("hasSeen"));
          s.close();
          return data;
       } catch(Exception e) { // tutorial data not in db
