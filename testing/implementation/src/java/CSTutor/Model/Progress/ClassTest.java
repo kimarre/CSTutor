@@ -60,7 +60,7 @@ public class ClassTest
     @Test
     public void testGetSections()
     {
-        fail("Not yet implemented");
+        testClass.getSections();
     }
 
     /**

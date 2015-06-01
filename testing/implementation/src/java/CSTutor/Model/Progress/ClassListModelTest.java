@@ -33,7 +33,35 @@ public class ClassListModelTest {
     @Test
     public void testConstructor()
     {
-        fail("Not yet implemented");
+        
+    }
+    
+    
+    /**
+     * Test method for the contains method.
+     */
+    @Test
+    public void testContains()
+    {
+        
+    }
+    
+    /**
+     * Test method for the indexOf method.
+     */
+    @Test
+    public void testIndexOf()
+    {
+        
+    }
+     
+    /**
+     * Test method for the getSimilarClasses method.
+     */
+    @Test
+    public void testGetSimilarClasses()
+    {
+        
     }
 
 }
