@@ -27,7 +27,13 @@ import static org.junit.Assert.*;
 public class ClassListModelTest {
     ClassListModel listModel;
     
-    public ClassListModelTest() {
+    /**
+     * Test method for ClassListModel's constructor.
+     */
+    @Test
+    public void testConstructor()
+    {
+        fail("Not yet implemented");
     }
 
 }
