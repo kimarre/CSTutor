@@ -51,6 +51,7 @@ public class TutorialEditor {
       } else {
         pageData.pageId = tutorialTrack.getNextID();
         tutorialTrack.database.setTutorialData(pageData);
+        tutorialTrack.track.add(pageData.pageId);
         
         System.out.println("Saved! There are now " + tutorialTrack.maxIndex + " tutorials.");
         return true;

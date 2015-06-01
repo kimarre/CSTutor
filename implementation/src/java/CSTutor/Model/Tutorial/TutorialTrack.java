@@ -39,6 +39,7 @@ public class TutorialTrack {
         
         int ndx = getNextID();
         TutorialData first = new TutorialData(ndx, newTitle, desc, syn, code, output, tryIt);
+        track.add(ndx);
         
         database.setTutorialData(first);
         
@@ -48,7 +49,20 @@ public class TutorialTrack {
         desc = "While loops are only sometimes as cool as for loops.";
         syn = "while (condition) { <br><br>}";
         
-        TutorialData second = new TutorialData(getNextID(), newTitle, desc, syn, "", "", "");
+        TutorialData second = new TutorialData(ndx = getNextID(), newTitle, desc, syn, "", "", "");
+        track.add(ndx);
         database.setTutorialData(second);
     }
+    
+    /*public void initRoadmapArray(String[] arr) {
+        System.out.println("max index is: " + maxIndex);
+        for(int i=0; i<maxIndex; i++) {
+            //
+            System.out.println("Maxindex: " + maxIndex + " TITLE: " + database.getTutorialData(i).title);
+            System.out.println("arr.length " + arr.length);
+            arr[i] = database.getTutorialData(i).title;
+            
+        }
+        
+    }*/
 }
