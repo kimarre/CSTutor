@@ -8,6 +8,8 @@ import javax.swing.tree.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 
+import CSTutor.Model.Manager.Class;
+
 import java.util.*;
 import java.io.*;
 /**
@@ -18,22 +20,33 @@ public class ManagerGUI extends JPanel {
 	public NewObjectGUI newObject;
 	public MoveGUI moveTut;
 	
+	public JPopupMenu toolMenu;
+	public JPanel selfRef;
+	
 	public static DefaultMutableTreeNode root;
 	public static DefaultTreeModel treeModel;
 	public static JTree tree;
 	
 	public static CSTutor.Model.Manager.Manager managerModel = new CSTutor.Model.Manager.Manager();
 
+	public static void main(String[] args) {
+		JFrame testFrame = new JFrame();
+		testFrame.add(new ManagerGUI());
+		testFrame.pack();
+		testFrame.setVisible(true);
+	}
+	
     public ManagerGUI() {
+    	selfRef = this;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
-        
+        /*
         System.out.println("Attempt to get data");
         managerModel.data = CSTutor.Model.Database.TutorDB.getClasses();
         System.out.println("Data got?");
-        
-        /*
+        */
+        moveTut = new MoveGUI();
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 103"));
@@ -45,7 +58,7 @@ public class ManagerGUI extends JPanel {
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Hello World", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Conditionals", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Loops", managerModel.selectedUnit));
-        */
+        
         
         
         addManagerContent();
@@ -141,24 +154,7 @@ public class ManagerGUI extends JPanel {
         root.removeAllChildren();
         treeModel.reload();
         */
-        for (int i = 0; i < managerModel.data.size(); i++) {
-      	   DefaultMutableTreeNode node = new DefaultMutableTreeNode(managerModel.data.get(i));
-        	   treeModel.insertNodeInto(node, root, root.getChildCount());
-        	   for (int j = 0; j < managerModel.data.get(i).sections.size(); j++) {
-        	   	 DefaultMutableTreeNode node2 = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j));
-        	   	 treeModel.insertNodeInto(node2, node, node.getChildCount());
-        	   	 for(int k = 0; k < managerModel.data.get(i).sections.get(j).units.size(); k++) {
-        	   		 DefaultMutableTreeNode node3
-        	   		     = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j).units.get(k));
-        	   		 treeModel.insertNodeInto(node3, node2, node2.getChildCount());
-          	        for(int l = 0; l <managerModel.data.get(i).sections.get(j).units.get(k).tutorials.size(); l++) {
-            	   		 DefaultMutableTreeNode node4
-          	   		     = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j).units.get(k).tutorials.get(l));
-              	   		 treeModel.insertNodeInto(node4, node3, node3.getChildCount());
-          	        }
-        	   	 }
-        	   }
-        }
+        populateTree();
         
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             public void valueChanged(TreeSelectionEvent e) {
@@ -169,6 +165,7 @@ public class ManagerGUI extends JPanel {
                 else {
                 	System.out.println(node.toString() + " selected");
    	          	System.out.println(node.toString() + " " + node.getLevel());
+   	          	managerModel.clearSelections();
    	          	switch(node.getLevel()) {
 	   	          	case 1:
 	   	          		managerModel.selectClass((CSTutor.Model.Manager.Class)node.getUserObject());
@@ -211,6 +208,7 @@ public class ManagerGUI extends JPanel {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("New Class button pressed");
+        	   newObject = new NewObjectGUI();
         	   newObject.setVisible(true);
            }
         });
@@ -271,6 +269,21 @@ public class ManagerGUI extends JPanel {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("Move Section button pressed");
+        	   moveTut.setVisible(true);
+        	 if (managerModel.selectedTutorial != null) {
+      	   	moveTut.passTutorial();
+      	   }
+        	 else if (managerModel.selectedUnit != null) {
+        		 	System.out.println(managerModel.selectedUnit);
+      	   	moveTut.passUnit();
+      	   }
+        	 else if (managerModel.selectedSection != null) {
+      		 	System.out.println(managerModel.selectedSection);
+      	   	moveTut.passSection();
+      	   }
+        	 else if (managerModel.selectedClass != null) {
+      	   	moveTut.passClass();
+      	   }
         	   System.out.println("Moving not yet implemented");
            }
         });
@@ -300,6 +313,9 @@ public class ManagerGUI extends JPanel {
         
         classPanel.add(buttonPanel, BorderLayout.SOUTH);
         panel.add(classPanel);
+        
+        
+        addMenu();
     }
     
     	class MyTreeModelListener implements TreeModelListener {
@@ -342,6 +358,29 @@ public class ManagerGUI extends JPanel {
         public void treeStructureChanged(TreeModelEvent e) {
         }
     }
+    	
+    	public void addMenu() {
+    		JMenuItem editOption = new JMenuItem("Edit...");
+    		JMenuItem moveOption = new JMenuItem("Move...");
+    		JMenuItem delOption = new JMenuItem("Delete");
+    		JMenuItem newOption = new JMenuItem("New...");
+    		toolMenu = new JPopupMenu("Tools");
+    		toolMenu.add(editOption);
+    		toolMenu.add(moveOption);
+    		toolMenu.add(delOption);
+    		toolMenu.add(newOption);
+    		
+    		tree.addMouseListener(new MouseAdapter()
+            {
+                public void mousePressed(MouseEvent e)
+                {
+                    if ( SwingUtilities.isRightMouseButton(e) )
+                    {
+                        toolMenu.show(selfRef, e.getX(), e.getY());
+                    }
+                }
+            });
+    	}
     	
     public static void addClass(CSTutor.Model.Manager.Class toInsert) {
    	 DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(toInsert);
@@ -402,4 +441,48 @@ public class ManagerGUI extends JPanel {
     	treeModel.insertNodeInto(tutNode, node, 0);
 		 managerModel.selectedSection.units.add(toInsert);
     }
+    public static ArrayList<Class> getClasses() {
+   	 return new ArrayList<Class>(managerModel.data);
+    }
+    public static java.util.List<CSTutor.Model.Manager.Section> getSections() {
+   	 ArrayList<CSTutor.Model.Manager.Section> list = new ArrayList<CSTutor.Model.Manager.Section>();
+   	 for (CSTutor.Model.Manager.Class c : managerModel.data) {
+   		 for (CSTutor.Model.Manager.Section s : c.sections) {
+   			 list.add(s);
+   		 }
+   	 }
+   	 return list;
+    }
+    public static java.util.List<CSTutor.Model.Manager.Unit> getUnits() {
+   	 ArrayList<CSTutor.Model.Manager.Unit> list = new ArrayList<CSTutor.Model.Manager.Unit>();
+   	 for (CSTutor.Model.Manager.Class c : managerModel.data) {
+   		 for (CSTutor.Model.Manager.Section s : c.sections) {
+      		 for (CSTutor.Model.Manager.Unit u : s.units) {
+      			 list.add(u);
+      		 }
+   		 }
+   	 }
+   	 return list;
+    }
+    public static void populateTree() {
+       for (int i = 0; i < managerModel.data.size(); i++) {
+    	   DefaultMutableTreeNode node = new DefaultMutableTreeNode(managerModel.data.get(i));
+      	   treeModel.insertNodeInto(node, root, root.getChildCount());
+      	   for (int j = 0; j < managerModel.data.get(i).sections.size(); j++) {
+      	   	 DefaultMutableTreeNode node2 = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j));
+      	   	 treeModel.insertNodeInto(node2, node, node.getChildCount());
+      	   	 for(int k = 0; k < managerModel.data.get(i).sections.get(j).units.size(); k++) {
+      	   		 DefaultMutableTreeNode node3
+      	   		     = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j).units.get(k));
+      	   		 treeModel.insertNodeInto(node3, node2, node2.getChildCount());
+        	        for(int l = 0; l <managerModel.data.get(i).sections.get(j).units.get(k).tutorials.size(); l++) {
+          	   		 DefaultMutableTreeNode node4
+        	   		     = new DefaultMutableTreeNode(managerModel.data.get(i).sections.get(j).units.get(k).tutorials.get(l));
+            	   		 treeModel.insertNodeInto(node4, node3, node3.getChildCount());
+        	        }
+      	   	 }
+      	   }
+      }
+    }
+    
 }

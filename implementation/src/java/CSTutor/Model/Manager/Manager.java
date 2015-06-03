@@ -26,6 +26,13 @@ public class Manager {
    public Manager() {
       data = new ArrayList<Class>();
    }
+   
+   public void clearSelections() {
+   	selectedClass = null;
+   	selectedSection = null;
+   	selectedUnit = null;
+   	selectedTutorial = null;
+   }
 
    /**
     * SelectSection sets the selectedSection to the given section, if it
@@ -222,7 +229,7 @@ public class Manager {
        selectedSection' == null && !selectedClass'.sections.contains(selectedSection);
      */
     public void deleteSection() {
-    	if(selectedClass != null) {
+    	if(selectedClass != null && selectedSection != null && selectedSection.name.equals("All sections")) {
     		selectedClass.sections.remove(selectedSection);
     	}
    	 System.out.println("In CSTutor.Model.Manager.deleteSection()");
@@ -237,7 +244,7 @@ public class Manager {
        selectedUnit' == null && !selectedSection'.units.contains(selectedUnit);
      */
     public void deleteUnit() {
-    	if(selectedSection != null) {
+    	if(selectedSection != null && selectedUnit != null && selectedUnit.name.equals("Uncategorized")) {
     		selectedSection.units.remove(selectedUnit);
     	}
    	 System.out.println("In CSTutor.Model.Manager.deleteUnit()");
