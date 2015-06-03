@@ -208,6 +208,37 @@ public class TutorDB {
       }
    }
 
+   /**
+    * Get list of all TutorialData in the database
+    *
+    * @return List of all TutorialData
+    * post:
+    *  return != null;
+    */
+   public static List<CSTutor.Model.Tutorial.TutorialData> getAllTutorialData() {
+      List<CSTutor.Model.Tutorial.TutorialData> tutorials = new ArrayList<CSTutor.Model.Tutorial.TutorialData>();
+      CSTutor.Model.Tutorial.TutorialData t;
+      try {
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM TutorialData");
+         ResultSet r = s.executeQuery();
+         while (r.next()) {
+            t = new CSTutor.Model.Tutorial.TutorialData(
+               r.getInt("id"), r.getString("title"), r.getString("description"), r.getString("syntax"),
+               r.getString("exampleCode"), r.getString("exampleOutput"), r.getString("tryitYourself"),
+               r.getBoolean("hasSeen")
+            );
+            tutorials.add(t);
+         }
+         s.close();
+         return tutorials;
+      } catch(Exception e) {
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+         return null;
+      }
+   }
+
 
 /*** Page methods *********************************************************************************/
 
