@@ -24,10 +24,48 @@ import static org.junit.Assert.*;
                TutorialListModel object.
  *									 </pre>
  */
-public class TutorialListModelTest {
+public class TutorialListModelTest 
+{
     TutorialListModel listModel;
     
-    public TutorialListModelTest() {
+    public TutorialListModelTest() 
+    {
+    }
+    
+    /**
+     * Test method for the TutorialListModel constructor.
+     */
+    @Test
+    public void testConstructor()
+    {
+        
+    }
+    
+    /**
+     * Test method for the contains method.
+     */
+    @Test
+    public void testContains()
+    {
+        
+    }
+    
+    /**
+     * Test method for the indexOf method.
+     */
+    @Test
+    public void testIndexOf()
+    {
+        
+    }
+    
+    /**
+     * Test method for the getSimilarTutorials method.
+     */
+    @Test
+    public void testGetSimilarTutorials()
+    {
+        
     }
 
 }
