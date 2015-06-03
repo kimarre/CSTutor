@@ -124,21 +124,62 @@ public class NewObjectGUI extends JFrame {
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("OK button pressed");
+        	   boolean nameExists = false;
 	         	if (objectSelect.getSelectedItem().equals("Class")) {
-	         		System.out.println("adding new class: " + newClass.getNewClass());
-	         		ManagerGUI.addClass(newClass.getNewClass());
+	         		for (CSTutor.Model.Manager.Class c : ManagerGUI.managerModel.data) {
+	         			if (c.name.equals(newClass.getNewClass().name )) {
+	         				nameExists = true;
+	         			}
+	         		}
+	         		if (!nameExists) {
+	         			System.out.println("adding new class: " + newClass.getNewClass());
+	         			ManagerGUI.addClass(newClass.getNewClass());
+	         		}
+	         		else {
+	         			System.out.println("Duplicate class name");
+	         		}
 	         	}
 	         	else if (objectSelect.getSelectedItem().equals("Section")) {
-	         		System.out.println("adding new section: " + newSect.getNewSection());
-	         		ManagerGUI.addSection(newSect.getNewSection());
+	         		for (CSTutor.Model.Manager.Section c : ManagerGUI.managerModel.selectedClass.sections) {
+	         			if (c.name.equals(newSect.getNewSection().name )) {
+	         				nameExists = true;
+	         			}
+	         		}
+	         		if (!nameExists) {
+	         			System.out.println("adding new section: " + newSect.getNewSection());
+	         			ManagerGUI.addSection(newSect.getNewSection());
+	         		}
+	         		else {
+	         			System.out.println("Duplicate sect name");
+	         		}
 	         	}
 	         	else if (objectSelect.getSelectedItem().equals("Unit")) {
-	         		System.out.println("adding new unit: " + newUnit.getNewUnit());
-	         		ManagerGUI.addUnit(newUnit.getNewUnit());
+	         		for (CSTutor.Model.Manager.Unit c : ManagerGUI.managerModel.selectedSection.units) {
+	         			if (c.name.equals(newUnit.getNewUnit().name )) {
+	         				nameExists = true;
+	         			}
+	         		}
+	         		if (!nameExists) {
+	         			System.out.println("adding new unit: " + newUnit.getNewUnit());
+	         			ManagerGUI.addUnit(newUnit.getNewUnit());
+	         		}
+	         		else {
+	         			System.out.println("Duplicate unit name");
+	         		}
 	         	}
 	         	else if (objectSelect.getSelectedItem().equals("Tutorial")) {
-	         		System.out.println("adding new tutorial: " + newTut.getNewTut());
-	         		ManagerGUI.addTutorial(newTut.getNewTut());
+	         		for (CSTutor.Model.Manager.Tutorial c : ManagerGUI.managerModel.selectedUnit.tutorials) {
+	         			if (c.name.equals(newTut.getNewTut().name )) {
+	         				nameExists = true;
+	         			}
+	         		}
+	         		if (!nameExists) {
+	         			System.out.println("adding new tutorial: " + newTut.getNewTut());
+	         			ManagerGUI.addTutorial(newTut.getNewTut());
+	         		}
+	         		else {
+	         			System.out.println("Duplicate tut name");
+	         		}
 	         	}
 	        	setVisible(false);
            }
