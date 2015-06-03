@@ -152,6 +152,33 @@ public class TutorDB {
       }
    }
 
+   /**
+    * Get a list of usernames from the database by accessLevel
+    *
+    * @param accessLevel The access level enum
+    * @return List of usernames by accessLevel
+    * post:
+    *  return != null;
+    */
+   public static List<String> getAllUsernames(CSTutor.Model.Manager.Class.ClassAccessLevel accessLevel) {
+      List<String> usernames = new ArrayList<String>();
+      try {
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
+         s.setString(1, getAccessString(accessLevel));
+         ResultSet r = s.executeQuery();
+         while (r.next()) {
+            usernames.add(r.getString("username"));
+         }
+         s.close();
+         return usernames;
+      } catch(Exception e) {
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getAllUsers(). " + e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+         return null;
+      }
+   }
+
 
 /*** TutorialData methods *************************************************************************/
 
