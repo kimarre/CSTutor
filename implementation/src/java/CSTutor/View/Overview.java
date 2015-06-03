@@ -37,6 +37,7 @@ public class Overview extends JFrame implements Observer {
     private JPanel chatBar;
     public User user;
     public UserDB userDB;
+    private Tutorial tutorial;
     private static int INSTRUCTOR_ACCESS = 2;
     
     public static void main(String[] args) {
@@ -69,13 +70,14 @@ public class Overview extends JFrame implements Observer {
         mainPanel = new JPanel();
         mainTop = new JPanel(new CardLayout());
         chatBar = new ChatBar();
+        tutorial = new Tutorial();
         
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
         mainTop.add(new ManagerGUI(), "Manager");
         mainTop.add(new Progress(INSTRUCTOR_ACCESS).getView(), "Progress");
-        mainTop.add(new EditTutorial(), "Tutorial");
-        mainTop.add(new CSTutor.View.Tutorial.Tutorial(), "Student Tutorial");
+        mainTop.add(new CSTutor.View.Tutorial.EditTutorial(), "Tutorial");
+        mainTop.add(tutorial, "Student Tutorial");
         mainTop.add(new QuizBuildGUI(), "Quiz");
         mainPanel.add(mainTop);
         mainPanel.add(chatBar);
@@ -177,7 +179,8 @@ public class Overview extends JFrame implements Observer {
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Manager");
     }
     
-    private void MyTutorialAction(java.awt.event.ActionEvent evt) { 
+    private void MyTutorialAction(java.awt.event.ActionEvent evt) {
+        tutorial.initRoadmapContent(); 
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
     }
     

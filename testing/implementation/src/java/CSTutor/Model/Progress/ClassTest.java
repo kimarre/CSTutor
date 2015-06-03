@@ -25,14 +25,24 @@ import org.junit.Test;
 */
 public class ClassTest
 {
-
+    Class testClass;
+    String nameString;
+    
+    public ClassTest()
+    {
+        testClass = new Class("CPE 101");
+        nameString = new String("CPE 101");
+    }
+    
     /**
      * Test method for the Class' constructor.
      */
     @Test
     public void testClass()
     {
-        fail("Not yet implemented");
+        Class sampleClass = new Class("CPE 102");
+        assert(sampleClass != null);
+        assert(sampleClass.toString().equals("CPE 102"));
     }
 
     /**
@@ -41,7 +51,7 @@ public class ClassTest
     @Test
     public void testToString()
     {
-        fail("Not yet implemented");
+        assert(testClass.toString().equals(nameString));
     }
 
     /**
@@ -50,7 +60,7 @@ public class ClassTest
     @Test
     public void testGetSections()
     {
-        fail("Not yet implemented");
+        testClass.getSections();
     }
 
     /**
@@ -59,7 +69,11 @@ public class ClassTest
     @Test
     public void testEqualsClass()
     {
-        fail("Not yet implemented");
+        Class sampleClass = new Class("CPE 102");
+        Class equalClass = new Class("CPE 101");
+        
+        assertFalse(testClass.equals(sampleClass));
+        assert(testClass.equals(equalClass));
     }
 
 }
