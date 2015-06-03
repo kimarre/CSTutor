@@ -45,12 +45,15 @@ public class TutorDBTest {
    public void testSetGetUser() {
       List<String> cols, vals;
       Map<String, String> correctrow, testrow;
-      cols = Arrays.asList("username, hash, firstname, lastname, accessLevel");
+      cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
       vals = Arrays.asList("sdali", "DEADBEEF", "Salvador", "Dali", "Professor");
       correctrow  = mapFromLists(cols, vals);
       TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
       testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row", correctrow, testrow);
+      assertEquals("Comparing correct and test row length", correctrow.size(), testrow.size());
+      for (String col : cols) {
+        assertEquals("Comparing correct and test row", correctrow.get(col), testrow.get(col));
+      }
    }
 
    /**
@@ -61,17 +64,24 @@ public class TutorDBTest {
    public void testSetGetUserTwice() {
       List<String> cols, vals;
       Map<String, String> correctrow, testrow;
-      cols = Arrays.asList("username, hash, firstname, lastname, accessLevel"); 
+      cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
       vals = Arrays.asList("bobsmith", "DEADBEEF", "Bob", "Smith", "Student");
       correctrow  = mapFromLists(cols, vals);
       TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
       testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row", correctrow, testrow);
+      assertEquals("Comparing correct and test row length", correctrow.size(), testrow.size());
+      for (String col : cols) {
+        assertEquals("Comparing correct and test row", correctrow.get(col), testrow.get(col));
+      }
 
       vals = Arrays.asList("bobsmith", "808FACED", "Bob", "Smith", "Student");
       correctrow  = mapFromLists(cols, vals);
+      TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
       testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row", correctrow, testrow);
+      assertEquals("Comparing correct and test row length", correctrow.size(), testrow.size());
+      for (String col : cols) {
+        assertEquals("Comparing correct and test row", correctrow.get(col), testrow.get(col));
+      }
    }
 
    /**
@@ -88,7 +98,7 @@ public class TutorDBTest {
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
       assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
-      assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
+      assertEquals("Comparing correct data and test data", correctdata.description.intro, testdata.description.intro);
       assertEquals("Comparing correct data and test data", correctdata.description.syntax, testdata.description.syntax);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);
@@ -110,7 +120,7 @@ public class TutorDBTest {
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
       assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
-      assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
+      assertEquals("Comparing correct data and test data", correctdata.description.intro, testdata.description.intro);
       assertEquals("Comparing correct data and test data", correctdata.description.syntax, testdata.description.syntax);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);
@@ -123,7 +133,7 @@ public class TutorDBTest {
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
       assertEquals("Comparing correct data and test data", correctdata.title, testdata.title);
-      assertEquals("Comparing correct data and test data", correctdata.description, testdata.description);
+      assertEquals("Comparing correct data and test data", correctdata.description.intro, testdata.description.intro);
       assertEquals("Comparing correct data and test data", correctdata.description.syntax, testdata.description.syntax);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);

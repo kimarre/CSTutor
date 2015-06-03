@@ -8,18 +8,22 @@ package CSTutor.View.Tutorial;
 import CSTutor.Model.Tutorial.*;
 import java.awt.Color;
 import java.util.*;
+import javax.swing.*;
 import javax.swing.JFrame;
+import javax.swing.JList;
 
 /**
  * Contains the elements of the tutorial view
  * 
  * @author Kim Arre (karre@calpoly.edu)
- * @version 26Apr2015
+ * @version 31May2015
  */
 public class Tutorial extends javax.swing.JPanel {
     /** Overall structure containing tutorial content */
     private TutorialTrack tutorialTrack = new TutorialTrack();
     private int currentIndex = 0;
+    
+    DefaultListModel listItems = new DefaultListModel();
     
     /** Provides a quick way to jump between tutorial lessons */
     public RoadmapModule sideModule;
@@ -29,14 +33,9 @@ public class Tutorial extends javax.swing.JPanel {
      */
     public Tutorial() {
         initComponents();
-        
-        /*setBackground(new Color(250, 250, 250));
-        TryItYourself.setBackground(new Color(250, 250, 250));
-        jPanel1.setBackground(new Color(250, 250, 250));
-        descriptionPanel.setBackground(new Color(250, 250, 250));*/
-        
+       
         sideModule = new RoadmapModule();
-        
+        initRoadmapContent();
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         
         this.setVisible(true);
@@ -48,6 +47,7 @@ public class Tutorial extends javax.swing.JPanel {
      */
     public Tutorial(TutorialData pageData) {
         initComponents();
+        initRoadmapContent();
         setAllTheThings(pageData);
     }
     
@@ -86,7 +86,7 @@ public class Tutorial extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         toEndButton = new javax.swing.JButton();
         toBeginningButton = new javax.swing.JButton();
-        jScrollPane9 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         roadmapList = new javax.swing.JList();
         descriptionPanel = new javax.swing.JPanel();
         sampleCodeLabel = new javax.swing.JLabel();
@@ -129,14 +129,9 @@ public class Tutorial extends javax.swing.JPanel {
         });
         jPanel1.add(toBeginningButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, 160, 40));
 
-        roadmapList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane9.setViewportView(roadmapList);
+        jScrollPane1.setViewportView(roadmapList);
 
-        jPanel1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 63, 159, 443));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 150, 450));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 10, -1, 588));
 
@@ -229,6 +224,15 @@ public class Tutorial extends javax.swing.JPanel {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_RoadmapContentListValueChanged
+    
+    public void initRoadmapContent() {
+        listItems.removeAllElements();
+        System.out.println("There are " + tutorialTrack.track.size() + " items in the list");
+        for (int i = 0; i < tutorialTrack.track.size(); i++) {
+            listItems.addElement(tutorialTrack.database.getTutorialData(tutorialTrack.track.get(i)).title);
+        } 
+        roadmapList.setModel(listItems);
+    }
     
     /** 
      * Jump to the end of the tutorial track.
@@ -332,9 +336,9 @@ public class Tutorial extends javax.swing.JPanel {
     private javax.swing.JPanel descriptionPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JButton nextLessonButton;
     private javax.swing.JLabel outputText;
     private javax.swing.JButton previousLessonButton;

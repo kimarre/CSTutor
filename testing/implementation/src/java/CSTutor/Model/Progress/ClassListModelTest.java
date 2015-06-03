@@ -27,7 +27,41 @@ import static org.junit.Assert.*;
 public class ClassListModelTest {
     ClassListModel listModel;
     
-    public ClassListModelTest() {
+    /**
+     * Test method for ClassListModel's constructor.
+     */
+    @Test
+    public void testConstructor()
+    {
+        
+    }
+    
+    
+    /**
+     * Test method for the contains method.
+     */
+    @Test
+    public void testContains()
+    {
+        
+    }
+    
+    /**
+     * Test method for the indexOf method.
+     */
+    @Test
+    public void testIndexOf()
+    {
+        
+    }
+     
+    /**
+     * Test method for the getSimilarClasses method.
+     */
+    @Test
+    public void testGetSimilarClasses()
+    {
+        
     }
 
 }
