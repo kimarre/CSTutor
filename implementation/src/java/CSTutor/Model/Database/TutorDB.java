@@ -13,58 +13,62 @@ import java.util.HashMap;
 import CSTutor.Model.Manager.Class.ClassAccessLevel;
 
 /**
- * CSTutor Data Access Object.
- * Interfaces with the sqlite database. Contains methods for getting and setting
- * values to and from the database. Connection to database is initialized
- * at startup.
+ * Class TutorDB provides an interface to the sqlite database. Contains methods
+ * for getting and setting values to and from the database. At startup the
+ * connection to the database is instantiated and the sql statements in an SQL
+ * script are executed to ensure all tables are created and the initial data
+ * exists in the database. 
  *
- * @author dlgordon
+ * @author dlgordon (dlgordon@calpoly.edu)
  */
 public class TutorDB {
-   private static final String db_path = "tutordb.db";
-   private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql";
-   private static Connection conn = connect();
-   //private static List<CSTutor.Model.Manager.Class> classes = getClasses();
+   private static final String db_path = "tutordb.db"; // Path to the database
+   private static final String init_db_path = "/CSTutor/Model/Database/tutordb.sql"; // Path to the SQL script
+   private static Connection conn = connect(); // The db connection used by all access methods
    
 /*** Helper methods *******************************************************************************/
 
    /**
-   * Connect to the database
+   * Returns a connection to the database for later use. This method is executed
+   * only once, at startup.
    *
    * @return Connection to the database
-     pre:
-      new java.io.File(db_path).exists();
-     post:
-      return != null;
+   * pre:
+   *  new java.io.File(db_path).exists();
+   * post:
+   *  return != null;
    */
    private static Connection connect() {
       try {
+         // Connect to the sqlite file
          Class.forName("org.sqlite.JDBC");
          Connection c = DriverManager.getConnection("jdbc:sqlite:" + db_path);
          c.setAutoCommit(false);
          init_db(c);
          return c;
       } catch(Exception e) {
-         System.err.println("Couldn't open db connection.");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
+         // Since the program is unuseable without a db connection, crash on exception
+         System.err.println("Couldn't open db connection. " + e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+         return null;
       }
    }  
    
    /**
-    * Initialize the database by running the SQL statements in tutordb.sql.
+    * Initialize the database by running the statements in the SQL script.
     * Create tables if they don't exist, and populate with initial data.
     *
     * @param con Connection to the database
-      pre:
-       con != null && TutorDB.class.getResourceAsStream(init_db_path) != null;
+    * pre:
+    *  con != null && TutorDB.class.getResourceAsStream(init_db_path) != null;
     */
    private static void init_db(Connection con) throws Exception { 
+      // Scanner to the SQL script
+      java.util.Scanner scan = new java.util.Scanner(
+       TutorDB.class.getResourceAsStream(init_db_path)).useDelimiter(";\n*");
       Statement s = con.createStatement();
-      java.io.InputStream input = TutorDB.class.getResourceAsStream(init_db_path);
-      java.util.Scanner scan = new java.util.Scanner(input).useDelimiter(";\n*");
       while (scan.hasNext()) {
-         s.executeUpdate(scan.next());
+         s.executeUpdate(scan.next()); // Execute each line
       }
       con.commit();
       s.close();
@@ -75,15 +79,15 @@ public class TutorDB {
    /**
     * Commit changes to the database. Must be called for db writes to take effect.
     *
-      pre:
-       conn != null;
+    * pre:
+    *  conn != null;
     */
    public static void commit() {
       try {
          conn.commit();
       } catch(Exception e) {
-         System.err.println("Error in commit()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // Committing should never throw an exception in normal operation
+         System.err.println("Error in commit(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -100,15 +104,15 @@ public class TutorDB {
     * @param firstname user's first name
     * @param lastname user's last name
     * @param accessLevel the access identifier (Guest, Student, Assistant, Professor) of the user
-      pre:
-       username != null && hash != null && firstname != null
-       && lastname != null && accessLevel != null;
+    * pre:
+    *  username != null && hash != null && firstname != null
+    *  && lastname != null && accessLevel != null;
     */
    public static void setUser(String username, String hash, String firstname,
     String lastname, String accessLevel) {
       try {
          PreparedStatement s = conn.prepareStatement("INSERT OR REPLACE INTO Users VALUES (?, ?, ?, ?, ?)");
-         List<String> values = Arrays.asList(username, hash, firstname, lastname, accessLevel);
+         List<String> values = Arrays.asList(username, hash, firstname, lastname, accessLevel); // Column values
          for (int i = 0; i < values.size(); i++) {
             s.setString(i+1, values.get(i));
          }
@@ -116,8 +120,8 @@ public class TutorDB {
          s.close();
          commit();
       } catch(Exception e) {
-         System.err.println("Error in setUser()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in setUser(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -127,8 +131,8 @@ public class TutorDB {
     *
     * @param username user's username
     * @return Map of columns to values, or null if not found.
-      pre:
-       username != null;
+    * pre:
+    *  username != null;
     */
    public static Map<String, String> getUser(String username) {
       try {
@@ -141,9 +145,9 @@ public class TutorDB {
             user.put(col, r.getString(col));
          }
          s.close();
-
          return user;
-      } catch(Exception e) { // user not in db
+      } catch(Exception e) {
+         // User is not in db so return null
          return null;
       }
    }
@@ -156,8 +160,8 @@ public class TutorDB {
     * Otherwise overwrite the entry.
     *
     * @param tutorial the Tutorial to add
-      pre:
-       tutorial != null && tutorial.description != null;
+    * pre:
+    *  tutorial != null && tutorial.description != null;
     */
    public static void setTutorialData(CSTutor.Model.Tutorial.TutorialData tutorial) {
       try {
@@ -173,8 +177,8 @@ public class TutorDB {
          s.close();
          commit();
       } catch(Exception e) {
-         System.err.println("Error in setTutorialData()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in setTutorialData(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -184,8 +188,8 @@ public class TutorDB {
     *
     * @param id the identifier for the TutorialData
     * @return specified TutorialData object, or null if not found
-      pre:
-       id >= 0;
+    * pre:
+    *  id >= 0;
     */
    public static CSTutor.Model.Tutorial.TutorialData getTutorialData(int id) {
       try {
@@ -198,7 +202,8 @@ public class TutorDB {
           r.getBoolean("hasSeen"));
          s.close();
          return data;
-      } catch(Exception e) { // tutorial data not in db
+      } catch(Exception e) {
+         // Tutorial is not in db so return null
          return null;
       }
    }
@@ -211,11 +216,11 @@ public class TutorDB {
     *
     * @param tutorial the Tutorial to look up Pages for
     * @return List of Pages
-      pre:
-       tutorial != null && tutorial.parent != null && tutorial.parent.parent != null
-       && tutorial.parent.parent.parent != null;
-      post:
-       return != null;
+    * pre:
+    *  tutorial != null && tutorial.parent != null && tutorial.parent.parent != null
+    *  && tutorial.parent.parent.parent != null;
+    * post:
+    *  return != null;
     */
    public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
       List<CSTutor.Model.Manager.Page> pages = new ArrayList<CSTutor.Model.Manager.Page>();
@@ -235,7 +240,8 @@ public class TutorDB {
          }
          s.close();
          return pages;
-      } catch(Exception e) { // tutorial not in db
+      } catch(Exception e) {
+         // This method should never throw an exception in normal operation
          return pages;
       }
    }
@@ -244,8 +250,8 @@ public class TutorDB {
     * Save a list of Pages to the database
     *
     * @param pages list of Pages to save
-      pre:
-       pages != null;
+    * pre:
+    *  pages != null;
     */
    public static void savePages(List<CSTutor.Model.Manager.Page> pages) {
       try {
@@ -261,8 +267,8 @@ public class TutorDB {
             s.close();
          }
       } catch(Exception e) {
-         System.err.println("Error in savePages()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in savePages(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -275,10 +281,10 @@ public class TutorDB {
     *
     * @param unit the Unit to look up Tutorials for
     * @return List of Tutorials
-      pre:
-       unit != null && unit.parent != null && unit.parent.parent != null;
-      post:
-       return != null;
+    * pre:
+    *  unit != null && unit.parent != null && unit.parent.parent != null;
+    * post:
+    *  return != null;
     */
    public static List<CSTutor.Model.Manager.Tutorial> getTutorials(CSTutor.Model.Manager.Unit unit) {
       List<CSTutor.Model.Manager.Tutorial> tutorials = new ArrayList<CSTutor.Model.Manager.Tutorial>();
@@ -298,7 +304,8 @@ public class TutorDB {
          }
          s.close();
          return tutorials;
-      } catch(Exception e) { // unit not in db
+      } catch(Exception e) {
+         // User not in db so return empty
          return tutorials;
       }
    }
@@ -307,8 +314,8 @@ public class TutorDB {
     * Save a list of Tutorials to the database
     *
     * @param tutorials list of Tutorials to save
-      pre:
-       tutorials != null;
+    * pre:
+    *  tutorials != null;
     */
    public static void saveTutorials(List<CSTutor.Model.Manager.Tutorial> tutorials) {
       try {
@@ -324,8 +331,8 @@ public class TutorDB {
             savePages(t.pages);
          }
       } catch(Exception e) {
-         System.err.println("Error in saveTutorials()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in saveTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -338,10 +345,10 @@ public class TutorDB {
     *
     * @param section the Section to look up Units for
     * @return List of Units
-      pre:
-       section != null && section.parent != null;
-      post:
-       return != null;
+    * pre:
+    *  section != null && section.parent != null;
+    * post:
+    *  return != null;
     */
    public static List<CSTutor.Model.Manager.Unit> getUnits(CSTutor.Model.Manager.Section section) {
       List<CSTutor.Model.Manager.Unit> units = new ArrayList<CSTutor.Model.Manager.Unit>();
@@ -361,7 +368,8 @@ public class TutorDB {
          }
          s.close();
          return units;
-      } catch(Exception e) { // section not in db
+      } catch(Exception e) {
+         // Section not in db so return empty
          return units;
       }
    }
@@ -370,8 +378,8 @@ public class TutorDB {
     * Save a list of Units to the database
     *
     * @param units list of Units to save
-      pre:
-       units != null;
+    * pre:
+    *  units != null;
     */
    public static void saveUnits(List<CSTutor.Model.Manager.Unit> units) {
       try {
@@ -386,8 +394,8 @@ public class TutorDB {
             saveTutorials(u.tutorials);
          }
       } catch(Exception e) {
-         System.err.println("Error in saveUnits()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in saveUnits(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -399,10 +407,10 @@ public class TutorDB {
     *
     * @param clas the Class to look up Sections for
     * @return List of Sections
-      pre:
-       clas != null;
-      post:
-       return != null;
+    * pre:
+    *  clas != null;
+    * post:
+    *  return != null;
     */
    public static List<CSTutor.Model.Manager.Section> getSections(CSTutor.Model.Manager.Class clas) {
       List<CSTutor.Model.Manager.Section> sections = new ArrayList<CSTutor.Model.Manager.Section>();
@@ -422,7 +430,8 @@ public class TutorDB {
          }
          s.close();
          return sections;
-      } catch(Exception e) { // class not in db
+      } catch(Exception e) {
+         // Class not in db so return empty
          return sections;
       }
    }
@@ -431,8 +440,8 @@ public class TutorDB {
     * Save a list of Sections to the database
     *
     * @param sections list of Sections to save
-      pre:
-       sections != null;
+    * pre:
+    *  sections != null;
     */
    public static void saveSections(List<CSTutor.Model.Manager.Section> sections) {
       try {
@@ -445,8 +454,8 @@ public class TutorDB {
             saveUnits(sec.units);
          }
       } catch(Exception e) {
-         System.err.println("Error in saveSections()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in saveSections(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
@@ -513,8 +522,8 @@ public class TutorDB {
     * Get a list of classes from the database
     *
     * @return List of classes
-      post:
-       return != null;
+    * post:
+    *  return != null;
     */
    public static List<CSTutor.Model.Manager.Class> getClasses() {
       List<CSTutor.Model.Manager.Class> classes = new ArrayList<CSTutor.Model.Manager.Class>();
@@ -532,8 +541,8 @@ public class TutorDB {
          printClassHierarchy(classes);
          return classes;
       } catch(Exception e) {
-         System.err.println("Error in getClasses()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getClasses(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
       }
    }
@@ -542,8 +551,8 @@ public class TutorDB {
     * Get a list of class names.
     *
     * @return List of class names.
-      post:
-       classes != null;
+    * post:
+    *  classes != null;
     */
    public static List<String> getClassNames() {
       List<String> classes = new ArrayList<String>();
@@ -556,8 +565,8 @@ public class TutorDB {
         s.close();
         return classes;
       } catch(Exception e) {
-         System.err.println("Error in getClassNames()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getClassNames(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1); return null;
       }
    }
@@ -580,8 +589,8 @@ public class TutorDB {
     * Save a list of Classes to the database. Drops all classes, sections, etc not in list.
     *
     * @param classes list of Classes to save
-      pre:
-       classes != null;
+    * pre:
+    *  classes != null;
     */
    public static void saveClasses(List<CSTutor.Model.Manager.Class> classes) {
       try {
@@ -597,8 +606,8 @@ public class TutorDB {
          }
          commit();
       } catch(Exception e) {
-         System.err.println("Error in saveClasses()");
-         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in saveClasses(). " + e.getClass().getName() + ": " + e.getMessage());
          System.exit(1);
       }
    }
