@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test.CSTutor.Model.User;
+package CSTutor.Model.User;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+
 import static org.junit.Assert.*;
-import CSTutor.Model.User.Password;
 
 /**
  *
@@ -65,7 +61,7 @@ public class PasswordTest {
     /**
      * Test of setPassword method, of class Password.
      */
-    //@Test
+    @Test
     public void testSetPassword() {
         System.out.println("setPassword");
         String password = "";
