@@ -298,6 +298,8 @@ public class Tutorial extends javax.swing.JPanel {
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         System.out.println("Run!");
+        // put the output into console 
+        consoleText.setText("Output goes here!");
     }//GEN-LAST:event_runButtonActionPerformed
 
     private void roadmapListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_roadmapListValueChanged
