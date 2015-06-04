@@ -159,7 +159,6 @@ public class Tutorial extends javax.swing.JPanel {
         codeInputText.setColumns(20);
         codeInputText.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         codeInputText.setRows(5);
-        codeInputText.setText("1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n");
         jScrollPane3.setViewportView(codeInputText);
 
         TryItYourself.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 109, 388, 204));
@@ -176,7 +175,7 @@ public class Tutorial extends javax.swing.JPanel {
                 runButtonActionPerformed(evt);
             }
         });
-        TryItYourself.add(runButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 325, -1, -1));
+        TryItYourself.add(runButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 80, 40));
 
         jLabel1.setText("<html><b>Try It Yourself!</html></b>");
         TryItYourself.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
