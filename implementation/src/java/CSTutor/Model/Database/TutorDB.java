@@ -160,7 +160,7 @@ public class TutorDB {
     * post:
     *  return != null;
     */
-   public static List<String> getAllUsernames(CSTutor.Model.Manager.Class.ClassAccessLevel accessLevel) {
+   public static List<String> getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel accessLevel) {
       List<String> usernames = new ArrayList<String>();
       try {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
