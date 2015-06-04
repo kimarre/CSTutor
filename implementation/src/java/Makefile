@@ -46,8 +46,8 @@ CLASS = CSTutor/View/*.class \
 		CSTutor/View/Manager/*.class \
 		CSTutor/View/Tutorial/*.class \
 		CSTutor/Model/Chat/*.class \
-		CSTutor/Model/Chat/Client/*.java \
-		CSTutor/Model/Chat/Server/*.java \
+		CSTutor/Model/Chat/Client/*.class \
+		CSTutor/Model/Chat/Server/*.class \
 		CSTutor/Model/Database/*.class \
 		CSTutor/Model/Manager/*.class \
 		CSTutor/Model/Progress/*.class \

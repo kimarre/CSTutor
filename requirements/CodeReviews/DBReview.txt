@@ -1,0 +1,29 @@
+Code Review For Luke Gordon
+Reviewed By Kyle Reis
+
+Class TutorDB: 
+	All method names need a capitalized first letter as stated in the Java Design and Implementation Convention (JDIC) section 5.
+	Variables need to be camel case as noted in JDIC section 6.a
+
+Method TutorDB.connect: Meets all standards
+Method TutorDB.init_db: Meets all standards
+Method TutorDB.commit: Meets all standards
+Method TutorDB.setUser: Meets all standards
+Method TutorDB.getUser: Meets all standards
+Method TutorDB.setTutorialData: Meets all standards
+Method TutorDB.getTutorialData: Meets all standards
+Method TutorDB.getPages: Meets all standards
+Method TutorDB.savePages: Meets all standards
+Method TutorDB.getTutorials: Meets all standards
+Method TutorDB.saveTutorials: Meets all standards
+Method TutorDB.getUnits: Meets all standards
+Method TutorDB.saveUnits: Meets all standards
+Method TutorDB.getSections: Meets all standards
+Method TutorDB.saveSections: Meets all standards
+Method TutorDB.getAccessEnum: Meets all standards
+Method TutorDB.getAccessString: Meets all standards
+Method TutorDB.printClassHierarchy: Needs a JavaDoc Comment. Also what is the purpose of this method?
+Method TutorDB.getClasses: Meets all standards
+Method TutorDB.getClassNames: Meets all standards
+Method TutorDB.deleteClassHierarchy: Meets all standards
+Method TutorDB.saveClasses: Meets all standards

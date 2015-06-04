@@ -32,9 +32,11 @@ public class Register {
         if (validator.isValid(email) && TutorDB.getUser(email) == null)
         {
             User user = new User(firstName, lastName, email, pass, instructor);
-            TutorDB.setUser(firstName, lastName, email, user.getPassword().getHash(), String.valueOf(instructor));
+            TutorDB.setUser(email, pass, firstName, lastName, instructor ? "Professor" : "Student");
+
             return true;
         } else {
+            System.out.println((TutorDB.getUser(email) == null) ? "email already exists" : "email invalid");
             System.out.println("email already exists or is invalid");
             return false;
         }
