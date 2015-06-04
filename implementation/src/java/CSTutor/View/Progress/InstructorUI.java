@@ -22,6 +22,7 @@ import CSTutor.Model.Progress.InstructorModel;
 import CSTutor.Model.Progress.Student;
 import CSTutor.Model.Progress.TutorialData;
 import CSTutor.Model.Progress.Class;
+import CSTutor.Model.Manager.*;
 
 /****
  * InstructorUI is the view class that displays the information 
@@ -49,7 +50,7 @@ public class InstructorUI extends JPanel
     private final int barHeight = 515;
     private final int searchHeight = 30;
     private InstructorModel model;
-    private JList<TutorialData> tutorialList;
+    private JList<Tutorial> tutorialList;
     private JList<CSTutor.Model.Progress.Class> classList;
     private JList<Student> studentList;
     private JButton classSearchButton, tutorialSearchButton, studentSearchButton;
