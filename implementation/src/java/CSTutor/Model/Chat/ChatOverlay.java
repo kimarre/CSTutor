@@ -1,14 +1,10 @@
 package CSTutor.Model.Chat;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.io.IOException;
+
 import java.util.Collection;
 
 import CSTutor.Model.Chat.Client.ChatClient;
-import CSTutor.Model.Chat.Server.ServerIF;
-
 import CSTutor.View.Chat.*;
 
 /**
@@ -25,12 +21,12 @@ public class ChatOverlay {
 	String lastStringInput = "";
 	public ChatBar chatBar;
 	
-	public ChatOverlay(ChatBar chatBar) throws MalformedURLException, RemoteException, NotBoundException {
-		
-        //Creates the client that will talk with the RMIServer
-        String chatServerURL = "rmi://localhost:2001/RMIChatServer";
-    	ServerIF chatServer = (ServerIF) Naming.lookup(chatServerURL);
-    	this.chatClient = new ChatClient ("Temp Name", chatServer, this);
+	public ChatOverlay(ChatBar chatBar) {
+    	try {
+			this.chatClient = new ChatClient ("Temp Name", this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     	
     	this.chatBar = chatBar;
 	}

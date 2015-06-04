@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EditTextButtons</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Tutorial</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EditTextButtons (CSTutor.Model.Tutorial)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EditTextButtons</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EditTextButtons$FontColor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Tutorial;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * EditTextButtons comprise the toolbar that gives the authors or editors the
+<i>5</i>&nbsp; * ability to format text within any of the text input fields.
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; * @author Kim Arre (karre@calpoly.edu)
+<i>8</i>&nbsp; * @version 20Apr2015
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;public abstract class EditTextButtons {
+<i>11</i>&nbsp;    /** Identifies which of several font styles are used to format within the tutorial editor */
+<i>12</i>&nbsp;   String fontStyle;
+<i>13</i>&nbsp;   
+<i>14</i>&nbsp;   /** Determines if the font should be bold */
+<i>15</i>&nbsp;   boolean isBold;
+<i>16</i>&nbsp;   
+<i>17</i>&nbsp;   /** Determines if the font should be italicized */
+<i>18</i>&nbsp;   boolean isItalicized;
+<i>19</i>&nbsp;   
+<i>20</i>&nbsp;   /** Determines if the font should be underlined */
+<i>21</i>&nbsp;   boolean isUnderlined;
+<i>22</i>&nbsp;   
+<i>23</i>&nbsp;   /** Determines what size font the tutorial&#39;s text should be */
+<i>24</i>&nbsp;   int fontSize;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;   /** Allows the font colors to be more easily distinguished */
+<b class="nc"><i>27</i>&nbsp;   enum FontColor {</b>
+<b class="nc"><i>28</i>&nbsp;      black, red, orange, yellow, green, blue, purple;</b>
+<i>29</i>&nbsp;   }
+<i>30</i>&nbsp;   
+<i>31</i>&nbsp;   /**
+<i>32</i>&nbsp;    * The constructor initializes all fields to standard font: 12pt plain Arial.
+<i>33</i>&nbsp;    */
+<b class="nc"><i>34</i>&nbsp;   public EditTextButtons() {</b>
+<b class="nc"><i>35</i>&nbsp;	   fontStyle = &quot;Arial&quot;;</b>
+<b class="nc"><i>36</i>&nbsp;	   isBold = false;</b>
+<b class="nc"><i>37</i>&nbsp;	   isItalicized = false;</b>
+<b class="nc"><i>38</i>&nbsp;	   isUnderlined = false;</b>
+<b class="nc"><i>39</i>&nbsp;	   fontSize = 12;</b>
+<i>40</i>&nbsp;   }
+<i>41</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-03 15:19</div>
+</div>
+</body>
+</html>

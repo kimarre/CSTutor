@@ -1,0 +1,45 @@
+Code Review for Simon Vurens
+Class Class: Few unimplemented methods
+Class.Class: Meets all Standards
+	Class.moveSectionUp: Unimplemented
+Class.moveUnitDown: Unimplemented
+Class.toString: Meets all Standards
+Class Manager: Few unimplemented methods
+	Manager.Manager: Meets all Standards
+	Manager.clearSections: Meets all Standards
+	Manager.selectSection: Meets all Standards
+	Manager.selectClass: Meets all Standards 
+	Manager.selectUnit: Meets all Standards 
+	Manager.selectTutorial: Meets all Standards
+	Manager.selectPage: Meets all Standards
+	Manager.createClass: Meets all Standards
+	Manager.createSection: Meets all Standards
+	Manager.createUnit: Meets all Standards
+	Manager.createTutorial: Meets all Standards 
+	Manager.createPage: Meets all Standards
+	Manager.deleteClass: Meets all Standards
+	Manager.deleteSection: Meets all Standards
+	Manager.deleteUnit: Meets all Standards
+	Manager.deleteTutorial: Meets all Standards 
+	Manager.deletePage: Meets all Standards
+	Manager.movePage: Unimplemented
+	Manager.moveTutorial: Unimplemented
+Class Page: Meets all Standards
+	Page.Page: Meets all Standards
+	Page.toString: Meets all Standards 
+Class Section: Meets all Standards
+	Section.Section: Meets all Standards
+	Section.Section: Meets all Standards
+	Section.toString: Meets all Standards
+Class Tutorial:  Few unimplemented methods
+	Tutorial.Tutorial: Meets all Standards
+	Tutorial.moveUp: Unimplemented
+	Tutorial.moveDown: Unimplemented
+Class Unit:  Few unimplemented methods
+	Unit.Unit: Meets all Standards
+	Unit.moveTutorialUp: Unimplemented
+	Unit.moveTutorialDown: Unimplemented
+	Unit.toString: Meets all Standards
+Class User: Unimplemented
+Class UserDB: Unimplemented
+	

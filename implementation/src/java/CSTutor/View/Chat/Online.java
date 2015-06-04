@@ -16,7 +16,11 @@ import javax.swing.*;
  */
 public class Online extends JFrame{
 
-    JList<String> listbox;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JList<String> listbox;
     JPopupMenu rightClick;
     JFrame selfRef = this;
     Student student;
@@ -91,18 +95,4 @@ public class Online extends JFrame{
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.student = student;
     }
-
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        jInternalFrame1.setVisible(!jInternalFrame1.isVisible());
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton1;
-    // End of variables declaration//GEN-END:variables
 }

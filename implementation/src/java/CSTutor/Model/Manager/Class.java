@@ -8,7 +8,7 @@ import java.util.*;
  * 
  * @author Simon Vurens (svurens@calpoly.edu)
  */
-public class Class {
+public class Class implements Cloneable{
 	/* All sections contained by this class */
    public List<Section> sections;
 

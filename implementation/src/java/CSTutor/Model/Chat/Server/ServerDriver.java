@@ -1,10 +1,8 @@
 package CSTutor.Model.Chat.Server;
 
-import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
-import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * A class that represents the server driver. This is the program that starts the RMI chat server
@@ -14,18 +12,35 @@ import java.rmi.registry.LocateRegistry;
  */
 
 public class ServerDriver {
-	public static void main(String[] args) throws RemoteException, MalformedURLException, AlreadyBoundException {
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		
 		if (1 != args.length) {
-			System.out.println("Usage: java ChatServer <server_port>");
-			System.out.println("Example: java ChatServer 2001");
+			System.out.println("Usage: java ServerDriver <server_port>");
+			System.out.println("Example: java ServerDriver 2001");
 			return;
 		}
-		ChatServer server = new ChatServer();
 		
-		int port = Integer.parseUnsignedInt(args[0]);
-        LocateRegistry.getRegistry(port).bind("RMIChatServer", server);
-        System.out.println("Server started at {0}, waiting for connections...");
-		
-		//Naming.rebind("RMIChatServer", new ChatServer());
+		ServerSocket serverSocket = null;
+	    int port = Integer.parseUnsignedInt(args[0]);
+	    ChatServer server = new ChatServer();
+	    
+		try {
+			serverSocket = new ServerSocket (port);
+			
+			while(true) {
+				Socket clientSocket = null;
+				
+				try {
+					clientSocket = serverSocket.accept();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				new Thread (new Worker(clientSocket, server)).start();
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
