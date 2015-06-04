@@ -231,13 +231,15 @@ public class Tutorial extends javax.swing.JPanel {
     }//GEN-LAST:event_RoadmapContentListValueChanged
     
     public void initRoadmapContent() {
-        //listItems.removeAllElements();
+        listItems.removeAllElements();
         System.out.println("There are " + tutorialTrack.track.size() + " items in the list");
         for (int i = 0; i < tutorialTrack.track.size(); i++) {
             listItems.addElement(tutorialTrack.database.getTutorialData(tutorialTrack.track.get(i)).title);
         } 
         roadmapList.setModel(listItems);
+        //roadmapList.setSelectedIndex(0);
     }
+
     
     /** 
      * Jump to the end of the tutorial track.
@@ -295,11 +297,15 @@ public class Tutorial extends javax.swing.JPanel {
     }//GEN-LAST:event_runButtonActionPerformed
 
     private void roadmapListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_roadmapListValueChanged
-        System.out.println("Selection: " + roadmapList.getSelectedIndex());
-        int ndx = tutorialTrack.track.get(roadmapList.getSelectedIndex());
-        currentIndex = roadmapList.getSelectedIndex();
-        setAllTheThings(tutorialTrack.database.getTutorialData(ndx));
-        System.out.println("Selected index: " + ndx);//setAllTheThings(tutorialTrack.database.getTutorialData(ndx));
+        if (!evt.getValueIsAdjusting() ) {
+            int ndx;
+            System.out.println("Selection: " + roadmapList.getSelectedIndex());
+            if (roadmapList.getSelectedIndex() != -1) {
+               ndx = tutorialTrack.track.get(roadmapList.getSelectedIndex());
+               currentIndex = roadmapList.getSelectedIndex();
+               setAllTheThings(tutorialTrack.database.getTutorialData(ndx));
+            }
+        }
     }//GEN-LAST:event_roadmapListValueChanged
 
     /**
