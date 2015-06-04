@@ -181,6 +181,7 @@ public class Overview extends JFrame implements Observer {
     
     private void MyTutorialAction(java.awt.event.ActionEvent evt) {
         tutorial.initRoadmapContent(); 
+       // roadmapList.setSelectedIndex(1);
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
     }
     

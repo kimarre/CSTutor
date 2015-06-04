@@ -8,13 +8,10 @@ package CSTutor.View.Chat;
 import CSTutor.Model.Chat.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
 
 import java.awt.event.*;
 import java.awt.*;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+
 
 /**
  *
@@ -22,6 +19,10 @@ import java.rmi.RemoteException;
  */
 public class ChatBar extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Creates new form ChatBar
 	 */
@@ -41,15 +42,12 @@ public class ChatBar extends JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		
-//		try {
-//			chatOverlay = new ChatOverlay(this);
-//		} catch (MalformedURLException | RemoteException | NotBoundException e1) {
-//			e1.printStackTrace();
-//		}
+
+		chatOverlay = new ChatOverlay(this);
 
 		online = new Online(new Student());
-		//box = new ChatBox(chatOverlay);
-		//box.setVisible(false);
+		box = new ChatBox(chatOverlay);
+		box.setVisible(false);
 		online.setVisible(false);
 		JPanel butPanel = new JPanel();
 		JButton onlineBut = new JButton("Online");
@@ -63,6 +61,18 @@ public class ChatBar extends JPanel {
 
 		chatBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(chatOverlay.chatClient.name == null) {
+					Component frame = new JFrame();
+					String s = (String)JOptionPane.showInputDialog(
+		                    frame,
+		                    "Please enter your name:",
+		                    "Customized Dialog",
+		                    JOptionPane.PLAIN_MESSAGE,
+		                    null,
+		                    null,
+		                    "");
+					chatOverlay.chatClient.name = s;
+				}
 				box.setVisible(true);
 			}
 		});

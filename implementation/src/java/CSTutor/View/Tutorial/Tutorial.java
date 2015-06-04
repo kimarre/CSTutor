@@ -129,6 +129,11 @@ public class Tutorial extends javax.swing.JPanel {
         });
         jPanel1.add(toBeginningButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, 160, 40));
 
+        roadmapList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                roadmapListValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(roadmapList);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 150, 450));
@@ -207,7 +212,7 @@ public class Tutorial extends javax.swing.JPanel {
                 previousLessonButtonActionPerformed(evt);
             }
         });
-        add(previousLessonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(389, 550, -1, 43));
+        add(previousLessonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 550, 160, 43));
 
         nextLessonButton.setText("Next Lesson");
         nextLessonButton.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +220,7 @@ public class Tutorial extends javax.swing.JPanel {
                 nextLessonButtonActionPerformed(evt);
             }
         });
-        add(nextLessonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 550, 145, 43));
+        add(nextLessonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 550, 150, 43));
     }// </editor-fold>//GEN-END:initComponents
     /** 
      * Update the tutorial to the current roadmap selection. 
@@ -232,7 +237,9 @@ public class Tutorial extends javax.swing.JPanel {
             listItems.addElement(tutorialTrack.database.getTutorialData(tutorialTrack.track.get(i)).title);
         } 
         roadmapList.setModel(listItems);
+        //roadmapList.setSelectedIndex(0);
     }
+
     
     /** 
      * Jump to the end of the tutorial track.
@@ -240,6 +247,7 @@ public class Tutorial extends javax.swing.JPanel {
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
         //sideModule.toEnd();
         currentIndex = tutorialTrack.maxIndex-1;
+        roadmapList.setSelectedIndex(currentIndex);
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toEndButtonActionPerformed
@@ -260,6 +268,7 @@ public class Tutorial extends javax.swing.JPanel {
         if (currentIndex > 0) {
             currentIndex--;
         }
+        roadmapList.setSelectedIndex(currentIndex);
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_previousLessonButtonActionPerformed
@@ -271,6 +280,7 @@ public class Tutorial extends javax.swing.JPanel {
         if (currentIndex < tutorialTrack.maxIndex-1) {
             currentIndex++;
         }
+        roadmapList.setSelectedIndex(currentIndex);
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_nextLessonButtonActionPerformed
@@ -281,13 +291,28 @@ public class Tutorial extends javax.swing.JPanel {
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
         //sideModule.toBeginning(tutorialTrack);
         currentIndex = 0;
+        roadmapList.setSelectedIndex(0);
         setAllTheThings(tutorialTrack.database.getTutorialData(0));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toBeginningButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         System.out.println("Run!");
+        // put the output into console 
+        consoleText.setText("Output goes here!");
     }//GEN-LAST:event_runButtonActionPerformed
+
+    private void roadmapListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_roadmapListValueChanged
+        if (!evt.getValueIsAdjusting() ) {
+            int ndx;
+            System.out.println("Selection: " + roadmapList.getSelectedIndex());
+            if (roadmapList.getSelectedIndex() != -1) {
+               ndx = tutorialTrack.track.get(roadmapList.getSelectedIndex());
+               currentIndex = roadmapList.getSelectedIndex();
+               setAllTheThings(tutorialTrack.database.getTutorialData(ndx));
+            }
+        }
+    }//GEN-LAST:event_roadmapListValueChanged
 
     /**
      * Opens and shows the Tutorial

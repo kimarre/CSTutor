@@ -46,8 +46,8 @@ CLASS = CSTutor/View/*.class \
 		CSTutor/View/Manager/*.class \
 		CSTutor/View/Tutorial/*.class \
 		CSTutor/Model/Chat/*.class \
-		CSTutor/Model/Chat/Client/*.java \
-		CSTutor/Model/Chat/Server/*.java \
+		CSTutor/Model/Chat/Client/*.class \
+		CSTutor/Model/Chat/Server/*.class \
 		CSTutor/Model/Database/*.class \
 		CSTutor/Model/Manager/*.class \
 		CSTutor/Model/Progress/*.class \
@@ -61,9 +61,9 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Database/*.java \
 		$(TEST_SRC_DIR)/Manager/*.java 
 
-TEST_CLASS = test.CSTutor.Model.User.PasswordTest \
-		test.CSTutor.Model.User.RegisterTest \
-		test.CSTutor.Model.User.UserTest \
+TEST_CLASS = CSTutor.Model.User.PasswordTest \
+		CSTutor.Model.User.RegisterTest \
+		CSTutor.Model.User.UserTest \
 		CSTutor.Model.Tutorial.TutorialDataTest \
 		CSTutor.Model.Tutorial.TutorialEditorTest \
 		CSTutor.Model.Progress.ClassListModelTest \

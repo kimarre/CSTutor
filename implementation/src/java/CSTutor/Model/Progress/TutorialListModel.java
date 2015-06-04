@@ -4,8 +4,9 @@ import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import CSTutor.Model.Manager.*;
 
-public class TutorialListModel<TutorialData> extends DefaultListModel<TutorialData>
+public class TutorialListModel<Tutorial> extends DefaultListModel<Tutorial>
 {
     public TutorialListModel()
     {
@@ -70,18 +71,26 @@ public class TutorialListModel<TutorialData> extends DefaultListModel<TutorialDa
        tut != null;
      *
      */
-    public ArrayList<TutorialData> getSimilarTutorials(TutorialData tut)
+    public ArrayList<Tutorial> getSimilarTutorials(Object obj)
     {
-        ArrayList<TutorialData> simTuts  = new ArrayList<TutorialData>();
-        
-        for(int i=0; i<this.size(); i++)
+        if(obj instanceof CSTutor.Model.Manager.Tutorial)
         {
-            if(this.get(i).toString().contains(tut.toString()))
+            ArrayList<Tutorial> simTuts  = new ArrayList<Tutorial>();
+            
+            for(int i=0; i<this.size(); i++)
             {
-                simTuts.add(this.get(i));
+                if(this.get(i).toString().contains(obj.toString()))
+                {
+                    simTuts.add(this.get(i));
+                }
             }
+            return simTuts;
         }
-        return simTuts;
+        else
+        {
+            return null;
+        }
+        
     }
 
 }

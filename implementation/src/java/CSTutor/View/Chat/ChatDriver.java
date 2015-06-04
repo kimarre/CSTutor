@@ -1,6 +1,5 @@
 package CSTutor.View.Chat;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
 
 
@@ -11,6 +10,10 @@ import java.awt.*;
  */
 
 public class ChatDriver extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//public static 
 	public static ChatDriver thisOne;
 	public static void main(String[] args) {

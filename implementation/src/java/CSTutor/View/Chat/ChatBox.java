@@ -2,19 +2,14 @@
 package CSTutor.View.Chat;
 
 import CSTutor.Model.Chat.*;
-import CSTutor.Model.Chat.Server.ServerIF;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
 
 import java.awt.event.*;
 import java.awt.*;
 import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+
 /**
  *
  * @author Simon Vurens Stephen Daily
@@ -27,6 +22,9 @@ public class ChatBox extends JFrame {
     JTextArea msgArea;
     JTextArea displayArea;
     JFrame selfRef = this;
+    
+    private static final String TEXT_SUBMIT = "text-submit";
+    private static final String INSERT_BREAK = "insert-break";
 	
     /**
      * Creates new form ChatBox
@@ -38,12 +36,13 @@ public class ChatBox extends JFrame {
         initComponents();
         
         this.chatOverlay = CW;
-        this.setVisible(true);
-        this.setSize(300, 400);
+        this.setVisible(false);
+        this.setSize(400, 500);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
-    private void initComponents() {
+    @SuppressWarnings("serial")
+	private void initComponents() {
    	 JPanel overallPanel = new JPanel();
    	 overallPanel.setLayout(new BorderLayout());
    	 JPanel sendPanel = new JPanel();
@@ -51,23 +50,41 @@ public class ChatBox extends JFrame {
    	 
    	 enterBut.addActionListener(new ActionListener() {
    		 public void actionPerformed(ActionEvent e) {
-   			 if (chatOverlay.Enter(msgArea.getText())) {
-   				 chatOverlay.pushText(msgArea.getText());
-   				 msgArea.setText("");
-   			 }
+   			handleInput();
    		 }
    	 });
+   	 
+   	 
+   	 
+     msgArea = new JTextArea();
+  	 msgArea.setLineWrap(true);
+  	 msgArea.setWrapStyleWord(true);
+  	 
+  	InputMap input = msgArea.getInputMap();
+    KeyStroke enter = KeyStroke.getKeyStroke("ENTER");
+    KeyStroke shiftEnter = KeyStroke.getKeyStroke("shift ENTER");
+    input.put(shiftEnter, INSERT_BREAK);  // input.get(enter)) = "insert-break"
+    input.put(enter, TEXT_SUBMIT);
 
-   	 msgArea = new JTextArea();
+    ActionMap actions = msgArea.getActionMap();
+    actions.put(TEXT_SUBMIT, new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        	handleInput();
+        }
+    });
+  	 
+  	 sendPanel.setLayout(new BoxLayout(sendPanel, BoxLayout.X_AXIS));
+  	 sendPanel.add(new JScrollPane(msgArea));
+  	 sendPanel.add(enterBut);
+  	 sendPanel.setBorder(new EtchedBorder());
+  	 
+  	 displayArea = new JTextArea();
+  	 displayArea.setEditable(false);
+  	 displayArea.setText("");
+  	 displayArea.setLineWrap(true);
+  	 displayArea.setWrapStyleWord(true);
    	 
-   	 sendPanel.setLayout(new BoxLayout(sendPanel, BoxLayout.X_AXIS));
-   	 sendPanel.add(new JScrollPane(msgArea));
-   	 sendPanel.add(enterBut);
-   	 sendPanel.setBorder(new EtchedBorder());
-   	 
-   	 displayArea = new JTextArea();
-   	 displayArea.setEditable(false);
-   	 displayArea.setText("");
    	 overallPanel.add(new JScrollPane(displayArea), BorderLayout.CENTER);
    	 overallPanel.add(sendPanel, BorderLayout.SOUTH);
    	 add(overallPanel);
@@ -78,16 +95,19 @@ public class ChatBox extends JFrame {
        // pack();
     }// </editor-fold>//GEN-END:initComponents
     
-  	 public void updateConsole() {
-   		 displayArea.append(chatOverlay.getLastString());
-   	 }
+  	public void updateConsole() {
+  		displayArea.append(chatOverlay.getLastString());
+   	}
+  	
+  	public void handleInput() {
+  		if (chatOverlay.Enter(msgArea.getText())) {
+			chatOverlay.pushText(msgArea.getText());
+			msgArea.setText("");
+		}
+  	}
+  	
+    /**
+     * @param args the command line arguments
+     */
     
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    // End of variables declaration//GEN-END:variables
 }

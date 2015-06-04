@@ -28,10 +28,68 @@ import static org.junit.Assert.*;
  *    Phase 4: Stress test the equals method with many other TutorialData objects.
  *									 </pre>
  */
-public class TutorialDataTest {
+public class TutorialDataTest 
+{
     TutorialData data;
     
-    public TutorialDataTest() {
+    public TutorialDataTest() 
+    {
+        data = new TutorialData("Hello World");
+    }
+    
+    /**
+     * Test method for toString().
+     */
+    @Test
+    public void testToString()
+    {
+        assert(data.toString().equals("Hello World"));
+    }
+    
+    /**
+     * Test method for equals().
+     */
+    @Test
+    public void equals()
+    {
+        
+    }
+    
+    /**
+     * Test method for setStudents().
+     */
+    @Test
+    public void testSetStudents()
+    {
+        
+    }
+    
+    /**
+     * Test method for getStudents().
+     */
+    @Test
+    public void testGetStudents()
+    {
+        
+    }
+    
+    /**
+     * Test method for getAverageQuizScores().
+     */
+    @Test
+    public void testGetAverageQuizScores()
+    {
+        
+       
+    }
+    
+    /**
+     * Test method for getQuizScores().
+     */
+    @Test
+    public void testGetQuizScores()
+    {
+        
     }
 
 }
