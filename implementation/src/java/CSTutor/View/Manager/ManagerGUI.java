@@ -446,8 +446,8 @@ public class ManagerGUI extends JPanel {
     }
     public static java.util.List<CSTutor.Model.Manager.Section> getSections() {
    	 ArrayList<CSTutor.Model.Manager.Section> list = new ArrayList<CSTutor.Model.Manager.Section>();
-   	 for (CSTutor.Model.Manager.Class c : managerModel.data) {
-   		 for (CSTutor.Model.Manager.Section s : c.sections) {
+   	 if (managerModel.selectedClass != null) {
+   	      for (CSTutor.Model.Manager.Section s : managerModel.selectedClass.sections) {
    			 list.add(s);
    		 }
    	 }
@@ -455,16 +455,15 @@ public class ManagerGUI extends JPanel {
     }
     public static java.util.List<CSTutor.Model.Manager.Unit> getUnits() {
    	 ArrayList<CSTutor.Model.Manager.Unit> list = new ArrayList<CSTutor.Model.Manager.Unit>();
-   	 for (CSTutor.Model.Manager.Class c : managerModel.data) {
-   		 for (CSTutor.Model.Manager.Section s : c.sections) {
-      		 for (CSTutor.Model.Manager.Unit u : s.units) {
+   	 if (managerModel.selectedSection != null) {
+      		 for (CSTutor.Model.Manager.Unit u : managerModel.selectedSection.units) {
       			 list.add(u);
       		 }
-   		 }
    	 }
    	 return list;
     }
     public static void populateTree() {
+   	 root.removeAllChildren();
        for (int i = 0; i < managerModel.data.size(); i++) {
     	   DefaultMutableTreeNode node = new DefaultMutableTreeNode(managerModel.data.get(i));
       	   treeModel.insertNodeInto(node, root, root.getChildCount());
