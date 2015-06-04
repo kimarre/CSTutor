@@ -66,7 +66,7 @@ public class User {
     
     /**
      * Gets a copy of the password object.
-     * @return The password object for this user.
+     * @return The password object for this user if one existe. Otherwise null.
      */
     public Password getPassword(){
         return password;
