@@ -247,6 +247,7 @@ public class Tutorial extends javax.swing.JPanel {
     private void toEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toEndButtonActionPerformed
         //sideModule.toEnd();
         currentIndex = tutorialTrack.maxIndex-1;
+        roadmapList.setSelectedIndex(currentIndex);
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toEndButtonActionPerformed
@@ -267,6 +268,7 @@ public class Tutorial extends javax.swing.JPanel {
         if (currentIndex > 0) {
             currentIndex--;
         }
+        roadmapList.setSelectedIndex(currentIndex);
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_previousLessonButtonActionPerformed
@@ -278,6 +280,7 @@ public class Tutorial extends javax.swing.JPanel {
         if (currentIndex < tutorialTrack.maxIndex-1) {
             currentIndex++;
         }
+        roadmapList.setSelectedIndex(currentIndex);
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_nextLessonButtonActionPerformed
@@ -288,6 +291,7 @@ public class Tutorial extends javax.swing.JPanel {
     private void toBeginningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toBeginningButtonActionPerformed
         //sideModule.toBeginning(tutorialTrack);
         currentIndex = 0;
+        roadmapList.setSelectedIndex(0);
         setAllTheThings(tutorialTrack.database.getTutorialData(0));
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toBeginningButtonActionPerformed
