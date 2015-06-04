@@ -17,18 +17,18 @@ import CSTutor.View.Chat.*;
 public class ChatOverlay {
     
 	Collection<Student> students;
-	public ChatClient chatClient;
+	private ChatClient chatClient;
 	String lastStringInput = "";
 	public ChatBar chatBar;
 	
 	public ChatOverlay(ChatBar chatBar) {
-    	try {
-			chatClient = new ChatClient(null, this);
+    		try {
+			chatClient = new ChatClient("Temp Name", this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
-    	this.chatBar = chatBar;
+    		this.chatBar = chatBar;
 	}
 	
     public Boolean Enter(String text){

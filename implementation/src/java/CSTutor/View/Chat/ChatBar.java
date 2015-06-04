@@ -61,6 +61,18 @@ public class ChatBar extends JPanel {
 
 		chatBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(chatOverlay.chatClient.name == null) {
+					Component frame = new JFrame();
+					String s = (String)JOptionPane.showInputDialog(
+		                    frame,
+		                    "Please enter your name:",
+		                    "Customized Dialog",
+		                    JOptionPane.PLAIN_MESSAGE,
+		                    null,
+		                    null,
+		                    "");
+					chatOverlay.chatClient.name = s;
+				}
 				box.setVisible(true);
 			}
 		});

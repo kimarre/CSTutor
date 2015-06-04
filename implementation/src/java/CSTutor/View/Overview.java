@@ -180,7 +180,7 @@ public class Overview extends JFrame implements Observer {
     }
     
     private void MyTutorialAction(java.awt.event.ActionEvent evt) {
-        tutorial.initRoadmapContent(); 
+        //tutorial.initRoadmapContent(); 
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
     }
     
