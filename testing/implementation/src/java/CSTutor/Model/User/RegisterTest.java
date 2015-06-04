@@ -1,10 +1,8 @@
-package test.CSTutor.Model.User;
+package CSTutor.Model.User;
 
-import CSTutor.Model.User.Register;
 import org.junit.Test;
-import org.junit.Assert;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by kylereis on 5/15/15.

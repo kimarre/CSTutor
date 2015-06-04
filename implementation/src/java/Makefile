@@ -61,9 +61,9 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Database/*.java \
 		$(TEST_SRC_DIR)/Manager/*.java 
 
-TEST_CLASS = test.CSTutor.Model.User.PasswordTest \
-		test.CSTutor.Model.User.RegisterTest \
-		test.CSTutor.Model.User.UserTest \
+TEST_CLASS = CSTutor.Model.User.PasswordTest \
+		CSTutor.Model.User.RegisterTest \
+		CSTutor.Model.User.UserTest \
 		CSTutor.Model.Tutorial.TutorialDataTest \
 		CSTutor.Model.Tutorial.TutorialEditorTest \
 		CSTutor.Model.Progress.ClassListModelTest \

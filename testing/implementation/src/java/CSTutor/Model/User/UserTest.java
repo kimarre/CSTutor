@@ -1,8 +1,8 @@
-package test.CSTutor.Model.User; 
+package CSTutor.Model.User;
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /** 
 * User Tester. 
