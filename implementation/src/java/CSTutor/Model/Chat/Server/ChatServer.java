@@ -1,10 +1,8 @@
 package CSTutor.Model.Chat.Server;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
-import CSTutor.Model.Chat.Client.*;
 
 /**
  * Class that represents the chat server.  Holds a list of chat clients, and broadcasts messages.
@@ -13,18 +11,19 @@ import CSTutor.Model.Chat.Client.*;
  *
  */
 
-public class ChatServer extends UnicastRemoteObject implements ServerIF{
-	private static final long serialVersionUID = 1L;
+public class ChatServer {
 	
-	private ArrayList<ClientIF> chatClients;
+
+	private ArrayList<ObjectOutputStream> chatClients;
+	
+	
 	
 	/**
 	 * Constructor
 	 * @throws RemoteException
 	 */
-	protected ChatServer() throws RemoteException {
-		super(0);
-		chatClients = new ArrayList<ClientIF>();
+	protected ChatServer() { 
+		chatClients = new ArrayList<ObjectOutputStream>();
 	}
 	
 	
@@ -33,11 +32,13 @@ public class ChatServer extends UnicastRemoteObject implements ServerIF{
 	 * 
 	 * @param message The message to be broadcasted to all the registered clients.
 	 */
-	@Override
-	public synchronized void broadcastMessage(String message) throws RemoteException {
-		int i = 0;
-		while (i < chatClients.size()) {
-			chatClients.get(i++).recieveMessage(message);
+	public synchronized void broadcastMessage(Object message) {
+		for(ObjectOutputStream stream : chatClients) {
+			try {
+				stream.writeObject(message);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	/**
@@ -45,8 +46,9 @@ public class ChatServer extends UnicastRemoteObject implements ServerIF{
 	 * 
 	 * @param chatClient A client that to be added to the server list.
 	 */
-	@Override
-	public synchronized void registerChatClient(ClientIF chatClient) throws RemoteException {
-		this.chatClients.add(chatClient);
+
+	
+	public synchronized void registerChatClient(ObjectOutputStream stream){
+		this.chatClients.add(stream);
 	}
 }
