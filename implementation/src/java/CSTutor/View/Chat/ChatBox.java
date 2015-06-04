@@ -36,8 +36,8 @@ public class ChatBox extends JFrame {
         initComponents();
         
         this.chatOverlay = CW;
-        this.setVisible(true);
-        this.setSize(300, 400);
+        this.setVisible(false);
+        this.setSize(400, 500);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -55,9 +55,12 @@ public class ChatBox extends JFrame {
    	 });
    	 
    	 
-   	 msgArea = new JTextArea();
    	 
-   	InputMap input = msgArea.getInputMap();
+     msgArea = new JTextArea();
+  	 msgArea.setLineWrap(true);
+  	 msgArea.setWrapStyleWord(true);
+  	 
+  	InputMap input = msgArea.getInputMap();
     KeyStroke enter = KeyStroke.getKeyStroke("ENTER");
     KeyStroke shiftEnter = KeyStroke.getKeyStroke("shift ENTER");
     input.put(shiftEnter, INSERT_BREAK);  // input.get(enter)) = "insert-break"
@@ -70,15 +73,18 @@ public class ChatBox extends JFrame {
         	handleInput();
         }
     });
+  	 
+  	 sendPanel.setLayout(new BoxLayout(sendPanel, BoxLayout.X_AXIS));
+  	 sendPanel.add(new JScrollPane(msgArea));
+  	 sendPanel.add(enterBut);
+  	 sendPanel.setBorder(new EtchedBorder());
+  	 
+  	 displayArea = new JTextArea();
+  	 displayArea.setEditable(false);
+  	 displayArea.setText("");
+  	 displayArea.setLineWrap(true);
+  	 displayArea.setWrapStyleWord(true);
    	 
-   	 sendPanel.setLayout(new BoxLayout(sendPanel, BoxLayout.X_AXIS));
-   	 sendPanel.add(new JScrollPane(msgArea));
-   	 sendPanel.add(enterBut);
-   	 sendPanel.setBorder(new EtchedBorder());
-   	 
-   	 displayArea = new JTextArea();
-   	 displayArea.setEditable(false);
-   	 displayArea.setText("");
    	 overallPanel.add(new JScrollPane(displayArea), BorderLayout.CENTER);
    	 overallPanel.add(sendPanel, BorderLayout.SOUTH);
    	 add(overallPanel);

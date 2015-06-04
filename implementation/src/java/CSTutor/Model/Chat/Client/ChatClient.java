@@ -21,7 +21,7 @@ public class ChatClient implements Runnable {
     	/**
     	 * The name of the user
     	 */
-    	private String name = null;
+    	public String name = null;
 
     	/**
     	 * The constructor for the chatClient class
@@ -46,13 +46,13 @@ public class ChatClient implements Runnable {
     	 * @return 
     	 */
     	public void recieveMessage(String message){
-    		chatOverlay.setLastString(name + ": " + message);
+    		chatOverlay.setLastString(message);
     		chatOverlay.chatBar.box.updateConsole();
     	}
     	
     	public void broadcastMessage(String message) {
     		try {
-				output.writeObject(message);
+				output.writeObject(name + ": " + message);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

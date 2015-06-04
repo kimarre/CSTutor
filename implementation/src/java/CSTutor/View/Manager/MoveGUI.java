@@ -39,7 +39,7 @@ public class MoveGUI extends JFrame{
 	public MoveGUI() {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setTitle("Move");
-        this.setSize(400, 600);
+        this.setSize(300, 200);
         this.setLocationRelativeTo(null);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         
@@ -51,7 +51,6 @@ public class MoveGUI extends JFrame{
         addSelections();
         addUpDown();
         addButtons();
-        this.pack();
         this.setVisible(false);
 	}
 	public void passClass() {
@@ -82,14 +81,13 @@ public class MoveGUI extends JFrame{
 		selected = UNIT;
 		JLabel mLabel = new JLabel("Move to: ");
         java.util.List<CSTutor.Model.Manager.Section> sectList = ManagerGUI.getSections();
-
         sectModel.removeAllElements();
         for (Section c : sectList) {
         	sectModel.addElement(c);
         }
-		sectPanel.removeAll();
-		sectPanel.add(mLabel);
-		sectPanel.add(sectOptions);
+		unitPanel.removeAll();
+		unitPanel.add(mLabel);
+		unitPanel.add(sectOptions);
 		selPanel.removeAll();
 		selPanel.add(unitPanel);
 		selPanel.revalidate();
@@ -103,9 +101,9 @@ public class MoveGUI extends JFrame{
         for (Unit c : unitList) {
         	unitModel.addElement(c);
         }
-		sectPanel.removeAll();
-		sectPanel.add(mLabel);
-		sectPanel.add(unitOptions);
+		tutPanel.removeAll();
+		tutPanel.add(mLabel);
+		tutPanel.add(unitOptions);
 		selPanel.removeAll();
 		selPanel.add(tutPanel);
 		selPanel.revalidate();
