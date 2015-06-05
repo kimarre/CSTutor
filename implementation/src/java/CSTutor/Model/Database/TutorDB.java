@@ -140,7 +140,7 @@ public class TutorDB {
          s.setString(1, username);
          ResultSet r = s.executeQuery();
          CSTutor.Model.User.User user = new CSTutor.Model.User.User(r.getString("firstname"), r.getString("lastname"),
-                 r.getString("username"), r.getString("hash"), r.getString("accessLevel") == "Professor", false);
+                 r.getString("username"), r.getString("hash"), r.getString("accessLevel").equals("Professor"), false);
          s.close();
          return user;
       } catch(Exception e) {
