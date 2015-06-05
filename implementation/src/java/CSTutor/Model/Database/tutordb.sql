@@ -65,6 +65,12 @@ CREATE TABLE IF NOT EXISTS TutorialData (
    hasSeen BOOLEAN
 );
 
+CREATE TABLE IF NOT EXISTS QuizData (
+   id INTEGER PRIMARY KEY,
+   name TEXT,
+   numQuestions INTEGER
+);
+
 CREATE TABLE IF NOT EXISTS Authorizations (
    username TEXT,
    sectionName TEXT,
@@ -151,3 +157,10 @@ REPLACE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VAL
    ("Page1", "Tutorial", "Unit1", "Section3", "CSC 103"),
    ("Page2", "Tutorial", "Unit1", "Section3", "CSC 103"),
    ("Page3", "Tutorial", "Unit1", "Section3", "CSC 103");
+
+REPLACE INTO QuizData(id, name, numPages) VALUES
+   (1, "Quiz1", 5),
+   (1, "Quiz2", 4),
+   (1, "Quiz3", 5),
+   (1, "Quiz4", 6),
+   (1, "Quiz5", 3);

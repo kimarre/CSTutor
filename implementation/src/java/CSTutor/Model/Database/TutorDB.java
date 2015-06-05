@@ -266,6 +266,35 @@ public class TutorDB {
       }
    }
 
+/*** UserData methods *****************************************************************************/
+
+   /**
+    * Get list of all QuizData in the database
+    *
+    * @return List of all QuizData
+    * post:
+    *  return != null;
+    */
+   public static List<CSTutor.Model.Progress.QuizData> getAllQuizData() {
+      List<CSTutor.Model.Progress.QuizData> quizzes = new ArrayList<CSTutor.Model.Progress.QuizData>();
+      CSTutor.Model.Progress.QuizData q;
+      try {
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM QuizData");
+         ResultSet r = s.executeQuery();
+         while (r.next()) {
+            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numPages"));
+            quizzes.add(q);
+         }
+         s.close();
+         return quizzes;
+      } catch(Exception e) {
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+         return null;
+      }
+   }
+
 
 /*** Page methods *********************************************************************************/
 
