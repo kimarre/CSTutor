@@ -12,8 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+import javax.swing.*;
 import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import CSTutor.Model.Progress.*;
 
@@ -29,6 +31,7 @@ public class MainContent extends JPanel
     private final int height = 550;
     private JPanel content;
     private JLabel title;
+    private JPanel titlePanel;
     private final Color LIGHT_BLUE = new Color(208, 226, 245);
     
     public MainContent()
@@ -53,7 +56,7 @@ public class MainContent extends JPanel
         setBackground(LIGHT_BLUE);
         setVisible(true);
         
-        JPanel titlePanel = new JPanel();
+        titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
         titlePanel.setMinimumSize(new Dimension(width, 50));
         titlePanel.setPreferredSize(new Dimension(width,50));
@@ -116,6 +119,72 @@ public class MainContent extends JPanel
      */
     public void displayClassStatistics(CSTutor.Model.Progress.Class cl)
     {
+        content.removeAll(); 
+        JButton section1 = new JButton("Section 1");
+        JButton section3 = new JButton("Section 3");
+        JButton section5 = new JButton("Section 5");
+        
+        final JPanel studentListPanel = new JPanel();
+        studentListPanel.setLayout(new BoxLayout(studentListPanel, BoxLayout.Y_AXIS));
+        studentListPanel.setBackground(LIGHT_BLUE);
+        
+        
+        
+        section1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                studentListPanel.removeAll();
+            }
+        });
+        
+        section3.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                studentListPanel.removeAll();
+            }
+        });
+        
+        section5.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                studentListPanel.removeAll();
+            }
+        });
+        
+        JPanel sectionPanel = new JPanel();
+        sectionPanel.setLayout(new BoxLayout(sectionPanel, BoxLayout.X_AXIS));
+        sectionPanel.setPreferredSize(new Dimension(width, 30));
+        sectionPanel.setMinimumSize(new Dimension(width, 30));
+        sectionPanel.setMaximumSize(new Dimension(width, 30));
+        sectionPanel.setBackground(LIGHT_BLUE);
+        sectionPanel.add(Box.createHorizontalStrut(20));
+        sectionPanel.add(section1);
+        sectionPanel.add(Box.createHorizontalStrut(20));
+        sectionPanel.add(section3);
+        sectionPanel.add(Box.createHorizontalStrut(20));
+        sectionPanel.add(section5);
+        
+        content.add(sectionPanel);
+        JLabel studentTitle = new JLabel("Students");
+        studentTitle.setFont(new Font("Avenir", Font.PLAIN, 20));
+        studentTitle.setBackground(LIGHT_BLUE);
+        
+        
+        JPanel studentTitlePanel = new JPanel();
+        studentTitlePanel.setLayout(new BoxLayout(studentTitlePanel, BoxLayout.X_AXIS));
+        studentTitlePanel.setBackground(LIGHT_BLUE);
+        studentTitlePanel.setPreferredSize(new Dimension(width, 50));
+        studentTitlePanel.setMinimumSize(new Dimension(width, 50));
+        studentTitlePanel.setMaximumSize(new Dimension(width, 50));
+        
+        studentTitlePanel.add(Box.createHorizontalStrut(20));
+        studentTitlePanel.add(studentTitle);
+        content.add(studentTitlePanel);
+        content.add(studentListPanel);
+        
         
     }
     
@@ -162,11 +231,17 @@ public class MainContent extends JPanel
         
         if(tutorial.hasQuizzes())
         {
-            String[] colNames = {"Student", "Quiz 1", "Quiz 2", "Quiz 3", 
-                    "Quiz 4", "Quiz 5", "Status"};
+            String[] colNames = new String[tutorial.getNumQuizzes() + 2];
+            colNames[0] = new String("Student");
+            colNames[colNames.length - 1] = new String("Status");
+            for(int i=1; (i-1) < tutorial.getNumQuizzes(); i++)
+            {
+                colNames[i] = tutorial.getQuizName(i-1);
+            }
             String[] studentNames = tutorial.getStudents();
             Object[][] data = new Object[studentNames.length][colNames.length];
             int[][] quizScores = tutorial.getQuizScores();
+            
             
             for(int row = 0; row < studentNames.length; row++)
             {
@@ -176,7 +251,7 @@ public class MainContent extends JPanel
                     {
                         data[row][col] = studentNames[row];
                     }
-                    else if(col != 0 && col != 6)
+                    else if(col != 0 && col != (colNames.length - 1))
                     {
                         data[row][col] = quizScores[row][col-1];
                     }
@@ -221,8 +296,11 @@ public class MainContent extends JPanel
             
             
             
-            JLabel yAxisLabel = new JLabel("Y-Axis");
+            JLabel yAxisLabel = new JLabel("Average Quiz Score");
             yAxisLabel.setUI(new VerticalLabelUI(false));
+            
+            
+            
             /*JLabel quiz1 = new JLabel("Quiz 1");
             JLabel quiz2 = new JLabel("Quiz 2");
             JLabel quiz3 = new JLabel("Quiz 3");
@@ -257,7 +335,7 @@ public class MainContent extends JPanel
             
             content.add(overallPanel);
             
-            
+            content.add(Box.createVerticalStrut(5));
             
             
             
@@ -289,8 +367,16 @@ public class MainContent extends JPanel
         }
         
         this.revalidate();
-        this.repaint();
-        
+        this.repaint(); 
+    }
+    
+    public void sendRefreshButton(JButton button)
+    {
+        button.setMinimumSize(new Dimension(100, 25));
+        button.setPreferredSize(new Dimension(100,25));
+        button.setMaximumSize(new Dimension(100, 25));
+        titlePanel.add(Box.createHorizontalGlue());
+        titlePanel.add(button);
         
         
     }

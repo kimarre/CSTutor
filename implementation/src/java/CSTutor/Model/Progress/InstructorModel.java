@@ -64,48 +64,40 @@ public class InstructorModel
         fullTutorialsModel
             = new TutorialListModel<ScoredTutorialTrack>(); /* List model for the JList */
         
+        /* TEMP QUIZZES UNTIL DB IS CONNECTED */ 
+        ArrayList<QuizData> quizzes = new ArrayList<QuizData>();
+        quizzes.add(new QuizData("For Loops Quiz Part 1", 1, 4));
+        quizzes.add(new QuizData("For Loops Quiz Part 2", 2, 3));
+        quizzes.add(new QuizData("While Loops Part 1", 3, 3));
+        quizzes.add(new QuizData("While Loops Part 2", 4, 4));
+        quizzes.add(new QuizData("While Loops Part 3", 5, 5));
+        quizzes.add(new QuizData("While Loops Part 4", 6, 2));
+        
+        
+   
+        
         for(int i=0; i< tutorials.size(); i++)
         {
-            fullTutorialsModel.addElement(new ScoredTutorialTrack(tutorials.get(i)));
+            ScoredTutorialTrack tempTrack = new ScoredTutorialTrack(tutorials.get(i));
+            if(i == 0)
+            {
+                tempTrack.placeQuizInTrack(quizzes.get(0));
+                tempTrack.placeQuizInTrack(quizzes.get(1));
+            }
+            if(i == 1)
+            {
+                tempTrack.placeQuizInTrack(quizzes.get(2));
+                tempTrack.placeQuizInTrack(quizzes.get(3));
+                tempTrack.placeQuizInTrack(quizzes.get(4));
+                tempTrack.placeQuizInTrack(quizzes.get(5));
+            }
+            fullTutorialsModel.addElement(tempTrack);
         }
         
-        /* Add sample elements to the list */
-        /*fullTutorialsModel.addElement(new TutorialData("Hello World!"));
-        fullTutorialsModel.addElement(new TutorialData("Intro. to C"));
-        fullTutorialsModel.addElement(new TutorialData("Data Types"));
-        fullTutorialsModel.addElement(new TutorialData("If Statements"));
-        fullTutorialsModel.addElement(new TutorialData("Loops in C"));
-        fullTutorialsModel.addElement(new TutorialData("Functions"));
-        fullTutorialsModel.addElement(new TutorialData("The Stack"));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));*/
+        
+        
+        
         tutorialList = new JList<ScoredTutorialTrack>(fullTutorialsModel);
-        
-        /* Tutorials list */
-        //fullTutorialsModel
-          //  = new TutorialListModel<TutorialData>(); /* List model for the JList */
-        
-        /* Add sample elements to the list */
-        /*fullTutorialsModel.addElement(new TutorialData("Hello World!"));
-        fullTutorialsModel.addElement(new TutorialData("Intro. to C"));
-        fullTutorialsModel.addElement(new TutorialData("Data Types"));
-        fullTutorialsModel.addElement(new TutorialData("If Statements"));
-        fullTutorialsModel.addElement(new TutorialData("Loops in C"));
-        fullTutorialsModel.addElement(new TutorialData("Functions"));
-        fullTutorialsModel.addElement(new TutorialData("The Stack"));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialList = new JList<TutorialData>(fullTutorialsModel);*/
         
     }
     
@@ -242,6 +234,7 @@ public class InstructorModel
      */
     public JList<ScoredTutorialTrack> getTutorialList()
     {
+        System.out.println("Tutorial List Size: " + tutorialList.getModel().getSize());
         return tutorialList;
     }
     

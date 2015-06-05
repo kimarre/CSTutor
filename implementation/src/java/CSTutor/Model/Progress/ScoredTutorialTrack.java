@@ -51,19 +51,26 @@ public class ScoredTutorialTrack
         hasQuiz = true;
         numQuizzes++;
         
-        quizScores = new int[students.length][numQuizzes];
+        int[][] quizScoresTemp = new int[students.length][numQuizzes];
         averageQuizScores = new int[numQuizzes];
         
         for(int row = 0; row < students.length; row++)
         {
             
-            for(int col = 0; col < numQuizzes; col++)
+            quizScoresTemp[row][numQuizzes-1] = (int) (Math.random()*100);
+        }
+        
+        if(numQuizzes > 1) 
+        {
+            for(int row = 0; row < students.length; row++)
             {
-                
-                quizScores[row][col] = (int) (Math.random()*100);
-                
+                for(int col = 0; col < (numQuizzes-1); col++)
+                {
+                    quizScoresTemp[row][col] = quizScores[row][col];
+                }
             }
         }
+        quizScores = quizScoresTemp;
     }
     
     /**
@@ -72,6 +79,15 @@ public class ScoredTutorialTrack
     public boolean hasQuizzes()
     {
         return hasQuiz;
+    }
+    
+    /**
+     * Returns the number of quizzes linked to this tutorial Track.
+     * @return numQuizzes  number of quizzes in this tutorial track
+     */
+    public int getNumQuizzes()
+    {
+        return numQuizzes;
     }
     
     /**
@@ -144,6 +160,20 @@ public class ScoredTutorialTrack
     public String[] getStudents()
     {
         return students;
+    }
+    
+    /**
+     * Returns the name of the nth quiz in the track.
+     * @param place
+     * @return 
+     */
+    public String getQuizName(int place)
+    {
+        if(place < quizzes.size())
+        {
+            return quizzes.get(place).getDisplayName();
+        }
+        return null;
     }
     
 
