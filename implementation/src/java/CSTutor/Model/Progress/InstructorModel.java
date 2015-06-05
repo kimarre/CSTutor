@@ -1,7 +1,7 @@
 package CSTutor.Model.Progress;
 
 import CSTutor.Model.Database.*;
-import CSTutor.Model.Manager.Tutorial;
+import CSTutor.Model.Tutorial.*;
 
 import java.util.*;
 
@@ -18,17 +18,17 @@ import javax.swing.JList;
  */
 public class InstructorModel
 {
-    private JList<Tutorial> tutorialList;
+    private JList<ScoredTutorialTrack> tutorialList;
     private JList<Class> classList;
     private JList<Student> studentList;
-    private DefaultListModel<Tutorial> tutorialsModel;
+    private DefaultListModel<ScoredTutorialTrack> tutorialsModel;
     private DefaultListModel<Student> studentModel;
     private ClassListModel<Class> fullClassesModel;
     private StudentListModel<Student> fullStudentsModel;
-    private TutorialListModel<Tutorial> fullTutorialsModel;
+    private TutorialListModel<ScoredTutorialTrack> fullTutorialsModel;
     private ClassListModel<Class> searchClassesModel;
     private StudentListModel<Student> searchStudentsModel;
-    private TutorialListModel<Tutorial> searchTutorialsModel;
+    private TutorialListModel<ScoredTutorialTrack> searchTutorialsModel;
     private Class currentClass;
     
     public InstructorModel()
@@ -48,64 +48,56 @@ public class InstructorModel
     {
         System.out.println("In InstructorModel.retrieveTutorialData");
         
-        ArrayList<CSTutor.Model.Manager.Class> managerClassList = (ArrayList<CSTutor.Model.Manager.Class>)TutorDB.getClasses();
+        /*ArrayList<CSTutor.Model.Manager.Class> managerClassList = (ArrayList<CSTutor.Model.Manager.Class>)TutorDB.getClasses();
         CSTutor.Model.Manager.Class class1 = managerClassList.get(0);
         
         ArrayList<CSTutor.Model.Manager.Section> sections = (ArrayList<CSTutor.Model.Manager.Section>)TutorDB.getSections(class1);
         CSTutor.Model.Manager.Section section1 = sections.get(0);
         
         ArrayList<CSTutor.Model.Manager.Unit> units = (ArrayList<CSTutor.Model.Manager.Unit>) TutorDB.getUnits(section1);
-        CSTutor.Model.Manager.Unit unit1 = units.get(0);
+        CSTutor.Model.Manager.Unit unit1 = units.get(0);*/   
+        //ArrayList<CSTutor.Model.Manager.Tutorial> tutorials = (ArrayList<CSTutor.Model.Manager.Tutorial>) TutorDB.getTutorials(unit1);
         
-        ArrayList<CSTutor.Model.Manager.Tutorial> tutorials = (ArrayList<CSTutor.Model.Manager.Tutorial>) TutorDB.getTutorials(unit1);
-        
+        ArrayList<CSTutor.Model.Tutorial.TutorialData> tutorials = (ArrayList<CSTutor.Model.Tutorial.TutorialData>) TutorDB.getAllTutorialData();
         
         /* Tutorials list */
         fullTutorialsModel
-            = new TutorialListModel<Tutorial>(); /* List model for the JList */
+            = new TutorialListModel<ScoredTutorialTrack>(); /* List model for the JList */
+        
+        /* TEMP QUIZZES UNTIL DB IS CONNECTED */ 
+        ArrayList<QuizData> quizzes = new ArrayList<QuizData>();
+        quizzes.add(new QuizData("For Loops Quiz Part 1", 1, 4));
+        quizzes.add(new QuizData("For Loops Quiz Part 2", 2, 3));
+        quizzes.add(new QuizData("While Loops Part 1", 3, 3));
+        quizzes.add(new QuizData("While Loops Part 2", 4, 4));
+        quizzes.add(new QuizData("While Loops Part 3", 5, 5));
+        quizzes.add(new QuizData("While Loops Part 4", 6, 2));
+        
+        
+   
         
         for(int i=0; i< tutorials.size(); i++)
         {
-            fullTutorialsModel.addElement(tutorials.get(i));
+            ScoredTutorialTrack tempTrack = new ScoredTutorialTrack(tutorials.get(i));
+            if(i == 0)
+            {
+                tempTrack.placeQuizInTrack(quizzes.get(0));
+                tempTrack.placeQuizInTrack(quizzes.get(1));
+            }
+            if(i == 1)
+            {
+                tempTrack.placeQuizInTrack(quizzes.get(2));
+                tempTrack.placeQuizInTrack(quizzes.get(3));
+                tempTrack.placeQuizInTrack(quizzes.get(4));
+                tempTrack.placeQuizInTrack(quizzes.get(5));
+            }
+            fullTutorialsModel.addElement(tempTrack);
         }
         
-        /* Add sample elements to the list */
-        /*fullTutorialsModel.addElement(new TutorialData("Hello World!"));
-        fullTutorialsModel.addElement(new TutorialData("Intro. to C"));
-        fullTutorialsModel.addElement(new TutorialData("Data Types"));
-        fullTutorialsModel.addElement(new TutorialData("If Statements"));
-        fullTutorialsModel.addElement(new TutorialData("Loops in C"));
-        fullTutorialsModel.addElement(new TutorialData("Functions"));
-        fullTutorialsModel.addElement(new TutorialData("The Stack"));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));*/
-        tutorialList = new JList<Tutorial>(fullTutorialsModel);
         
-        /* Tutorials list */
-        //fullTutorialsModel
-          //  = new TutorialListModel<TutorialData>(); /* List model for the JList */
         
-        /* Add sample elements to the list */
-        /*fullTutorialsModel.addElement(new TutorialData("Hello World!"));
-        fullTutorialsModel.addElement(new TutorialData("Intro. to C"));
-        fullTutorialsModel.addElement(new TutorialData("Data Types"));
-        fullTutorialsModel.addElement(new TutorialData("If Statements"));
-        fullTutorialsModel.addElement(new TutorialData("Loops in C"));
-        fullTutorialsModel.addElement(new TutorialData("Functions"));
-        fullTutorialsModel.addElement(new TutorialData("The Stack"));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        fullTutorialsModel.addElement(new TutorialData("     ..."));
-        tutorialList = new JList<TutorialData>(fullTutorialsModel);*/
+        
+        tutorialList = new JList<ScoredTutorialTrack>(fullTutorialsModel);
         
     }
     
@@ -196,7 +188,16 @@ public class InstructorModel
     {
         //System.out.println("In InstructorModel.retrieveClassesData");
         
+        ArrayList<CSTutor.Model.Manager.Class> managerClassList = (ArrayList<CSTutor.Model.Manager.Class>)TutorDB.getClasses();
+        CSTutor.Model.Manager.Class class1 = managerClassList.get(0);
         
+        ArrayList<CSTutor.Model.Manager.Section> sections = (ArrayList<CSTutor.Model.Manager.Section>)TutorDB.getSections(class1);
+        CSTutor.Model.Manager.Section section1 = sections.get(0);
+        
+        ArrayList<CSTutor.Model.Manager.Unit> units = (ArrayList<CSTutor.Model.Manager.Unit>) TutorDB.getUnits(section1);
+        CSTutor.Model.Manager.Unit unit1 = units.get(0);
+        
+        ArrayList<CSTutor.Model.Manager.Tutorial> tutorials = (ArrayList<CSTutor.Model.Manager.Tutorial>) TutorDB.getTutorials(unit1);
         
         
         List<String> dbClasses = TutorDB.getClassNames();
@@ -231,8 +232,9 @@ public class InstructorModel
        tutorialList != null;
      *                                                  </pre>
      */
-    public JList<Tutorial> getTutorialList()
+    public JList<ScoredTutorialTrack> getTutorialList()
     {
+        System.out.println("Tutorial List Size: " + tutorialList.getModel().getSize());
         return tutorialList;
     }
     
@@ -290,23 +292,23 @@ public class InstructorModel
     }
     
     /**
-     * Returns a list of students that match the search string.
+     * Returns a list of tutorials that match the search string.
      *                                                 <pre>
      pre:
        // fullTutorialsModel must be initialized.
        fullTutorialsModel != null;
      *                                                  </pre>
      */
-    public JList<Tutorial> searchForTutorial(String searchString)
+    public JList<ScoredTutorialTrack> searchForTutorial(String searchString)
     {
-        ArrayList<Tutorial> simTutorials = fullTutorialsModel.getSimilarTutorials(new Tutorial(searchString, null));  
-        searchTutorialsModel = new TutorialListModel<Tutorial>();
+        ArrayList<ScoredTutorialTrack> simTutorials = fullTutorialsModel.getSimilarTutorials(searchString);  
+        searchTutorialsModel = new TutorialListModel<ScoredTutorialTrack>();
         
-        for(Tutorial tut: simTutorials)
+        for(ScoredTutorialTrack tut: simTutorials)
         {
             searchTutorialsModel.addElement(tut);
         }
-        return new JList<Tutorial>(searchTutorialsModel);
+        return new JList<ScoredTutorialTrack>(searchTutorialsModel);
     }
     
 

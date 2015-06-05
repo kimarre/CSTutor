@@ -130,24 +130,47 @@ public class TutorDB {
     * Get user info (as column/value map) by username
     *
     * @param username user's username
-    * @return Map of columns to values, or null if not found.
+    * @return The requested User object
     * pre:
     *  username != null;
     */
-   public static Map<String, String> getUser(String username) {
+   public static CSTutor.Model.User.User getUser(String username) {
       try {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
          s.setString(1, username);
          ResultSet r = s.executeQuery();
-         Map<String, String> user = new HashMap<String, String>();
-         List<String> cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
-         for (String col : cols) {
-            user.put(col, r.getString(col));
-         }
+         CSTutor.Model.User.User user = null;// = new CSTutor.Model.User.User();
          s.close();
          return user;
       } catch(Exception e) {
          // User is not in db so return null
+         return null;
+      }
+   }
+
+   /**
+    * Get a list of usernames from the database by accessLevel
+    *
+    * @param accessLevel The access level enum
+    * @return List of usernames by accessLevel
+    * post:
+    *  return != null;
+    */
+   public static List<String> getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel accessLevel) {
+      List<String> usernames = new ArrayList<String>();
+      try {
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
+         s.setString(1, getAccessString(accessLevel));
+         ResultSet r = s.executeQuery();
+         while (r.next()) {
+            usernames.add(r.getString("username"));
+         }
+         s.close();
+         return usernames;
+      } catch(Exception e) {
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getAllUsers(). " + e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
          return null;
       }
    }
@@ -231,6 +254,35 @@ public class TutorDB {
          }
          s.close();
          return tutorials;
+      } catch(Exception e) {
+         // This method should never throw an exception in normal operation
+         System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
+         System.exit(1);
+         return null;
+      }
+   }
+
+/*** UserData methods *****************************************************************************/
+
+   /**
+    * Get list of all QuizData in the database
+    *
+    * @return List of all QuizData
+    * post:
+    *  return != null;
+    */
+   public static List<CSTutor.Model.Progress.QuizData> getAllQuizData() {
+      List<CSTutor.Model.Progress.QuizData> quizzes = new ArrayList<CSTutor.Model.Progress.QuizData>();
+      CSTutor.Model.Progress.QuizData q;
+      try {
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM QuizData");
+         ResultSet r = s.executeQuery();
+         while (r.next()) {
+            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numPages"));
+            quizzes.add(q);
+         }
+         s.close();
+         return quizzes;
       } catch(Exception e) {
          // This method should never throw an exception in normal operation
          System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());

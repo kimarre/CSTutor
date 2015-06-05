@@ -37,7 +37,7 @@ public class User {
      * Whether or not the user is an instructor.
      */
     private boolean instructor;
-    
+
     /**
      * The constructor for a User.
      * @param firstName The user's first name.
@@ -45,23 +45,21 @@ public class User {
      * @param email The user's email address.
      * @param pass The user's password.
      * @param instructor Whether or not a user is an instructor.
+     * @param newUser Whether or not this is a newly registered User.
      */
-    public User(String firstName, String lastName, String email, String pass, boolean instructor)
+    public User(String firstName, String lastName, String email, String pass, boolean instructor, boolean newUser)
     {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.instructor = instructor;
-        password = new Password();
-        password.setPassword(pass);
-    }
-
-    public User(String firstName, String lastName, String email, boolean instructor)
-    {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.instructor = instructor;
+        if (newUser)
+        {
+            password = new Password();
+            password.setPassword(pass);
+        } else {
+            password = new Password(pass);
+        }
     }
     
     /**
