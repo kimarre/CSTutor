@@ -103,7 +103,7 @@ public class Overview extends JFrame implements Observer {
         createTuts = new JMenuItem();
         myQuiz = new JMenuItem();
         createQuiz = new JMenuItem();
-        
+
         // Home
         jMenuHome.setText("Home");
         jMenuHome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,7 +124,7 @@ public class Overview extends JFrame implements Observer {
             }
         });
         jMenuTutorials.add(myTuts);
-        
+
         createTuts.setText("Create Tutorial");
         createTuts.setEnabled(false);
         createTuts.addActionListener(new java.awt.event.ActionListener() {
@@ -145,8 +145,9 @@ public class Overview extends JFrame implements Observer {
             }
         });
         jMenuQuizzes.add(myQuiz);
-        
+
         createQuiz.setText("Create Quiz");
+        createQuiz.setEnabled(false);
         jMenuQuizzes.add(createQuiz);
         
         // Progress
@@ -222,6 +223,12 @@ public class Overview extends JFrame implements Observer {
             }
         });
         jMenuProgress.setEnabled(true);
+
+        if (user.isInstructor())
+        {
+            createTuts.setEnabled(true);
+            createQuiz.setEnabled(true);
+        }
     }
 
     public void update(Observable o, Object arg) {

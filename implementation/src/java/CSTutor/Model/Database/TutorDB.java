@@ -139,7 +139,8 @@ public class TutorDB {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
          s.setString(1, username);
          ResultSet r = s.executeQuery();
-         CSTutor.Model.User.User user = null;// = new CSTutor.Model.User.User();
+         CSTutor.Model.User.User user = new CSTutor.Model.User.User(r.getString("firstname"), r.getString("lastname"),
+                 r.getString("username"), r.getString("hash"), r.getString("accessLevel") == "Professor", false);
          s.close();
          return user;
       } catch(Exception e) {
