@@ -31,8 +31,8 @@ public class Register {
         EmailValidator validator = EmailValidator.getInstance(false);
         if (TutorDB.getUser(email) == null)
         {
-            User user = new User(firstName, lastName, email, pass, instructor);
-            TutorDB.setUser(email, pass, firstName, lastName, instructor ? "Professor" : "Student");
+            User user = new User(firstName, lastName, email, pass, instructor, true);
+            TutorDB.setUser(email, user.getPassword().getHash(), firstName, lastName, instructor ? "Professor" : "Student");
 
             return true;
         } else {

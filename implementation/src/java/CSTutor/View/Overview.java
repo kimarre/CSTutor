@@ -126,6 +126,7 @@ public class Overview extends JFrame implements Observer {
         jMenuTutorials.add(myTuts);
         
         createTuts.setText("Create Tutorial");
+        createTuts.setEnabled(false);
         createTuts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateTutorialAction(evt);
@@ -150,11 +151,7 @@ public class Overview extends JFrame implements Observer {
         
         // Progress
         jMenuProgress.setText("Progress");
-        jMenuProgress.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProgressAction(evt);
-            }
-        });
+        jMenuProgress.setEnabled(false);
         jMenuBar.add(jMenuProgress);
         
         // Login
@@ -173,7 +170,20 @@ public class Overview extends JFrame implements Observer {
     private void LoginAction(java.awt.event.MouseEvent evt) {                             
         login = new Login(this);
         login.setVisible(true);
-    } 
+    }
+
+    private void LogoutAction(java.awt.event.MouseEvent evt) {
+        user = null;
+        jMenuLogin.setText("Login");
+        jMenuLogin.removeMouseListener(jMenuLogin.getMouseListeners()[2]);
+        jMenuLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LoginAction(evt);
+            }
+        });
+        jMenuProgress.removeMouseListener(login.getMouseListeners()[2]);
+        jMenuProgress.setEnabled(false);
+    }
     
     private void HomeAction(java.awt.event.MouseEvent evt) {
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Manager");
@@ -199,7 +209,19 @@ public class Overview extends JFrame implements Observer {
 
     public void LoggedIn()
     {
-        getJMenuBar().getMenu(5).setName("Logout");
+        jMenuLogin.setText("Logout");
+        jMenuLogin.removeMouseListener(jMenuLogin.getMouseListeners()[2]);
+        jMenuLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoutAction(evt);
+            }
+        });
+        jMenuProgress.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProgressAction(evt);
+            }
+        });
+        jMenuProgress.setEnabled(true);
     }
 
     public void update(Observable o, Object arg) {

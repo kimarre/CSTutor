@@ -143,8 +143,7 @@ public class Login extends JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        HashMap<String, String> tempData = TutorDB.getUser(usernameField.getText())
-        User tempUser = new User(tempData.get("firstname"), tempData.get("laststname"), tempData.get("firstname"), );
+        User tempUser = TutorDB.getUser(usernameField.getText());
         boolean valid = false;
         // TODO: check if tempUser exists
         if (tempUser != null)
