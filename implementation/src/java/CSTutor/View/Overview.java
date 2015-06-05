@@ -118,8 +118,10 @@ public class Overview extends JFrame implements Observer {
         jMenuBar.add(jMenuTutorials);
         
         myTuts.setText("My Tutorials");
-        myTuts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        myTuts.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MyTutorialAction(evt);
             }
         });
@@ -182,8 +184,10 @@ public class Overview extends JFrame implements Observer {
                 LoginAction(evt);
             }
         });
-        jMenuProgress.removeMouseListener(login.getMouseListeners()[2]);
+        jMenuProgress.removeMouseListener(jMenuProgress.getMouseListeners()[2]);
         jMenuProgress.setEnabled(false);
+        createTuts.setEnabled(false);
+        createQuiz.setEnabled(false);
     }
     
     private void HomeAction(java.awt.event.MouseEvent evt) {
