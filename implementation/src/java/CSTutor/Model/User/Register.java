@@ -29,14 +29,14 @@ public class Register {
     public static boolean createUser(String firstName, String lastName, String email, String pass, boolean instructor)
     {
         EmailValidator validator = EmailValidator.getInstance(false);
-        if (validator.isValid(email) && TutorDB.getUser(email) == null)
+        if (TutorDB.getUser(email) == null)
         {
             User user = new User(firstName, lastName, email, pass, instructor);
             TutorDB.setUser(email, pass, firstName, lastName, instructor ? "Professor" : "Student");
 
             return true;
         } else {
-            System.out.println((TutorDB.getUser(email) == null) ? "email already exists" : "email invalid");
+            System.out.println((TutorDB.getUser(email) != null) ? "email already exists" : "email invalid");
             System.out.println("email already exists or is invalid");
             return false;
         }
