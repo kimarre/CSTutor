@@ -70,6 +70,8 @@ public class Tutorial extends javax.swing.JPanel {
         sampleCodeText.setText("<html><body style='width: 300px'>" + pageData.getExampleCode() + "</body></html>");
         outputText.setText("<html><body style='width: 300px'>" + pageData.getExampleOutput() + "</body></html>");
         tryItText.setText("<html><body style='width: 300px'>" + pageData.tryItYourself + "</body></html>");
+        consoleText.setText("");
+        codeInputText.setText("");
         pyinterpreter.setOut(pyout);
     }
     
