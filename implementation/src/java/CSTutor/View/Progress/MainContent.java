@@ -4,14 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
@@ -185,6 +177,29 @@ public class MainContent extends JPanel
         content.add(studentTitlePanel);
         content.add(studentListPanel);
         
+        JPanel studentPanel = new JPanel();
+        studentPanel.setBackground(LIGHT_BLUE);
+        studentPanel.setLayout(new BoxLayout(studentPanel, BoxLayout.Y_AXIS));
+        String[] students = new String[] {"Maria Auxier", "Marian Bell", "Eugene Brown",
+                "Jamie Bryant","Danielle Carter", "Vernon Chilton", "Mary Clark", 
+                "Laurie Crawford", "Geoffrey Dunning", "Lester Flores", "Suzanne Gridley", 
+                "Bruce Griffin", "Jennifer Headrick", "Kevin Hoover", "Constance Jackson",
+                "Chris Kapp", "Leon Lewis", "Victor Massey", "Blanche Natal",
+                "Dianne Ohara", "Charlotte Perry", "Eric Prince", "Frank Reed",
+                "Nicole Rios", "David Rodriguez", "James Scott", "Robert Taylor",
+                "Anna Turley", "James Welsh", "Marlene Williams"};
+        
+        for(String st: students)
+        {
+            JLabel label = new JLabel(st);
+            label.setFont(new Font("Avenir", Font.PLAIN, 16));
+            label.setBackground(LIGHT_BLUE);
+            studentPanel.add(label);
+        }
+        JScrollPane studentScroll = new JScrollPane(studentPanel);
+        studentScroll.setBackground(LIGHT_BLUE);
+        content.add(studentScroll);
+        
         
     }
     
@@ -202,6 +217,7 @@ public class MainContent extends JPanel
             JPanel tempPanel = new JPanel();
             tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.X_AXIS));
             tempPanel.setBackground(LIGHT_BLUE);
+            tempPanel.add(Box.createVerticalStrut(20));
             
             JLabel tempLabel = new JLabel(enCls.get(i).toString());
             tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
