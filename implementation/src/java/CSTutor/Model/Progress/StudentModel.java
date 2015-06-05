@@ -4,6 +4,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 import CSTutor.View.Progress.*;
+import CSTutor.Model.Tutorial.*;
 
 
 /****
@@ -39,7 +40,7 @@ public class StudentModel
              = new DefaultListModel<TutorialData>(); /* List model for the JList */
          
          /* Add sample elements to the list */
-         tutorialsModel.addElement(new TutorialData("Hello World!"));
+         /*tutorialsModel.addElement(new TutorialData("Hello World!"));
          tutorialsModel.addElement(new TutorialData("Intro. to C"));
          tutorialsModel.addElement(new TutorialData("Data Types"));
          tutorialsModel.addElement(new TutorialData("If Statements"));
@@ -53,7 +54,7 @@ public class StudentModel
          tutorialsModel.addElement(new TutorialData("     ..."));
          tutorialsModel.addElement(new TutorialData("     ..."));
          tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialList = new JList<TutorialData>(tutorialsModel);
+         tutorialList = new JList<TutorialData>(tutorialsModel);*/
     }
     
     /**

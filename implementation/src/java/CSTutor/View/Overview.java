@@ -10,7 +10,7 @@ package CSTutor.View;
 import CSTutor.View.User.*;
 import CSTutor.View.Chat.*;
 import CSTutor.View.Manager.*;
-import CSTutor.Model.Progress.*;
+import CSTutor.Model.Progress.Progress;
 import CSTutor.View.Tutorial.*;
 import CSTutor.View.Quiz.*;
 import CSTutor.Model.User.*;

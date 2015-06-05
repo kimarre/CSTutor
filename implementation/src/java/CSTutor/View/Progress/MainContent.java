@@ -15,9 +15,7 @@ import javax.swing.JTable;
 
 import java.util.*;
 
-import CSTutor.Model.Progress.Student;
-import CSTutor.Model.Progress.TutorialData;
-import CSTutor.Model.Progress.Class;
+import CSTutor.Model.Progress.*;
 
 /****
  * Class MainContent is the JPanel where information about the item selected
@@ -128,7 +126,7 @@ public class MainContent extends JPanel
     public void displayStudentStatistics(Student student)
     {
         content.removeAll();
-        ArrayList<Class> enCls = student.getEnrolledClasses();
+        ArrayList<CSTutor.Model.Progress.Class> enCls = student.getEnrolledClasses();
         
         for(int i=0; i<enCls.size(); i++)
         {
@@ -157,124 +155,141 @@ public class MainContent extends JPanel
      * Displays the provided tutorial's statistics in the content JPanel.
      * @param tutorial
      */
-    public void displayTutorialStatistics(TutorialData tutorial)
+    public void displayTutorialStatistics(ScoredTutorialTrack tutorial)
     {
         content.removeAll();
         content.setBackground(LIGHT_BLUE);
         
-        String[] colNames = {"Student", "Quiz 1", "Quiz 2", "Quiz 3", 
-                "Quiz 4", "Quiz 5", "Status"};
-        String[] studentNames = tutorial.getStudents();
-        Object[][] data = new Object[studentNames.length][colNames.length];
-        int[][] quizScores = tutorial.getQuizScores();
-        
-        for(int row = 0; row < studentNames.length; row++)
+        if(tutorial.hasQuizzes())
         {
+            String[] colNames = {"Student", "Quiz 1", "Quiz 2", "Quiz 3", 
+                    "Quiz 4", "Quiz 5", "Status"};
+            String[] studentNames = tutorial.getStudents();
+            Object[][] data = new Object[studentNames.length][colNames.length];
+            int[][] quizScores = tutorial.getQuizScores();
             
-            for(int col = 0; col < colNames.length; col++)
+            for(int row = 0; row < studentNames.length; row++)
             {
-                
-                if(col == 0)
-                {
-                    data[row][col] = studentNames[row];
-                }
-                else if(col != 0 && col != 6)
-                {
-                    data[row][col] = quizScores[row][col-1];
-                }
-                else
-                {
-                    int completionVal = (int) (Math.random()*2);
-                    if(completionVal == 0)
+                for(int col = 0; col < colNames.length; col++)
+                { 
+                    if(col == 0)
                     {
-                        data[row][col] = new String("NOT COMPLETED");
+                        data[row][col] = studentNames[row];
+                    }
+                    else if(col != 0 && col != 6)
+                    {
+                        data[row][col] = quizScores[row][col-1];
                     }
                     else
                     {
-                        data[row][col] = new String("COMPLETED");
+                        int completionVal = (int) (Math.random()*2);
+                        if(completionVal == 0)
+                        {
+                            data[row][col] = new String("NOT COMPLETED");
+                        }
+                        else
+                        {
+                            data[row][col] = new String("COMPLETED");
+                        }
+                        
                     }
-                    
                 }
             }
+            
+            JPanel graphPanel = new JPanel();
+            JPanel axisPanel = new JPanel();
+            JPanel overallPanel = new JPanel();
+            overallPanel.setLayout(new BoxLayout(overallPanel, BoxLayout.Y_AXIS));
+            overallPanel.setBackground(LIGHT_BLUE);
+            
+            graphPanel.setLayout(new BoxLayout(graphPanel, BoxLayout.X_AXIS));
+            graphPanel.setVisible(true);
+            graphPanel.setBackground(LIGHT_BLUE);
+            
+            axisPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 0, Color.BLACK));
+            axisPanel.setPreferredSize(new Dimension(400, 250));
+            axisPanel.setMinimumSize(new Dimension(400, 250));
+            axisPanel.setMaximumSize(new Dimension(400, 250));
+            axisPanel.setVisible(true); 
+            
+            /* BAR GRAPH STUFF */
+            
+            BarGraph graph = new BarGraph(400, 250, tutorial.getAverageQuizScores());
+            graph.setVisible(true);
+            axisPanel.add(graph);
+            
+            
+            
+            
+            JLabel yAxisLabel = new JLabel("Y-Axis");
+            yAxisLabel.setUI(new VerticalLabelUI(false));
+            /*JLabel quiz1 = new JLabel("Quiz 1");
+            JLabel quiz2 = new JLabel("Quiz 2");
+            JLabel quiz3 = new JLabel("Quiz 3");
+            JLabel quiz4 = new JLabel("Quiz 4");
+            JLabel quiz5 = new JLabel("Quiz 5");
+            
+            JPanel quizLabels = new JPanel();
+            quizLabels.setLayout(new BoxLayout(quizLabels, BoxLayout.X_AXIS));
+            quizLabels.setPreferredSize(new Dimension(400, 15));
+            quizLabels.setMinimumSize(new Dimension(400, 15));
+            quizLabels.setMaximumSize(new Dimension(400, 15));
+            quizLabels.add(Box.createHorizontalGlue());
+            quizLabels.add(quiz1);
+            quizLabels.add(Box.createHorizontalGlue());
+            quizLabels.add(quiz2);
+            quizLabels.add(Box.createHorizontalGlue());
+            quizLabels.add(quiz3);
+            quizLabels.add(Box.createHorizontalGlue());
+            quizLabels.add(quiz4);
+            quizLabels.add(Box.createHorizontalGlue());
+            quizLabels.add(quiz5);
+            quizLabels.add(Box.createHorizontalGlue());
+            */
+            
+            
+            graphPanel.add(yAxisLabel);
+            graphPanel.add(axisPanel);
+            
+            
+            overallPanel.add(graphPanel);
+            /*overallPanel.add(quizLabels);*/
+            
+            content.add(overallPanel);
+            
+            
+            
+            
+            
+            JTable table = new JTable(data, colNames);
+            
+            JScrollPane scrollPane = new JScrollPane(table);
+            table.setFillsViewportHeight(true);
+            
+            
+            content.add(scrollPane);
+        }
+        else
+        {
+            System.out.println("No quiz data to display");
+            JPanel noQuizDataPanel = new JPanel();
+            noQuizDataPanel.setLayout(new BoxLayout(noQuizDataPanel, BoxLayout.X_AXIS));
+            noQuizDataPanel.setBackground(new Color(208, 226, 245));
+            noQuizDataPanel.setVisible(true);
+            JLabel message = new JLabel("No quiz data to display.");
+            message.setFont(new Font("Avenir", Font.PLAIN, 20));
+            message.setVisible(true);
+            message.setBackground(new Color(208, 226, 245));
+            
+            noQuizDataPanel.add(message);
+            
+            content.add(Box.createVerticalStrut(20));
+            content.add(noQuizDataPanel);
+            
         }
         
-        JPanel graphPanel = new JPanel();
-        JPanel axisPanel = new JPanel();
-        JPanel overallPanel = new JPanel();
-        overallPanel.setLayout(new BoxLayout(overallPanel, BoxLayout.Y_AXIS));
-        overallPanel.setBackground(LIGHT_BLUE);
-        
-        graphPanel.setLayout(new BoxLayout(graphPanel, BoxLayout.X_AXIS));
-        graphPanel.setVisible(true);
-        graphPanel.setBackground(LIGHT_BLUE);
-        
-        axisPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 0, Color.BLACK));
-        axisPanel.setPreferredSize(new Dimension(400, 250));
-        axisPanel.setMinimumSize(new Dimension(400, 250));
-        axisPanel.setMaximumSize(new Dimension(400, 250));
-        axisPanel.setVisible(true);
-        
-        /* BAR GRAPH STUFF */
-        
-        BarGraph graph = new BarGraph(400, 250, tutorial.getAverageQuizScores());
-        graph.setVisible(true);
-        axisPanel.add(graph);
-        
-        
-        
-        
-        JLabel yAxisLabel = new JLabel("Y-Axis");
-        yAxisLabel.setUI(new VerticalLabelUI(false));
-        JLabel quiz1 = new JLabel("Quiz 1");
-        JLabel quiz2 = new JLabel("Quiz 2");
-        JLabel quiz3 = new JLabel("Quiz 3");
-        JLabel quiz4 = new JLabel("Quiz 4");
-        JLabel quiz5 = new JLabel("Quiz 5");
-        
-        JPanel quizLabels = new JPanel();
-        quizLabels.setLayout(new BoxLayout(quizLabels, BoxLayout.X_AXIS));
-        quizLabels.setPreferredSize(new Dimension(400, 15));
-        quizLabels.setMinimumSize(new Dimension(400, 15));
-        quizLabels.setMaximumSize(new Dimension(400, 15));
-        quizLabels.add(Box.createHorizontalGlue());
-        quizLabels.add(quiz1);
-        quizLabels.add(Box.createHorizontalGlue());
-        quizLabels.add(quiz2);
-        quizLabels.add(Box.createHorizontalGlue());
-        quizLabels.add(quiz3);
-        quizLabels.add(Box.createHorizontalGlue());
-        quizLabels.add(quiz4);
-        quizLabels.add(Box.createHorizontalGlue());
-        quizLabels.add(quiz5);
-        quizLabels.add(Box.createHorizontalGlue());
-        
-        //JLabel xAxisLabel = new JLabel("Quizzes");
-        
-        graphPanel.add(yAxisLabel);
-        graphPanel.add(axisPanel);
-        //graphPanel.add(xAxisLabel);
-        
-        overallPanel.add(graphPanel);
-        overallPanel.add(quizLabels);
-        
-        content.add(overallPanel);
-        
-        
-        
-        
-        
-        JTable table = new JTable(data, colNames);
-        
-        JScrollPane scrollPane = new JScrollPane(table);
-        table.setFillsViewportHeight(true);
-        //scrollPane.setPreferredSize(new Dimension(700, 450));
-        //scrollPane.setMinimumSize(new Dimension(700, 450));
-        //scrollPane.setMaximumSize(new Dimension(700, 450));
-        
-        
-        content.add(scrollPane);
-        
-        
+        this.revalidate();
+        this.repaint();
         
         
         

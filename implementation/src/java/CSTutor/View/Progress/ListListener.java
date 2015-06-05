@@ -5,9 +5,7 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import CSTutor.Model.Progress.InstructorModel;
-import CSTutor.Model.Progress.Student;
-import CSTutor.Model.Progress.TutorialData;
+import CSTutor.Model.Progress.*;
 
 /**
  * Class ListListener provides the method that is called when changes occur
@@ -60,9 +58,9 @@ public class ListListener implements ListSelectionListener
                 main.displayStudentStatistics(selectedStudent);
             }
             
-            else if(obj instanceof TutorialData)
+            else if(obj instanceof ScoredTutorialTrack)
             {
-                TutorialData selectedTut = (TutorialData) obj;
+                ScoredTutorialTrack selectedTut = (ScoredTutorialTrack) obj;
                 main.displayTutorialStatistics(selectedTut);
             }
             

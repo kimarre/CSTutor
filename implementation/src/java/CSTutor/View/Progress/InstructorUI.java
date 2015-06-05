@@ -1,6 +1,7 @@
 package CSTutor.View.Progress;
 
 import java.awt.Color;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -18,11 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 
 
-import CSTutor.Model.Progress.InstructorModel;
-import CSTutor.Model.Progress.Student;
-import CSTutor.Model.Progress.TutorialData;
-import CSTutor.Model.Progress.Class;
 import CSTutor.Model.Manager.*;
+import CSTutor.Model.Progress.*;
 
 /****
  * InstructorUI is the view class that displays the information 
@@ -50,7 +48,7 @@ public class InstructorUI extends JPanel
     private final int barHeight = 515;
     private final int searchHeight = 30;
     private InstructorModel model;
-    private JList<Tutorial> tutorialList;
+    private JList<ScoredTutorialTrack> tutorialList;
     private JList<CSTutor.Model.Progress.Class> classList;
     private JList<Student> studentList;
     private JButton classSearchButton, tutorialSearchButton, studentSearchButton;

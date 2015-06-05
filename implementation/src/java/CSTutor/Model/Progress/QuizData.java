@@ -5,15 +5,18 @@ public class QuizData
     private String name;
     private int numQuestions;
     private int quizID;
+
     
     public QuizData(String quizName, int qID, int numQ)
     {
         this.name = quizName;
         numQuestions = numQ;
         quizID = qID;
+        
+        
     }
     
-    public String getName()
+    public String getDisplayName()
     {
         return name;
     }
@@ -22,6 +25,13 @@ public class QuizData
     {
         return numQuestions;
     }
+    
+    public void changeName(String newName)
+    {
+        name = newName;
+    }
+    
+    
     
     
     
