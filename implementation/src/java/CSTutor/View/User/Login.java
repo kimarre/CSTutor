@@ -49,7 +49,7 @@ public class Login extends JFrame{
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setText("CSTutor Login");
 
-        jLabel1.setText("Username:");
+        jLabel1.setText("Email:");
 
         jLabel3.setText("Password:");
 
@@ -145,7 +145,6 @@ public class Login extends JFrame{
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         User tempUser = TutorDB.getUser(usernameField.getText());
         boolean valid = false;
-        // TODO: check if tempUser exists
         if (tempUser != null)
         {
              valid = Password.validateHash(new String(passwordField.getPassword()), tempUser.getPassword().getHash());
