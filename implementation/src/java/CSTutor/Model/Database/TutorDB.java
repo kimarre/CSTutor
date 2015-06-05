@@ -130,20 +130,16 @@ public class TutorDB {
     * Get user info (as column/value map) by username
     *
     * @param username user's username
-    * @return Map of columns to values, or null if not found.
+    * @return The requested User object
     * pre:
     *  username != null;
     */
-   public static Map<String, String> getUser(String username) {
+   public static CSTutor.Model.User.User getUser(String username) {
       try {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
          s.setString(1, username);
          ResultSet r = s.executeQuery();
-         Map<String, String> user = new HashMap<String, String>();
-         List<String> cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
-         for (String col : cols) {
-            user.put(col, r.getString(col));
-         }
+         CSTutor.Model.User.User user = null;// = new CSTutor.Model.User.User();
          s.close();
          return user;
       } catch(Exception e) {

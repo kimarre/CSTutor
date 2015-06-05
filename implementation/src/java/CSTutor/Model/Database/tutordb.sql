@@ -158,7 +158,7 @@ REPLACE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VAL
    ("Page2", "Tutorial", "Unit1", "Section3", "CSC 103"),
    ("Page3", "Tutorial", "Unit1", "Section3", "CSC 103");
 
-REPLACE INTO QuizData(id, name, numPages) VALUES
+REPLACE INTO QuizData(id, name, numQuestions) VALUES
    (1, "Quiz1", 5),
    (1, "Quiz2", 4),
    (1, "Quiz3", 5),
