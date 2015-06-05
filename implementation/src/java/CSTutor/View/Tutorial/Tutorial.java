@@ -11,6 +11,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import org.python.util.PythonInterpreter;
+import org.python.core.PyObject;
 
 /**
  * Contains the elements of the tutorial view
@@ -27,6 +29,12 @@ public class Tutorial extends javax.swing.JPanel {
     
     /** Provides a quick way to jump between tutorial lessons */
     public RoadmapModule sideModule;
+
+    /** Used to run the python code in the tutorial with the run button **/
+    private PythonInterpreter pyinterpreter = new PythonInterpreter();
+
+    /** Used to store the output of the python interpreter **/
+    private java.io.OutputStream pyout = new java.io.ByteArrayOutputStream();
     
     /**
      * Creates new Tutorial with two sample initial tutorials
@@ -62,6 +70,7 @@ public class Tutorial extends javax.swing.JPanel {
         sampleCodeText.setText("<html><body style='width: 300px'>" + pageData.getExampleCode() + "</body></html>");
         outputText.setText("<html><body style='width: 300px'>" + pageData.getExampleOutput() + "</body></html>");
         tryItText.setText("<html><body style='width: 300px'>" + pageData.tryItYourself + "</body></html>");
+        pyinterpreter.setOut(pyout);
     }
     
     /** 
@@ -295,10 +304,13 @@ public class Tutorial extends javax.swing.JPanel {
         System.out.println("Tutorial " + (currentIndex+1) + "/" + tutorialTrack.maxIndex);
     }//GEN-LAST:event_toBeginningButtonActionPerformed
 
-    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
+    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed       
+        // Run the python code and put output in the console.
         System.out.println("Run!");
-        // put the output into console 
-        consoleText.setText("Output goes here!");
+        String pycode = codeInputText.getText();
+        pyinterpreter.exec(pycode);
+        consoleText.setText(pyout.toString());
+
     }//GEN-LAST:event_runButtonActionPerformed
 
     private void roadmapListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_roadmapListValueChanged
