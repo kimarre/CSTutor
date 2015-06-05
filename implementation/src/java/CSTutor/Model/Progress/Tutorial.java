@@ -7,7 +7,7 @@ package CSTutor.Model.Progress;
  * the tutorial.
  * @author Erica Solum (esolum@calpoly.edu)
  */
-public class TutorialData
+public class Tutorial
 {
     private String name;
     private boolean complete;
@@ -16,7 +16,7 @@ public class TutorialData
     private int[][] quizScores;
     private int numQuizzes;
     
-    public TutorialData(String name)
+    public Tutorial(String name)
     {
         this.name = name;
         complete = false;
@@ -73,7 +73,7 @@ public class TutorialData
        tutorial != null;
      *
      */
-    public boolean equals(TutorialData tutorial)
+    public boolean equals(Tutorial tutorial)
     {
         if(tutorial.toString().equals(name))
         {

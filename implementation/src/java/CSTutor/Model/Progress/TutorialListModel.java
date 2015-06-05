@@ -2,11 +2,10 @@ package CSTutor.Model.Progress;
 
 import java.awt.List;
 import java.util.ArrayList;
-
 import javax.swing.DefaultListModel;
-import CSTutor.Model.Manager.*;
+import CSTutor.Model.Tutorial.*;
 
-public class TutorialListModel<Tutorial> extends DefaultListModel<Tutorial>
+public class TutorialListModel<ScoredTutorialTrack> extends DefaultListModel<ScoredTutorialTrack>
 {
     public TutorialListModel()
     {
@@ -25,7 +24,7 @@ public class TutorialListModel<Tutorial> extends DefaultListModel<Tutorial>
     {
         for(int i=0; i<this.size(); i++)
         {
-            if(this.get(i).toString().equals(obj.toString()))
+            if(this.get(i).toString().equals(obj))
             {
                 return true;
             }
@@ -35,7 +34,8 @@ public class TutorialListModel<Tutorial> extends DefaultListModel<Tutorial>
     
     /**
      * Returns the index of the given object in the list if it is in
-     * the list model. Returns -1 if given object is not found.
+     * the list model. Returns -1 if given object is not found. 
+     * Overrides DefaultListModel's indexOf method.
      *                                                  <pre>
      pre:
        // Object obj must not be null.
@@ -44,12 +44,12 @@ public class TutorialListModel<Tutorial> extends DefaultListModel<Tutorial>
      */
     public int indexOf(Object obj)
     {
-        //System.out.print(obj.toString());
-        if(this.contains(obj))
+        ScoredTutorialTrack tut = (ScoredTutorialTrack)obj;
+        if(this.contains(tut))
         {
             for(int i=0; i<this.size(); i++)
             {
-                if(this.get(i).toString().equals(obj.toString()))
+                if(this.get(i).toString().equals(tut.toString()))
                 {
                     return i;
                 }
@@ -71,15 +71,17 @@ public class TutorialListModel<Tutorial> extends DefaultListModel<Tutorial>
        tut != null;
      *
      */
-    public ArrayList<Tutorial> getSimilarTutorials(Object obj)
+    public ArrayList<ScoredTutorialTrack> getSimilarTutorials(Object obj)
     {
-        if(obj instanceof CSTutor.Model.Manager.Tutorial)
+        if(obj instanceof java.lang.String)
         {
-            ArrayList<Tutorial> simTuts  = new ArrayList<Tutorial>();
+            String objStr = (String)obj;
+            
+            ArrayList<ScoredTutorialTrack> simTuts  = new ArrayList<ScoredTutorialTrack>();
             
             for(int i=0; i<this.size(); i++)
             {
-                if(this.get(i).toString().contains(obj.toString()))
+                if(this.get(i).toString().contains(objStr))
                 {
                     simTuts.add(this.get(i));
                 }
