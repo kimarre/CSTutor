@@ -36,8 +36,6 @@ public class Overview extends JFrame implements Observer {
     private JPanel insideTop;
     private ChatBar chatBar;
     public User user;
-    public UserDB userDB;
-    private Tutorial tutorial;
     private static int INSTRUCTOR_ACCESS = 2;
     
     public static void main(String[] args) {
@@ -65,19 +63,17 @@ public class Overview extends JFrame implements Observer {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
            ex.printStackTrace();
         }
-        userDB = new UserDB();
         init();
         mainPanel = new JPanel();
         mainTop = new JPanel(new CardLayout());
         chatBar = new ChatBar();
-        tutorial = new Tutorial();
         
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
         mainTop.add(new ManagerGUI(), "Manager");
         mainTop.add(new Progress(INSTRUCTOR_ACCESS).getView(), "Progress");
         mainTop.add(new CSTutor.View.Tutorial.EditTutorial(), "Tutorial");
-        mainTop.add(tutorial, "Student Tutorial");
+        mainTop.add(new Tutorial(), "Student Tutorial");
         mainTop.add(new QuizBuildGUI(), "Quiz");
         mainPanel.add(mainTop);
         mainPanel.add(chatBar);
@@ -197,11 +193,10 @@ public class Overview extends JFrame implements Observer {
     
     private void MyTutorialAction(java.awt.event.ActionEvent evt) {
         mainTop.remove(3);
-        mainTop.add(tutorial, "Student Tutorial", 3);
+        mainTop.add(new Tutorial(), "Student Tutorial", 3);
         pack();
         revalidate();
         repaint();
-        tutorial.initRoadmapContent(); 
        // roadmapList.setSelectedIndex(1);
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
     }

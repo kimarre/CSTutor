@@ -58,6 +58,7 @@ public class User {
             password = new Password();
             password.setPassword(pass);
         } else {
+            System.out.println("Instructor: " + instructor);
             password = new Password(pass);
         }
     }
