@@ -20,7 +20,7 @@ import java.awt.*;
 public class ChatBar extends JPanel {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
@@ -29,8 +29,24 @@ public class ChatBar extends JPanel {
 	public ChatBox box;
 	public Online online;
 	public ChatOverlay chatOverlay;
+	private JButton onlineBut;
+	private JButton chatBut;
+
 	public ChatBar() {
 		initComponents();
+		disableButtons();
+	}
+
+	public void disableButtons()
+	{
+		onlineBut.setEnabled(false);
+		chatBut.setEnabled(false);
+	}
+
+	public void enableButtons()
+	{
+		onlineBut.setEnabled(true);
+		chatBut.setEnabled(true);
 	}
 
 	/**
@@ -41,7 +57,7 @@ public class ChatBar extends JPanel {
 	//@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-		
+
 
 		chatOverlay = new ChatOverlay(this);
 
@@ -50,8 +66,8 @@ public class ChatBar extends JPanel {
 		box.setVisible(false);
 		online.setVisible(false);
 		JPanel butPanel = new JPanel();
-		JButton onlineBut = new JButton("Online");
-		JButton chatBut = new JButton("Chat");
+		onlineBut = new JButton("Online");
+		chatBut = new JButton("Chat");
 
 		onlineBut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,13 +80,13 @@ public class ChatBar extends JPanel {
 				if(chatOverlay.chatClient.name == null) {
 					Component frame = new JFrame();
 					String s = (String)JOptionPane.showInputDialog(
-		                    frame,
-		                    "Please enter your name:",
-		                    "Customized Dialog",
-		                    JOptionPane.PLAIN_MESSAGE,
-		                    null,
-		                    null,
-		                    "");
+							frame,
+							"Please enter your name:",
+							"Customized Dialog",
+							JOptionPane.PLAIN_MESSAGE,
+							null,
+							null,
+							"");
 					chatOverlay.chatClient.name = s;
 				}
 				box.setVisible(true);

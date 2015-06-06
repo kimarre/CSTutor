@@ -34,7 +34,7 @@ public class Overview extends JFrame implements Observer {
     private JPanel mainPanel;
     private JPanel mainTop;
     private JPanel insideTop;
-    private JPanel chatBar;
+    private ChatBar chatBar;
     public User user;
     public UserDB userDB;
     private Tutorial tutorial;
@@ -84,6 +84,12 @@ public class Overview extends JFrame implements Observer {
         add(mainPanel);
         pack();
         setVisible(true);
+
+        System.out.println("Componenets");
+        for(Component comp : mainTop.getComponents())
+        {
+            System.out.println(comp.toString());
+        }
     }
 
     private void addObservables()
@@ -126,15 +132,6 @@ public class Overview extends JFrame implements Observer {
             }
         });
         jMenuTutorials.add(myTuts);
-
-        createTuts.setText("Create Tutorial");
-        createTuts.setEnabled(false);
-        createTuts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateTutorialAction(evt);
-            }
-        });
-        jMenuTutorials.add(createTuts);
         
         // Quizzes
         jMenuQuizzes.setText("Quizzes");
@@ -147,10 +144,6 @@ public class Overview extends JFrame implements Observer {
             }
         });
         jMenuQuizzes.add(myQuiz);
-
-        createQuiz.setText("Create Quiz");
-        createQuiz.setEnabled(false);
-        jMenuQuizzes.add(createQuiz);
         
         // Progress
         jMenuProgress.setText("Progress");
@@ -186,29 +179,57 @@ public class Overview extends JFrame implements Observer {
         });
         jMenuProgress.removeMouseListener(jMenuProgress.getMouseListeners()[2]);
         jMenuProgress.setEnabled(false);
-        createTuts.setEnabled(false);
-        createQuiz.setEnabled(false);
+        jMenuTutorials.remove(createTuts);
+        jMenuQuizzes.remove(createQuiz);
+        chatBar.disableButtons();
+        revalidate();
+        repaint();
     }
     
     private void HomeAction(java.awt.event.MouseEvent evt) {
+        mainTop.remove(0);
+        mainTop.add(new ManagerGUI(), "Manager", 0);
+        pack();
+        revalidate();
+        repaint();
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Manager");
     }
     
     private void MyTutorialAction(java.awt.event.ActionEvent evt) {
+        mainTop.remove(3);
+        mainTop.add(tutorial, "Student Tutorial", 3);
+        pack();
+        revalidate();
+        repaint();
         tutorial.initRoadmapContent(); 
        // roadmapList.setSelectedIndex(1);
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
     }
     
-    private void CreateTutorialAction(java.awt.event.ActionEvent evt) { 
+    private void CreateTutorialAction(java.awt.event.ActionEvent evt) {
+        mainTop.remove(2);
+        mainTop.add(new CSTutor.View.Tutorial.EditTutorial(), "Tutorial", 2);
+        pack();
+        revalidate();
+        repaint();
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Tutorial");
     }
     
-    private void QuizAction(java.awt.event.ActionEvent evt) { 
+    private void QuizAction(java.awt.event.ActionEvent evt) {
+        mainTop.remove(4);
+        mainTop.add(new QuizBuildGUI(), "Quiz", 4);
+        pack();
+        revalidate();
+        repaint();
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Quiz");
     }
     
     private void ProgressAction(java.awt.event.MouseEvent evt) {
+        mainTop.remove(1);
+        mainTop.add(new Progress(INSTRUCTOR_ACCESS).getView(), "Progress", 1);
+        pack();
+        revalidate();
+        repaint();
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Progress");
     }
 
@@ -227,11 +248,23 @@ public class Overview extends JFrame implements Observer {
             }
         });
         jMenuProgress.setEnabled(true);
+        chatBar.enableButtons();
 
         if (user.isInstructor())
         {
-            createTuts.setEnabled(true);
-            createQuiz.setEnabled(true);
+            createTuts.setText("Create Tutorial");
+            createTuts.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    CreateTutorialAction(evt);
+                }
+            });
+            jMenuTutorials.add(createTuts);
+
+            createQuiz.setText("Create Quiz");
+            jMenuQuizzes.add(createQuiz);
+
+            revalidate();
+            repaint();
         }
     }
 
