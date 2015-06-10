@@ -6,6 +6,9 @@
 package CSTutor.View.User;
 
 import CSTutor.Model.Database.TutorDB;
+import CSTutor.Model.Manager.*;
+import CSTutor.Model.Manager.Class;
+import static CSTutor.Model.Manager.Class.ClassAccessLevel.Student;
 
 /**
  *
@@ -18,7 +21,7 @@ public class AdminPanel extends javax.swing.JFrame {
      */
     public AdminPanel() {
         initComponents();
-        UserList.setListData(TutorDB.getUsernamesByAccessLevel());
+        UserList.setListData(TutorDB.getUsernamesByAccessLevel(Student).toArray());
     }
 
     /**
