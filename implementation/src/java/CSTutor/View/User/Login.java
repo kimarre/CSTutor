@@ -1,10 +1,12 @@
 package CSTutor.View.User;
 
+import CSTutor.Model.Database.TutorDB;
 import CSTutor.View.Overview;
 import CSTutor.View.*;
 import CSTutor.Model.User.*;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.Observable;
 
 /**
@@ -47,7 +49,7 @@ public class Login extends JFrame{
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setText("CSTutor Login");
 
-        jLabel1.setText("Username:");
+        jLabel1.setText("Email:");
 
         jLabel3.setText("Password:");
 
@@ -141,12 +143,11 @@ public class Login extends JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        User tempUser = parent.userDB.getUser(usernameField.getText());
+        User tempUser = TutorDB.getUser(usernameField.getText());
         boolean valid = false;
-        // TODO: check if tempUser exists
         if (tempUser != null)
         {
-             valid = tempUser.getPassword().validateHash(passwordField.getText(), "");
+             valid = Password.validateHash(new String(passwordField.getPassword()), tempUser.getPassword().getHash());
         }
         if(!valid)
         {
@@ -157,23 +158,19 @@ public class Login extends JFrame{
             parent.user = tempUser;
             System.out.println("Logged in: " + tempUser.getName());
             this.setVisible(false);
-
+            parent.LoggedIn();
         }
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        register = new RegisterGUI(parent.userDB);
+        register = new RegisterGUI();
         register.setVisible(true);
         this.setVisible(false);
-        // TODO add your handling code here:
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void RecoverPassAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
-        recoverPass = new RecoverPassword(parent.userDB);
+        recoverPass = new RecoverPassword();
         recoverPass.setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_RecoverPassAction
 
     /**

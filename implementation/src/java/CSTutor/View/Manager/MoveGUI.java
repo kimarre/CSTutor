@@ -8,6 +8,7 @@ import javax.swing.event.*;
 
 import CSTutor.Model.Manager.Class;
 import CSTutor.Model.Manager.Section;
+import CSTutor.Model.Manager.Tutorial;
 import CSTutor.Model.Manager.Unit;
 
 import java.util.*;
@@ -184,6 +185,29 @@ public class MoveGUI extends JFrame{
            public void actionPerformed(ActionEvent event)
            {
         	   System.out.println("OK button pressed");
+        	   switch(selected) {
+        	   case SECTION:
+        	   	Class c = (Class)classOptions.getSelectedItem();
+        	   	Section s = ManagerGUI.managerModel.selectedSection;
+        	   	s.parent.sections.remove(s);
+        	   	c.sections.add(s);
+        	   	ManagerGUI.populateTree();
+        	   	break;
+	        	 case UNIT:
+	      	   	Section s2 = (Section)sectOptions.getSelectedItem();
+	      	   	Unit u = ManagerGUI.managerModel.selectedUnit;
+	      	   	u.parent.units.remove(u);
+	      	   	s2.units.add(u);
+	      	   	ManagerGUI.populateTree();
+	      	   	break;
+	        	case TUTORIAL:
+	     	   	Unit u2 = (Unit)unitOptions.getSelectedItem();
+	     	   	Tutorial t = ManagerGUI.managerModel.selectedTutorial;
+	     	   	t.parent.tutorials.remove(t);
+	     	   	u2.tutorials.add(t);
+	     	   	ManagerGUI.populateTree();
+	     	   	break;
+        	   }
         	   setVisible(false);
            }
         });

@@ -163,6 +163,7 @@ public class ManagerGUI extends JPanel {
                 	System.out.println("Nothing selected");
                 }
                 else {
+               	moveTut.setVisible(false);
                 	System.out.println(node.toString() + " selected");
    	          	System.out.println(node.toString() + " " + node.getLevel());
    	          	managerModel.clearSelections();
@@ -464,6 +465,8 @@ public class ManagerGUI extends JPanel {
     }
     public static void populateTree() {
    	 root.removeAllChildren();
+   	 //treeModel = new DefaultTreeModel(root);
+   	 treeModel.reload();
        for (int i = 0; i < managerModel.data.size(); i++) {
     	   DefaultMutableTreeNode node = new DefaultMutableTreeNode(managerModel.data.get(i));
       	   treeModel.insertNodeInto(node, root, root.getChildCount());

@@ -27,7 +27,7 @@ public class Password {
     }
 
     /**
-     * For constructing a new Password ovject for a new User.
+     * For constructing a new Password object for a new User.
      */
     public Password(){}
 
