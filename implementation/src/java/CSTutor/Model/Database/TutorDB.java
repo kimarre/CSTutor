@@ -162,7 +162,7 @@ public class TutorDB {
    public static List<String> getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel accessLevel) {
       List<String> usernames = new ArrayList<String>();
       try {
-         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE accessLevel=?");
          s.setString(1, getAccessString(accessLevel));
          ResultSet r = s.executeQuery();
          while (r.next()) {
