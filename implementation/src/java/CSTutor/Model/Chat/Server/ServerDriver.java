@@ -13,7 +13,13 @@ import java.net.Socket;
 
 public class ServerDriver {
 	@SuppressWarnings("resource")
+	
+	/**
+	 * The main method for the chat server. This function initiates a socket and then constantly
+	 * tries to except new connections
+	 */
 	public static void main(String[] args) {
+		
 		
 		if (1 != args.length) {
 			System.out.println("Usage: java ServerDriver <server_port>");

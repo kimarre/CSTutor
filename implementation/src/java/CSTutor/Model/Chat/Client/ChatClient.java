@@ -10,6 +10,11 @@ import java.net.UnknownHostException;
 
 import CSTutor.Model.Chat.ChatOverlay;
 
+/**
+ * @author Stephen Daily
+ * 
+ * Chat client class
+ */
 
 public class ChatClient implements Runnable {
     	Socket socket = null;
@@ -50,6 +55,9 @@ public class ChatClient implements Runnable {
     		chatOverlay.chatBar.box.updateConsole();
     	}
     	
+    	/**
+    	 * This sends the message inputted from the view to the chat server over an object stream
+    	 */
     	public void broadcastMessage(String message) {
     		try {
 				output.writeObject(name + ": " + message);
@@ -58,6 +66,10 @@ public class ChatClient implements Runnable {
 			}
     	}
     	
+    	/**
+    	 * This is a thread function that constantly checks for input from the server. 
+    	 * If it get's input, it passes it back to the view which outputs it to the console. 
+    	 */
     	public void run() {
     		try {
     			output = new ObjectOutputStream(socket.getOutputStream());

@@ -21,6 +21,13 @@ public class ChatOverlay {
 	String lastStringInput = "";
 	public ChatBar chatBar;
 	
+	/**
+	 * Constructor
+	 * 
+	 * Takes a reference to the parent chatBar (view)
+	 * 
+	 * Attemps to create a new connection to the server via initializing a new chatClient class
+	 */
 	public ChatOverlay(ChatBar chatBar) {
     	try {
 			chatClient = new ChatClient(null, this);
@@ -31,6 +38,9 @@ public class ChatOverlay {
     	this.chatBar = chatBar;
 	}
 	
+	/**
+	 * Verification for the chatBox input. Returns true if the text entered is not just whitespace
+	 */
     public Boolean Enter(String text){
     	if(!text.equals("") && text.trim().length() > 0) {
     		return true;
@@ -38,14 +48,23 @@ public class ChatOverlay {
     	return false;
     }
     
+    /**
+     * A method to send the inputted text to the server, via a method call in the ChatClient class
+     */
     public void pushText(String buffer) {
     	chatClient.broadcastMessage(buffer);
     }
     
+    /**
+     * Adds a new line to the end of the input text.
+     */
     public void setLastString(String str) {
     	lastStringInput = str + "\n";
     }
     
+    /**
+     * Returns the last string input by the user. 
+     */
     public String getLastString() {
     	return lastStringInput;
     }
