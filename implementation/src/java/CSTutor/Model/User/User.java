@@ -58,6 +58,7 @@ public class User {
             password = new Password();
             password.setPassword(pass);
         } else {
+            System.out.println("Instructor: " + instructor);
             password = new Password(pass);
         }
     }
@@ -84,6 +85,22 @@ public class User {
      */
     public String getName(){
         return firstName + " " + lastName;
+    }
+
+    /**
+     * Gets the users first name.
+     * @return The users first name.
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Gets the users last Name.
+     * @return The users last name.
+     */
+    public String getLastName() {
+        return lastName;
     }
     
     /**

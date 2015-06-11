@@ -139,8 +139,10 @@ public class TutorDB {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
          s.setString(1, username);
          ResultSet r = s.executeQuery();
-         CSTutor.Model.User.User user = new CSTutor.Model.User.User(r.getString("firstname"), r.getString("lastname"),
-                 r.getString("username"), r.getString("hash"), r.getString("accessLevel").equals("Professor"), false);
+         CSTutor.Model.User.User user = new CSTutor.Model.User.User(
+            r.getString("firstname"), r.getString("lastname"), r.getString("username"),
+            r.getString("hash"), r.getString("accessLevel").equals("Professor"), false
+         );
          s.close();
          return user;
       } catch(Exception e) {
@@ -160,7 +162,7 @@ public class TutorDB {
    public static List<String> getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel accessLevel) {
       List<String> usernames = new ArrayList<String>();
       try {
-         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE username=?");
+         PreparedStatement s = conn.prepareStatement("SELECT * FROM Users WHERE accessLevel=?");
          s.setString(1, getAccessString(accessLevel));
          ResultSet r = s.executeQuery();
          while (r.next()) {

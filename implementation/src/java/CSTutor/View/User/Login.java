@@ -163,13 +163,13 @@ public class Login extends JFrame{
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        register = new RegisterGUI(parent.userDB);
+        register = new RegisterGUI();
         register.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void RecoverPassAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
-        recoverPass = new RecoverPassword(parent.userDB);
+        recoverPass = new RecoverPassword();
         recoverPass.setVisible(true);
     }//GEN-LAST:event_RecoverPassAction
 

@@ -1,6 +1,8 @@
 package CSTutor.View.User;
 
 import javax.swing.JOptionPane;
+
+import CSTutor.Model.Database.TutorDB;
 import CSTutor.Model.User.*;
 
 /**
@@ -12,9 +14,8 @@ public class RecoverPassword extends javax.swing.JFrame {
     /**
      * Creates new form RecoverPassword
      */
-    public RecoverPassword(UserDB users) {
+    public RecoverPassword() {
         initComponents();
-        this.users = users;
     }
 
     /**
@@ -113,7 +114,7 @@ public class RecoverPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        User user = users.getUser(Username.getText());
+        User user = TutorDB.getUser(Username.getText());
         if(user != null)
         {
             recover.generateResetToken(user.getEmail());
@@ -158,7 +159,7 @@ public class RecoverPassword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecoverPassword(new UserDB()).setVisible(true);
+                new RecoverPassword().setVisible(true);
             }
         });
     }
@@ -174,5 +175,4 @@ public class RecoverPassword extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private final TokenDB tokens = new TokenDB();
     private final RecoverPass recover = new RecoverPass(tokens);
-    private final UserDB users;
 }
