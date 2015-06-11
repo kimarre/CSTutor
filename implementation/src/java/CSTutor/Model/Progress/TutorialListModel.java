@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import CSTutor.Model.Tutorial.*;
 
+/****
+ * Class TutorialListModel inherits the characteristics of a DefaultListModel but
+ * contains only ScoredTutorialTrack variable types. It provides methods to query the list
+ * that is contained in the Tutorials tab of the side bar. 
+ * @author Erica Solum (esolum@calpoly.edu)
+ */
 public class TutorialListModel<ScoredTutorialTrack> extends DefaultListModel<ScoredTutorialTrack>
 {
     public TutorialListModel()

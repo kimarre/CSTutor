@@ -12,7 +12,9 @@ import java.util.*;
  */
 public class Student
 { 
+    /** Displayable name of the student */
     private String name;
+    /** List of classes the student is enrolled in */
     private ArrayList<Class> enrolledClasses;
     
     public Student(String name, ArrayList<Class> enrolled)

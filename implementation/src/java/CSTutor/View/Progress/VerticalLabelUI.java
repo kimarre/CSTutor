@@ -10,6 +10,9 @@ import java.awt.geom.AffineTransform;
  * which is needed for graphing user statistics. 
  * 
  * source: http://tech.chitgoks.com/2009/11/13/rotate-jlabel-vertically/
+ * 
+ * For purposes of the CSTutor project:
+ * @author Erica Solum (esolum@calpoly.edu)
  */
 public class VerticalLabelUI extends BasicLabelUI {
 

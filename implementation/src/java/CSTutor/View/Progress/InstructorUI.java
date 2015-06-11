@@ -30,29 +30,49 @@ import CSTutor.Model.Progress.*;
  */
 public class InstructorUI extends JPanel
 {
-    
+    /** Space for the top of the side bar */
     private JPanel topSpace;
+    /** Space for the bottom of the side bar */
     private JPanel bottomSpace;
+    /** Final panels for each tab in the side bar */
     private JPanel finalClassesPane, finalStudentPane, finalTutorialPane;
+    /** Panel containing everything in the main section except for the title */
     private JPanel content;
+    /** Space panels for each tab in the side bar */
     private JPanel classSpace, studentSpace, tutorialSpace;
+    /** Corners used in the scroll panes of each tab */
     private JPanel classCorner, studentCorner, tutorialCorner;
+    /** Primary section where data will be displayed */
     private MainContent main;
+    /** Tab pane that functions as the side bar */
     private JTabbedPane tabPane;
+    /** Input fields for the search functionality */
     private JTextField classField, studentField, tutorialField;
+    /** Scroll panes for every tab */
     private JScrollPane classScroll, studentScroll, tutorialScroll;
+    /** Panels that contain the lists of variables */
     private JPanel classPanel, studentPanel, tutorialPanel;
+    /** Panels containing the UI elements for the search functionality */
     private JPanel classSearchPanel, studentSearchPanel, tutorialSearchPanel;
-    private ListRenderer renderer;
+    /** Width of the side bar */
     private final int barWidth = 200;
+    /** Height of the side bar */
     private final int barHeight = 515;
+    /** Height of the search panels and buttons */
     private final int searchHeight = 30;
+    /** Model that contains all the information to be displayed */
     private InstructorModel model;
+    /** UI for the list of tutorials in the side bar */
     private JList<ScoredTutorialTrack> tutorialList;
+    /** UI for the list of classes in the side bar */
     private JList<CSTutor.Model.Progress.Class> classList;
+    /** UI for the list of students in the side bar */
     private JList<Student> studentList;
+    /** Search buttons for each tab */
     private JButton classSearchButton, tutorialSearchButton, studentSearchButton;
+    /** Reset buttons for each tab */
     private JButton classResetButton, tutorialResetButton, studentResetButton;
+    /** Reset panels for each tab */
     private JPanel classResetPanel, studentResetPanel, tutorialResetPanel;
     
     
@@ -60,7 +80,6 @@ public class InstructorUI extends JPanel
     {
         this.model = model;
         init();
-        renderer = new ListRenderer(); 
     }
     
     /**
@@ -68,7 +87,6 @@ public class InstructorUI extends JPanel
      */    
     public void init()
     {
-       
         setVisible(true);
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -79,8 +97,6 @@ public class InstructorUI extends JPanel
         
         add(content);
         add(Box.createVerticalStrut(25));
-        
-    
     }
     
     /**
@@ -88,8 +104,6 @@ public class InstructorUI extends JPanel
      */
     public void layoutMiddle()
     {
-        
-        
         content = new JPanel();
         main = new MainContent();
         makeRefreshButton();
@@ -223,7 +237,6 @@ public class InstructorUI extends JPanel
         classResetPanel = new JPanel();
         classResetPanel.setLayout(new BoxLayout(classResetPanel, BoxLayout.Y_AXIS));
         classResetPanel.setBackground(new Color(153, 153, 153));
-        
         classResetPanel.setMinimumSize(new Dimension(200, searchHeight));
         classResetPanel.setPreferredSize(new Dimension(200, searchHeight));
         classResetPanel.setMaximumSize(new Dimension(200, searchHeight));
@@ -236,8 +249,7 @@ public class InstructorUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                classList = model.searchForClass("");
-                
+                classList = model.searchForClass("");  
                 classList.setCellRenderer(new ListRenderer());
                 classList.addListSelectionListener(
                         new ListListener(main, model));
@@ -245,11 +257,9 @@ public class InstructorUI extends JPanel
                 classPanel.add(classList);
                 classPanel.add(Box.createVerticalGlue());
                 classPanel.revalidate();
-                classPanel.repaint();
-                
+                classPanel.repaint();  
                 classResetPanel.setVisible(false);
-            }
-            
+            } 
         });
         
         classSearchButton.addActionListener(new ActionListener()
@@ -257,10 +267,7 @@ public class InstructorUI extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 String searchString = classField.getText();
-                
-                System.out.print("Searching for " + searchString);
                 classList = model.searchForClass(searchString);
-                
                 classList.setCellRenderer(new ListRenderer());
                 classList.addListSelectionListener(
                         new ListListener(main, model));
@@ -269,10 +276,8 @@ public class InstructorUI extends JPanel
                 classPanel.add(Box.createVerticalGlue());
                 classPanel.revalidate();
                 classPanel.repaint();
-                
                 classResetPanel.setVisible(true);
             }
-            
         });
         classResetPanel.add(classResetButton);
     }
@@ -283,26 +288,20 @@ public class InstructorUI extends JPanel
      */
     private void makeStudentSearchField()
     {
-        
-        
         studentResetPanel = new JPanel();
         studentResetPanel.setLayout(new BoxLayout(studentResetPanel, BoxLayout.Y_AXIS));
         studentResetPanel.setBackground(new Color(153, 153, 153));
-        
         studentResetPanel.setMinimumSize(new Dimension(200, searchHeight));
         studentResetPanel.setPreferredSize(new Dimension(200, searchHeight));
         studentResetPanel.setMaximumSize(new Dimension(200, searchHeight));
-        
         studentField = new JTextField();
         studentSearchButton = new JButton("Search");
-        
         studentResetButton = new JButton("Reset");
         studentResetPanel.setVisible(false);
         studentResetButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                
                 studentList = model.searchForStudent("");
                 studentList.setCellRenderer(new ListRenderer());
                 studentList.addListSelectionListener(
@@ -312,7 +311,6 @@ public class InstructorUI extends JPanel
                 studentPanel.add(Box.createVerticalGlue());
                 studentPanel.revalidate();
                 studentPanel.repaint();
-                
                 studentResetPanel.setVisible(false);
             }
         });
@@ -320,11 +318,8 @@ public class InstructorUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                String searchString = studentField.getText();
-                
-                System.out.print("Searching for " + searchString);
+                String searchString = studentField.getText(); 
                 studentList = model.searchForStudent(searchString);
-                
                 studentList.setCellRenderer(new ListRenderer());
                 studentList.addListSelectionListener(
                         new ListListener(main, model));
@@ -333,7 +328,6 @@ public class InstructorUI extends JPanel
                 studentPanel.add(Box.createVerticalGlue());
                 studentPanel.revalidate();
                 studentPanel.repaint();
-                
                 studentResetPanel.setVisible(true);
             }
         });
@@ -348,13 +342,10 @@ public class InstructorUI extends JPanel
     {
         tutorialResetPanel = new JPanel();
         tutorialResetPanel.setLayout(new BoxLayout(tutorialResetPanel, BoxLayout.Y_AXIS));
-        tutorialResetPanel.setBackground(new Color(153, 153, 153));
-        
+        tutorialResetPanel.setBackground(new Color(153, 153, 153)); 
         tutorialResetPanel.setMinimumSize(new Dimension(200, searchHeight));
         tutorialResetPanel.setPreferredSize(new Dimension(200, searchHeight));
         tutorialResetPanel.setMaximumSize(new Dimension(200, searchHeight));
-        
-        
         tutorialField = new JTextField();
         tutorialSearchButton = new JButton("Search");
         
@@ -365,16 +356,13 @@ public class InstructorUI extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 tutorialList = model.searchForTutorial("");
-                
                 tutorialList.setCellRenderer(new ListRenderer());
-                tutorialList.addListSelectionListener(
-                        new ListListener(main, model));
+                tutorialList.addListSelectionListener(new ListListener(main, model));
                 tutorialPanel.removeAll();
                 tutorialPanel.add(tutorialList);
                 tutorialPanel.add(Box.createVerticalGlue());
                 tutorialPanel.revalidate();
-                tutorialPanel.repaint();
-                
+                tutorialPanel.repaint();    
                 tutorialResetPanel.setVisible(false);
             }
         });
@@ -384,19 +372,14 @@ public class InstructorUI extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 String searchString = tutorialField.getText();
-                
-                System.out.print("Searching for " + searchString);
                 tutorialList = model.searchForTutorial(searchString);
-                
                 tutorialList.setCellRenderer(new ListRenderer());
-                tutorialList.addListSelectionListener(
-                        new ListListener(main, model));
+                tutorialList.addListSelectionListener(new ListListener(main, model));
                 tutorialPanel.removeAll();
                 tutorialPanel.add(tutorialList);
                 tutorialPanel.add(Box.createVerticalGlue());
                 tutorialPanel.revalidate();
                 tutorialPanel.repaint();
-                
                 tutorialResetPanel.setVisible(true);
             }
         });
@@ -542,6 +525,10 @@ public class InstructorUI extends JPanel
         tabPane.addTab("Tutorials", finalTutorialPane); 
     }
     
+    /**
+     * Makes and places the refresh button that updates the
+     * lists in the side bar/
+     */
     public void makeRefreshButton()
     {
         JButton refreshButton = new JButton("Refresh");

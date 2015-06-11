@@ -16,7 +16,9 @@ import CSTutor.Model.Progress.*;
  */
 public class ListListener implements ListSelectionListener
 {
+    /** Main section of the UI where data is displayed */
     private MainContent main;
+    /* Model containing the underlying data to display */
     private InstructorModel model;
     
     public ListListener(MainContent main, InstructorModel model)
@@ -63,9 +65,6 @@ public class ListListener implements ListSelectionListener
                 ScoredTutorialTrack selectedTut = (ScoredTutorialTrack) obj;
                 main.displayTutorialStatistics(selectedTut);
             }
-            
-            
-            
         }
     }
 }

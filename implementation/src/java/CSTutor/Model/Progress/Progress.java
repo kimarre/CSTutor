@@ -13,9 +13,11 @@ import CSTutor.View.Progress.*;
  */
 public class Progress
 {
-    private final int GUEST_ACCESS = 0;
+    /** Final variable representing user gets student access */
     private final int STUDENT_ACCESS = 1;
-    private final int INSTRUCTOR_ACCESS = 2;   
+    /** Final variable representing user gets instructor access */
+    private final int INSTRUCTOR_ACCESS = 2;
+    /** UI panel for the Progress feature */
     private JPanel viewPanel;
     
     
@@ -36,12 +38,6 @@ public class Progress
             StudentUI view = new StudentUI(model);
             viewPanel = view;
         }
-        else if(accessCode == GUEST_ACCESS)
-        {
-            GuestModel model = new GuestModel();
-            GuestUI view = new GuestUI(model);
-            viewPanel = view;
-        } 
     }
     
     /**

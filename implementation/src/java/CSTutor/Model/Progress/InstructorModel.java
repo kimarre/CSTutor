@@ -18,18 +18,24 @@ import javax.swing.JList;
  */
 public class InstructorModel
 {
+    /** List of instructor's tutorials */
     private JList<ScoredTutorialTrack> tutorialList;
+    /** list of Classes with this user listed as an instructor */
     private JList<Class> classList;
+    /** List of students that are enrolled in any of the instructor's classes */
     private JList<Student> studentList;
-    private DefaultListModel<ScoredTutorialTrack> tutorialsModel;
-    private DefaultListModel<Student> studentModel;
+    /** List model for the classes that are listed in the Classes tab */
     private ClassListModel<Class> fullClassesModel;
+    /** List model for the Students that are listed in the Students tab */
     private StudentListModel<Student> fullStudentsModel;
+    /** List model for the tutorials that are listed in the Tutorials tab */
     private TutorialListModel<ScoredTutorialTrack> fullTutorialsModel;
+    /** List model for the Classes that are found when conducting a search */
     private ClassListModel<Class> searchClassesModel;
+    /** List model for the students that are found when conducting a search */
     private StudentListModel<Student> searchStudentsModel;
+    /** List model for the tutorials that are found when conducting a search */
     private TutorialListModel<ScoredTutorialTrack> searchTutorialsModel;
-    private Class currentClass;
     
     public InstructorModel()
     {
@@ -48,23 +54,12 @@ public class InstructorModel
     {
         System.out.println("In InstructorModel.retrieveTutorialData");
         
-        /*ArrayList<CSTutor.Model.Manager.Class> managerClassList = (ArrayList<CSTutor.Model.Manager.Class>)TutorDB.getClasses();
-        CSTutor.Model.Manager.Class class1 = managerClassList.get(0);
+        ArrayList<CSTutor.Model.Tutorial.TutorialData> tutorials = 
+            (ArrayList<CSTutor.Model.Tutorial.TutorialData>) TutorDB.getAllTutorialData();
         
-        ArrayList<CSTutor.Model.Manager.Section> sections = (ArrayList<CSTutor.Model.Manager.Section>)TutorDB.getSections(class1);
-        CSTutor.Model.Manager.Section section1 = sections.get(0);
-        
-        ArrayList<CSTutor.Model.Manager.Unit> units = (ArrayList<CSTutor.Model.Manager.Unit>) TutorDB.getUnits(section1);
-        CSTutor.Model.Manager.Unit unit1 = units.get(0);*/   
-        //ArrayList<CSTutor.Model.Manager.Tutorial> tutorials = (ArrayList<CSTutor.Model.Manager.Tutorial>) TutorDB.getTutorials(unit1);
-        
-        ArrayList<CSTutor.Model.Tutorial.TutorialData> tutorials = (ArrayList<CSTutor.Model.Tutorial.TutorialData>) TutorDB.getAllTutorialData();
-        
-        /* Tutorials list */
         fullTutorialsModel
             = new TutorialListModel<ScoredTutorialTrack>(); /* List model for the JList */
         
-        /* TEMP QUIZZES UNTIL DB IS CONNECTED */ 
         ArrayList<QuizData> quizzes = new ArrayList<QuizData>();
         quizzes.add(new QuizData("For Loops Quiz Part 1", 1, 4));
         quizzes.add(new QuizData("For Loops Quiz Part 2", 2, 3));
@@ -72,9 +67,6 @@ public class InstructorModel
         quizzes.add(new QuizData("While Loops Part 2", 4, 4));
         quizzes.add(new QuizData("While Loops Part 3", 5, 5));
         quizzes.add(new QuizData("While Loops Part 4", 6, 2));
-        
-        
-   
         
         for(int i=0; i< tutorials.size(); i++)
         {
@@ -93,12 +85,7 @@ public class InstructorModel
             }
             fullTutorialsModel.addElement(tempTrack);
         }
-        
-        
-        
-        
         tutorialList = new JList<ScoredTutorialTrack>(fullTutorialsModel);
-        
     }
     
     /**
@@ -109,65 +96,47 @@ public class InstructorModel
      */
     private void retrieveStudentData()
     {
-        //System.out.println("In InstructorModel.retrieveStudentData");
-        
-        /*
-         * List model for the JList.
-         */
-        fullStudentsModel
-            = new StudentListModel<Student>(); 
-        
+        fullStudentsModel = new StudentListModel<Student>(); 
         ArrayList<Class> enrolledClasses = new ArrayList<Class>();
         enrolledClasses.add(new Class("CPE 225"));
         enrolledClasses.add(new Class("CPE 357"));
-        
         ArrayList<Class> enrolledClasses2 = new ArrayList<Class>();
         enrolledClasses2.add(new Class("CPE 101"));
         enrolledClasses2.add(new Class("CPE 102"));
-        
         ArrayList<Class> enrolledClasses3 = new ArrayList<Class>();
         enrolledClasses3.add(new Class("CPE 305"));
         enrolledClasses3.add(new Class("CPE 308"));
-        
         ArrayList<Class> enrolledClasses4 = new ArrayList<Class>();
         enrolledClasses4.add(new Class("CPE 300"));
         enrolledClasses4.add(new Class("CPE 349"));
-        
         ArrayList<Class> enrolledClasses5 = new ArrayList<Class>();
         enrolledClasses5.add(new Class("CPE 378"));
         enrolledClasses5.add(new Class("CPE 453"));
         
-        /*
-         * Add sample elements to the list.
-         */
         fullStudentsModel.addElement(new Student("Maria Auxier", enrolledClasses));
         fullStudentsModel.addElement(new Student("Marian Bell", enrolledClasses2));
         fullStudentsModel.addElement(new Student("Eugene Brown", enrolledClasses3));
         fullStudentsModel.addElement(new Student("Jamie Bryant", enrolledClasses4));
         fullStudentsModel.addElement(new Student("Danielle Carter", enrolledClasses5));
         fullStudentsModel.addElement(new Student("Vernon Chilton", enrolledClasses));
-        
         fullStudentsModel.addElement(new Student("Mary Clark", enrolledClasses2));
         fullStudentsModel.addElement(new Student("Laurie Crawford", enrolledClasses3));
         fullStudentsModel.addElement(new Student("Geoffrey Dunning", enrolledClasses4));
         fullStudentsModel.addElement(new Student("Lester Flores", enrolledClasses5));
         fullStudentsModel.addElement(new Student("Suzanne Gridley", enrolledClasses));
         fullStudentsModel.addElement(new Student("Bruce Griffin", enrolledClasses2));
-        
         fullStudentsModel.addElement(new Student("Jennifer Headrick", enrolledClasses3));
         fullStudentsModel.addElement(new Student("Kevin Hoover", enrolledClasses4));
         fullStudentsModel.addElement(new Student("Constance Jackson", enrolledClasses5));
         fullStudentsModel.addElement(new Student("Chris Kapp", enrolledClasses));
         fullStudentsModel.addElement(new Student("Leon Lewis", enrolledClasses2));
         fullStudentsModel.addElement(new Student("Victor Massey", enrolledClasses3));
-        
         fullStudentsModel.addElement(new Student("Blanche Natal", enrolledClasses4));
         fullStudentsModel.addElement(new Student("Dianne Ohara", enrolledClasses5));
         fullStudentsModel.addElement(new Student("Charlotte Perry", enrolledClasses));
         fullStudentsModel.addElement(new Student("Eric Prince", enrolledClasses2));
         fullStudentsModel.addElement(new Student("Frank Reed", enrolledClasses3));
         fullStudentsModel.addElement(new Student("Nicole Rios", enrolledClasses4));
-        
         fullStudentsModel.addElement(new Student("David Rodriguez", enrolledClasses5));
         fullStudentsModel.addElement(new Student("James Scott", enrolledClasses));
         fullStudentsModel.addElement(new Student("Robert Taylor", enrolledClasses2));
@@ -175,7 +144,6 @@ public class InstructorModel
         fullStudentsModel.addElement(new Student("James Welsh", enrolledClasses4));
         fullStudentsModel.addElement(new Student("Marlene Williams", enrolledClasses5));
         studentList = new JList<Student>(fullStudentsModel);  
-        
     }
     
     /**
@@ -186,8 +154,6 @@ public class InstructorModel
      */
     private void retrieveClassesData()
     {
-        //System.out.println("In InstructorModel.retrieveClassesData");
-        
         ArrayList<CSTutor.Model.Manager.Class> managerClassList = (ArrayList<CSTutor.Model.Manager.Class>)TutorDB.getClasses();
         CSTutor.Model.Manager.Class class1 = managerClassList.get(0);
         

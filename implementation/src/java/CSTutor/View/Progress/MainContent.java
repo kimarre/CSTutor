@@ -19,11 +19,17 @@ import CSTutor.Model.Progress.*;
  */
 public class MainContent extends JPanel
 {
+    /** Width of the section */
     private final int width = 750;
+    /** Height of the section */
     private final int height = 550;
+    /** Panel for displaying data about a selection */
     private JPanel content;
+    /** Title of entity selected */
     private JLabel title;
+    /** Panel containing the title */
     private JPanel titlePanel;
+    /** Constant for the background color */
     private final Color LIGHT_BLUE = new Color(208, 226, 245);
     
     public MainContent()
@@ -41,7 +47,6 @@ public class MainContent extends JPanel
     public void init()
     {   
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        //setBorder(BorderFactory.createEtchedBorder(1));
         setMinimumSize(new Dimension(width, height));
         setPreferredSize(new Dimension(width, height));
         setMaximumSize(new Dimension(width, height));
@@ -54,34 +59,29 @@ public class MainContent extends JPanel
         titlePanel.setPreferredSize(new Dimension(width,50));
         titlePanel.setMaximumSize(new Dimension(width, 50));
         titlePanel.setBackground(LIGHT_BLUE);
-        titlePanel.add(Box.createHorizontalStrut(10));
-        
-        
+        titlePanel.add(Box.createHorizontalStrut(30));
         
         title = new JLabel(new String("Progress"));
         title.setFont(new Font("Avenir", Font.PLAIN, 30));
         title.setVisible(true);
-        //title.setAlignmentX(Component.CENTER_ALIGNMENT);
         titlePanel.add(title);
-        
         this.add(titlePanel);
         
+        JPanel separatorPanel = new JPanel();
+        separatorPanel.setLayout(new BoxLayout(separatorPanel, BoxLayout.X_AXIS));
+        separatorPanel.setBackground(LIGHT_BLUE);
+        separatorPanel.add(Box.createHorizontalStrut(30));
         
         JPanel linePanel = new JPanel();
-        linePanel.setPreferredSize(new Dimension(1000, 1));
-        linePanel.setMinimumSize(new Dimension(1000, 1));
-        linePanel.setMaximumSize(new Dimension(1000, 1));
+        linePanel.setPreferredSize(new Dimension(800, 2));
+        linePanel.setMinimumSize(new Dimension(800, 2));
+        linePanel.setMaximumSize(new Dimension(800, 2));
         linePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.add(linePanel);
         this.add(Box.createVerticalStrut(15));
         
         content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        //content.setBorder(BorderFactory.createEtchedBorder(1));
-        //content.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        //content.setMaximumSize(new Dimension(750, 350));
-        //content.setPreferredSize(new Dimension(750, 350));
-        //content.setMinimumSize(new Dimension(750, 350));
         this.add(content);
     }
     
@@ -119,8 +119,6 @@ public class MainContent extends JPanel
         final JPanel studentListPanel = new JPanel();
         studentListPanel.setLayout(new BoxLayout(studentListPanel, BoxLayout.Y_AXIS));
         studentListPanel.setBackground(LIGHT_BLUE);
-        
-        
         
         section1.addActionListener(new ActionListener()
         {
@@ -196,11 +194,15 @@ public class MainContent extends JPanel
             label.setBackground(LIGHT_BLUE);
             studentPanel.add(label);
         }
+        JPanel studentXDir = new JPanel();
+        studentXDir.setLayout(new BoxLayout(studentXDir, BoxLayout.X_AXIS));
+        studentXDir.setBackground(LIGHT_BLUE);
+        studentXDir.add(Box.createHorizontalStrut(25));
+        
         JScrollPane studentScroll = new JScrollPane(studentPanel);
         studentScroll.setBackground(LIGHT_BLUE);
-        content.add(studentScroll);
-        
-        
+        studentXDir.add(studentScroll);
+        content.add(studentXDir);
     }
     
     /**
@@ -222,16 +224,12 @@ public class MainContent extends JPanel
             JLabel tempLabel = new JLabel(enCls.get(i).toString());
             tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
             tempLabel.setFont(new Font("Avenir", Font.PLAIN, 20));
-            
-            
+
             tempPanel.add(tempLabel);
             tempPanel.add(Box.createHorizontalGlue());
             content.add(tempPanel);
-            
-            
         }
-        
-        
+
         this.revalidate();
         this.repaint();
     }
@@ -303,18 +301,12 @@ public class MainContent extends JPanel
             axisPanel.setMaximumSize(new Dimension(400, 250));
             axisPanel.setVisible(true); 
             
-            /* BAR GRAPH STUFF */
-            
             BarGraph graph = new BarGraph(400, 250, tutorial.getAverageQuizScores());
             graph.setVisible(true);
             axisPanel.add(graph);
             
-            
-            
-            
             JLabel yAxisLabel = new JLabel("Average Quiz Score");
             yAxisLabel.setUI(new VerticalLabelUI(false));
-            
             
             
             /*JLabel quiz1 = new JLabel("Quiz 1");
@@ -350,7 +342,6 @@ public class MainContent extends JPanel
             /*overallPanel.add(quizLabels);*/
             
             content.add(overallPanel);
-            
             content.add(Box.createVerticalStrut(5));
             
             
@@ -386,6 +377,10 @@ public class MainContent extends JPanel
         this.repaint(); 
     }
     
+    /**
+     * Contains the UI code for placing the Refresh Button.
+     * @param button
+     */
     public void sendRefreshButton(JButton button)
     {
         button.setMinimumSize(new Dimension(100, 25));
@@ -393,8 +388,115 @@ public class MainContent extends JPanel
         button.setMaximumSize(new Dimension(100, 25));
         titlePanel.add(Box.createHorizontalGlue());
         titlePanel.add(button);
-        
-        
     }
-
+    
+    /**
+     * Displays the information for the given tutorial to
+     * be viewed by a Student user. 
+     * @param tutorial
+     */
+    public void displayStudentUI(FullStudentTutorial tutorial)
+    {
+        setTitleText("Tutorial Progress");
+        content.removeAll();
+        
+        JPanel progressPanel = new JPanel();
+        progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.X_AXIS));
+        progressPanel.setMinimumSize(new Dimension(width, 75));
+        progressPanel.setPreferredSize(new Dimension(width, 75));
+        progressPanel.setMaximumSize(new Dimension(width, 75));
+        progressPanel.setBackground(LIGHT_BLUE);
+        
+        ProgressBar bar = new ProgressBar(400, 26, tutorial.getNumberOfPagesSeen(), tutorial.getNumberOfPages());
+        bar.setVisible(true);
+        progressPanel.add(Box.createHorizontalStrut(25));
+        progressPanel.add(bar);
+        int percentage = (int)(((double)tutorial.getNumberOfPagesSeen())/((double)tutorial.getNumberOfPages()) * 100);
+        JLabel label = new JLabel(new String(percentage + "% complete"));
+        label.setFont(new Font("Avenir", Font.PLAIN, 12));
+        label.setBackground(LIGHT_BLUE);
+        progressPanel.add(Box.createHorizontalStrut(10));
+        progressPanel.add(label);
+        
+        content.add(progressPanel);
+        
+        JPanel quizPanel = new JPanel();
+        quizPanel.setLayout(new BoxLayout(quizPanel, BoxLayout.Y_AXIS));
+        quizPanel.setBackground(LIGHT_BLUE);
+        
+        JPanel quizTitlePanel = new JPanel();
+        quizTitlePanel.setLayout(new BoxLayout(quizTitlePanel, BoxLayout.X_AXIS));
+        quizTitlePanel.setMinimumSize(new Dimension(width, 50));
+        quizTitlePanel.setPreferredSize(new Dimension(width,50));
+        quizTitlePanel.setMaximumSize(new Dimension(width, 50));
+        quizTitlePanel.setBackground(LIGHT_BLUE);
+        quizTitlePanel.add(Box.createHorizontalStrut(10));
+        
+        JLabel title = new JLabel(new String("Quiz Scores"));
+        title.setFont(new Font("Avenir", Font.PLAIN, 25));
+        title.setVisible(true);
+        quizTitlePanel.add(title);
+        
+        quizPanel.add(quizTitlePanel);
+        
+        
+        JPanel linePanel = new JPanel();
+        linePanel.setPreferredSize(new Dimension(500, 2));
+        linePanel.setMinimumSize(new Dimension(500, 2));
+        linePanel.setMaximumSize(new Dimension(500, 2));
+        linePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        quizPanel.add(linePanel);
+        
+        
+        if(tutorial.hasQuizzes())
+        {
+            String[] colNames = {"Name", "Points", "Performance"};
+            Object[][] data = new Object[tutorial.getNumberOfQuizzes()][colNames.length];
+            
+            
+            for(int row = 0; row < tutorial.getNumberOfQuizzes(); row++)
+            {
+                for(int col=0; col<colNames.length; col++)
+                {
+                    if(col == 0)
+                    {
+                        data[row][col] = tutorial.getQuizName(row);
+                    }
+                    else if(col == 1)
+                    {
+                        data[row][col] = new String(tutorial.getScoreForQuiz(row) + "/" + tutorial.getNumQuestionsInQuiz(row));
+                    }
+                    else
+                    {
+                        data[row][col] = new String(" ");
+                    }
+                }
+            }
+            
+            JTable table = new JTable(data, colNames);
+            
+            JPanel tablePanel = new JPanel();
+            tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.X_AXIS));
+            tablePanel.setBackground(LIGHT_BLUE);
+            JScrollPane scrollPane = new JScrollPane(table);
+            table.setFillsViewportHeight(true);
+            tablePanel.add(scrollPane);
+            quizPanel.add(tablePanel);
+        }
+        else
+        {
+            JPanel noQuizPanel = new JPanel();
+            noQuizPanel.setLayout(new BoxLayout(noQuizPanel, BoxLayout.X_AXIS));
+            noQuizPanel.setBackground(LIGHT_BLUE);
+            noQuizPanel.add(Box.createHorizontalStrut(40));
+            JLabel noQuizLabel = new JLabel("No quizzes available.");
+            noQuizLabel.setFont(new Font("Avenir", Font.PLAIN, 16));
+            noQuizLabel.setBackground(LIGHT_BLUE);
+            noQuizPanel.add(noQuizLabel);
+            quizPanel.add(Box.createVerticalStrut(30));
+            quizPanel.add(noQuizPanel);
+        }
+        content.add(Box.createVerticalStrut(30));
+        content.add(quizPanel); 
+    }
 }

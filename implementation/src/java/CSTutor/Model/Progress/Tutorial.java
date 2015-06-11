@@ -2,24 +2,27 @@ package CSTutor.Model.Progress;
 
 
 /****
- * Class TutorialData is a data structure that represents a tutorial listed
- * under a class. Class TutorialData provides methods to get the name of
+ * Class Tutorial is a data structure that represents a tutorial listed
+ * under a class. Class Tutorial provides methods to get the name of
  * the tutorial.
  * @author Erica Solum (esolum@calpoly.edu)
  */
 public class Tutorial
 {
+    /** Name of the tutorial */
     private String name;
-    private boolean complete;
+    /** List of the names of the students who have access */
     private String[] students;
+    /** List of the average quiz scores listed numerically by quiz ID*/
     private int[] averageQuizScores;
+    /** 2-D array containing a student's name and their quiz scores */
     private int[][] quizScores;
+    /** Number of quizzes attached to this tutorial */
     private int numQuizzes;
     
     public Tutorial(String name)
     {
         this.name = name;
-        complete = false;
         numQuizzes = 5;
         
         students = new String[] {"Maria Auxier", "Marian Bell", "Eugene Brown",
@@ -39,12 +42,9 @@ public class Tutorial
         
         for(int row = 0; row < students.length; row++)
         {
-            
             for(int col = 0; col < numQuizzes; col++)
-            {
-                
-                quizScores[row][col] = (int) (Math.random()*100);
-                
+            {   
+                quizScores[row][col] = (int) (Math.random()*100);  
             }
         }
     }
@@ -82,17 +82,28 @@ public class Tutorial
         return false;
     }
     
-    
+    /**
+     * Sets the list of students to the given array.
+     * @param students  array containing the names of students
+     */
     public void setStudents(String[] students)
     {
         this.students = students;
     }
     
+    /**
+     * Returns the list of students who have access to the tutorial.
+     * @return  students  list of students' names
+     */
     public String[] getStudents()
     {
         return students;
     }
     
+    /**
+     * Calculates and returns an array containing the average quiz scores
+     * sorted numerically by quiz ID. 
+     */
     public int[] getAverageQuizScores()
     {
         for(int col = 0; col<numQuizzes; col++)
@@ -109,6 +120,10 @@ public class Tutorial
         return averageQuizScores;
     }
     
+    /**
+     * Returns the 2-D array with the students names and their quiz scores.
+     * @return quizScores
+     */
     public int[][] getQuizScores()
     {
         return quizScores;

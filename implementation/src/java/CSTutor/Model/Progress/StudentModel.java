@@ -2,13 +2,19 @@ package CSTutor.Model.Progress;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JTree;
+import javax.swing.tree.*;
+
+import java.util.*;
 
 import CSTutor.View.Progress.*;
 import CSTutor.Model.Tutorial.*;
+import CSTutor.Model.Database.*;
+import CSTutor.Model.Manager.*;
 
 
 /****
- * Class Student is a model class for the CSTutor progress and
+ * Class StudentModel is a model class for the CSTutor progress and
  * assessment feature. It contains methods for all of the operations defined
  * for Student users, including retrieving data from the database.
  * @author Erica Solum (esolum@calpoly.edu)
@@ -16,45 +22,16 @@ import CSTutor.Model.Tutorial.*;
  */
 public class StudentModel
 {
-    private JList<TutorialData> tutorialList;
+    /** List of tutorials the student user has access to */
+    private JList<ScoredTutorialTrack> tutorialList;
+    /** List of classes the student User is enrolled in */
     private JList<Class> classList;
+    /** Tree containing the classes and their tutorials */
+    private JTree tree;
     
     public StudentModel()
     {
-        retrieveTutorialData();
         retrieveClassesData();
-    }
-    
-    /**
-     * Retrieves data about student's tutorials from the database. Puts
-     * data into a JList for easy formatting later on. Currently sample 
-     * data is filling the list for viewing purposes until further 
-     * database implementation is done.
-     */
-    public void retrieveTutorialData()
-    {
-         System.out.println("In StudentModel.retrieveTutorialData");
-         
-         /* Tutorials list */
-         DefaultListModel<TutorialData> tutorialsModel
-             = new DefaultListModel<TutorialData>(); /* List model for the JList */
-         
-         /* Add sample elements to the list */
-         /*tutorialsModel.addElement(new TutorialData("Hello World!"));
-         tutorialsModel.addElement(new TutorialData("Intro. to C"));
-         tutorialsModel.addElement(new TutorialData("Data Types"));
-         tutorialsModel.addElement(new TutorialData("If Statements"));
-         tutorialsModel.addElement(new TutorialData("Loops in C"));
-         tutorialsModel.addElement(new TutorialData("Functions"));
-         tutorialsModel.addElement(new TutorialData("The Stack"));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialsModel.addElement(new TutorialData("     ..."));
-         tutorialList = new JList<TutorialData>(tutorialsModel);*/
     }
     
     /**
@@ -67,28 +44,38 @@ public class StudentModel
     {
         System.out.println("In StudentModel.retrieveClassesData");
         
-        /*
-         * List model for the JList.
-         */
-        DefaultListModel<Class> classesModel = new DefaultListModel<Class>();
+        ArrayList<CSTutor.Model.Manager.Class> managerClassList = (ArrayList<CSTutor.Model.Manager.Class>)TutorDB.getClasses();
         
-        /*
-         * Add sample elements to the list.
-         */
-        classesModel.addElement(new Class("CPE 123"));
-        classesModel.addElement(new Class("CPE 101"));
-        classesModel.addElement(new Class("CPE 102"));
-        classesModel.addElement(new Class("CPE 103"));
-        classesModel.addElement(new Class("CPE 357"));
-        classesModel.addElement(new Class("CPE 305"));
-        classesModel.addElement(new Class("CPE 308"));
-        classList = new JList<Class>(classesModel);
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Classes");
+        
+        for(CSTutor.Model.Manager.Class thisClass: managerClassList)
+        {
+            DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(thisClass);
+            ArrayList<Section> sections = (ArrayList<Section>)TutorDB.getSections(thisClass);
+            for(Section thisSection: sections)
+            {
+                ArrayList<Unit> units = (ArrayList<Unit>) TutorDB.getUnits(thisSection);
+                for(Unit thisUnit: units)
+                {
+                    ArrayList<CSTutor.Model.Manager.Tutorial> tutorials = (ArrayList<CSTutor.Model.Manager.Tutorial>) TutorDB.getTutorials(thisUnit);
+                    for(CSTutor.Model.Manager.Tutorial thisTutorial: tutorials)
+                    {
+                        FullStudentTutorial tut = new FullStudentTutorial(thisTutorial);
+                        DefaultMutableTreeNode tutorialNode = new DefaultMutableTreeNode(tut);
+                        classNode.add(tutorialNode);
+                    }
+                }
+            }
+            top.add(classNode);
+        }
+        tree = new JTree(top);
+        tree.putClientProperty("JTree.lineStyle", "None");
     }
     
     /**
      * Returns the JList filled with tutorial data.
      */
-    public JList<TutorialData> getTutorialList()
+    public JList<ScoredTutorialTrack> getTutorialList()
     {
         return tutorialList;
     }
@@ -99,6 +86,22 @@ public class StudentModel
     public JList<Class> getClassList()
     {
         return classList;
+    }
+    
+    /**
+     * Search for a class or tutorial with a similar title.
+     */
+    public JList<Object> search(String searchString)
+    {
+        return null;
+    }
+    
+    /**
+     * Returns the original JTree containing every class and their tutorials.
+     */
+    public JTree getTree()
+    {
+        return tree;
     }
 
 }

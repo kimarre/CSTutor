@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 
+/****
+ * Class StudentListModel inherits the characteristics of a DefaultListModel but
+ * contains only Student variable types. It provides methods to query the list
+ * that is contained in the Student tab of the side bar. 
+ * @author Erica Solum (esolum@calpoly.edu)
+ */
 public class StudentListModel<Student> extends DefaultListModel<Student>
 {
     public StudentListModel()

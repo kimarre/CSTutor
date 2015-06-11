@@ -11,17 +11,19 @@ import java.util.*;
  */
 public class ScoredTutorialTrack
 {
-    /* Number of quizzes in this group of tutorials */
+    /** Number of quizzes in this group of tutorials */
     int numQuizzes;
-    /* Data type that holds a stripped version of a Tutorial */
+    /** Data type that holds a stripped version of a Tutorial */
     TutorialData data;
-    /* Results of the optional quiz associated with this group of tutorials */
+    /** Results of the optional quiz associated with this group of tutorials */
     ArrayList<QuizData> quizzes;
-    /* List of students users who have access to this tutorial */
+    /** List of students users who have access to this tutorial */
     String[] students;
-    /* Quiz scores of students sorted alphabetically*/
+    /** Quiz scores of students sorted alphabetically*/
     private int[][] quizScores;
+    /** Boolean representing if the tutorial track has attached quizzes */
     boolean hasQuiz;
+    /** List of the average quiz scores sorted numerically by quiz ID */
     private int[] averageQuizScores;
     
     public ScoredTutorialTrack(TutorialData d)

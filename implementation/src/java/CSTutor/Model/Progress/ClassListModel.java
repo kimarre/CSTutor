@@ -11,7 +11,7 @@ import javax.swing.DefaultListModel;
  * side bar while the Classes tab is selected. Class ClassListModel provides
  * methods to get the index of an item, get a list of items with names
  * matching a search query, and check to see if the item is in the list.
- * @author Erica Solum
+ * @author Erica Solum (esolum@calpoly.edu)
  * @version 18May15
  */
 public class ClassListModel<Class> extends DefaultListModel<Class>

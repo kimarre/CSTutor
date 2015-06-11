@@ -10,9 +10,15 @@ import java.util.*;
  */
 public class Class
 {
+    /** Name of the class */
     private String name;
+    /** List of names of the instructors that teach the class */
     private List<String> instructors;
     
+    /**
+     * Initializes a class with a String for the name.
+     * @param name  name of the class
+     */
     public Class(String name)
     {
         this.name = name;
