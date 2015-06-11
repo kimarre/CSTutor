@@ -87,15 +87,13 @@ public class TutorDBTest {
    @Test
    public void testGetUsernamesByAccessLevel() {
       List<String> cols, vals;
-      Map<String, String> correctrow, testrow;
       cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
       vals = Arrays.asList("sdali", "DEADBEEF", "Salvador", "Dali", "Professor");
-      correctrow  = mapFromLists(cols, vals);
       TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
       List<String> profs = TutorDB.getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel.Professor);
       List<String> students = TutorDB.getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel.Student);
-      assertTrue(profs.contains("sdali"));
-      assertFalse(students.contains("sdali"));
+      assertTrue("Testing getUsernamesByAccessLevel", profs.contains("sdali"));
+      assertFalse("Testing getUsernamesByAccessLevel", students.contains("sdali"));
    }
 
    /**
@@ -152,6 +150,21 @@ public class TutorDBTest {
       assertEquals("Comparing correct data and test data", correctdata.description.exampleCode, testdata.description.exampleCode);
       assertEquals("Comparing correct data and test data", correctdata.description.exampleOutput, testdata.description.exampleOutput);
       assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
+   }
+
+   /**
+     * Test methods getAllTutorialData.
+     */
+   @Test
+   public void testGetAllTutorialData() {
+      CSTutor.Model.Tutorial.TutorialData data;
+      List<CSTutor.Model.Tutorial.TutorialData> all;
+      data = new CSTutor.Model.Tutorial.TutorialData(
+       1111, "title", "description", "syntax", "example code",
+       "example output", "try it yourself");
+      TutorDB.setTutorialData(data);
+      all = TutorDB.getAllTutorialData();
+      assertTrue("Testing getAllTutorialData", all.size() > 0);
    }
 
 
