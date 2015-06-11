@@ -43,17 +43,15 @@ public class TutorDBTest {
      */
    @Test
    public void testSetGetUser() {
-      List<String> cols, vals;
-      Map<String, String> correctrow, testrow;
-      cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
-      vals = Arrays.asList("sdali", "DEADBEEF", "Salvador", "Dali", "Professor");
-      correctrow  = mapFromLists(cols, vals);
-      TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
-      testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row length", correctrow.size(), testrow.size());
-      for (String col : cols) {
-        assertEquals("Comparing correct and test row", correctrow.get(col), testrow.get(col));
-      }
+      CSTutor.Model.User.User testuser, correctuser;
+      correctuser = new CSTutor.Model.User.User("sdali", "DEADBEEF", "Bob", "Smith", false, true);
+      TutorDB.setUser("sdali", "DEADBEEF", "Bob", "Smith", "Student");
+      testuser = TutorDB.getUser("sdali");
+      assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
+      assertEquals("Comparing correct and test user", correctuser.getEmail(), testuser.getEmail());
+      assertEquals("Comparing correct and test user", correctuser.getFirstName(), testuser.getFirstName());
+      assertEquals("Comparing correct and test user", correctuser.getLastName(), testuser.getLastName());
+      assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
    }
 
    /**
@@ -62,26 +60,42 @@ public class TutorDBTest {
      */
    @Test
    public void testSetGetUserTwice() {
+      CSTutor.Model.User.User testuser, correctuser;
+      correctuser = new CSTutor.Model.User.User("sdali", "DEADBEEF", "Bob", "Smith", false, true);
+      TutorDB.setUser("sdali", "DEADBEEF", "Bob", "Smith", "Student");
+      testuser = TutorDB.getUser("sdali");
+      assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
+      assertEquals("Comparing correct and test user", correctuser.getEmail(), testuser.getEmail());
+      assertEquals("Comparing correct and test user", correctuser.getFirstName(), testuser.getFirstName());
+      assertEquals("Comparing correct and test user", correctuser.getLastName(), testuser.getLastName());
+      assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
+
+      correctuser = new CSTutor.Model.User.User("sdali", "808FACED", "Bob", "Smith", false, true);
+      TutorDB.setUser("sdali", "808FACED", "Bob", "Smith", "Student");
+      testuser = TutorDB.getUser("sdali");
+      assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
+      assertEquals("Comparing correct and test user", correctuser.getEmail(), testuser.getEmail());
+      assertEquals("Comparing correct and test user", correctuser.getFirstName(), testuser.getFirstName());
+      assertEquals("Comparing correct and test user", correctuser.getLastName(), testuser.getLastName());
+      assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
+   }
+
+   /**
+     * Test method getUsernamesByAccessLevel by adding a few users of different levels,
+     * then getting them.
+     */
+   @Test
+   public void testGetUsernamesByAccessLevel() {
       List<String> cols, vals;
       Map<String, String> correctrow, testrow;
       cols = Arrays.asList("username", "hash", "firstname", "lastname", "accessLevel");
-      vals = Arrays.asList("bobsmith", "DEADBEEF", "Bob", "Smith", "Student");
+      vals = Arrays.asList("sdali", "DEADBEEF", "Salvador", "Dali", "Professor");
       correctrow  = mapFromLists(cols, vals);
       TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
-      testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row length", correctrow.size(), testrow.size());
-      for (String col : cols) {
-        assertEquals("Comparing correct and test row", correctrow.get(col), testrow.get(col));
-      }
-
-      vals = Arrays.asList("bobsmith", "808FACED", "Bob", "Smith", "Student");
-      correctrow  = mapFromLists(cols, vals);
-      TutorDB.setUser(vals.get(0), vals.get(1), vals.get(2), vals.get(3), vals.get(4));
-      testrow = TutorDB.getUser(vals.get(0));
-      assertEquals("Comparing correct and test row length", correctrow.size(), testrow.size());
-      for (String col : cols) {
-        assertEquals("Comparing correct and test row", correctrow.get(col), testrow.get(col));
-      }
+      List<String> profs = TutorDB.getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel.Professor);
+      List<String> students = TutorDB.getUsernamesByAccessLevel(CSTutor.Model.Manager.Class.ClassAccessLevel.Student);
+      assertTrue(profs.contains("sdali"));
+      assertFalse(students.contains("sdali"));
    }
 
    /**
