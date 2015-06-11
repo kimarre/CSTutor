@@ -60,9 +60,6 @@ public class Password {
             valid = true;
         }
         return valid;
-        
-        
-        //boolean correct = BCrypt.checkpw("password", hash);
     }
     
     /**
