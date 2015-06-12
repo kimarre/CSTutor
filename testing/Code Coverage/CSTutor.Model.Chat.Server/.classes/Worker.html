@@ -42,26 +42,26 @@
   <td class="name">Worker</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/ 2)
+    (1/ 2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    29.2%
   </span>
   <span class="absValue">
-    (0/ 22)
+    (7/ 24)
   </span>
 </td>
 </tr>
@@ -87,19 +87,19 @@
 <i>13</i>&nbsp; */
 <i>14</i>&nbsp;
 <i>15</i>&nbsp;public class Worker implements Runnable {
-<b class="nc"><i>16</i>&nbsp;	protected Socket clientSocket = null;</b>
-<b class="nc"><i>17</i>&nbsp;	protected ChatServer parent = null;</b>
-<b class="nc"><i>18</i>&nbsp;	Object inputObject = null;</b>
+<b class="fc"><i>16</i>&nbsp;	protected Socket clientSocket = null;</b>
+<b class="fc"><i>17</i>&nbsp;	protected ChatServer parent = null;</b>
+<b class="fc"><i>18</i>&nbsp;	Object inputObject = null;</b>
 <i>19</i>&nbsp;	
 <i>20</i>&nbsp;	/**
 <i>21</i>&nbsp;	 * Constructor
 <i>22</i>&nbsp;	 * 
 <i>23</i>&nbsp;	 * Accepts a socket and a reference to the chat server.
 <i>24</i>&nbsp;	 */
-<b class="nc"><i>25</i>&nbsp;	public Worker (Socket soc, ChatServer parent) {</b>
-<b class="nc"><i>26</i>&nbsp;		this.clientSocket = soc;</b>
-<b class="nc"><i>27</i>&nbsp;		this.parent = parent;</b>
-<i>28</i>&nbsp;	}
+<b class="fc"><i>25</i>&nbsp;	public Worker (Socket soc, ChatServer parent) {</b>
+<b class="fc"><i>26</i>&nbsp;		this.clientSocket = soc;</b>
+<b class="fc"><i>27</i>&nbsp;		this.parent = parent;</b>
+<b class="fc"><i>28</i>&nbsp;	}</b>
 <i>29</i>&nbsp;	
 <i>30</i>&nbsp;	
 <i>31</i>&nbsp;	/**
@@ -134,14 +134,14 @@
 <b class="nc"><i>60</i>&nbsp;		} catch (IOException e) {</b>
 <b class="nc"><i>61</i>&nbsp;			e.printStackTrace();</b>
 <b class="nc"><i>62</i>&nbsp;		}</b>
-<i>63</i>&nbsp;	}
+<b class="nc"><i>63</i>&nbsp;	}</b>
 <i>64</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 21:37</div>
+    <div style="float:right;">generated on 2015-06-11 22:21</div>
 </div>
 </body>
 </html>

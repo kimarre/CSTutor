@@ -42,26 +42,26 @@
   <td class="name">ChatOverlay</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    20%
   </span>
   <span class="absValue">
-    (0/ 5)
+    (1/ 5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    37.5%
   </span>
   <span class="absValue">
-    (0/ 13)
+    (6/ 16)
   </span>
 </td>
 </tr>
@@ -92,7 +92,7 @@
 <i>18</i>&nbsp;    
 <i>19</i>&nbsp;	Collection&lt;Student&gt; students;
 <i>20</i>&nbsp;	public ChatClient chatClient;
-<b class="nc"><i>21</i>&nbsp;	String lastStringInput = &quot;&quot;;</b>
+<b class="fc"><i>21</i>&nbsp;	String lastStringInput = &quot;&quot;;</b>
 <i>22</i>&nbsp;	public ChatBar chatBar;
 <i>23</i>&nbsp;	
 <i>24</i>&nbsp;	/**
@@ -102,15 +102,15 @@
 <i>28</i>&nbsp;	 * 
 <i>29</i>&nbsp;	 * Attemps to create a new connection to the server via initializing a new chatClient class
 <i>30</i>&nbsp;	 */
-<b class="nc"><i>31</i>&nbsp;	public ChatOverlay(ChatBar chatBar) {</b>
+<b class="fc"><i>31</i>&nbsp;	public ChatOverlay(ChatBar chatBar) {</b>
 <i>32</i>&nbsp;    	try {
-<b class="nc"><i>33</i>&nbsp;			chatClient = new ChatClient(null, this);</b>
+<b class="fc"><i>33</i>&nbsp;			chatClient = new ChatClient(null, this);</b>
 <b class="nc"><i>34</i>&nbsp;		} catch (IOException e) {</b>
 <b class="nc"><i>35</i>&nbsp;			e.printStackTrace();</b>
-<b class="nc"><i>36</i>&nbsp;		}</b>
+<b class="fc"><i>36</i>&nbsp;		}</b>
 <i>37</i>&nbsp;    	
-<b class="nc"><i>38</i>&nbsp;    	this.chatBar = chatBar;</b>
-<i>39</i>&nbsp;	}
+<b class="fc"><i>38</i>&nbsp;    	this.chatBar = chatBar;</b>
+<b class="fc"><i>39</i>&nbsp;	}</b>
 <i>40</i>&nbsp;	
 <i>41</i>&nbsp;	/**
 <i>42</i>&nbsp;	 * Verification for the chatBox input. Returns true if the text entered is not just whitespace
@@ -127,14 +127,14 @@
 <i>53</i>&nbsp;     */
 <i>54</i>&nbsp;    public void pushText(String buffer) {
 <b class="nc"><i>55</i>&nbsp;    	chatClient.broadcastMessage(buffer);</b>
-<i>56</i>&nbsp;    }
+<b class="nc"><i>56</i>&nbsp;    }</b>
 <i>57</i>&nbsp;    
 <i>58</i>&nbsp;    /**
 <i>59</i>&nbsp;     * Adds a new line to the end of the input text.
 <i>60</i>&nbsp;     */
 <i>61</i>&nbsp;    public void setLastString(String str) {
 <b class="nc"><i>62</i>&nbsp;    	lastStringInput = str + &quot;\n&quot;;</b>
-<i>63</i>&nbsp;    }
+<b class="nc"><i>63</i>&nbsp;    }</b>
 <i>64</i>&nbsp;    
 <i>65</i>&nbsp;    /**
 <i>66</i>&nbsp;     * Returns the last string input by the user. 
@@ -148,7 +148,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 21:37</div>
+    <div style="float:right;">generated on 2015-06-11 22:21</div>
 </div>
 </body>
 </html>
