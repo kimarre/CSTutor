@@ -23,11 +23,6 @@ public class EditTextButtons {
    /** Determines what size font the tutorial's text should be */
    int fontSize;
 
-   /** Allows the font colors to be more easily distinguished */
-   enum FontColor {
-      black, red, orange, yellow, green, blue, purple;
-   }
-   
    /**
     * The constructor initializes all fields to standard font: 12pt plain Arial.
     */
