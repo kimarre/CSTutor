@@ -1,0 +1,91 @@
+<html>
+<head>
+   <title>Database Acceptance Testing</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="container">
+   <h3>Database Acceptance Testing</h3>
+   
+   <table class="table table-condensed table-bordered">
+   <tbody>
+      <tr>
+         <td><b>Case No.</b></td>
+         <td><b>User Inputs and Commands</b></td>
+         <td><b>Expected Output</b></td>
+         <td><b>Remarks</b></td>
+         <td><b>Results</b></td>
+      </tr>
+      <tr>
+         <td>1</td>
+         <td>Start the program. Look at the class hierarchy on the left.</td>
+         <td>There should be an expandable folder to show classes</td>
+         <td>Tests initial load of classes in the tree</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>2</td>
+         <td>Expand or collapse any number of nodes.</td>
+         <td>Any data in the nodes should become visible when expanded, and hidden when collapsed</td>
+         <td>Viewing nodes in the tree</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>3</td>
+         <td>Click on the add button.</td>
+         <td>Add menu should pop up</td>
+         <td>Add dialogue test</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>4</td>
+         <td>After performing 3, enter a name in the name field, then click ok</td>
+         <td>The class should be added to the list.</td>
+         <td>Adding classes</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>5</td>
+         <td>After performing 3, use the dropdown to select 'Section'</td>
+         <td>The add section should pop up instead of the add class dialogue</td>
+         <td>Changing the add dialogue.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>6</td>
+         <td>Select a class by clicking on it, then perform 5, then name the section, then click OK</td>
+         <td>The new section should appear under the selected class.</td>
+         <td>Adding a section</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>7</td>
+         <td>Select a section, then click on the 'move' button.</td>
+         <td>The move dialogue should pop up</td>
+         <td>Popping up the move dialogue</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>8</td>
+         <td>Perform 7, then select a class from the dropdown menu, then click ok</td>
+         <td>The section should be moved the correct class</td>
+         <td>Using the move dialogue</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>9</td>
+         <td>Select any part of the tree except the first node, then click delete</td>
+         <td>The selected part of the tree should be deleted</td>
+         <td>Using the delete button</td>
+         <td>Pass</td>
+      </tr>
+   </tbody>
+   </table>
+   
+
+</body>
+
+</html>
+
+
