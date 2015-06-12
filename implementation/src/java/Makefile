@@ -65,7 +65,6 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Chat/Server/*.java \
 
 TEST_CLASS = CSTutor.Model.User.PasswordTest \
-		CSTutor.Model.User.RegisterTest \
 		CSTutor.Model.User.UserTest \
 		CSTutor.Model.Tutorial.TutorialDataTest \
 		CSTutor.Model.Tutorial.TutorialEditorTest \
