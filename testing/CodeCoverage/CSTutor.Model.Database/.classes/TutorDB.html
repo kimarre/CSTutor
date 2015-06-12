@@ -42,15 +42,15 @@
     100%
   </span>
   <span class="absValue">
-    (28/ 28)
+    (26/ 26)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88%
+    86.6%
   </span>
   <span class="absValue">
-    (241/ 274)
+    (214/ 247)
   </span>
 </td>
 </tr>
@@ -80,15 +80,15 @@
     100%
   </span>
   <span class="absValue">
-    (29/ 29)
+    (27/ 27)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88%
+    86.7%
   </span>
   <span class="absValue">
-    (242/ 275)
+    (215/ 248)
   </span>
 </td>
 </tr>
@@ -403,384 +403,325 @@
 <i>303</i>&nbsp;   }
 <i>304</i>&nbsp;
 <i>305</i>&nbsp;
-<i>306</i>&nbsp;/*** Page methods *********************************************************************************/
+<i>306</i>&nbsp;/*** Tutorial methods *****************************************************************************/
 <i>307</i>&nbsp;
 <i>308</i>&nbsp;   /**
-<i>309</i>&nbsp;    * Get list of Pages for the specified Tutorial
+<i>309</i>&nbsp;    * Get list of Tutorials for the specified Unit
 <i>310</i>&nbsp;    *
-<i>311</i>&nbsp;    * @param tutorial the Tutorial to look up Pages for
-<i>312</i>&nbsp;    * @return List of Pages
+<i>311</i>&nbsp;    * @param unit the Unit to look up Tutorials for
+<i>312</i>&nbsp;    * @return List of Tutorials
 <i>313</i>&nbsp;    * pre:
-<i>314</i>&nbsp;    *  tutorial != null &amp;&amp; tutorial.parent != null &amp;&amp; tutorial.parent.parent != null
-<i>315</i>&nbsp;    *  &amp;&amp; tutorial.parent.parent.parent != null;
-<i>316</i>&nbsp;    * post:
-<i>317</i>&nbsp;    *  return != null;
-<i>318</i>&nbsp;    */
-<i>319</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Page&gt; getPages(CSTutor.Model.Manager.Tutorial tutorial) throws SQLException {
-<b class="fc"><i>320</i>&nbsp;      List&lt;CSTutor.Model.Manager.Page&gt; pages = new ArrayList&lt;CSTutor.Model.Manager.Page&gt;();</b>
-<i>321</i>&nbsp;      CSTutor.Model.Manager.Page p;
-<b class="fc"><i>322</i>&nbsp;      PreparedStatement s = conn.prepareStatement(</b>
-<i>323</i>&nbsp;       &quot;SELECT * FROM Pages WHERE tutorialName=? AND unitName=? AND sectionName=? AND className=?&quot;);
-<b class="fc"><i>324</i>&nbsp;      List&lt;String&gt; values = Arrays.asList(tutorial.name, tutorial.parent.name,</b>
-<i>325</i>&nbsp;       tutorial.parent.parent.name, tutorial.parent.parent.parent.name);
-<b class="fc"><i>326</i>&nbsp;      for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="fc"><i>327</i>&nbsp;         s.setString(i+1, values.get(i));</b>
-<i>328</i>&nbsp;      }
-<b class="fc"><i>329</i>&nbsp;      ResultSet r = s.executeQuery();</b>
-<b class="fc"><i>330</i>&nbsp;      while (r.next()) {</b>
-<b class="fc"><i>331</i>&nbsp;         p = new CSTutor.Model.Manager.Page(r.getString(&quot;pageName&quot;), tutorial);</b>
-<b class="fc"><i>332</i>&nbsp;         pages.add(p);</b>
-<i>333</i>&nbsp;      }
-<b class="fc"><i>334</i>&nbsp;      s.close();</b>
-<b class="fc"><i>335</i>&nbsp;      return pages;</b>
-<i>336</i>&nbsp;   }
-<i>337</i>&nbsp;
-<i>338</i>&nbsp;   /**
-<i>339</i>&nbsp;    * Save a list of Pages to the database
-<i>340</i>&nbsp;    *
-<i>341</i>&nbsp;    * @param pages list of Pages to save
-<i>342</i>&nbsp;    * pre:
-<i>343</i>&nbsp;    *  pages != null;
-<i>344</i>&nbsp;    */
-<i>345</i>&nbsp;   public static void savePages(List&lt;CSTutor.Model.Manager.Page&gt; pages) throws SQLException {
-<b class="fc"><i>346</i>&nbsp;      for (CSTutor.Model.Manager.Page p : pages) {</b>
-<b class="fc"><i>347</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
-<i>348</i>&nbsp;          &quot;INSERT OR IGNORE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?, ?)&quot;);
-<b class="fc"><i>349</i>&nbsp;         s.setString(1, p.name);</b>
-<b class="fc"><i>350</i>&nbsp;         s.setString(2, p.parent.name);</b>
-<b class="fc"><i>351</i>&nbsp;         s.setString(3, p.parent.parent.name);</b>
-<b class="fc"><i>352</i>&nbsp;         s.setString(4, p.parent.parent.parent.name);</b>
-<b class="fc"><i>353</i>&nbsp;         s.setString(5, p.parent.parent.parent.parent.name);</b>
-<b class="fc"><i>354</i>&nbsp;         s.executeUpdate();</b>
-<b class="fc"><i>355</i>&nbsp;         s.close();</b>
-<b class="fc"><i>356</i>&nbsp;      }</b>
-<b class="fc"><i>357</i>&nbsp;   }</b>
-<i>358</i>&nbsp;
-<i>359</i>&nbsp;
-<i>360</i>&nbsp;/*** Tutorial methods *****************************************************************************/
+<i>314</i>&nbsp;    *  unit != null &amp;&amp; unit.parent != null &amp;&amp; unit.parent.parent != null;
+<i>315</i>&nbsp;    * post:
+<i>316</i>&nbsp;    *  return != null;
+<i>317</i>&nbsp;    */
+<i>318</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Tutorial&gt; getTutorials(CSTutor.Model.Manager.Unit unit) {
+<b class="fc"><i>319</i>&nbsp;      List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials = new ArrayList&lt;CSTutor.Model.Manager.Tutorial&gt;();</b>
+<i>320</i>&nbsp;      CSTutor.Model.Manager.Tutorial t;
+<i>321</i>&nbsp;      try {
+<b class="fc"><i>322</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<i>323</i>&nbsp;          &quot;SELECT * FROM Tutorials WHERE unitName=? AND sectionName=? AND className=?&quot;);
+<b class="fc"><i>324</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(unit.name, unit.parent.name, unit.parent.parent.name);</b>
+<b class="fc"><i>325</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc"><i>326</i>&nbsp;            s.setString(i+1, values.get(i));</b>
+<i>327</i>&nbsp;         }
+<b class="fc"><i>328</i>&nbsp;         ResultSet r = s.executeQuery();</b>
+<b class="fc"><i>329</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>330</i>&nbsp;            t = new CSTutor.Model.Manager.Tutorial(r.getString(&quot;tutorialName&quot;), unit);</b>
+<b class="fc"><i>331</i>&nbsp;            tutorials.add(t);</b>
+<i>332</i>&nbsp;         }
+<b class="fc"><i>333</i>&nbsp;         s.close();</b>
+<b class="fc"><i>334</i>&nbsp;         return tutorials;</b>
+<b class="nc"><i>335</i>&nbsp;      } catch(SQLException e) {</b>
+<i>336</i>&nbsp;         // SQL error, should not happen
+<b class="nc"><i>337</i>&nbsp;         return tutorials;</b>
+<i>338</i>&nbsp;      }
+<i>339</i>&nbsp;   }
+<i>340</i>&nbsp;
+<i>341</i>&nbsp;   /**
+<i>342</i>&nbsp;    * Save a list of Tutorials to the database
+<i>343</i>&nbsp;    *
+<i>344</i>&nbsp;    * @param tutorials list of Tutorials to save
+<i>345</i>&nbsp;    * pre:
+<i>346</i>&nbsp;    *  tutorials != null;
+<i>347</i>&nbsp;    */
+<i>348</i>&nbsp;   public static void saveTutorials(List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials) throws SQLException {
+<b class="fc"><i>349</i>&nbsp;      for (CSTutor.Model.Manager.Tutorial t : tutorials) {</b>
+<b class="fc"><i>350</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<i>351</i>&nbsp;          &quot;INSERT OR IGNORE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?)&quot;);
+<b class="fc"><i>352</i>&nbsp;         s.setString(1, t.name);</b>
+<b class="fc"><i>353</i>&nbsp;         s.setString(2, t.parent.name);</b>
+<b class="fc"><i>354</i>&nbsp;         s.setString(3, t.parent.parent.name);</b>
+<b class="fc"><i>355</i>&nbsp;         s.setString(4, t.parent.parent.parent.name);</b>
+<b class="fc"><i>356</i>&nbsp;         s.executeUpdate();</b>
+<b class="fc"><i>357</i>&nbsp;         s.close();</b>
+<b class="fc"><i>358</i>&nbsp;      }</b>
+<b class="fc"><i>359</i>&nbsp;   }</b>
+<i>360</i>&nbsp;
 <i>361</i>&nbsp;
-<i>362</i>&nbsp;   /**
-<i>363</i>&nbsp;    * Get list of Tutorials for the specified Unit
-<i>364</i>&nbsp;    *
-<i>365</i>&nbsp;    * @param unit the Unit to look up Tutorials for
-<i>366</i>&nbsp;    * @return List of Tutorials
-<i>367</i>&nbsp;    * pre:
-<i>368</i>&nbsp;    *  unit != null &amp;&amp; unit.parent != null &amp;&amp; unit.parent.parent != null;
-<i>369</i>&nbsp;    * post:
-<i>370</i>&nbsp;    *  return != null;
-<i>371</i>&nbsp;    */
-<i>372</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Tutorial&gt; getTutorials(CSTutor.Model.Manager.Unit unit) {
-<b class="fc"><i>373</i>&nbsp;      List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials = new ArrayList&lt;CSTutor.Model.Manager.Tutorial&gt;();</b>
-<i>374</i>&nbsp;      CSTutor.Model.Manager.Tutorial t;
-<i>375</i>&nbsp;      try {
-<b class="fc"><i>376</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
-<i>377</i>&nbsp;          &quot;SELECT * FROM Tutorials WHERE unitName=? AND sectionName=? AND className=?&quot;);
-<b class="fc"><i>378</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(unit.name, unit.parent.name, unit.parent.parent.name);</b>
-<b class="fc"><i>379</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="fc"><i>380</i>&nbsp;            s.setString(i+1, values.get(i));</b>
-<i>381</i>&nbsp;         }
-<b class="fc"><i>382</i>&nbsp;         ResultSet r = s.executeQuery();</b>
-<b class="fc"><i>383</i>&nbsp;         while (r.next()) {</b>
-<b class="fc"><i>384</i>&nbsp;            t = new CSTutor.Model.Manager.Tutorial(r.getString(&quot;tutorialName&quot;), unit);</b>
-<b class="fc"><i>385</i>&nbsp;            t.pages = getPages(t);</b>
-<b class="fc"><i>386</i>&nbsp;            tutorials.add(t);</b>
-<i>387</i>&nbsp;         }
-<b class="fc"><i>388</i>&nbsp;         s.close();</b>
-<b class="fc"><i>389</i>&nbsp;         return tutorials;</b>
-<b class="nc"><i>390</i>&nbsp;      } catch(SQLException e) {</b>
-<i>391</i>&nbsp;         // SQL error, should not happen
-<b class="nc"><i>392</i>&nbsp;         return tutorials;</b>
-<i>393</i>&nbsp;      }
-<i>394</i>&nbsp;   }
-<i>395</i>&nbsp;
-<i>396</i>&nbsp;   /**
-<i>397</i>&nbsp;    * Save a list of Tutorials to the database
-<i>398</i>&nbsp;    *
-<i>399</i>&nbsp;    * @param tutorials list of Tutorials to save
-<i>400</i>&nbsp;    * pre:
-<i>401</i>&nbsp;    *  tutorials != null;
-<i>402</i>&nbsp;    */
-<i>403</i>&nbsp;   public static void saveTutorials(List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials) throws SQLException {
-<b class="fc"><i>404</i>&nbsp;      for (CSTutor.Model.Manager.Tutorial t : tutorials) {</b>
-<b class="fc"><i>405</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
-<i>406</i>&nbsp;          &quot;INSERT OR IGNORE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?)&quot;);
-<b class="fc"><i>407</i>&nbsp;         s.setString(1, t.name);</b>
-<b class="fc"><i>408</i>&nbsp;         s.setString(2, t.parent.name);</b>
-<b class="fc"><i>409</i>&nbsp;         s.setString(3, t.parent.parent.name);</b>
-<b class="fc"><i>410</i>&nbsp;         s.setString(4, t.parent.parent.parent.name);</b>
-<b class="fc"><i>411</i>&nbsp;         s.executeUpdate();</b>
-<b class="fc"><i>412</i>&nbsp;         s.close();</b>
-<b class="fc"><i>413</i>&nbsp;         savePages(t.pages);</b>
-<b class="fc"><i>414</i>&nbsp;      }</b>
-<b class="fc"><i>415</i>&nbsp;   }</b>
-<i>416</i>&nbsp;
+<i>362</i>&nbsp;/*** Unit methods *********************************************************************************/
+<i>363</i>&nbsp;
+<i>364</i>&nbsp;   /**
+<i>365</i>&nbsp;    * Get list of Units for the specified Section
+<i>366</i>&nbsp;    *
+<i>367</i>&nbsp;    * @param section the Section to look up Units for
+<i>368</i>&nbsp;    * @return List of Units
+<i>369</i>&nbsp;    * pre:
+<i>370</i>&nbsp;    *  section != null &amp;&amp; section.parent != null;
+<i>371</i>&nbsp;    * post:
+<i>372</i>&nbsp;    *  return != null;
+<i>373</i>&nbsp;    */
+<i>374</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Unit&gt; getUnits(CSTutor.Model.Manager.Section section) {
+<b class="fc"><i>375</i>&nbsp;      List&lt;CSTutor.Model.Manager.Unit&gt; units = new ArrayList&lt;CSTutor.Model.Manager.Unit&gt;();</b>
+<i>376</i>&nbsp;      CSTutor.Model.Manager.Unit u;
+<i>377</i>&nbsp;      try {
+<b class="fc"><i>378</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<i>379</i>&nbsp;          &quot;SELECT * FROM Units WHERE sectionName=? AND className=?&quot;);
+<b class="fc"><i>380</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(section.name, section.parent.name);</b>
+<b class="fc"><i>381</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc"><i>382</i>&nbsp;            s.setString(i+1, values.get(i));</b>
+<i>383</i>&nbsp;         }
+<b class="fc"><i>384</i>&nbsp;         ResultSet r = s.executeQuery();</b>
+<b class="fc"><i>385</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>386</i>&nbsp;            u = new CSTutor.Model.Manager.Unit(r.getString(&quot;unitName&quot;), section);</b>
+<b class="fc"><i>387</i>&nbsp;            u.tutorials = getTutorials(u);</b>
+<b class="fc"><i>388</i>&nbsp;            units.add(u);</b>
+<i>389</i>&nbsp;         }
+<b class="fc"><i>390</i>&nbsp;         s.close();</b>
+<b class="fc"><i>391</i>&nbsp;         return units;</b>
+<b class="nc"><i>392</i>&nbsp;      } catch(SQLException e) {</b>
+<i>393</i>&nbsp;         // SQL error, should not happen
+<b class="nc"><i>394</i>&nbsp;         return units;</b>
+<i>395</i>&nbsp;      }
+<i>396</i>&nbsp;   }
+<i>397</i>&nbsp;
+<i>398</i>&nbsp;   /**
+<i>399</i>&nbsp;    * Save a list of Units to the database
+<i>400</i>&nbsp;    *
+<i>401</i>&nbsp;    * @param units list of Units to save
+<i>402</i>&nbsp;    * pre:
+<i>403</i>&nbsp;    *  units != null;
+<i>404</i>&nbsp;    */
+<i>405</i>&nbsp;   public static void saveUnits(List&lt;CSTutor.Model.Manager.Unit&gt; units) throws SQLException {
+<b class="fc"><i>406</i>&nbsp;      for (CSTutor.Model.Manager.Unit u : units) {</b>
+<b class="fc"><i>407</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<i>408</i>&nbsp;          &quot;INSERT OR IGNORE INTO Units(unitName, sectionName, className) VALUES (?, ?, ?)&quot;);
+<b class="fc"><i>409</i>&nbsp;         s.setString(1, u.name);</b>
+<b class="fc"><i>410</i>&nbsp;         s.setString(2, u.parent.name);</b>
+<b class="fc"><i>411</i>&nbsp;         s.setString(3, u.parent.parent.name);</b>
+<b class="fc"><i>412</i>&nbsp;         s.executeUpdate();</b>
+<b class="fc"><i>413</i>&nbsp;         s.close();</b>
+<b class="fc"><i>414</i>&nbsp;         saveTutorials(u.tutorials);</b>
+<b class="fc"><i>415</i>&nbsp;      }</b>
+<b class="fc"><i>416</i>&nbsp;   }</b>
 <i>417</i>&nbsp;
-<i>418</i>&nbsp;/*** Unit methods *********************************************************************************/
+<i>418</i>&nbsp;/*** Section methods ******************************************************************************/
 <i>419</i>&nbsp;
 <i>420</i>&nbsp;   /**
-<i>421</i>&nbsp;    * Get list of Units for the specified Section
+<i>421</i>&nbsp;    * Get list of Sections for the specified Class
 <i>422</i>&nbsp;    *
-<i>423</i>&nbsp;    * @param section the Section to look up Units for
-<i>424</i>&nbsp;    * @return List of Units
+<i>423</i>&nbsp;    * @param clas the Class to look up Sections for
+<i>424</i>&nbsp;    * @return List of Sections
 <i>425</i>&nbsp;    * pre:
-<i>426</i>&nbsp;    *  section != null &amp;&amp; section.parent != null;
+<i>426</i>&nbsp;    *  clas != null;
 <i>427</i>&nbsp;    * post:
 <i>428</i>&nbsp;    *  return != null;
 <i>429</i>&nbsp;    */
-<i>430</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Unit&gt; getUnits(CSTutor.Model.Manager.Section section) {
-<b class="fc"><i>431</i>&nbsp;      List&lt;CSTutor.Model.Manager.Unit&gt; units = new ArrayList&lt;CSTutor.Model.Manager.Unit&gt;();</b>
-<i>432</i>&nbsp;      CSTutor.Model.Manager.Unit u;
+<i>430</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Section&gt; getSections(CSTutor.Model.Manager.Class clas) {
+<b class="fc"><i>431</i>&nbsp;      List&lt;CSTutor.Model.Manager.Section&gt; sections = new ArrayList&lt;CSTutor.Model.Manager.Section&gt;();</b>
+<i>432</i>&nbsp;      CSTutor.Model.Manager.Section sec;
 <i>433</i>&nbsp;      try {
 <b class="fc"><i>434</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
-<i>435</i>&nbsp;          &quot;SELECT * FROM Units WHERE sectionName=? AND className=?&quot;);
-<b class="fc"><i>436</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(section.name, section.parent.name);</b>
+<i>435</i>&nbsp;          &quot;SELECT * FROM Sections WHERE className=?&quot;);
+<b class="fc"><i>436</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(clas.name);</b>
 <b class="fc"><i>437</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
 <b class="fc"><i>438</i>&nbsp;            s.setString(i+1, values.get(i));</b>
 <i>439</i>&nbsp;         }
 <b class="fc"><i>440</i>&nbsp;         ResultSet r = s.executeQuery();</b>
 <b class="fc"><i>441</i>&nbsp;         while (r.next()) {</b>
-<b class="fc"><i>442</i>&nbsp;            u = new CSTutor.Model.Manager.Unit(r.getString(&quot;unitName&quot;), section);</b>
-<b class="fc"><i>443</i>&nbsp;            u.tutorials = getTutorials(u);</b>
-<b class="fc"><i>444</i>&nbsp;            units.add(u);</b>
+<b class="fc"><i>442</i>&nbsp;            sec = new CSTutor.Model.Manager.Section(r.getString(&quot;sectionName&quot;), clas);</b>
+<b class="fc"><i>443</i>&nbsp;            sec.units = getUnits(sec);</b>
+<b class="fc"><i>444</i>&nbsp;            sections.add(sec);</b>
 <i>445</i>&nbsp;         }
 <b class="fc"><i>446</i>&nbsp;         s.close();</b>
-<b class="fc"><i>447</i>&nbsp;         return units;</b>
+<b class="fc"><i>447</i>&nbsp;         return sections;</b>
 <b class="nc"><i>448</i>&nbsp;      } catch(SQLException e) {</b>
 <i>449</i>&nbsp;         // SQL error, should not happen
-<b class="nc"><i>450</i>&nbsp;         return units;</b>
+<b class="nc"><i>450</i>&nbsp;         return sections;</b>
 <i>451</i>&nbsp;      }
 <i>452</i>&nbsp;   }
 <i>453</i>&nbsp;
 <i>454</i>&nbsp;   /**
-<i>455</i>&nbsp;    * Save a list of Units to the database
+<i>455</i>&nbsp;    * Save a list of Sections to the database
 <i>456</i>&nbsp;    *
-<i>457</i>&nbsp;    * @param units list of Units to save
+<i>457</i>&nbsp;    * @param sections list of Sections to save
 <i>458</i>&nbsp;    * pre:
-<i>459</i>&nbsp;    *  units != null;
+<i>459</i>&nbsp;    *  sections != null;
 <i>460</i>&nbsp;    */
-<i>461</i>&nbsp;   public static void saveUnits(List&lt;CSTutor.Model.Manager.Unit&gt; units) throws SQLException {
-<b class="fc"><i>462</i>&nbsp;      for (CSTutor.Model.Manager.Unit u : units) {</b>
-<b class="fc"><i>463</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
-<i>464</i>&nbsp;          &quot;INSERT OR IGNORE INTO Units(unitName, sectionName, className) VALUES (?, ?, ?)&quot;);
-<b class="fc"><i>465</i>&nbsp;         s.setString(1, u.name);</b>
-<b class="fc"><i>466</i>&nbsp;         s.setString(2, u.parent.name);</b>
-<b class="fc"><i>467</i>&nbsp;         s.setString(3, u.parent.parent.name);</b>
-<b class="fc"><i>468</i>&nbsp;         s.executeUpdate();</b>
-<b class="fc"><i>469</i>&nbsp;         s.close();</b>
-<b class="fc"><i>470</i>&nbsp;         saveTutorials(u.tutorials);</b>
-<b class="fc"><i>471</i>&nbsp;      }</b>
-<b class="fc"><i>472</i>&nbsp;   }</b>
-<i>473</i>&nbsp;
-<i>474</i>&nbsp;/*** Section methods ******************************************************************************/
-<i>475</i>&nbsp;
-<i>476</i>&nbsp;   /**
-<i>477</i>&nbsp;    * Get list of Sections for the specified Class
-<i>478</i>&nbsp;    *
-<i>479</i>&nbsp;    * @param clas the Class to look up Sections for
-<i>480</i>&nbsp;    * @return List of Sections
-<i>481</i>&nbsp;    * pre:
-<i>482</i>&nbsp;    *  clas != null;
-<i>483</i>&nbsp;    * post:
-<i>484</i>&nbsp;    *  return != null;
-<i>485</i>&nbsp;    */
-<i>486</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Section&gt; getSections(CSTutor.Model.Manager.Class clas) {
-<b class="fc"><i>487</i>&nbsp;      List&lt;CSTutor.Model.Manager.Section&gt; sections = new ArrayList&lt;CSTutor.Model.Manager.Section&gt;();</b>
-<i>488</i>&nbsp;      CSTutor.Model.Manager.Section sec;
-<i>489</i>&nbsp;      try {
-<b class="fc"><i>490</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
-<i>491</i>&nbsp;          &quot;SELECT * FROM Sections WHERE className=?&quot;);
-<b class="fc"><i>492</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(clas.name);</b>
-<b class="fc"><i>493</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="fc"><i>494</i>&nbsp;            s.setString(i+1, values.get(i));</b>
-<i>495</i>&nbsp;         }
-<b class="fc"><i>496</i>&nbsp;         ResultSet r = s.executeQuery();</b>
-<b class="fc"><i>497</i>&nbsp;         while (r.next()) {</b>
-<b class="fc"><i>498</i>&nbsp;            sec = new CSTutor.Model.Manager.Section(r.getString(&quot;sectionName&quot;), clas);</b>
-<b class="fc"><i>499</i>&nbsp;            sec.units = getUnits(sec);</b>
-<b class="fc"><i>500</i>&nbsp;            sections.add(sec);</b>
-<i>501</i>&nbsp;         }
-<b class="fc"><i>502</i>&nbsp;         s.close();</b>
-<b class="fc"><i>503</i>&nbsp;         return sections;</b>
-<b class="nc"><i>504</i>&nbsp;      } catch(SQLException e) {</b>
-<i>505</i>&nbsp;         // SQL error, should not happen
-<b class="nc"><i>506</i>&nbsp;         return sections;</b>
-<i>507</i>&nbsp;      }
-<i>508</i>&nbsp;   }
-<i>509</i>&nbsp;
-<i>510</i>&nbsp;   /**
-<i>511</i>&nbsp;    * Save a list of Sections to the database
-<i>512</i>&nbsp;    *
-<i>513</i>&nbsp;    * @param sections list of Sections to save
-<i>514</i>&nbsp;    * pre:
-<i>515</i>&nbsp;    *  sections != null;
-<i>516</i>&nbsp;    */
-<i>517</i>&nbsp;   public static void saveSections(List&lt;CSTutor.Model.Manager.Section&gt; sections) throws SQLException {
-<b class="fc"><i>518</i>&nbsp;      for (CSTutor.Model.Manager.Section sec : sections) {</b>
-<b class="fc"><i>519</i>&nbsp;         PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)&quot;);</b>
-<b class="fc"><i>520</i>&nbsp;         s.setString(1, sec.name);</b>
-<b class="fc"><i>521</i>&nbsp;         s.setString(2, sec.parent.name);</b>
-<b class="fc"><i>522</i>&nbsp;         s.executeUpdate();</b>
-<b class="fc"><i>523</i>&nbsp;         s.close();</b>
-<b class="fc"><i>524</i>&nbsp;         saveUnits(sec.units);</b>
-<b class="fc"><i>525</i>&nbsp;      }</b>
-<b class="fc"><i>526</i>&nbsp;   }</b>
-<i>527</i>&nbsp;
-<i>528</i>&nbsp;
-<i>529</i>&nbsp;/*** Class methods ********************************************************************************/
-<i>530</i>&nbsp;
-<i>531</i>&nbsp;   /**
-<i>532</i>&nbsp;    * Determine the ClassAccessLevel enum for the access string
-<i>533</i>&nbsp;    *
-<i>534</i>&nbsp;    * @param access string representing the access level (Guest, Student, Assistant, Professor)
-<i>535</i>&nbsp;    * @return ClassAccessLevel enum
-<i>536</i>&nbsp;    */
-<i>537</i>&nbsp;   private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
-<b class="fc"><i>538</i>&nbsp;      switch (access) {</b>
-<i>539</i>&nbsp;         case &quot;Student&quot;:
-<b class="nc"><i>540</i>&nbsp;            return ClassAccessLevel.Student;</b>
-<i>541</i>&nbsp;         case &quot;Professor&quot;:
-<b class="nc"><i>542</i>&nbsp;            return ClassAccessLevel.Professor;</b>
-<i>543</i>&nbsp;      }
-<b class="fc"><i>544</i>&nbsp;      return ClassAccessLevel.Guest;</b>
-<i>545</i>&nbsp;   }
-<i>546</i>&nbsp;
-<i>547</i>&nbsp;   /**
-<i>548</i>&nbsp;    * Determine the accessLevel string for the ClassAccessLevel enum
-<i>549</i>&nbsp;    *
-<i>550</i>&nbsp;    * @param access ClassAccessLevel enum
-<i>551</i>&nbsp;    * @return access string representing the access level (Guest, Student, Assistant, Professor)
-<i>552</i>&nbsp;    */
-<i>553</i>&nbsp;   private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
-<b class="fc"><i>554</i>&nbsp;      switch (access) {</b>
-<i>555</i>&nbsp;         case Student:
-<b class="fc"><i>556</i>&nbsp;            return &quot;Student&quot;;</b>
-<i>557</i>&nbsp;         case Professor:
-<b class="fc"><i>558</i>&nbsp;            return &quot;Professor&quot;;</b>
-<i>559</i>&nbsp;      }
-<b class="fc"><i>560</i>&nbsp;      return &quot;Guest&quot;;</b>
-<i>561</i>&nbsp;   }
-<i>562</i>&nbsp;
-<i>563</i>&nbsp;   /**
-<i>564</i>&nbsp;    * Prints the contents of the list of classes to stdout. Used in debugging.
-<i>565</i>&nbsp;    * @param classes The list of classes to print
-<i>566</i>&nbsp;    */
-<i>567</i>&nbsp;   private static void printClassHierarchy(List&lt;CSTutor.Model.Manager.Class&gt; classes) {
-<b class="fc"><i>568</i>&nbsp;      for (CSTutor.Model.Manager.Class c : classes) {</b>
-<b class="fc"><i>569</i>&nbsp;         System.out.println(&quot;&lt;&quot; + c.name + &quot;&gt;&quot;);</b>
-<b class="fc"><i>570</i>&nbsp;         for (CSTutor.Model.Manager.Section s : c.sections) {</b>
-<b class="fc"><i>571</i>&nbsp;            System.out.println(&quot;  &lt;&quot; + s.name + &quot;&gt;&quot;);</b>
-<b class="fc"><i>572</i>&nbsp;            for (CSTutor.Model.Manager.Unit u : s.units) {</b>
-<b class="fc"><i>573</i>&nbsp;               System.out.println(&quot;    &lt;&quot; + u.name + &quot;&gt;&quot;);</b>
-<b class="fc"><i>574</i>&nbsp;               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {</b>
-<b class="fc"><i>575</i>&nbsp;                  System.out.println(&quot;      &lt;&quot; + t.name + &quot;&gt;&quot;);</b>
-<b class="fc"><i>576</i>&nbsp;                  for (CSTutor.Model.Manager.Page p : t.pages) {</b>
-<b class="fc"><i>577</i>&nbsp;                     System.out.println(&quot;        &lt;&quot; + p.name + &quot;&gt;&quot;);</b>
-<b class="fc"><i>578</i>&nbsp;                  }</b>
-<b class="fc"><i>579</i>&nbsp;               }</b>
-<b class="fc"><i>580</i>&nbsp;            }</b>
-<b class="fc"><i>581</i>&nbsp;         }</b>
-<b class="fc"><i>582</i>&nbsp;      }</b>
-<b class="fc"><i>583</i>&nbsp;   }</b>
-<i>584</i>&nbsp;
-<i>585</i>&nbsp;   /**
-<i>586</i>&nbsp;    * Get a list of classes from the database
-<i>587</i>&nbsp;    *
-<i>588</i>&nbsp;    * @return List of classes
-<i>589</i>&nbsp;    * post:
-<i>590</i>&nbsp;    *  return != null;
-<i>591</i>&nbsp;    */
-<i>592</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Class&gt; getClasses() {
-<b class="fc"><i>593</i>&nbsp;      List&lt;CSTutor.Model.Manager.Class&gt; classes = new ArrayList&lt;CSTutor.Model.Manager.Class&gt;();</b>
-<i>594</i>&nbsp;      CSTutor.Model.Manager.Class c;
-<i>595</i>&nbsp;      try {
-<b class="fc"><i>596</i>&nbsp;         Statement s = conn.createStatement();</b>
-<b class="fc"><i>597</i>&nbsp;         ResultSet r = s.executeQuery(&quot;SELECT * FROM classes;&quot;);</b>
-<b class="fc"><i>598</i>&nbsp;         while (r.next()) {</b>
-<b class="fc"><i>599</i>&nbsp;            c = new CSTutor.Model.Manager.Class(r.getString(&quot;className&quot;));</b>
-<b class="fc"><i>600</i>&nbsp;            c.sections = getSections(c);</b>
-<b class="fc"><i>601</i>&nbsp;            c.access = getAccessEnum(r.getString(&quot;accessLevel&quot;));</b>
-<b class="fc"><i>602</i>&nbsp;            classes.add(c);</b>
-<i>603</i>&nbsp;         }
-<b class="fc"><i>604</i>&nbsp;         s.close();</b>
-<b class="fc"><i>605</i>&nbsp;         printClassHierarchy(classes);</b>
-<b class="fc"><i>606</i>&nbsp;         return classes;</b>
-<b class="nc"><i>607</i>&nbsp;      } catch(SQLException e) {</b>
-<i>608</i>&nbsp;         // SQL error, should not happen
-<b class="nc"><i>609</i>&nbsp;         System.err.println(&quot;Error in getClasses(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
-<b class="nc"><i>610</i>&nbsp;         return null;</b>
-<i>611</i>&nbsp;      }
-<i>612</i>&nbsp;   }
-<i>613</i>&nbsp;
-<i>614</i>&nbsp;   /**
-<i>615</i>&nbsp;    * Get a list of class names.
-<i>616</i>&nbsp;    *
-<i>617</i>&nbsp;    * @return List of class names.
-<i>618</i>&nbsp;    * post:
-<i>619</i>&nbsp;    *  classes != null;
-<i>620</i>&nbsp;    */
-<i>621</i>&nbsp;   public static List&lt;String&gt; getClassNames() {
-<b class="fc"><i>622</i>&nbsp;      List&lt;String&gt; classes = new ArrayList&lt;String&gt;();</b>
-<i>623</i>&nbsp;      try {
-<b class="fc"><i>624</i>&nbsp;        Statement s = conn.createStatement();</b>
-<b class="fc"><i>625</i>&nbsp;        ResultSet r = s.executeQuery(&quot;SELECT className FROM classes;&quot;);</b>
-<b class="fc"><i>626</i>&nbsp;        while (r.next()) {</b>
-<b class="fc"><i>627</i>&nbsp;          classes.add(r.getString(&quot;className&quot;));</b>
-<i>628</i>&nbsp;        }
-<b class="fc"><i>629</i>&nbsp;        s.close();</b>
-<b class="fc"><i>630</i>&nbsp;        return classes;</b>
-<b class="nc"><i>631</i>&nbsp;      } catch(SQLException e) {</b>
-<i>632</i>&nbsp;         // SQL error, should not happen
-<b class="nc"><i>633</i>&nbsp;         System.err.println(&quot;Error in getClassNames(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
-<b class="nc"><i>634</i>&nbsp;         return null;</b>
-<i>635</i>&nbsp;      }
-<i>636</i>&nbsp;   }
-<i>637</i>&nbsp;
-<i>638</i>&nbsp;   /**
-<i>639</i>&nbsp;    * Delete rows from tables in class hierarchy
-<i>640</i>&nbsp;    *
-<i>641</i>&nbsp;    */
-<i>642</i>&nbsp;   private static void deleteClassHierarchy() throws SQLException {
-<b class="fc"><i>643</i>&nbsp;      List&lt;String&gt; values = Arrays.asList(&quot;Classes&quot;, &quot;Sections&quot;, &quot;Units&quot;, &quot;Tutorials&quot;, &quot;Pages&quot;);</b>
-<b class="fc"><i>644</i>&nbsp;      for (String val : values) {</b>
-<b class="fc"><i>645</i>&nbsp;         PreparedStatement s = conn.prepareStatement(&quot;DELETE FROM &quot; + val + &quot; WHERE 1=1&quot;);</b>
-<b class="fc"><i>646</i>&nbsp;         s.executeUpdate();</b>
-<b class="fc"><i>647</i>&nbsp;         s.close();</b>
-<b class="fc"><i>648</i>&nbsp;      }</b>
-<b class="fc"><i>649</i>&nbsp;      commit();</b>
-<b class="fc"><i>650</i>&nbsp;   }</b>
-<i>651</i>&nbsp;
-<i>652</i>&nbsp;   /**
-<i>653</i>&nbsp;    * Save a list of Classes to the database. Drops all classes, sections, etc not in list.
-<i>654</i>&nbsp;    *
-<i>655</i>&nbsp;    * @param classes list of Classes to save
-<i>656</i>&nbsp;    * pre:
-<i>657</i>&nbsp;    *  classes != null;
-<i>658</i>&nbsp;    */
-<i>659</i>&nbsp;   public static void saveClasses(List&lt;CSTutor.Model.Manager.Class&gt; classes) {
-<i>660</i>&nbsp;      try {
-<b class="fc"><i>661</i>&nbsp;         printClassHierarchy(classes);</b>
-<b class="fc"><i>662</i>&nbsp;         deleteClassHierarchy();</b>
-<b class="fc"><i>663</i>&nbsp;         for (CSTutor.Model.Manager.Class c : classes) {</b>
-<b class="fc"><i>664</i>&nbsp;            PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Classes VALUES (?, ?)&quot;);</b>
-<b class="fc"><i>665</i>&nbsp;            s.setString(1, c.name);</b>
-<b class="fc"><i>666</i>&nbsp;            s.setString(2, getAccessString(c.access));</b>
-<b class="fc"><i>667</i>&nbsp;            s.executeUpdate();</b>
-<b class="fc"><i>668</i>&nbsp;            s.close();</b>
-<b class="fc"><i>669</i>&nbsp;            saveSections(c.sections);</b>
-<b class="fc"><i>670</i>&nbsp;         }</b>
-<b class="fc"><i>671</i>&nbsp;         commit();</b>
-<b class="nc"><i>672</i>&nbsp;      } catch(SQLException e) {</b>
-<i>673</i>&nbsp;         // SQL error, should not happen
-<b class="nc"><i>674</i>&nbsp;         System.err.println(&quot;Error in saveClasses(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
-<b class="fc"><i>675</i>&nbsp;      }</b>
-<b class="fc"><i>676</i>&nbsp;   }</b>
-<i>677</i>&nbsp;}
+<i>461</i>&nbsp;   public static void saveSections(List&lt;CSTutor.Model.Manager.Section&gt; sections) throws SQLException {
+<b class="fc"><i>462</i>&nbsp;      for (CSTutor.Model.Manager.Section sec : sections) {</b>
+<b class="fc"><i>463</i>&nbsp;         PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)&quot;);</b>
+<b class="fc"><i>464</i>&nbsp;         s.setString(1, sec.name);</b>
+<b class="fc"><i>465</i>&nbsp;         s.setString(2, sec.parent.name);</b>
+<b class="fc"><i>466</i>&nbsp;         s.executeUpdate();</b>
+<b class="fc"><i>467</i>&nbsp;         s.close();</b>
+<b class="fc"><i>468</i>&nbsp;         saveUnits(sec.units);</b>
+<b class="fc"><i>469</i>&nbsp;      }</b>
+<b class="fc"><i>470</i>&nbsp;   }</b>
+<i>471</i>&nbsp;
+<i>472</i>&nbsp;
+<i>473</i>&nbsp;/*** Class methods ********************************************************************************/
+<i>474</i>&nbsp;
+<i>475</i>&nbsp;   /**
+<i>476</i>&nbsp;    * Determine the ClassAccessLevel enum for the access string
+<i>477</i>&nbsp;    *
+<i>478</i>&nbsp;    * @param access string representing the access level (Guest, Student, Assistant, Professor)
+<i>479</i>&nbsp;    * @return ClassAccessLevel enum
+<i>480</i>&nbsp;    */
+<i>481</i>&nbsp;   private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
+<b class="fc"><i>482</i>&nbsp;      switch (access) {</b>
+<i>483</i>&nbsp;         case &quot;Student&quot;:
+<b class="nc"><i>484</i>&nbsp;            return ClassAccessLevel.Student;</b>
+<i>485</i>&nbsp;         case &quot;Professor&quot;:
+<b class="nc"><i>486</i>&nbsp;            return ClassAccessLevel.Professor;</b>
+<i>487</i>&nbsp;      }
+<b class="fc"><i>488</i>&nbsp;      return ClassAccessLevel.Guest;</b>
+<i>489</i>&nbsp;   }
+<i>490</i>&nbsp;
+<i>491</i>&nbsp;   /**
+<i>492</i>&nbsp;    * Determine the accessLevel string for the ClassAccessLevel enum
+<i>493</i>&nbsp;    *
+<i>494</i>&nbsp;    * @param access ClassAccessLevel enum
+<i>495</i>&nbsp;    * @return access string representing the access level (Guest, Student, Assistant, Professor)
+<i>496</i>&nbsp;    */
+<i>497</i>&nbsp;   private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
+<b class="fc"><i>498</i>&nbsp;      switch (access) {</b>
+<i>499</i>&nbsp;         case Student:
+<b class="fc"><i>500</i>&nbsp;            return &quot;Student&quot;;</b>
+<i>501</i>&nbsp;         case Professor:
+<b class="fc"><i>502</i>&nbsp;            return &quot;Professor&quot;;</b>
+<i>503</i>&nbsp;      }
+<b class="fc"><i>504</i>&nbsp;      return &quot;Guest&quot;;</b>
+<i>505</i>&nbsp;   }
+<i>506</i>&nbsp;
+<i>507</i>&nbsp;   /**
+<i>508</i>&nbsp;    * Prints the contents of the list of classes to stdout. Used in debugging.
+<i>509</i>&nbsp;    * @param classes The list of classes to print
+<i>510</i>&nbsp;    */
+<i>511</i>&nbsp;   private static void printClassHierarchy(List&lt;CSTutor.Model.Manager.Class&gt; classes) {
+<b class="fc"><i>512</i>&nbsp;      for (CSTutor.Model.Manager.Class c : classes) {</b>
+<b class="fc"><i>513</i>&nbsp;         System.out.println(&quot;&lt;&quot; + c.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>514</i>&nbsp;         for (CSTutor.Model.Manager.Section s : c.sections) {</b>
+<b class="fc"><i>515</i>&nbsp;            System.out.println(&quot;  &lt;&quot; + s.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>516</i>&nbsp;            for (CSTutor.Model.Manager.Unit u : s.units) {</b>
+<b class="fc"><i>517</i>&nbsp;               System.out.println(&quot;    &lt;&quot; + u.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>518</i>&nbsp;               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {</b>
+<b class="fc"><i>519</i>&nbsp;                  System.out.println(&quot;      &lt;&quot; + t.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>520</i>&nbsp;               }</b>
+<b class="fc"><i>521</i>&nbsp;            }</b>
+<b class="fc"><i>522</i>&nbsp;         }</b>
+<b class="fc"><i>523</i>&nbsp;      }</b>
+<b class="fc"><i>524</i>&nbsp;   }</b>
+<i>525</i>&nbsp;
+<i>526</i>&nbsp;   /**
+<i>527</i>&nbsp;    * Get a list of classes from the database
+<i>528</i>&nbsp;    *
+<i>529</i>&nbsp;    * @return List of classes
+<i>530</i>&nbsp;    * post:
+<i>531</i>&nbsp;    *  return != null;
+<i>532</i>&nbsp;    */
+<i>533</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Class&gt; getClasses() {
+<b class="fc"><i>534</i>&nbsp;      List&lt;CSTutor.Model.Manager.Class&gt; classes = new ArrayList&lt;CSTutor.Model.Manager.Class&gt;();</b>
+<i>535</i>&nbsp;      CSTutor.Model.Manager.Class c;
+<i>536</i>&nbsp;      try {
+<b class="fc"><i>537</i>&nbsp;         Statement s = conn.createStatement();</b>
+<b class="fc"><i>538</i>&nbsp;         ResultSet r = s.executeQuery(&quot;SELECT * FROM classes;&quot;);</b>
+<b class="fc"><i>539</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>540</i>&nbsp;            c = new CSTutor.Model.Manager.Class(r.getString(&quot;className&quot;));</b>
+<b class="fc"><i>541</i>&nbsp;            c.sections = getSections(c);</b>
+<b class="fc"><i>542</i>&nbsp;            c.access = getAccessEnum(r.getString(&quot;accessLevel&quot;));</b>
+<b class="fc"><i>543</i>&nbsp;            classes.add(c);</b>
+<i>544</i>&nbsp;         }
+<b class="fc"><i>545</i>&nbsp;         s.close();</b>
+<b class="fc"><i>546</i>&nbsp;         printClassHierarchy(classes);</b>
+<b class="fc"><i>547</i>&nbsp;         return classes;</b>
+<b class="nc"><i>548</i>&nbsp;      } catch(SQLException e) {</b>
+<i>549</i>&nbsp;         // SQL error, should not happen
+<b class="nc"><i>550</i>&nbsp;         System.err.println(&quot;Error in getClasses(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
+<b class="nc"><i>551</i>&nbsp;         return null;</b>
+<i>552</i>&nbsp;      }
+<i>553</i>&nbsp;   }
+<i>554</i>&nbsp;
+<i>555</i>&nbsp;   /**
+<i>556</i>&nbsp;    * Get a list of class names.
+<i>557</i>&nbsp;    *
+<i>558</i>&nbsp;    * @return List of class names.
+<i>559</i>&nbsp;    * post:
+<i>560</i>&nbsp;    *  classes != null;
+<i>561</i>&nbsp;    */
+<i>562</i>&nbsp;   public static List&lt;String&gt; getClassNames() {
+<b class="fc"><i>563</i>&nbsp;      List&lt;String&gt; classes = new ArrayList&lt;String&gt;();</b>
+<i>564</i>&nbsp;      try {
+<b class="fc"><i>565</i>&nbsp;        Statement s = conn.createStatement();</b>
+<b class="fc"><i>566</i>&nbsp;        ResultSet r = s.executeQuery(&quot;SELECT className FROM classes;&quot;);</b>
+<b class="fc"><i>567</i>&nbsp;        while (r.next()) {</b>
+<b class="fc"><i>568</i>&nbsp;          classes.add(r.getString(&quot;className&quot;));</b>
+<i>569</i>&nbsp;        }
+<b class="fc"><i>570</i>&nbsp;        s.close();</b>
+<b class="fc"><i>571</i>&nbsp;        return classes;</b>
+<b class="nc"><i>572</i>&nbsp;      } catch(SQLException e) {</b>
+<i>573</i>&nbsp;         // SQL error, should not happen
+<b class="nc"><i>574</i>&nbsp;         System.err.println(&quot;Error in getClassNames(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
+<b class="nc"><i>575</i>&nbsp;         return null;</b>
+<i>576</i>&nbsp;      }
+<i>577</i>&nbsp;   }
+<i>578</i>&nbsp;
+<i>579</i>&nbsp;   /**
+<i>580</i>&nbsp;    * Delete rows from tables in class hierarchy
+<i>581</i>&nbsp;    *
+<i>582</i>&nbsp;    */
+<i>583</i>&nbsp;   private static void deleteClassHierarchy() throws SQLException {
+<b class="fc"><i>584</i>&nbsp;      List&lt;String&gt; values = Arrays.asList(&quot;Classes&quot;, &quot;Sections&quot;, &quot;Units&quot;, &quot;Tutorials&quot;, &quot;Pages&quot;);</b>
+<b class="fc"><i>585</i>&nbsp;      for (String val : values) {</b>
+<b class="fc"><i>586</i>&nbsp;         PreparedStatement s = conn.prepareStatement(&quot;DELETE FROM &quot; + val + &quot; WHERE 1=1&quot;);</b>
+<b class="fc"><i>587</i>&nbsp;         s.executeUpdate();</b>
+<b class="fc"><i>588</i>&nbsp;         s.close();</b>
+<b class="fc"><i>589</i>&nbsp;      }</b>
+<b class="fc"><i>590</i>&nbsp;      commit();</b>
+<b class="fc"><i>591</i>&nbsp;   }</b>
+<i>592</i>&nbsp;
+<i>593</i>&nbsp;   /**
+<i>594</i>&nbsp;    * Save a list of Classes to the database. Drops all classes, sections, etc not in list.
+<i>595</i>&nbsp;    *
+<i>596</i>&nbsp;    * @param classes list of Classes to save
+<i>597</i>&nbsp;    * pre:
+<i>598</i>&nbsp;    *  classes != null;
+<i>599</i>&nbsp;    */
+<i>600</i>&nbsp;   public static void saveClasses(List&lt;CSTutor.Model.Manager.Class&gt; classes) {
+<i>601</i>&nbsp;      try {
+<b class="fc"><i>602</i>&nbsp;         printClassHierarchy(classes);</b>
+<b class="fc"><i>603</i>&nbsp;         deleteClassHierarchy();</b>
+<b class="fc"><i>604</i>&nbsp;         for (CSTutor.Model.Manager.Class c : classes) {</b>
+<b class="fc"><i>605</i>&nbsp;            PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Classes VALUES (?, ?)&quot;);</b>
+<b class="fc"><i>606</i>&nbsp;            s.setString(1, c.name);</b>
+<b class="fc"><i>607</i>&nbsp;            s.setString(2, getAccessString(c.access));</b>
+<b class="fc"><i>608</i>&nbsp;            s.executeUpdate();</b>
+<b class="fc"><i>609</i>&nbsp;            s.close();</b>
+<b class="fc"><i>610</i>&nbsp;            saveSections(c.sections);</b>
+<b class="fc"><i>611</i>&nbsp;         }</b>
+<b class="fc"><i>612</i>&nbsp;         commit();</b>
+<b class="nc"><i>613</i>&nbsp;      } catch(SQLException e) {</b>
+<i>614</i>&nbsp;         // SQL error, should not happen
+<b class="nc"><i>615</i>&nbsp;         System.err.println(&quot;Error in saveClasses(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
+<b class="fc"><i>616</i>&nbsp;      }</b>
+<b class="fc"><i>617</i>&nbsp;   }</b>
+<i>618</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 23:06</div>
+    <div style="float:right;">generated on 2015-06-11 23:44</div>
 </div>
 </body>
 </html>
