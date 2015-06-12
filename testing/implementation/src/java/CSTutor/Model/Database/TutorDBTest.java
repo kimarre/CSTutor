@@ -107,6 +107,7 @@ public class TutorDBTest {
       correctdata = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "description", "syntax", "example code",
        "example output", "try it yourself");
+      assertEquals("Looking for nonexistent TutorialData", TutorDB.getTutorialData(76585274), null);
       TutorDB.setTutorialData(correctdata);
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
