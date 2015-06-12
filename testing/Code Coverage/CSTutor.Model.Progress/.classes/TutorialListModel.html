@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 16)
+    (0/ 21)
   </span>
 </td>
 </tr>
@@ -76,95 +76,112 @@
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import java.awt.List;
 <i>4</i>&nbsp;import java.util.ArrayList;
-<i>5</i>&nbsp;
-<i>6</i>&nbsp;import javax.swing.DefaultListModel;
+<i>5</i>&nbsp;import javax.swing.DefaultListModel;
+<i>6</i>&nbsp;import CSTutor.Model.Tutorial.*;
 <i>7</i>&nbsp;
-<i>8</i>&nbsp;public class TutorialListModel&lt;TutorialData&gt; extends DefaultListModel&lt;TutorialData&gt;
-<i>9</i>&nbsp;{
-<i>10</i>&nbsp;    public TutorialListModel()
-<i>11</i>&nbsp;    {
-<b class="nc"><i>12</i>&nbsp;        super();</b>
-<i>13</i>&nbsp;    }
-<i>14</i>&nbsp;    
-<i>15</i>&nbsp;    /**
-<i>16</i>&nbsp;     * Returns true if the given object is in the list and false otherwise.
-<i>17</i>&nbsp;     *                                                  &lt;pre&gt;
-<i>18</i>&nbsp;     pre:
-<i>19</i>&nbsp;       // String name must not be null.
-<i>20</i>&nbsp;       obj != null;
-<i>21</i>&nbsp;     *
-<i>22</i>&nbsp;     */
-<i>23</i>&nbsp;    public boolean contains(Object obj)
-<i>24</i>&nbsp;    {
-<b class="nc"><i>25</i>&nbsp;        for(int i=0; i&lt;this.size(); i++)</b>
-<i>26</i>&nbsp;        {
-<b class="nc"><i>27</i>&nbsp;            if(this.get(i).toString().equals(obj.toString()))</b>
-<i>28</i>&nbsp;            {
-<b class="nc"><i>29</i>&nbsp;                return true;</b>
-<i>30</i>&nbsp;            }
-<i>31</i>&nbsp;        }
-<b class="nc"><i>32</i>&nbsp;        return false;</b>
-<i>33</i>&nbsp;    }
-<i>34</i>&nbsp;    
-<i>35</i>&nbsp;    /**
-<i>36</i>&nbsp;     * Returns the index of the given object in the list if it is in
-<i>37</i>&nbsp;     * the list model. Returns -1 if given object is not found.
-<i>38</i>&nbsp;     *                                                  &lt;pre&gt;
-<i>39</i>&nbsp;     pre:
-<i>40</i>&nbsp;       // Object obj must not be null.
-<i>41</i>&nbsp;       obj != null;
-<i>42</i>&nbsp;     *
-<i>43</i>&nbsp;     */
-<i>44</i>&nbsp;    public int indexOf(Object obj)
-<i>45</i>&nbsp;    {
-<i>46</i>&nbsp;        //System.out.print(obj.toString());
-<b class="nc"><i>47</i>&nbsp;        if(this.contains(obj))</b>
-<i>48</i>&nbsp;        {
-<b class="nc"><i>49</i>&nbsp;            for(int i=0; i&lt;this.size(); i++)</b>
-<i>50</i>&nbsp;            {
-<b class="nc"><i>51</i>&nbsp;                if(this.get(i).toString().equals(obj.toString()))</b>
-<i>52</i>&nbsp;                {
-<b class="nc"><i>53</i>&nbsp;                    return i;</b>
-<i>54</i>&nbsp;                }
-<i>55</i>&nbsp;            }
-<b class="nc"><i>56</i>&nbsp;            return -1;</b>
-<i>57</i>&nbsp;        }
-<i>58</i>&nbsp;        else
-<i>59</i>&nbsp;        {
-<b class="nc"><i>60</i>&nbsp;            return -1;</b>
-<i>61</i>&nbsp;        }
-<i>62</i>&nbsp;    }
-<i>63</i>&nbsp;    
-<i>64</i>&nbsp;    /**
-<i>65</i>&nbsp;     * Returns a collection of Tutorial items with names that
-<i>66</i>&nbsp;     * match the name of the input tutorial.
-<i>67</i>&nbsp;     *                                                  &lt;pre&gt;
-<i>68</i>&nbsp;     pre:
-<i>69</i>&nbsp;       // TutorialData tut must not be null.
-<i>70</i>&nbsp;       tut != null;
-<i>71</i>&nbsp;     *
-<i>72</i>&nbsp;     */
-<i>73</i>&nbsp;    public ArrayList&lt;TutorialData&gt; getSimilarTutorials(TutorialData tut)
-<i>74</i>&nbsp;    {
-<b class="nc"><i>75</i>&nbsp;        ArrayList&lt;TutorialData&gt; simTuts  = new ArrayList&lt;TutorialData&gt;();</b>
-<i>76</i>&nbsp;        
-<b class="nc"><i>77</i>&nbsp;        for(int i=0; i&lt;this.size(); i++)</b>
-<i>78</i>&nbsp;        {
-<b class="nc"><i>79</i>&nbsp;            if(this.get(i).toString().contains(tut.toString()))</b>
-<i>80</i>&nbsp;            {
-<b class="nc"><i>81</i>&nbsp;                simTuts.add(this.get(i));</b>
-<i>82</i>&nbsp;            }
-<i>83</i>&nbsp;        }
-<b class="nc"><i>84</i>&nbsp;        return simTuts;</b>
-<i>85</i>&nbsp;    }
-<i>86</i>&nbsp;
-<i>87</i>&nbsp;}
+<i>8</i>&nbsp;/****
+<i>9</i>&nbsp; * Class TutorialListModel inherits the characteristics of a DefaultListModel but
+<i>10</i>&nbsp; * contains only ScoredTutorialTrack variable types. It provides methods to query the list
+<i>11</i>&nbsp; * that is contained in the Tutorials tab of the side bar. 
+<i>12</i>&nbsp; * @author Erica Solum (esolum@calpoly.edu)
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public class TutorialListModel&lt;ScoredTutorialTrack&gt; extends DefaultListModel&lt;ScoredTutorialTrack&gt;
+<i>15</i>&nbsp;{
+<i>16</i>&nbsp;    public TutorialListModel()
+<i>17</i>&nbsp;    {
+<b class="nc"><i>18</i>&nbsp;        super();</b>
+<b class="nc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;    
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Returns true if the given object is in the list and false otherwise.
+<i>23</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>24</i>&nbsp;     pre:
+<i>25</i>&nbsp;       // String name must not be null.
+<i>26</i>&nbsp;       obj != null;
+<i>27</i>&nbsp;     *
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    public boolean contains(Object obj)
+<i>30</i>&nbsp;    {
+<b class="nc"><i>31</i>&nbsp;        for(int i=0; i&lt;this.size(); i++)</b>
+<i>32</i>&nbsp;        {
+<b class="nc"><i>33</i>&nbsp;            if(this.get(i).toString().equals(obj))</b>
+<i>34</i>&nbsp;            {
+<b class="nc"><i>35</i>&nbsp;                return true;</b>
+<i>36</i>&nbsp;            }
+<i>37</i>&nbsp;        }
+<b class="nc"><i>38</i>&nbsp;        return false;</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;    
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * Returns the index of the given object in the list if it is in
+<i>43</i>&nbsp;     * the list model. Returns -1 if given object is not found. 
+<i>44</i>&nbsp;     * Overrides DefaultListModel&#39;s indexOf method.
+<i>45</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>46</i>&nbsp;     pre:
+<i>47</i>&nbsp;       // Object obj must not be null.
+<i>48</i>&nbsp;       obj != null;
+<i>49</i>&nbsp;     *
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    public int indexOf(Object obj)
+<i>52</i>&nbsp;    {
+<b class="nc"><i>53</i>&nbsp;        ScoredTutorialTrack tut = (ScoredTutorialTrack)obj;</b>
+<b class="nc"><i>54</i>&nbsp;        if(this.contains(tut))</b>
+<i>55</i>&nbsp;        {
+<b class="nc"><i>56</i>&nbsp;            for(int i=0; i&lt;this.size(); i++)</b>
+<i>57</i>&nbsp;            {
+<b class="nc"><i>58</i>&nbsp;                if(this.get(i).toString().equals(tut.toString()))</b>
+<i>59</i>&nbsp;                {
+<b class="nc"><i>60</i>&nbsp;                    return i;</b>
+<i>61</i>&nbsp;                }
+<i>62</i>&nbsp;            }
+<b class="nc"><i>63</i>&nbsp;            return -1;</b>
+<i>64</i>&nbsp;        }
+<i>65</i>&nbsp;        else
+<i>66</i>&nbsp;        {
+<b class="nc"><i>67</i>&nbsp;            return -1;</b>
+<i>68</i>&nbsp;        }
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;    
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * Returns a collection of Tutorial items with names that
+<i>73</i>&nbsp;     * match the name of the input tutorial.
+<i>74</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>75</i>&nbsp;     pre:
+<i>76</i>&nbsp;       // TutorialData tut must not be null.
+<i>77</i>&nbsp;       tut != null;
+<i>78</i>&nbsp;     *
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    public ArrayList&lt;ScoredTutorialTrack&gt; getSimilarTutorials(Object obj)
+<i>81</i>&nbsp;    {
+<b class="nc"><i>82</i>&nbsp;        if(obj instanceof java.lang.String)</b>
+<i>83</i>&nbsp;        {
+<b class="nc"><i>84</i>&nbsp;            String objStr = (String)obj;</b>
+<i>85</i>&nbsp;            
+<b class="nc"><i>86</i>&nbsp;            ArrayList&lt;ScoredTutorialTrack&gt; simTuts  = new ArrayList&lt;ScoredTutorialTrack&gt;();</b>
+<i>87</i>&nbsp;            
+<b class="nc"><i>88</i>&nbsp;            for(int i=0; i&lt;this.size(); i++)</b>
+<i>89</i>&nbsp;            {
+<b class="nc"><i>90</i>&nbsp;                if(this.get(i).toString().contains(objStr))</b>
+<i>91</i>&nbsp;                {
+<b class="nc"><i>92</i>&nbsp;                    simTuts.add(this.get(i));</b>
+<i>93</i>&nbsp;                }
+<i>94</i>&nbsp;            }
+<b class="nc"><i>95</i>&nbsp;            return simTuts;</b>
+<i>96</i>&nbsp;        }
+<i>97</i>&nbsp;        else
+<i>98</i>&nbsp;        {
+<b class="nc"><i>99</i>&nbsp;            return null;</b>
+<i>100</i>&nbsp;        }
+<i>101</i>&nbsp;        
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

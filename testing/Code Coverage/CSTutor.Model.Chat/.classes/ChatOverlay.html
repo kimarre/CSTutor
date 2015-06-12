@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 12)
+    (0/ 13)
   </span>
 </td>
 </tr>
@@ -74,66 +74,81 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Chat;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import java.net.MalformedURLException;
-<i>4</i>&nbsp;import java.rmi.Naming;
-<i>5</i>&nbsp;import java.rmi.NotBoundException;
-<i>6</i>&nbsp;import java.rmi.RemoteException;
-<i>7</i>&nbsp;import java.util.Collection;
-<i>8</i>&nbsp;
-<i>9</i>&nbsp;import CSTutor.Model.Chat.Client.ChatClient;
-<i>10</i>&nbsp;import CSTutor.Model.Chat.Server.ServerIF;
-<i>11</i>&nbsp;
-<i>12</i>&nbsp;import CSTutor.View.Chat.*;
-<i>13</i>&nbsp;
-<i>14</i>&nbsp;/**
-<i>15</i>&nbsp; * ChatOverlay is a class that will encompass the overlay bar at the bottom of our application.
-<i>16</i>&nbsp; * It will house data such as the ChatWindow, and will have methods that show and hide the window, respectively.
-<i>17</i>&nbsp; * 
-<i>18</i>&nbsp; * @author Stephen Daily
-<i>19</i>&nbsp; */
-<i>20</i>&nbsp;
-<i>21</i>&nbsp;public class ChatOverlay {
-<i>22</i>&nbsp;    
-<i>23</i>&nbsp;	Collection&lt;Student&gt; students;
-<i>24</i>&nbsp;	private ChatClient chatClient;
-<b class="nc"><i>25</i>&nbsp;	String lastStringInput = &quot;&quot;;</b>
-<i>26</i>&nbsp;	public ChatBar chatBar;
-<i>27</i>&nbsp;	
-<b class="nc"><i>28</i>&nbsp;	public ChatOverlay(ChatBar chatBar) throws MalformedURLException, RemoteException, NotBoundException {</b>
-<i>29</i>&nbsp;		
-<i>30</i>&nbsp;        //Creates the client that will talk with the RMIServer
-<b class="nc"><i>31</i>&nbsp;        String chatServerURL = &quot;rmi://localhost:2001/RMIChatServer&quot;;</b>
-<b class="nc"><i>32</i>&nbsp;    	ServerIF chatServer = (ServerIF) Naming.lookup(chatServerURL);</b>
-<b class="nc"><i>33</i>&nbsp;    	this.chatClient = new ChatClient (&quot;Temp Name&quot;, chatServer, this);</b>
-<i>34</i>&nbsp;    	
-<b class="nc"><i>35</i>&nbsp;    	this.chatBar = chatBar;</b>
-<i>36</i>&nbsp;	}
-<i>37</i>&nbsp;	
-<i>38</i>&nbsp;    public Boolean Enter(String text){
-<b class="nc"><i>39</i>&nbsp;    	if(!text.equals(&quot;&quot;) &amp;&amp; text.trim().length() &gt; 0) {</b>
-<b class="nc"><i>40</i>&nbsp;    		return true;</b>
-<i>41</i>&nbsp;    	}
-<b class="nc"><i>42</i>&nbsp;    	return false;</b>
-<i>43</i>&nbsp;    }
-<i>44</i>&nbsp;    
-<i>45</i>&nbsp;    public void pushText(String buffer) {
-<b class="nc"><i>46</i>&nbsp;    	chatClient.broadcastMessage(buffer);</b>
-<i>47</i>&nbsp;    }
-<i>48</i>&nbsp;    
-<i>49</i>&nbsp;    public void setLastString(String str) {
-<b class="nc"><i>50</i>&nbsp;    	lastStringInput = str + &quot;\n&quot;;</b>
-<i>51</i>&nbsp;    }
-<i>52</i>&nbsp;    
-<i>53</i>&nbsp;    public String getLastString() {
-<b class="nc"><i>54</i>&nbsp;    	return lastStringInput;</b>
-<i>55</i>&nbsp;    }
-<i>56</i>&nbsp;}
+<i>3</i>&nbsp;import java.io.IOException;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.Collection;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import CSTutor.Model.Chat.Client.*;
+<i>8</i>&nbsp;import CSTutor.View.Chat.*;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * ChatOverlay is a class that will encompass the overlay bar at the bottom of our application.
+<i>12</i>&nbsp; * It will house data such as the ChatWindow, and will have methods that show and hide the window, respectively.
+<i>13</i>&nbsp; * 
+<i>14</i>&nbsp; * @author Stephen Daily
+<i>15</i>&nbsp; */
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;public class ChatOverlay {
+<i>18</i>&nbsp;    
+<i>19</i>&nbsp;	Collection&lt;Student&gt; students;
+<i>20</i>&nbsp;	public ChatClient chatClient;
+<b class="nc"><i>21</i>&nbsp;	String lastStringInput = &quot;&quot;;</b>
+<i>22</i>&nbsp;	public ChatBar chatBar;
+<i>23</i>&nbsp;	
+<i>24</i>&nbsp;	/**
+<i>25</i>&nbsp;	 * Constructor
+<i>26</i>&nbsp;	 * 
+<i>27</i>&nbsp;	 * Takes a reference to the parent chatBar (view)
+<i>28</i>&nbsp;	 * 
+<i>29</i>&nbsp;	 * Attemps to create a new connection to the server via initializing a new chatClient class
+<i>30</i>&nbsp;	 */
+<b class="nc"><i>31</i>&nbsp;	public ChatOverlay(ChatBar chatBar) {</b>
+<i>32</i>&nbsp;    	try {
+<b class="nc"><i>33</i>&nbsp;			chatClient = new ChatClient(null, this);</b>
+<b class="nc"><i>34</i>&nbsp;		} catch (IOException e) {</b>
+<b class="nc"><i>35</i>&nbsp;			e.printStackTrace();</b>
+<b class="nc"><i>36</i>&nbsp;		}</b>
+<i>37</i>&nbsp;    	
+<b class="nc"><i>38</i>&nbsp;    	this.chatBar = chatBar;</b>
+<i>39</i>&nbsp;	}
+<i>40</i>&nbsp;	
+<i>41</i>&nbsp;	/**
+<i>42</i>&nbsp;	 * Verification for the chatBox input. Returns true if the text entered is not just whitespace
+<i>43</i>&nbsp;	 */
+<i>44</i>&nbsp;    public Boolean Enter(String text){
+<b class="nc"><i>45</i>&nbsp;    	if(!text.equals(&quot;&quot;) &amp;&amp; text.trim().length() &gt; 0) {</b>
+<b class="nc"><i>46</i>&nbsp;    		return true;</b>
+<i>47</i>&nbsp;    	}
+<b class="nc"><i>48</i>&nbsp;    	return false;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;    
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * A method to send the inputted text to the server, via a method call in the ChatClient class
+<i>53</i>&nbsp;     */
+<i>54</i>&nbsp;    public void pushText(String buffer) {
+<b class="nc"><i>55</i>&nbsp;    	chatClient.broadcastMessage(buffer);</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;    
+<i>58</i>&nbsp;    /**
+<i>59</i>&nbsp;     * Adds a new line to the end of the input text.
+<i>60</i>&nbsp;     */
+<i>61</i>&nbsp;    public void setLastString(String str) {
+<b class="nc"><i>62</i>&nbsp;    	lastStringInput = str + &quot;\n&quot;;</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;    
+<i>65</i>&nbsp;    /**
+<i>66</i>&nbsp;     * Returns the last string input by the user. 
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    public String getLastString() {
+<b class="nc"><i>69</i>&nbsp;    	return lastStringInput;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

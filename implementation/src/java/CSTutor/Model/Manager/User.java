@@ -15,7 +15,7 @@ public abstract class User {
     * Each level corresponds to an access level. Guest is lowest, Professor
     * is highest.
     */
-   enum AccessLevel {
+   public enum AccessLevel {
       Guest, Student, Assistant, Professor
    }
 }

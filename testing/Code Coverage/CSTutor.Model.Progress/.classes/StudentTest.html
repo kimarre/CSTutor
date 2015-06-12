@@ -73,89 +73,90 @@
 
 
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Progress;
-<i>2</i>&nbsp;
-<i>3</i>&nbsp;import org.junit.Test;
-<i>4</i>&nbsp;
-<i>5</i>&nbsp;import java.util.ArrayList;
-<i>6</i>&nbsp;
+<i>2</i>&nbsp;import CSTutor.Model.Progress.Student;
+<i>3</i>&nbsp;import CSTutor.Model.Progress.Class;
+<i>4</i>&nbsp;import org.junit.Test;
+<i>5</i>&nbsp;import static org.junit.Assert.*;
+<i>6</i>&nbsp;import java.util.*;
 <i>7</i>&nbsp;
-<i>8</i>&nbsp;/****
-<i>9</i>&nbsp; * Class StudentTest is the companion testing class for Student.
-<i>10</i>&nbsp; * It implements the following module test plan:
-<i>11</i>&nbsp; *                                                         &lt;pre&gt;
-<i>12</i>&nbsp; * Phase 1: Unit test the constructor.
-<i>13</i>&nbsp; *
-<i>14</i>&nbsp; * Phase 2: Unit test the get methods.
-<i>15</i>&nbsp; *
-<i>16</i>&nbsp; * Phase 3: Unit test the toString method.
-<i>17</i>&nbsp; *                                                         &lt;/pre&gt;
-<i>18</i>&nbsp; */
-<b class="fc"><i>19</i>&nbsp;public class StudentTest</b>
-<i>20</i>&nbsp;{
-<i>21</i>&nbsp;    Student testStudent;
-<i>22</i>&nbsp;    ArrayList&lt;Class&gt; enrolledClasses;
-<i>23</i>&nbsp;    
-<i>24</i>&nbsp;    public StudentTest()
-<b class="fc"><i>25</i>&nbsp;    {</b>
-<b class="fc"><i>26</i>&nbsp;        enrolledClasses = new ArrayList&lt;Class&gt;();</b>
-<b class="fc"><i>27</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 101&quot;));</b>
-<b class="fc"><i>28</i>&nbsp;        testStudent = new Student(&quot;John Lennon&quot;, enrolledClasses);</b>
-<b class="fc"><i>29</i>&nbsp;    }</b>
-<i>30</i>&nbsp;    
-<i>31</i>&nbsp;    /**
-<i>32</i>&nbsp;     * Test method for the Student constructor.
-<i>33</i>&nbsp;     */
-<i>34</i>&nbsp;    @Test
-<i>35</i>&nbsp;    public void testConstructor()
-<i>36</i>&nbsp;    {
-<b class="fc"><i>37</i>&nbsp;        assert(testStudent.toString().equals(&quot;John Lennon&quot;));</b>
-<b class="fc"><i>38</i>&nbsp;        assert(testStudent.getEnrolledClasses().equals(enrolledClasses));</b>
-<b class="fc"><i>39</i>&nbsp;    }</b>
-<i>40</i>&nbsp;    
-<i>41</i>&nbsp;    /**
-<i>42</i>&nbsp;     * Tests the toString method.
-<i>43</i>&nbsp;     */
-<i>44</i>&nbsp;    @Test
-<i>45</i>&nbsp;    public void testToString()
-<i>46</i>&nbsp;    {
-<i>47</i>&nbsp;        
-<b class="fc"><i>48</i>&nbsp;    }</b>
-<i>49</i>&nbsp;    
-<i>50</i>&nbsp;    /**
-<i>51</i>&nbsp;     * Tests the addClass method.
-<i>52</i>&nbsp;     */
-<i>53</i>&nbsp;    @Test
-<i>54</i>&nbsp;    public void testAddClass()
-<i>55</i>&nbsp;    {
-<i>56</i>&nbsp;        
-<b class="fc"><i>57</i>&nbsp;    }</b>
-<i>58</i>&nbsp;    
-<i>59</i>&nbsp;    /**
-<i>60</i>&nbsp;     * Tests the equals method.
-<i>61</i>&nbsp;     */
-<i>62</i>&nbsp;    @Test
-<i>63</i>&nbsp;    public void testEquals()
-<i>64</i>&nbsp;    {
-<b class="fc"><i>65</i>&nbsp;        Student newStudent = new Student(&quot;Ringo Star&quot;, enrolledClasses);</b>
-<b class="fc"><i>66</i>&nbsp;        assert(!newStudent.equals(testStudent));</b>
-<i>67</i>&nbsp;        
-<b class="fc"><i>68</i>&nbsp;    }</b>
-<i>69</i>&nbsp;    
-<i>70</i>&nbsp;    /**
-<i>71</i>&nbsp;     * Test method for the getEnrolled Classes method.
-<i>72</i>&nbsp;     */
-<i>73</i>&nbsp;    @Test
-<i>74</i>&nbsp;    public void testGetEnrolledClasses()
-<i>75</i>&nbsp;    {
-<i>76</i>&nbsp;        
-<b class="fc"><i>77</i>&nbsp;    }</b>
-<i>78</i>&nbsp;}
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/****
+<i>10</i>&nbsp; * Class StudentTest is the companion testing class for Student.
+<i>11</i>&nbsp; * It implements the following module test plan:
+<i>12</i>&nbsp; *                                                         &lt;pre&gt;
+<i>13</i>&nbsp; * Phase 1: Unit test the constructor.
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; * Phase 2: Unit test the get methods.
+<i>16</i>&nbsp; *
+<i>17</i>&nbsp; * Phase 3: Unit test the toString method.
+<i>18</i>&nbsp; *                                                         &lt;/pre&gt;
+<i>19</i>&nbsp; */
+<b class="fc"><i>20</i>&nbsp;public class StudentTest</b>
+<i>21</i>&nbsp;{
+<i>22</i>&nbsp;    Student testStudent;
+<i>23</i>&nbsp;    ArrayList&lt;Class&gt; enrolledClasses;
+<i>24</i>&nbsp;    
+<i>25</i>&nbsp;    public StudentTest()
+<b class="fc"><i>26</i>&nbsp;    {</b>
+<b class="fc"><i>27</i>&nbsp;        enrolledClasses = new ArrayList&lt;Class&gt;();</b>
+<b class="fc"><i>28</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 101&quot;));</b>
+<b class="fc"><i>29</i>&nbsp;        testStudent = new Student(&quot;John Lennon&quot;, enrolledClasses);</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;    
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Test method for the Student constructor.
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    @Test
+<i>36</i>&nbsp;    public void testConstructor()
+<i>37</i>&nbsp;    {
+<b class="fc"><i>38</i>&nbsp;        assert(testStudent.toString().equals(&quot;John Lennon&quot;));</b>
+<b class="fc"><i>39</i>&nbsp;        assert(testStudent.getEnrolledClasses().equals(enrolledClasses));</b>
+<b class="fc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;    
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * Tests the toString method.
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    @Test
+<i>46</i>&nbsp;    public void testToString()
+<i>47</i>&nbsp;    {
+<i>48</i>&nbsp;        
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;    
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * Tests the addClass method.
+<i>53</i>&nbsp;     */
+<i>54</i>&nbsp;    @Test
+<i>55</i>&nbsp;    public void testAddClass()
+<i>56</i>&nbsp;    {
+<i>57</i>&nbsp;        
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;    
+<i>60</i>&nbsp;    /**
+<i>61</i>&nbsp;     * Tests the equals method.
+<i>62</i>&nbsp;     */
+<i>63</i>&nbsp;    @Test
+<i>64</i>&nbsp;    public void testEquals()
+<i>65</i>&nbsp;    {
+<b class="fc"><i>66</i>&nbsp;        Student newStudent = new Student(&quot;Ringo Star&quot;, enrolledClasses);</b>
+<b class="fc"><i>67</i>&nbsp;        assert(!newStudent.equals(testStudent));</b>
+<i>68</i>&nbsp;        
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;    
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * Test method for the getEnrolled Classes method.
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    @Test
+<i>75</i>&nbsp;    public void testGetEnrolledClasses()
+<i>76</i>&nbsp;    {
+<i>77</i>&nbsp;        
+<b class="fc"><i>78</i>&nbsp;    }</b>
+<i>79</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

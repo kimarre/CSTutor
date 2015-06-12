@@ -75,27 +75,26 @@
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.User;
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import org.junit.Test;
-<i>4</i>&nbsp;
-<i>5</i>&nbsp;import static org.junit.Assert.assertTrue;
-<i>6</i>&nbsp;
-<i>7</i>&nbsp;/**
-<i>8</i>&nbsp; * Created by kylereis on 5/15/15.
-<i>9</i>&nbsp; */
-<b class="fc"><i>10</i>&nbsp;public class RegisterTest</b>
-<i>11</i>&nbsp;{
-<i>12</i>&nbsp;
-<i>13</i>&nbsp;    @Test
-<i>14</i>&nbsp;    public void testCreateUser() throws Exception
-<i>15</i>&nbsp;    {
-<b class="fc"><i>16</i>&nbsp;        assertTrue(Register.createUser(&quot;Kyle&quot;, &quot;Reis&quot;, &quot;kjreis@calpoly.edu&quot;, &quot;password&quot;, true));</b>
-<b class="fc"><i>17</i>&nbsp;    }</b>
-<i>18</i>&nbsp;}
+<i>4</i>&nbsp;import static org.junit.Assert.*;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * Created by kylereis on 5/15/15.
+<i>8</i>&nbsp; */
+<b class="fc"><i>9</i>&nbsp;public class RegisterTest</b>
+<i>10</i>&nbsp;{
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    @Test
+<i>13</i>&nbsp;    public void testCreateUser() throws Exception
+<i>14</i>&nbsp;    {
+<b class="fc"><i>15</i>&nbsp;        assertFalse(Register.createUser(&quot;Kyle&quot;, &quot;Reis&quot;, &quot;kjreis@calpoly.edu&quot;, &quot;password&quot;, true));</b>
+<b class="fc"><i>16</i>&nbsp;    }</b>
+<i>17</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

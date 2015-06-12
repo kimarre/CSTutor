@@ -51,7 +51,7 @@ public class Profile extends javax.swing.JFrame {
         Reset = new javax.swing.JButton();
         Close = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         FirstName.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         FirstName.setText("jLabel1");
@@ -62,19 +62,13 @@ public class Profile extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         jLabel1.setText("Old Password");
 
-        OldPassword.setText("jPasswordField1");
-
         AccountLevel.setText("jLabel2");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         jLabel2.setText("New Password");
 
-        NewPassword.setText("jPasswordField1");
-
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         jLabel3.setText("Confirm Password");
-
-        ConfirmPassword.setText("jPasswordField1");
 
         Reset.setText("Reset");
         Reset.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +78,13 @@ public class Profile extends javax.swing.JFrame {
         });
 
         Close.setText("Close");
+        Close.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                CloseAction(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,12 +103,12 @@ public class Profile extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(OldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3))
-                    .addComponent(ConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Reset)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,14 +149,19 @@ public class Profile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ResetPassAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
-        if(NewPassword.getPassword().equals(ConfirmPassword.getPassword()) && Password.validateHash(new String(OldPassword.getPassword()), user.getPassword().getHash())){
+        if((new String(NewPassword.getPassword())).equals(new String(ConfirmPassword.getPassword())) && Password.validateHash(new String(OldPassword.getPassword()), user.getPassword().getHash())){
             if(user.getPassword().setPassword(new String(NewPassword.getPassword())))
             {
                 TutorDB.setUser(user.getEmail(), user.getPassword().getHash(), user.getFirstName(), user.getLastName(), user.isInstructor() ? "Professor" : "Student");
+                this.setVisible(false);
             } else {
                 JOptionPane.showConfirmDialog(null, "Invalid Password Entered", "Validation error", JOptionPane.OK_CANCEL_OPTION);
             }
         }
+    }//GEN-LAST:event_RecoverPassAction
+
+    private void CloseAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
+        this.setVisible(false);
     }//GEN-LAST:event_RecoverPassAction
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

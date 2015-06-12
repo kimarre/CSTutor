@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FullStudentTutorial</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Progress</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FullStudentTutorial (CSTutor.Model.Progress)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FullStudentTutorial</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Progress;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import CSTutor.Model.Manager.*;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/****
+<i>8</i>&nbsp; * Class FullStudentTutorial provides a class that holds an instance of Tutorial from
+<i>9</i>&nbsp; * the Manager package and keeps a list of TrackedPage&#39;s so that proper analysis
+<i>10</i>&nbsp; * of a student&#39;s progress can be conducted.
+<i>11</i>&nbsp; * @author Erica Solum (esolum@calpoly.edu)
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public class FullStudentTutorial
+<i>15</i>&nbsp;{
+<i>16</i>&nbsp;    /** Tutorial data from the Manager feature */
+<i>17</i>&nbsp;    CSTutor.Model.Manager.Tutorial manTutorial;
+<i>18</i>&nbsp;    /** List of individual pages in the tutorial */
+<i>19</i>&nbsp;    ArrayList&lt;TrackedPage&gt; pages;
+<i>20</i>&nbsp;    /** Results of the optional quiz associated with this tutorial*/
+<i>21</i>&nbsp;    ArrayList&lt;QuizData&gt; quizzes;
+<i>22</i>&nbsp;    /** Number of quizzes in this tutorial */
+<i>23</i>&nbsp;    int numQuizzes;
+<i>24</i>&nbsp;    /** Variable for if the tutorial has at least one quiz */
+<i>25</i>&nbsp;    boolean hasQuiz;
+<i>26</i>&nbsp;    
+<i>27</i>&nbsp;    public FullStudentTutorial(CSTutor.Model.Manager.Tutorial tutorial)
+<b class="nc"><i>28</i>&nbsp;    {</b>
+<b class="nc"><i>29</i>&nbsp;        manTutorial = tutorial;</b>
+<b class="nc"><i>30</i>&nbsp;        pages = new ArrayList&lt;TrackedPage&gt;();</b>
+<b class="nc"><i>31</i>&nbsp;        quizzes = new ArrayList&lt;QuizData&gt;();</b>
+<b class="nc"><i>32</i>&nbsp;        hasQuiz = false;</b>
+<b class="nc"><i>33</i>&nbsp;        numQuizzes = 0;</b>
+<b class="nc"><i>34</i>&nbsp;        generatePageData();  </b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;    
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * Generates page data to populate the tutorials until the database is
+<i>39</i>&nbsp;     * complete. Also randomly determines if this tutorial has quizzes.
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    private void generatePageData()
+<i>42</i>&nbsp;    {
+<b class="nc"><i>43</i>&nbsp;        int randomNum = (int) (Math.random() * 5) + 1;</b>
+<b class="nc"><i>44</i>&nbsp;        for(int i=1; i&lt; 6; i++)</b>
+<i>45</i>&nbsp;        {
+<b class="nc"><i>46</i>&nbsp;            Page tempPage = new Page(new String(&quot;Page &quot; + i), manTutorial);</b>
+<i>47</i>&nbsp;            boolean seen;
+<i>48</i>&nbsp;            
+<b class="nc"><i>49</i>&nbsp;            if(i &lt;= randomNum)</b>
+<i>50</i>&nbsp;            {
+<b class="nc"><i>51</i>&nbsp;                seen = true;</b>
+<i>52</i>&nbsp;            }
+<i>53</i>&nbsp;            else
+<i>54</i>&nbsp;            {
+<b class="nc"><i>55</i>&nbsp;                seen = false;</b>
+<i>56</i>&nbsp;            }
+<b class="nc"><i>57</i>&nbsp;            TrackedPage newTracked = new TrackedPage(tempPage, seen);</b>
+<b class="nc"><i>58</i>&nbsp;            pages.add(newTracked);</b>
+<i>59</i>&nbsp;        }
+<i>60</i>&nbsp;        
+<b class="nc"><i>61</i>&nbsp;        int quizDecider = (int) (Math.random() * 2);</b>
+<b class="nc"><i>62</i>&nbsp;        if(quizDecider != 0)</b>
+<i>63</i>&nbsp;        {
+<b class="nc"><i>64</i>&nbsp;            hasQuiz = true;</b>
+<b class="nc"><i>65</i>&nbsp;            numQuizzes = (int) (Math.random() * 5) + 1;</b>
+<i>66</i>&nbsp;            
+<b class="nc"><i>67</i>&nbsp;            for(int i=0; i &lt; numQuizzes; i++)</b>
+<i>68</i>&nbsp;            {
+<b class="nc"><i>69</i>&nbsp;                QuizData tempQuiz = new QuizData(new String(&quot;Quiz &quot; + (i+1)), i, (int) (Math.random() * 5) + 1);</b>
+<b class="nc"><i>70</i>&nbsp;                quizzes.add(tempQuiz);</b>
+<i>71</i>&nbsp;            }
+<i>72</i>&nbsp;        }
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;    
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * Returns the number of tracked pages in this tutorial.
+<i>77</i>&nbsp;     */
+<i>78</i>&nbsp;    public int getNumberOfPages()
+<i>79</i>&nbsp;    {
+<b class="nc"><i>80</i>&nbsp;        return pages.size();</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;    
+<i>83</i>&nbsp;    /**
+<i>84</i>&nbsp;     * Tabulates and returns the number of pages that have been seen by the user.
+<i>85</i>&nbsp;     */
+<i>86</i>&nbsp;    public int getNumberOfPagesSeen()
+<i>87</i>&nbsp;    {
+<b class="nc"><i>88</i>&nbsp;        int tempInt = 0;</b>
+<b class="nc"><i>89</i>&nbsp;        for(TrackedPage tempPage: pages)</b>
+<i>90</i>&nbsp;        {
+<b class="nc"><i>91</i>&nbsp;            if(tempPage.beenSeen())</b>
+<i>92</i>&nbsp;            {
+<b class="nc"><i>93</i>&nbsp;                tempInt++;</b>
+<i>94</i>&nbsp;            }
+<b class="nc"><i>95</i>&nbsp;        }</b>
+<b class="nc"><i>96</i>&nbsp;        return tempInt;</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;    
+<i>99</i>&nbsp;    /**
+<i>100</i>&nbsp;     * Returns the name of the tutorial.
+<i>101</i>&nbsp;     */
+<i>102</i>&nbsp;    public String getTutorialName()
+<i>103</i>&nbsp;    {
+<b class="nc"><i>104</i>&nbsp;        return manTutorial.name;</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;    
+<i>107</i>&nbsp;    /**
+<i>108</i>&nbsp;     * Returns the number of quizzes in the tutorial track.
+<i>109</i>&nbsp;     */
+<i>110</i>&nbsp;    public int getNumberOfQuizzes()
+<i>111</i>&nbsp;    {
+<b class="nc"><i>112</i>&nbsp;        return numQuizzes;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;    
+<i>115</i>&nbsp;    /**
+<i>116</i>&nbsp;     * Returns if the tutorial has any quizzes associated with it or not.
+<i>117</i>&nbsp;     */
+<i>118</i>&nbsp;    public boolean hasQuizzes()
+<i>119</i>&nbsp;    {
+<b class="nc"><i>120</i>&nbsp;        return hasQuiz;</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;    
+<i>123</i>&nbsp;    /**
+<i>124</i>&nbsp;     * Returns the number of questions answered correctly for the quiz
+<i>125</i>&nbsp;     * with the given ID number.
+<i>126</i>&nbsp;     * @param quizID  quiz ID number
+<i>127</i>&nbsp;     */
+<i>128</i>&nbsp;    public int getScoreForQuiz(int quizID)
+<i>129</i>&nbsp;    {
+<b class="nc"><i>130</i>&nbsp;        if(quizID &lt; numQuizzes)</b>
+<i>131</i>&nbsp;        {
+<b class="nc"><i>132</i>&nbsp;            return quizzes.get(quizID).getScore();</b>
+<i>133</i>&nbsp;        }
+<i>134</i>&nbsp;        else
+<i>135</i>&nbsp;        {
+<b class="nc"><i>136</i>&nbsp;            System.out.println(&quot;Quiz ID is not a valid ID number&quot;);</b>
+<b class="nc"><i>137</i>&nbsp;            return -1;</b>
+<i>138</i>&nbsp;        }
+<i>139</i>&nbsp;        
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;    
+<i>142</i>&nbsp;    /**
+<i>143</i>&nbsp;     * Returns the number of questions in the quiz with the given ID.
+<i>144</i>&nbsp;     */
+<i>145</i>&nbsp;    public int getNumQuestionsInQuiz(int quizID)
+<i>146</i>&nbsp;    {
+<b class="nc"><i>147</i>&nbsp;        if(quizID &lt; numQuizzes)</b>
+<i>148</i>&nbsp;        {
+<b class="nc"><i>149</i>&nbsp;            return quizzes.get(quizID).getNumQuestions();</b>
+<i>150</i>&nbsp;        }
+<i>151</i>&nbsp;        else
+<i>152</i>&nbsp;        {
+<b class="nc"><i>153</i>&nbsp;            System.out.println(&quot;Quiz ID is not a valid ID number&quot;);</b>
+<b class="nc"><i>154</i>&nbsp;            return -1;</b>
+<i>155</i>&nbsp;        }
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;    
+<i>158</i>&nbsp;    /**
+<i>159</i>&nbsp;     * Returns the name of the quiz with the given ID.
+<i>160</i>&nbsp;     */
+<i>161</i>&nbsp;    public String getQuizName(int quizID)
+<i>162</i>&nbsp;    {
+<b class="nc"><i>163</i>&nbsp;        if(quizID &lt; numQuizzes)</b>
+<i>164</i>&nbsp;        {
+<b class="nc"><i>165</i>&nbsp;            return quizzes.get(quizID).getDisplayName();</b>
+<i>166</i>&nbsp;        }
+<i>167</i>&nbsp;        else
+<i>168</i>&nbsp;        {
+<b class="nc"><i>169</i>&nbsp;            System.out.println(&quot;Quiz ID is not a valid ID number&quot;);</b>
+<b class="nc"><i>170</i>&nbsp;            return null;</b>
+<i>171</i>&nbsp;        }
+<i>172</i>&nbsp;    }
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
+</div>
+</body>
+</html>

@@ -84,65 +84,71 @@
 <i>10</i>&nbsp; */
 <i>11</i>&nbsp;public class Class
 <i>12</i>&nbsp;{
-<i>13</i>&nbsp;    private String name;
-<i>14</i>&nbsp;    private List&lt;String&gt; instructors;
-<i>15</i>&nbsp;    
-<i>16</i>&nbsp;    public Class(String name)
-<b class="fc"><i>17</i>&nbsp;    {</b>
-<b class="fc"><i>18</i>&nbsp;        this.name = name;</b>
-<b class="fc"><i>19</i>&nbsp;        instructors = new ArrayList&lt;String&gt;();</b>
-<b class="fc"><i>20</i>&nbsp;    }</b>
-<i>21</i>&nbsp;    
-<i>22</i>&nbsp;    /**
-<i>23</i>&nbsp;     * Returns a string representation of the class, also know as the name of
-<i>24</i>&nbsp;     * the class.
-<i>25</i>&nbsp;     *                                                  &lt;pre&gt;
-<i>26</i>&nbsp;     pre:
-<i>27</i>&nbsp;       // String name must not be null.
-<i>28</i>&nbsp;       name != null &amp;&amp; !name.isEmpty();
-<i>29</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>30</i>&nbsp;     */
-<i>31</i>&nbsp;    public String toString()
-<i>32</i>&nbsp;    {
-<b class="fc"><i>33</i>&nbsp;        return name;</b>
-<i>34</i>&nbsp;    }
-<i>35</i>&nbsp;    
-<i>36</i>&nbsp;    /**
-<i>37</i>&nbsp;     * Returns the list of sections listed under this class.
-<i>38</i>&nbsp;     */
-<i>39</i>&nbsp;    public void getSections()
-<i>40</i>&nbsp;    {
-<b class="fc"><i>41</i>&nbsp;        System.out.println(&quot;In Class.getSections&quot;);</b>
-<b class="fc"><i>42</i>&nbsp;    }</b>
-<i>43</i>&nbsp;    
-<i>44</i>&nbsp;    /**
-<i>45</i>&nbsp;     * Returns if the names of the classes are the same.
-<i>46</i>&nbsp;     *                                                  &lt;pre&gt;
-<i>47</i>&nbsp;     pre:
-<i>48</i>&nbsp;       // String name must not be null.
-<i>49</i>&nbsp;       name != null &amp;&amp; !name.isEmpty();
-<i>50</i>&nbsp;       // Class cl must not be null.
-<i>51</i>&nbsp;       cl != null;
-<i>52</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>53</i>&nbsp;     */
-<i>54</i>&nbsp;    public boolean equals(Class cl)
-<i>55</i>&nbsp;    {
-<b class="fc"><i>56</i>&nbsp;        if(cl.toString().equals(name))</b>
-<i>57</i>&nbsp;        {
-<b class="fc"><i>58</i>&nbsp;            return true;</b>
-<i>59</i>&nbsp;        }
-<b class="fc"><i>60</i>&nbsp;        return false;</b>
-<i>61</i>&nbsp;    }
-<i>62</i>&nbsp;    
-<i>63</i>&nbsp;    
-<i>64</i>&nbsp;
-<i>65</i>&nbsp;}
+<i>13</i>&nbsp;    /** Name of the class */
+<i>14</i>&nbsp;    private String name;
+<i>15</i>&nbsp;    /** List of names of the instructors that teach the class */
+<i>16</i>&nbsp;    private List&lt;String&gt; instructors;
+<i>17</i>&nbsp;    
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     * Initializes a class with a String for the name.
+<i>20</i>&nbsp;     * @param name  name of the class
+<i>21</i>&nbsp;     */
+<i>22</i>&nbsp;    public Class(String name)
+<b class="fc"><i>23</i>&nbsp;    {</b>
+<b class="fc"><i>24</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>25</i>&nbsp;        instructors = new ArrayList&lt;String&gt;();</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;    
+<i>28</i>&nbsp;    /**
+<i>29</i>&nbsp;     * Returns a string representation of the class, also know as the name of
+<i>30</i>&nbsp;     * the class.
+<i>31</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>32</i>&nbsp;     pre:
+<i>33</i>&nbsp;       // String name must not be null.
+<i>34</i>&nbsp;       name != null &amp;&amp; !name.isEmpty();
+<i>35</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public String toString()
+<i>38</i>&nbsp;    {
+<b class="fc"><i>39</i>&nbsp;        return name;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;    
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * Returns the list of sections listed under this class.
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    public void getSections()
+<i>46</i>&nbsp;    {
+<b class="fc"><i>47</i>&nbsp;        System.out.println(&quot;In Class.getSections&quot;);</b>
+<b class="fc"><i>48</i>&nbsp;    }</b>
+<i>49</i>&nbsp;    
+<i>50</i>&nbsp;    /**
+<i>51</i>&nbsp;     * Returns if the names of the classes are the same.
+<i>52</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>53</i>&nbsp;     pre:
+<i>54</i>&nbsp;       // String name must not be null.
+<i>55</i>&nbsp;       name != null &amp;&amp; !name.isEmpty();
+<i>56</i>&nbsp;       // Class cl must not be null.
+<i>57</i>&nbsp;       cl != null;
+<i>58</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    public boolean equals(Class cl)
+<i>61</i>&nbsp;    {
+<b class="fc"><i>62</i>&nbsp;        if(cl.toString().equals(name))</b>
+<i>63</i>&nbsp;        {
+<b class="fc"><i>64</i>&nbsp;            return true;</b>
+<i>65</i>&nbsp;        }
+<b class="fc"><i>66</i>&nbsp;        return false;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;    
+<i>69</i>&nbsp;    
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>
