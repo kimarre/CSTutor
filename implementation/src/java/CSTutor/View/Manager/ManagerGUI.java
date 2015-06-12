@@ -41,11 +41,10 @@ public class ManagerGUI extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
-        /*
         System.out.println("Attempt to get data");
         managerModel.data = CSTutor.Model.Database.TutorDB.getClasses();
         System.out.println("Data got?");
-        */
+        
         moveTut = new MoveGUI();
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
