@@ -75,34 +75,32 @@
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Chat.Server;
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import static org.junit.Assert.*;
-<i>4</i>&nbsp;
+<i>4</i>&nbsp;import java.net.Socket;
 <i>5</i>&nbsp;import org.junit.Test;
 <i>6</i>&nbsp;
-<i>7</i>&nbsp;import java.net.Socket;
-<i>8</i>&nbsp;
-<b class="fc"><i>9</i>&nbsp;public class WorkerTest {</b>
-<i>10</i>&nbsp;	Worker w;
-<i>11</i>&nbsp;	
-<i>12</i>&nbsp;	@Test
-<i>13</i>&nbsp;	public void testWorker() {
-<b class="fc"><i>14</i>&nbsp;		Socket s = new Socket();</b>
-<b class="fc"><i>15</i>&nbsp;		ChatServer cs = new ChatServer();</b>
-<i>16</i>&nbsp;		
-<b class="fc"><i>17</i>&nbsp;		w = new Worker(s, cs);</b>
-<b class="fc"><i>18</i>&nbsp;		assertTrue(&quot;Worker constructor works: &quot;, w != null);</b>
-<b class="fc"><i>19</i>&nbsp;	}</b>
-<i>20</i>&nbsp;
-<i>21</i>&nbsp;	@Test
-<i>22</i>&nbsp;	public void testRun() {
-<b class="fc"><i>23</i>&nbsp;	}</b>
-<i>24</i>&nbsp;
-<i>25</i>&nbsp;}
+<b class="fc"><i>7</i>&nbsp;public class WorkerTest {</b>
+<i>8</i>&nbsp;	Worker w;
+<i>9</i>&nbsp;	
+<i>10</i>&nbsp;	@Test
+<i>11</i>&nbsp;	public void testWorker() {
+<b class="fc"><i>12</i>&nbsp;		Socket s = new Socket();</b>
+<b class="fc"><i>13</i>&nbsp;		ChatServer cs = new ChatServer();</b>
+<i>14</i>&nbsp;		
+<b class="fc"><i>15</i>&nbsp;		w = new Worker(s, cs);</b>
+<b class="fc"><i>16</i>&nbsp;		assertTrue(&quot;Worker constructor works: &quot;, w != null);</b>
+<b class="fc"><i>17</i>&nbsp;	}</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;	@Test
+<i>20</i>&nbsp;	public void testRun() {
+<b class="fc"><i>21</i>&nbsp;	}</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 22:24</div>
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
 </div>
 </body>
 </html>
