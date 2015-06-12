@@ -61,7 +61,7 @@
     100%
   </span>
   <span class="absValue">
-    (15/ 15)
+    (24/ 24)
   </span>
 </td>
 </tr>
@@ -119,44 +119,52 @@
 <i>45</i>&nbsp;    @Test
 <i>46</i>&nbsp;    public void testToString()
 <i>47</i>&nbsp;    {
-<i>48</i>&nbsp;        
-<b class="fc"><i>49</i>&nbsp;    }</b>
-<i>50</i>&nbsp;    
-<i>51</i>&nbsp;    /**
-<i>52</i>&nbsp;     * Tests the addClass method.
-<i>53</i>&nbsp;     */
-<i>54</i>&nbsp;    @Test
-<i>55</i>&nbsp;    public void testAddClass()
-<i>56</i>&nbsp;    {
-<i>57</i>&nbsp;        
-<b class="fc"><i>58</i>&nbsp;    }</b>
-<i>59</i>&nbsp;    
-<i>60</i>&nbsp;    /**
-<i>61</i>&nbsp;     * Tests the equals method.
-<i>62</i>&nbsp;     */
-<i>63</i>&nbsp;    @Test
-<i>64</i>&nbsp;    public void testEquals()
-<i>65</i>&nbsp;    {
-<b class="fc"><i>66</i>&nbsp;        Student newStudent = new Student(&quot;Ringo Star&quot;, enrolledClasses);</b>
-<b class="fc"><i>67</i>&nbsp;        assert(!newStudent.equals(testStudent));</b>
-<i>68</i>&nbsp;        
-<b class="fc"><i>69</i>&nbsp;    }</b>
-<i>70</i>&nbsp;    
-<i>71</i>&nbsp;    /**
-<i>72</i>&nbsp;     * Test method for the getEnrolled Classes method.
-<i>73</i>&nbsp;     */
-<i>74</i>&nbsp;    @Test
-<i>75</i>&nbsp;    public void testGetEnrolledClasses()
-<i>76</i>&nbsp;    {
-<i>77</i>&nbsp;        
-<b class="fc"><i>78</i>&nbsp;    }</b>
-<i>79</i>&nbsp;}
+<b class="fc"><i>48</i>&nbsp;        String testString = testStudent.toString();</b>
+<b class="fc"><i>49</i>&nbsp;        assert(testString.equals(&quot;John Lennon&quot;));</b>
+<b class="fc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;    
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * Tests the addClass method.
+<i>54</i>&nbsp;     */
+<i>55</i>&nbsp;    @Test
+<i>56</i>&nbsp;    public void testAddClass()
+<i>57</i>&nbsp;    {
+<b class="fc"><i>58</i>&nbsp;        testStudent.addClass(new Class(&quot;CPE 102&quot;));</b>
+<b class="fc"><i>59</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 102&quot;));</b>
+<b class="fc"><i>60</i>&nbsp;        assert(testStudent.getEnrolledClasses().equals(enrolledClasses));</b>
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;    
+<i>63</i>&nbsp;    /**
+<i>64</i>&nbsp;     * Tests the equals method.
+<i>65</i>&nbsp;     */
+<i>66</i>&nbsp;    @Test
+<i>67</i>&nbsp;    public void testEquals()
+<i>68</i>&nbsp;    {
+<b class="fc"><i>69</i>&nbsp;        Student newStudent = new Student(&quot;Ringo Star&quot;, enrolledClasses);</b>
+<b class="fc"><i>70</i>&nbsp;        assert(!newStudent.equals(testStudent));</b>
+<i>71</i>&nbsp;        
+<b class="fc"><i>72</i>&nbsp;        Student newStudent2 = new Student(&quot;John Lennon&quot;, enrolledClasses);</b>
+<b class="fc"><i>73</i>&nbsp;        assert(newStudent2.equals(testStudent));</b>
+<i>74</i>&nbsp;        
+<b class="fc"><i>75</i>&nbsp;    }</b>
+<i>76</i>&nbsp;    
+<i>77</i>&nbsp;    /**
+<i>78</i>&nbsp;     * Test method for the getEnrolled Classes method.
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    @Test
+<i>81</i>&nbsp;    public void testGetEnrolledClasses()
+<i>82</i>&nbsp;    {
+<b class="fc"><i>83</i>&nbsp;        ArrayList&lt;Class&gt; testClasses = testStudent.getEnrolledClasses();</b>
+<b class="fc"><i>84</i>&nbsp;        assert(testClasses.equals(enrolledClasses));</b>
+<i>85</i>&nbsp;        
+<b class="fc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 20:51</div>
+    <div style="float:right;">generated on 2015-06-11 21:37</div>
 </div>
 </body>
 </html>
