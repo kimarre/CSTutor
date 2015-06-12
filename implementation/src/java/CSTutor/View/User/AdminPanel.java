@@ -41,7 +41,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         CancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         UserList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -51,6 +51,13 @@ public class AdminPanel extends javax.swing.JFrame {
         jScrollPane1.setViewportView(UserList);
 
         OkButton.setText("OK");
+        OkButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                PromoteAction(evt);
+            }
+        });
 
         jLabel1.setText("Select users and click");
 
@@ -59,6 +66,13 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel3.setText("OK to make them");
 
         CancelButton.setText("Cancel");
+        CancelButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                CloseAction(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,6 +109,14 @@ public class AdminPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void PromoteAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
+        System.out.println(UserList.getSelectedValuesList());
+    }//GEN-LAST:event_RecoverPassAction
+
+    private void CloseAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
+        this.setVisible(false);
+    }//GEN-LAST:event_RecoverPassAction
 
     /**
      * @param args the command line arguments

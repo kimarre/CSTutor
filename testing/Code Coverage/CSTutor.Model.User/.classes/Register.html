@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    62.5%
+    50%
   </span>
   <span class="absValue">
-    (5/ 8)
+    (4/ 8)
   </span>
 </td>
 </tr>
@@ -79,7 +79,7 @@
 <i>5</i>&nbsp;
 <i>6</i>&nbsp;/**
 <i>7</i>&nbsp; * Register is responsible for validating registration information and creating
-<i>8</i>&nbsp; * and adding the user to the UserDB. It is is derived from
+<i>8</i>&nbsp; * and adding the user to the TutorDB&#39;s user table. It is is derived from
 <i>9</i>&nbsp; * &lt;a href=&quot;../../requirements/functionalRequirements/login.html&quot;&gt; Section 2.6 
 <i>10</i>&nbsp; * &lt;/a&gt; the requirements.
 <i>11</i>&nbsp; *
@@ -88,7 +88,7 @@
 <b class="nc"><i>14</i>&nbsp;public class Register {</b>
 <i>15</i>&nbsp;    /**
 <i>16</i>&nbsp;     * Validates that all of the needed information for a User was entered and
-<i>17</i>&nbsp;     * adds the user to the UserDB if all of the information was entered and
+<i>17</i>&nbsp;     * adds the user to the TutorDB&#39;s user table if all of the information was entered and
 <i>18</i>&nbsp;     * there isn&#39;t already a user with that information.
 <i>19</i>&nbsp;     *
 <i>20</i>&nbsp;     * @param firstName The user&#39;s first name.
@@ -103,24 +103,25 @@
 <i>29</i>&nbsp;    public static boolean createUser(String firstName, String lastName, String email, String pass, boolean instructor)
 <i>30</i>&nbsp;    {
 <b class="fc"><i>31</i>&nbsp;        EmailValidator validator = EmailValidator.getInstance(false);</b>
-<b class="fc"><i>32</i>&nbsp;        if (validator.isValid(email) &amp;&amp; TutorDB.getUser(email) == null)</b>
+<b class="fc"><i>32</i>&nbsp;        if (TutorDB.getUser(email) == null)</b>
 <i>33</i>&nbsp;        {
-<b class="fc"><i>34</i>&nbsp;            User user = new User(firstName, lastName, email, pass, instructor);</b>
-<b class="fc"><i>35</i>&nbsp;            TutorDB.setUser(firstName, lastName, email, user.getPassword().getHash(), String.valueOf(instructor));</b>
-<b class="fc"><i>36</i>&nbsp;            return true;</b>
-<i>37</i>&nbsp;        } else {
-<b class="nc"><i>38</i>&nbsp;            System.out.println(&quot;email already exists or is invalid&quot;);</b>
-<b class="nc"><i>39</i>&nbsp;            return false;</b>
-<i>40</i>&nbsp;        }
-<i>41</i>&nbsp;        //System.out.println(&quot;New User Created.&quot;);
-<i>42</i>&nbsp;    }
-<i>43</i>&nbsp;}
+<b class="nc"><i>34</i>&nbsp;            User user = new User(firstName, lastName, email, pass, instructor, true);</b>
+<b class="nc"><i>35</i>&nbsp;            TutorDB.setUser(email, user.getPassword().getHash(), firstName, lastName, instructor ? &quot;Professor&quot; : &quot;Student&quot;);</b>
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;            return true;</b>
+<i>38</i>&nbsp;        } else {
+<b class="fc"><i>39</i>&nbsp;            System.out.println((TutorDB.getUser(email) != null) ? &quot;email already exists&quot; : &quot;email invalid&quot;);</b>
+<b class="fc"><i>40</i>&nbsp;            return false;</b>
+<i>41</i>&nbsp;        }
+<i>42</i>&nbsp;        //System.out.println(&quot;New User Created.&quot;);
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

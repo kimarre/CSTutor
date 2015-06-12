@@ -61,7 +61,7 @@
     100%
   </span>
   <span class="absValue">
-    (8/ 8)
+    (19/ 19)
   </span>
 </td>
 </tr>
@@ -74,85 +74,93 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.User;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import org.junit.After;
-<i>4</i>&nbsp;import org.junit.Before;
-<i>5</i>&nbsp;import org.junit.Test;
-<i>6</i>&nbsp;
-<i>7</i>&nbsp;/** 
-<i>8</i>&nbsp;* User Tester. 
-<i>9</i>&nbsp;* 
-<i>10</i>&nbsp;* @author &lt;Authors name&gt; 
-<i>11</i>&nbsp;* @since &lt;pre&gt;May 15, 2015&lt;/pre&gt; 
-<i>12</i>&nbsp;* @version 1.0 
-<i>13</i>&nbsp;*/ 
-<b class="fc"><i>14</i>&nbsp;public class UserTest { </b>
-<i>15</i>&nbsp;
-<i>16</i>&nbsp;@Before
-<i>17</i>&nbsp;public void before() throws Exception { 
-<b class="fc"><i>18</i>&nbsp;} </b>
-<i>19</i>&nbsp;
-<i>20</i>&nbsp;@After
-<i>21</i>&nbsp;public void after() throws Exception { 
-<b class="fc"><i>22</i>&nbsp;} </b>
-<i>23</i>&nbsp;
-<i>24</i>&nbsp;/** 
-<i>25</i>&nbsp;* 
-<i>26</i>&nbsp;* Method: getPassword() 
+<i>3</i>&nbsp;import CSTutor.Model.Database.TutorDB;
+<i>4</i>&nbsp;import static org.junit.Assert.*;
+<i>5</i>&nbsp;import org.junit.After;
+<i>6</i>&nbsp;import org.junit.Before;
+<i>7</i>&nbsp;import org.junit.Test;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/** 
+<i>10</i>&nbsp;* User Tester. 
+<i>11</i>&nbsp;* 
+<i>12</i>&nbsp;* @author &lt;Authors name&gt; 
+<i>13</i>&nbsp;* @since &lt;pre&gt;May 15, 2015&lt;/pre&gt; 
+<i>14</i>&nbsp;* @version 1.0 
+<i>15</i>&nbsp;*/ 
+<b class="fc"><i>16</i>&nbsp;public class UserTest { </b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;@Before
+<i>19</i>&nbsp;public void before() throws Exception { 
+<b class="fc"><i>20</i>&nbsp;} </b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;@After
+<i>23</i>&nbsp;public void after() throws Exception { 
+<b class="fc"><i>24</i>&nbsp;} </b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/** 
 <i>27</i>&nbsp;* 
-<i>28</i>&nbsp;*/ 
-<i>29</i>&nbsp;@Test
-<i>30</i>&nbsp;public void testGetPassword() throws Exception { 
-<i>31</i>&nbsp;//TODO: Test goes here... 
-<b class="fc"><i>32</i>&nbsp;} </b>
-<i>33</i>&nbsp;
-<i>34</i>&nbsp;/** 
-<i>35</i>&nbsp;* 
-<i>36</i>&nbsp;* Method: getEmail() 
-<i>37</i>&nbsp;* 
-<i>38</i>&nbsp;*/ 
-<i>39</i>&nbsp;@Test
-<i>40</i>&nbsp;public void testGetEmail() throws Exception { 
-<i>41</i>&nbsp;//TODO: Test goes here... 
-<b class="fc"><i>42</i>&nbsp;} </b>
-<i>43</i>&nbsp;
-<i>44</i>&nbsp;/** 
-<i>45</i>&nbsp;* 
-<i>46</i>&nbsp;* Method: getName() 
-<i>47</i>&nbsp;* 
-<i>48</i>&nbsp;*/ 
-<i>49</i>&nbsp;@Test
-<i>50</i>&nbsp;public void testGetName() throws Exception { 
-<i>51</i>&nbsp;//TODO: Test goes here... 
-<b class="fc"><i>52</i>&nbsp;} </b>
-<i>53</i>&nbsp;
-<i>54</i>&nbsp;/** 
-<i>55</i>&nbsp;* 
-<i>56</i>&nbsp;* Method: isInstructor() 
-<i>57</i>&nbsp;* 
-<i>58</i>&nbsp;*/ 
-<i>59</i>&nbsp;@Test
-<i>60</i>&nbsp;public void testIsInstructor() throws Exception { 
-<i>61</i>&nbsp;//TODO: Test goes here... 
-<b class="fc"><i>62</i>&nbsp;} </b>
-<i>63</i>&nbsp;
-<i>64</i>&nbsp;/** 
-<i>65</i>&nbsp;* 
-<i>66</i>&nbsp;* Method: setInstructor() 
-<i>67</i>&nbsp;* 
-<i>68</i>&nbsp;*/ 
-<i>69</i>&nbsp;@Test
-<i>70</i>&nbsp;public void testSetInstructor() throws Exception { 
-<i>71</i>&nbsp;//TODO: Test goes here... 
-<b class="fc"><i>72</i>&nbsp;} </b>
-<i>73</i>&nbsp;
-<i>74</i>&nbsp;
-<i>75</i>&nbsp;} 
+<i>28</i>&nbsp;* Method: getPassword() 
+<i>29</i>&nbsp;* 
+<i>30</i>&nbsp;*/ 
+<i>31</i>&nbsp;@Test
+<i>32</i>&nbsp;public void testGetPassword() throws Exception {
+<b class="fc"><i>33</i>&nbsp;    User test = new User(&quot;Kyle&quot;, &quot;Reis&quot;, &quot;kjreis@calpoly.edu&quot;, &quot;password&quot;, false, true);</b>
+<b class="fc"><i>34</i>&nbsp;    assertTrue(test.getPassword() != null);</b>
+<b class="fc"><i>35</i>&nbsp;} </b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;/** 
+<i>38</i>&nbsp;* 
+<i>39</i>&nbsp;* Method: getEmail() 
+<i>40</i>&nbsp;* 
+<i>41</i>&nbsp;*/ 
+<i>42</i>&nbsp;@Test
+<i>43</i>&nbsp;public void testGetEmail() throws Exception {
+<b class="fc"><i>44</i>&nbsp;    User test = new User(&quot;Kyle&quot;, &quot;Reis&quot;, &quot;kjreis@calpoly.edu&quot;, &quot;password&quot;, false, true);</b>
+<b class="fc"><i>45</i>&nbsp;    assertEquals(&quot;Getting email&quot;, &quot;kjreis@calpoly.edu&quot;, test.getEmail());</b>
+<b class="fc"><i>46</i>&nbsp;} </b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;/** 
+<i>49</i>&nbsp;* 
+<i>50</i>&nbsp;* Method: getName() 
+<i>51</i>&nbsp;* 
+<i>52</i>&nbsp;*/ 
+<i>53</i>&nbsp;@Test
+<i>54</i>&nbsp;public void testGetName() throws Exception {
+<b class="fc"><i>55</i>&nbsp;    User test = new User(&quot;Kyle&quot;, &quot;Reis&quot;, &quot;kjreis@calpoly.edu&quot;, &quot;password&quot;, false, true);</b>
+<b class="fc"><i>56</i>&nbsp;    assertEquals(&quot;Getting name&quot;, &quot;Kyle Reis&quot;, test.getName());</b>
+<b class="fc"><i>57</i>&nbsp;} </b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;/** 
+<i>60</i>&nbsp;* 
+<i>61</i>&nbsp;* Method: isInstructor() 
+<i>62</i>&nbsp;* 
+<i>63</i>&nbsp;*/ 
+<i>64</i>&nbsp;@Test
+<i>65</i>&nbsp;public void testIsInstructor() throws Exception {
+<b class="fc"><i>66</i>&nbsp;    assertTrue(TutorDB.getUser(&quot;kjreis@calpoly.edu&quot;).isInstructor());</b>
+<b class="fc"><i>67</i>&nbsp;} </b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;/** 
+<i>70</i>&nbsp;* 
+<i>71</i>&nbsp;* Method: setInstructor() 
+<i>72</i>&nbsp;* 
+<i>73</i>&nbsp;*/ 
+<i>74</i>&nbsp;@Test
+<i>75</i>&nbsp;public void testSetInstructor() throws Exception {
+<b class="fc"><i>76</i>&nbsp;    User test = new User(&quot;Kyle&quot;, &quot;Reis&quot;, &quot;kjreis@calpoly.edu&quot;, &quot;password&quot;, false, true);</b>
+<b class="fc"><i>77</i>&nbsp;    assertFalse(test.isInstructor());</b>
+<b class="fc"><i>78</i>&nbsp;    test.setInstructor();</b>
+<b class="fc"><i>79</i>&nbsp;    assertTrue(test.isInstructor());</b>
+<b class="fc"><i>80</i>&nbsp;} </b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;} 
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>
