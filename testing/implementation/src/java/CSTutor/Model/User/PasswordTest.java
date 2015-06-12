@@ -10,29 +10,15 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
+ * Tests the Password Object.
  *
- * @author kylereis
+ * @author Kyle Reis (kjreis@calpoly.edu)
+ *
+ * Phase 1: Test setPassword.
+ *
+ * Phase 2: Test validateHash.
  */
 public class PasswordTest {
-    
-    public PasswordTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of getHash method, of class Password.

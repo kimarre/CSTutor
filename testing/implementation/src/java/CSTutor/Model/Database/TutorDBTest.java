@@ -26,7 +26,7 @@ public class TutorDBTest {
    }
 
 
-   /**
+    /**
      * Helper function for other tests. Creates maps from lists.
      */
    public Map<String, String> mapFromLists(List<String> cols, List<String> vals) {
@@ -37,8 +37,8 @@ public class TutorDBTest {
       return map;
    }
 
-   /**
-     * Test methods setUser and getUser by adding a new user, getting it back,
+    /**
+     * Test methods setUser, getUser and deleteUser by adding a new user, getting it back,
      * and verifying its values.
      */
    @Test
@@ -53,9 +53,11 @@ public class TutorDBTest {
       assertEquals("Comparing correct and test user", correctuser.getFirstName(), testuser.getFirstName());
       assertEquals("Comparing correct and test user", correctuser.getLastName(), testuser.getLastName());
       assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
+      TutorDB.deleteUser("sdali");
+      assertEquals("Looking for nonexistent user", null, TutorDB.getUser("sdali"));
    }
 
-   /**
+    /**
      * Test methods setUser and getUser by adding a new user, getting it back, and
      * verifying its values. Then set a new hash, get the user back, and verify.
      */
@@ -81,7 +83,7 @@ public class TutorDBTest {
       assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
    }
 
-   /**
+    /**
      * Test method getUsernamesByAccessLevel by adding a few users of different levels,
      * then getting them.
      */
@@ -97,7 +99,7 @@ public class TutorDBTest {
       assertFalse("Testing getUsernamesByAccessLevel", students.contains("sdali"));
    }
 
-   /**
+    /**
      * Test methods setTutorialData and getTutorialData by adding a new entry,
      * getting it back, and verifying its values.
      */
@@ -107,6 +109,7 @@ public class TutorDBTest {
       correctdata = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "description", "syntax", "example code",
        "example output", "try it yourself");
+      assertEquals("Looking for nonexistent TutorialData", TutorDB.getTutorialData(76585274), null);
       TutorDB.setTutorialData(correctdata);
       testdata = TutorDB.getTutorialData(1111);
       assertEquals("Comparing correct data and test data", correctdata.pageId, testdata.pageId);
@@ -118,7 +121,7 @@ public class TutorDBTest {
       assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
    }
 
-   /**
+    /**
      * Test methods setTutorialData and getTutorialData by adding a new entry,
      * getting it back, and verifying its values. Then do it again to the same
      * pageId but with different values
@@ -153,22 +156,24 @@ public class TutorDBTest {
       assertEquals("Comparing correct data and test data", correctdata.tryItYourself, testdata.tryItYourself);
    }
 
-   /**
-     * Test methods getAllTutorialData.
+    /**
+     * Test methods getAllTutorialData and getAllUserData.
      */
    @Test
-   public void testGetAllTutorialData() {
-      CSTutor.Model.Tutorial.TutorialData data;
+   public void testGetAllThings() {
       List<CSTutor.Model.Tutorial.TutorialData> all;
-      data = new CSTutor.Model.Tutorial.TutorialData(
+      CSTutor.Model.Tutorial.TutorialData data = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "description", "syntax", "example code",
        "example output", "try it yourself");
       TutorDB.setTutorialData(data);
       all = TutorDB.getAllTutorialData();
       assertTrue("Testing getAllTutorialData", all.size() > 0);
+
+      List<CSTutor.Model.Progress.QuizData> quizzes = TutorDB.getAllQuizData();
+      assertNotNull("Testing getAllTQuizData", quizzes);
    }
 
-   /**
+    /**
      * Test class hierarchy methods.
      */
    @Test
@@ -176,7 +181,16 @@ public class TutorDBTest {
       List<CSTutor.Model.Manager.Class> classes = TutorDB.getClasses();
       TutorDB.setUser("sdali12345", "DEADBEEF", "Bob", "Smith", "Student");
       TutorDB.saveClasses(classes);
+      assertNotNull("Checking getClassNames", TutorDB.getClassNames());
       assertEquals("Comparing class hierarchies", classes.size(), TutorDB.getClasses().size());
+   }
+
+    /**
+     * Test exception handling
+     */
+   @Test
+   public void testExceptions() {
+      
    }
 
 

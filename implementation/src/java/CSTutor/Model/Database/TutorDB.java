@@ -152,6 +152,25 @@ public class TutorDB {
    }
 
    /**
+    * Delete a user from the database.
+    *
+    * @param username Username to delete
+    * pre:
+    *  username != null;
+    */
+   public static void deleteUser(String username) {
+      try {
+         PreparedStatement s = conn.prepareStatement("DELETE FROM Users WHERE username=?");
+         s.setString(1, username);
+         s.executeUpdate();
+         s.close();
+         commit();
+      } catch(Exception e) {
+         // User is not in db
+      }
+   }
+
+   /**
     * Get a list of usernames from the database by accessLevel
     *
     * @param accessLevel The access level enum
@@ -281,7 +300,7 @@ public class TutorDB {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM QuizData");
          ResultSet r = s.executeQuery();
          while (r.next()) {
-            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numPages"));
+            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numQuestions"));
             quizzes.add(q);
          }
          s.close();
@@ -557,14 +576,12 @@ public class TutorDB {
     */
    private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
       switch (access) {
-         case "Guest":
-            return ClassAccessLevel.Guest;
          case "Student":
             return ClassAccessLevel.Student;
          case "Professor":
             return ClassAccessLevel.Professor;
       }
-      return null;
+      return ClassAccessLevel.Guest;
    }
 
    /**
@@ -575,17 +592,19 @@ public class TutorDB {
     */
    private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
       switch (access) {
-         case Guest:
-            return "Guest";
          case Student:
             return "Student";
          case Professor:
             return "Professor";
       }
-      return null;
+      return "Guest";
    }
 
-   private static int printClassHierarchy(List<CSTutor.Model.Manager.Class> classes) {
+   /**
+    * Prints the contents of the list of classes to stdout. Used in debugging.
+    * @param classes The list of classes to print
+    */
+   private static void printClassHierarchy(List<CSTutor.Model.Manager.Class> classes) {
       for (CSTutor.Model.Manager.Class c : classes) {
          System.out.println("<" + c.name + ">");
          for (CSTutor.Model.Manager.Section s : c.sections) {
@@ -601,7 +620,6 @@ public class TutorDB {
             }
          }
       }
-      return 0;
    }
 
    /**
