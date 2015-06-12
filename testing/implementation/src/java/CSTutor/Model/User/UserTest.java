@@ -11,21 +11,39 @@ import org.junit.Test;
  *
  * @author Kyle Reis (kjreis@calpoly.edu)
  *
- * Phase 1: Test getName.
+ * Phase 1: Test registerUser.
  *
- * Phase 2: Test getFirstName.
+ * Phase 2: Test getName.
  *
- * Phase 3: Test getLastName.
+ * Phase 3: Test getFirstName.
  *
- * Phase 4: Test getEmail.
+ * Phase 4: Test getLastName.
  *
- * Phase 5: Test isInstructor.
+ * Phase 5: Test getEmail.
  *
- * Phase 6: Test setInstructor.
+ * Phase 6: Test isInstructor.
  *
- * Phase 7: Test getPassword.
+ * Phase 7: Test setInstructor.
+ *
+ * Phase 8: Test getPassword.
  */
 public class UserTest {
+
+    @Test
+    public void testRegisterUser() throws Exception
+    {
+        assertFalse(User.registerUser("Kyle", "Reis", "kjreis@calpoly.edu", "password", true));
+    }
+
+    @Test
+    public void testRegisterUser1()
+    {
+        if(TutorDB.getUser("znjp@calpoly.edu") != null){
+            TutorDB.deleteUser("znjp@calpoly.edu");
+        }
+
+        assertTrue(User.registerUser("Zach", "Peterson", "znjp@calpoly.edu", "password", true));
+    }
 
     /**
     *
