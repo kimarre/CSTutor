@@ -109,19 +109,12 @@ public class TutorialDataTest {
     }
 
     /**
-     * Test of run method, of class TutorialData.
-     */
-    @Test
-    public void testRun() {
-        
-    }
-
-    /**
      * Test of next method, of class TutorialData.
      */
     @Test
     public void testNext() {
-        
+        TutorialData temp = new TutorialData();
+        temp.next();
     }
 
     /**
@@ -129,7 +122,8 @@ public class TutorialDataTest {
      */
     @Test
     public void testPrev() {
-        
+        TutorialData temp = new TutorialData();
+        temp.prev();
     }
     
 }

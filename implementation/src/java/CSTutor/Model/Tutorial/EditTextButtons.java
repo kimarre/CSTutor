@@ -7,7 +7,7 @@ package CSTutor.Model.Tutorial;
  * @author Kim Arre (karre@calpoly.edu)
  * @version 20Apr2015
  */
-public abstract class EditTextButtons {
+public class EditTextButtons {
     /** Identifies which of several font styles are used to format within the tutorial editor */
    String fontStyle;
    
@@ -23,11 +23,6 @@ public abstract class EditTextButtons {
    /** Determines what size font the tutorial's text should be */
    int fontSize;
 
-   /** Allows the font colors to be more easily distinguished */
-   enum FontColor {
-      black, red, orange, yellow, green, blue, purple;
-   }
-   
    /**
     * The constructor initializes all fields to standard font: 12pt plain Arial.
     */

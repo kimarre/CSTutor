@@ -41,6 +41,7 @@ public class Overview extends JFrame {
     private ChatBar chatBar;
     private JLabel userInfo;
     public User user;
+    public Tutorial tutorial;
     private static int INSTRUCTOR_ACCESS = 2;
     private static int STUDENT_ACCESS = 1;
 
@@ -82,13 +83,14 @@ public class Overview extends JFrame {
         mainPanel = new JPanel();
         mainTop = new JPanel(new CardLayout());
         chatBar = new ChatBar();
+        tutorial = new Tutorial();
         
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         
         mainTop.add(new ManagerGUI(), "Manager");
         mainTop.add(new Progress(INSTRUCTOR_ACCESS).getView(), "Progress");
         mainTop.add(new CSTutor.View.Tutorial.EditTutorial(), "Tutorial");
-        mainTop.add(new Tutorial(), "Student Tutorial");
+        mainTop.add(tutorial, "Student Tutorial");
         mainTop.add(new QuizBuildGUI(), "Quiz");
         mainPanel.add(mainTop);
         mainPanel.add(chatBar);
@@ -247,12 +249,8 @@ public class Overview extends JFrame {
      * @param evt A mouse click.
      */
     private void MyTutorialAction(java.awt.event.ActionEvent evt) {
-        mainTop.remove(3);
-        mainTop.add(new Tutorial(), "Student Tutorial", 3);
-        pack();
-        revalidate();
-        repaint();
-       // roadmapList.setSelectedIndex(1);
+        tutorial.initRoadmapContent();
+        // roadmapList.setSelectedIndex(1);
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Student Tutorial");
     }
 
@@ -262,11 +260,6 @@ public class Overview extends JFrame {
      * @param evt A mouse click.
      */
     private void CreateTutorialAction(java.awt.event.ActionEvent evt) {
-        mainTop.remove(2);
-        mainTop.add(new CSTutor.View.Tutorial.EditTutorial(), "Tutorial", 2);
-        pack();
-        revalidate();
-        repaint();
         ((CardLayout)(mainTop.getLayout())).show(mainTop, "Tutorial");
     }
 

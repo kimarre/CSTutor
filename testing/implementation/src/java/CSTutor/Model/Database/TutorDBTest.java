@@ -44,7 +44,8 @@ public class TutorDBTest {
    @Test
    public void testSetGetUser() {
       CSTutor.Model.User.User testuser, correctuser;
-      correctuser = new CSTutor.Model.User.User("sdali", "DEADBEEF", "Bob", "Smith", false, true);
+      correctuser = new CSTutor.Model.User.User("Bob", "Smith", "sdali", "DEADBEEF", false, true);
+      assertEquals("Looking for nonexistent user", TutorDB.getUser("blahblahblah237284"), null);
       TutorDB.setUser("sdali", "DEADBEEF", "Bob", "Smith", "Student");
       testuser = TutorDB.getUser("sdali");
       assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
@@ -61,7 +62,7 @@ public class TutorDBTest {
    @Test
    public void testSetGetUserTwice() {
       CSTutor.Model.User.User testuser, correctuser;
-      correctuser = new CSTutor.Model.User.User("sdali", "DEADBEEF", "Bob", "Smith", false, true);
+      correctuser = new CSTutor.Model.User.User("Bob", "Smith", "sdali", "DEADBEEF", false, true);
       TutorDB.setUser("sdali", "DEADBEEF", "Bob", "Smith", "Student");
       testuser = TutorDB.getUser("sdali");
       assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
@@ -70,7 +71,7 @@ public class TutorDBTest {
       assertEquals("Comparing correct and test user", correctuser.getLastName(), testuser.getLastName());
       assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
 
-      correctuser = new CSTutor.Model.User.User("sdali", "808FACED", "Bob", "Smith", false, true);
+      correctuser = new CSTutor.Model.User.User("Bob", "Smith", "sdali", "808FACED", false, true);
       TutorDB.setUser("sdali", "808FACED", "Bob", "Smith", "Student");
       testuser = TutorDB.getUser("sdali");
       assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
@@ -165,6 +166,17 @@ public class TutorDBTest {
       TutorDB.setTutorialData(data);
       all = TutorDB.getAllTutorialData();
       assertTrue("Testing getAllTutorialData", all.size() > 0);
+   }
+
+   /**
+     * Test class hierarchy methods.
+     */
+   @Test
+   public void testClassHierarchy() {
+      List<CSTutor.Model.Manager.Class> classes = TutorDB.getClasses();
+      TutorDB.setUser("sdali12345", "DEADBEEF", "Bob", "Smith", "Student");
+      TutorDB.saveClasses(classes);
+      assertEquals("Comparing class hierarchies", classes.size(), TutorDB.getClasses().size());
    }
 
 

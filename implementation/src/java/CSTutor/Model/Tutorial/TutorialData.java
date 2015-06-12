@@ -31,9 +31,6 @@ public class TutorialData {
    /** Tracker for Progress that indicates if a tutorial has been seen or not. */
    public boolean hasSeen;
 
-   /** Contains all components of the tutorial track, with links to the beginning and end of the tutorial track */
-   RoadmapModule module;
-   
    public TutorialData() {
        description = new Description();
        tryItYourself = "";
@@ -101,13 +98,6 @@ public class TutorialData {
        description.exampleCode = code;
        description.exampleOutput = output;
        tryItYourself = tryIt;
-   }
-
-   /**
-   * Runs the code in the text editor and shows output to the console.
-   */
-   void run() {
-	   
    }
 
    /*

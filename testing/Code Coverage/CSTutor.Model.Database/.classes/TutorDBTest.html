@@ -50,18 +50,18 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    91.7%
+    92.3%
   </span>
   <span class="absValue">
-    (11/ 12)
+    (12/ 13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    72.8%
+    74.4%
   </span>
   <span class="absValue">
-    (59/ 81)
+    (64/ 86)
   </span>
 </td>
 </tr>
@@ -241,14 +241,25 @@
 <b class="fc"><i>167</i>&nbsp;      assertTrue(&quot;Testing getAllTutorialData&quot;, all.size() &gt; 0);</b>
 <b class="fc"><i>168</i>&nbsp;   }</b>
 <i>169</i>&nbsp;
-<i>170</i>&nbsp;
-<i>171</i>&nbsp;}
+<i>170</i>&nbsp;   /**
+<i>171</i>&nbsp;     * Test class hierarchy methods.
+<i>172</i>&nbsp;     */
+<i>173</i>&nbsp;   @Test
+<i>174</i>&nbsp;   public void testClassHierarchy() {
+<b class="fc"><i>175</i>&nbsp;      List&lt;CSTutor.Model.Manager.Class&gt; classes = TutorDB.getClasses();</b>
+<b class="fc"><i>176</i>&nbsp;      TutorDB.setUser(&quot;sdali12345&quot;, &quot;DEADBEEF&quot;, &quot;Bob&quot;, &quot;Smith&quot;, &quot;Student&quot;);</b>
+<b class="fc"><i>177</i>&nbsp;      TutorDB.saveClasses(classes);</b>
+<b class="fc"><i>178</i>&nbsp;      assertEquals(&quot;Comparing class hierarchies&quot;, classes.size(), TutorDB.getClasses().size());</b>
+<b class="fc"><i>179</i>&nbsp;   }</b>
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 18:51</div>
+    <div style="float:right;">generated on 2015-06-11 20:17</div>
 </div>
 </body>
 </html>
