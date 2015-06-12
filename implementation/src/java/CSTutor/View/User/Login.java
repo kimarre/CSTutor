@@ -41,7 +41,6 @@ public class Login extends JFrame{
         passwordField = new javax.swing.JPasswordField();
         RegisterButton = new javax.swing.JButton();
         LoginButton = new javax.swing.JButton();
-        RecoverPassButton = new javax.swing.JButton();
         invalidText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -64,18 +63,6 @@ public class Login extends JFrame{
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginButtonActionPerformed(evt);
-            }
-        });
-
-        RecoverPassButton.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        RecoverPassButton.setForeground(new java.awt.Color(0, 0, 255));
-        RecoverPassButton.setText("Forgot Password?");
-        RecoverPassButton.setBorder(null);
-        RecoverPassButton.setBorderPainted(false);
-        RecoverPassButton.setContentAreaFilled(false);
-        RecoverPassButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RecoverPassAction(evt);
             }
         });
 
@@ -168,11 +155,6 @@ public class Login extends JFrame{
         this.setVisible(false);
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
-    private void RecoverPassAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
-        recoverPass = new RecoverPassword();
-        recoverPass.setVisible(true);
-    }//GEN-LAST:event_RecoverPassAction
-
     /**
      * @param args the command line arguments
      */
@@ -223,5 +205,4 @@ public class Login extends JFrame{
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
     private RegisterGUI register;
-    private RecoverPassword recoverPass;
 }

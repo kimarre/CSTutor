@@ -44,7 +44,7 @@ public class AdminPanel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         UserList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {};
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -111,7 +111,12 @@ public class AdminPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PromoteAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
-        System.out.println(UserList.getSelectedValuesList());
+        for (Object username : UserList.getSelectedValuesList()) {
+            CSTutor.Model.User.User tempUser = TutorDB.getUser((String)username);
+            TutorDB.setUser(tempUser.getEmail(), tempUser.getPassword().getHash(), tempUser.getFirstName(), tempUser.getLastName(), "Professor");
+            this.setVisible(false);
+        }
+
     }//GEN-LAST:event_RecoverPassAction
 
     private void CloseAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecoverPassAction
