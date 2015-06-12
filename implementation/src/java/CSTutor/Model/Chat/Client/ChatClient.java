@@ -17,11 +17,11 @@ import CSTutor.Model.Chat.ChatOverlay;
  */
 
 public class ChatClient implements Runnable {
-    	Socket socket = null;
-    	ObjectInputStream input = null; 
-    	ObjectOutputStream output = null;
+    	public Socket socket = null;
+    	public ObjectInputStream input = null; 
+    	public ObjectOutputStream output = null;
     	
-    	private ChatOverlay chatOverlay;
+    	public ChatOverlay chatOverlay;
     	
     	/**
     	 * The name of the user

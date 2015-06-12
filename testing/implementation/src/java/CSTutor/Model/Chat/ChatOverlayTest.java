@@ -15,7 +15,6 @@ public class ChatOverlayTest {
 
 	@Test
 	public void testEnter() {
-		co = new ChatOverlay(null);
 		String s1 = "This is a test.";
 		String s2 = "       ";
 		
@@ -27,7 +26,6 @@ public class ChatOverlayTest {
 
 	@Test
 	public void testPushText() {
-		co = new ChatOverlay(null);
 		co.pushText("Test");
 		assertTrue(true);
 	}

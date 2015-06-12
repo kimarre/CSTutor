@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ChatServer {
 	
 
-	private ArrayList<ObjectOutputStream> chatClients;
+	public ArrayList<ObjectOutputStream> chatClients;
 	
 	
 	
@@ -22,7 +22,7 @@ public class ChatServer {
 	 * Constructor
 	 * @throws RemoteException
 	 */
-	protected ChatServer() { 
+	public ChatServer() { 
 		chatClients = new ArrayList<ObjectOutputStream>();
 	}
 	

@@ -23,7 +23,7 @@ public class ChatServerTest {
 
 	@Test
 	public void testRegisterChatClient() {
-		ObjectOutputStream os = new ObjectOutputStream()
+		ObjectOutputStream os = new ObjectOutputStream();
 		cs.registerChatClient(os);
 		assertTrue("Register chat client works: ", cs.chatClients.contains(os));
 		cs.chatClients.remove(os);
