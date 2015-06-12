@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    44.4%
+    68.2%
   </span>
   <span class="absValue">
-    (8/ 18)
+    (15/ 22)
   </span>
 </td>
 </tr>
@@ -89,38 +89,43 @@
 <i>15</i>&nbsp;
 <i>16</i>&nbsp;	@Test
 <i>17</i>&nbsp;	public void testEnter() {
-<b class="fc"><i>18</i>&nbsp;		Boolean test1 = co.Enter(&quot;This is a test.&quot;);</b>
-<b class="nc"><i>19</i>&nbsp;		Boolean test2 = co.Enter(&quot;       &quot;);</b>
-<i>20</i>&nbsp;		
-<b class="nc"><i>21</i>&nbsp;		assertTrue(&quot;Making sure that enter button works&quot;, test1 == true &amp;&amp; test2 == false);</b>
-<b class="nc"><i>22</i>&nbsp;	}</b>
-<i>23</i>&nbsp;
-<i>24</i>&nbsp;	@Test
-<i>25</i>&nbsp;	public void testPushText() {
-<b class="fc"><i>26</i>&nbsp;		co.pushText(&quot;Test&quot;);</b>
-<b class="nc"><i>27</i>&nbsp;		assertTrue(true);</b>
-<b class="nc"><i>28</i>&nbsp;	}</b>
-<i>29</i>&nbsp;
-<i>30</i>&nbsp;	@Test
-<i>31</i>&nbsp;	public void testSetLastString() {
-<b class="fc"><i>32</i>&nbsp;		co.setLastString(&quot;Happy Friday!&quot;);</b>
-<b class="nc"><i>33</i>&nbsp;		Boolean test1 = (co.lastStringInput.equals(&quot;Happy Friday!\n&quot;));</b>
-<b class="nc"><i>34</i>&nbsp;		assertTrue(&quot;Making sure the string changed&quot;, test1);</b>
-<b class="nc"><i>35</i>&nbsp;	}</b>
-<i>36</i>&nbsp;
-<i>37</i>&nbsp;	@Test
-<i>38</i>&nbsp;	public void testGetLastString() {
-<b class="fc"><i>39</i>&nbsp;		co.setLastString(&quot;Happy.&quot;);</b>
-<b class="nc"><i>40</i>&nbsp;		assertTrue(&quot;Making sure that it returns the correct string.&quot;, co.getLastString().equals(&quot;Happy.\n&quot;));</b>
-<b class="nc"><i>41</i>&nbsp;	}</b>
-<i>42</i>&nbsp;
-<i>43</i>&nbsp;}
+<b class="fc"><i>18</i>&nbsp;		co = new ChatOverlay(null);</b>
+<b class="fc"><i>19</i>&nbsp;		String s1 = &quot;This is a test.&quot;;</b>
+<b class="fc"><i>20</i>&nbsp;		String s2 = &quot;       &quot;;</b>
+<i>21</i>&nbsp;		
+<b class="fc"><i>22</i>&nbsp;		Boolean test1 = co.Enter(s1);</b>
+<b class="fc"><i>23</i>&nbsp;		Boolean test2 = co.Enter(s2);</b>
+<i>24</i>&nbsp;		
+<b class="fc"><i>25</i>&nbsp;		assertTrue(&quot;Making sure that enter button works&quot;, test1 == true &amp;&amp; test2 == false);</b>
+<b class="fc"><i>26</i>&nbsp;	}</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;	@Test
+<i>29</i>&nbsp;	public void testPushText() {
+<b class="fc"><i>30</i>&nbsp;		co = new ChatOverlay(null);</b>
+<b class="fc"><i>31</i>&nbsp;		co.pushText(&quot;Test&quot;);</b>
+<b class="nc"><i>32</i>&nbsp;		assertTrue(true);</b>
+<b class="nc"><i>33</i>&nbsp;	}</b>
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	@Test
+<i>36</i>&nbsp;	public void testSetLastString() {
+<b class="fc"><i>37</i>&nbsp;		co.setLastString(&quot;Happy Friday!&quot;);</b>
+<b class="nc"><i>38</i>&nbsp;		Boolean test1 = (co.lastStringInput.equals(&quot;Happy Friday!\n&quot;));</b>
+<b class="nc"><i>39</i>&nbsp;		assertTrue(&quot;Making sure the string changed&quot;, test1);</b>
+<b class="nc"><i>40</i>&nbsp;	}</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;	@Test
+<i>43</i>&nbsp;	public void testGetLastString() {
+<b class="fc"><i>44</i>&nbsp;		co.setLastString(&quot;Happy.&quot;);</b>
+<b class="nc"><i>45</i>&nbsp;		assertTrue(&quot;Making sure that it returns the correct string.&quot;, co.getLastString().equals(&quot;Happy.\n&quot;));</b>
+<b class="nc"><i>46</i>&nbsp;	}</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 22:21</div>
+    <div style="float:right;">generated on 2015-06-11 22:24</div>
 </div>
 </body>
 </html>
