@@ -25,10 +25,17 @@ public class ChatServerTest {
 	@Test
 	public void testRegisterChatClient() {
 		Socket s = new Socket();
-		ObjectOutputStream os = new ObjectOutputStream(s.getOutputStream());
-		cs.registerChatClient(os);
-		assertTrue("Register chat client works: ", cs.chatClients.contains(os));
-		cs.chatClients.remove(os);
+		
+		try {
+			ObjectOutputStream os = new ObjectOutputStream(s.getOutputStream());
+			cs.registerChatClient(os);
+			assertTrue("Register chat client works: ", cs.chatClients.contains(os));
+			cs.chatClients.remove(os);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			break;
+		}
 	}
 
 }
