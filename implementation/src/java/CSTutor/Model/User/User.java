@@ -1,5 +1,6 @@
 package CSTutor.Model.User;
 
+import CSTutor.Model.Database.TutorDB;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
@@ -14,7 +15,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  * A User is derived from
  * <a href="../../requirements/functionalRequirements/login.html"> Section 2.6 
  * </a> the requirements.
- * @author Kyle Reis
+ * @author Kyle Reis (kjreis@calpoly.edu)
  */
 public class User {
     /**
@@ -118,5 +119,33 @@ public class User {
     public void setInstructor()
     {
         instructor = true;
+    }
+
+    /**
+     * Validates that all of the needed information for a User was entered and
+     * adds the user to the TutorDB's user table if all of the information was entered and
+     * there isn't already a user with that information.
+     *
+     * @param firstName The user's first name.
+     * @param lastName The user's last name.
+     * @param email The user's email address.
+     * @param pass The user's password.
+     * @param instructor Whether or not a user is an instructor.
+     *
+    post:
+    database.users.length() > 0;
+     */
+    public static boolean registerUser(String firstName, String lastName, String email, String pass, boolean instructor)
+    {
+        EmailValidator validator = EmailValidator.getInstance(false);
+        if (TutorDB.getUser(email) == null)
+        {
+            User user = new User(firstName, lastName, email, pass, instructor, true);
+            TutorDB.setUser(email, user.getPassword().getHash(), firstName, lastName, instructor ? "Professor" : "Student");
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
