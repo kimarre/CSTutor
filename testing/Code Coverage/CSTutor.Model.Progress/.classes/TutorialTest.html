@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TutorialTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Progress</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TutorialTest (CSTutor.Model.Progress)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TutorialTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package CSTutor.Model.Progress;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import CSTutor.Model.Progress.Tutorial;
+<i>9</i>&nbsp;import org.junit.Test;
+<i>10</i>&nbsp;import static org.junit.Assert.*;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * @author Erica Solum (esolum@calpoly.edu)
+<i>14</i>&nbsp; * @version 18May2015
+<i>15</i>&nbsp; */
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/****
+<i>18</i>&nbsp; *
+<i>19</i>&nbsp; * Class TutorialTest is the companion testing class for TutorialData.  
+<i>20</i>&nbsp; * It implements the following module test plan:
+<i>21</i>&nbsp; *									  &lt;pre&gt;
+<i>22</i>&nbsp; *    Phase 1: Unit test the constructor.
+<i>23</i>&nbsp; *     
+<i>24</i>&nbsp; *    Phase 2: Unit test the toString method.
+<i>25</i>&nbsp; * 
+<i>26</i>&nbsp; *    Phase 3: Unit test the equals method against other TutorialData objects.
+<i>27</i>&nbsp; * 
+<i>28</i>&nbsp; *    Phase 4: Stress test the equals method with many other TutorialData objects.
+<i>29</i>&nbsp; *									 &lt;/pre&gt;
+<i>30</i>&nbsp; */
+<b class="fc"><i>31</i>&nbsp;public class TutorialTest </b>
+<i>32</i>&nbsp;{
+<i>33</i>&nbsp;    Tutorial data;
+<i>34</i>&nbsp;    
+<i>35</i>&nbsp;    public TutorialTest() 
+<b class="fc"><i>36</i>&nbsp;    {</b>
+<b class="fc"><i>37</i>&nbsp;        data = new Tutorial(&quot;Hello World&quot;);</b>
+<b class="fc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;    
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     * Test method for toString().
+<i>42</i>&nbsp;     */
+<i>43</i>&nbsp;    @Test
+<i>44</i>&nbsp;    public void testToString()
+<i>45</i>&nbsp;    {
+<b class="fc"><i>46</i>&nbsp;        assert(data.toString().equals(&quot;Hello World&quot;));</b>
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;    
+<i>49</i>&nbsp;    /**
+<i>50</i>&nbsp;     * Test method for equals().
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    @Test
+<i>53</i>&nbsp;    public void equals()
+<i>54</i>&nbsp;    {
+<i>55</i>&nbsp;        
+<b class="fc"><i>56</i>&nbsp;    }</b>
+<i>57</i>&nbsp;    
+<i>58</i>&nbsp;    /**
+<i>59</i>&nbsp;     * Test method for setStudents().
+<i>60</i>&nbsp;     */
+<i>61</i>&nbsp;    @Test
+<i>62</i>&nbsp;    public void testSetStudents()
+<i>63</i>&nbsp;    {
+<i>64</i>&nbsp;        
+<b class="fc"><i>65</i>&nbsp;    }</b>
+<i>66</i>&nbsp;    
+<i>67</i>&nbsp;    /**
+<i>68</i>&nbsp;     * Test method for getStudents().
+<i>69</i>&nbsp;     */
+<i>70</i>&nbsp;    @Test
+<i>71</i>&nbsp;    public void testGetStudents()
+<i>72</i>&nbsp;    {
+<i>73</i>&nbsp;        
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;    
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * Test method for getAverageQuizScores().
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    @Test
+<i>80</i>&nbsp;    public void testGetAverageQuizScores()
+<i>81</i>&nbsp;    {
+<i>82</i>&nbsp;        
+<i>83</i>&nbsp;       
+<b class="fc"><i>84</i>&nbsp;    }</b>
+<i>85</i>&nbsp;    
+<i>86</i>&nbsp;    /**
+<i>87</i>&nbsp;     * Test method for getQuizScores().
+<i>88</i>&nbsp;     */
+<i>89</i>&nbsp;    @Test
+<i>90</i>&nbsp;    public void testGetQuizScores()
+<i>91</i>&nbsp;    {
+<i>92</i>&nbsp;        
+<b class="fc"><i>93</i>&nbsp;    }</b>
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 19:54</div>
+</div>
+</body>
+</html>
