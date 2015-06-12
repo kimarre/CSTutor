@@ -2,6 +2,7 @@ package CSTutor.Model.Chat.Server;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
@@ -34,7 +35,7 @@ public class ChatServerTest {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			break;
+			return;
 		}
 	}
 

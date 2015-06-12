@@ -75,6 +75,10 @@ TEST_CLASS = CSTutor.Model.User.PasswordTest \
 		CSTutor.Model.Progress.TutorialListModelTest \
 		CSTutor.Model.Database.TutorDBTest \
 		CSTutor.Model.Manager.ManagerTest \
+		CSTutor.Model.Manager.UnitTest \
+		CSTutor.Model.Manager.TutorialTest \
+		CSTutor.Model.Manager.SectionTest \
+		CSTutor.Model.Manager.ClassTest \
 		CSTutor.Model.Chat.ChatOverlayTest \
 		CSTutor.Model.Chat.Client.ChatClientTest \
 		CSTutor.Model.Chat.Server.ChatServerTest \
