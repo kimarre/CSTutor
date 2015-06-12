@@ -303,60 +303,6 @@ public class TutorDB {
    }
 
 
-/*** Page methods *********************************************************************************/
-
-   /**
-    * Get list of Pages for the specified Tutorial
-    *
-    * @param tutorial the Tutorial to look up Pages for
-    * @return List of Pages
-    * pre:
-    *  tutorial != null && tutorial.parent != null && tutorial.parent.parent != null
-    *  && tutorial.parent.parent.parent != null;
-    * post:
-    *  return != null;
-    */
-   public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) throws SQLException {
-      List<CSTutor.Model.Manager.Page> pages = new ArrayList<CSTutor.Model.Manager.Page>();
-      CSTutor.Model.Manager.Page p;
-      PreparedStatement s = conn.prepareStatement(
-       "SELECT * FROM Pages WHERE tutorialName=? AND unitName=? AND sectionName=? AND className=?");
-      List<String> values = Arrays.asList(tutorial.name, tutorial.parent.name,
-       tutorial.parent.parent.name, tutorial.parent.parent.parent.name);
-      for (int i = 0; i < values.size(); i++) {
-         s.setString(i+1, values.get(i));
-      }
-      ResultSet r = s.executeQuery();
-      while (r.next()) {
-         p = new CSTutor.Model.Manager.Page(r.getString("pageName"), tutorial);
-         pages.add(p);
-      }
-      s.close();
-      return pages;
-   }
-
-   /**
-    * Save a list of Pages to the database
-    *
-    * @param pages list of Pages to save
-    * pre:
-    *  pages != null;
-    */
-   public static void savePages(List<CSTutor.Model.Manager.Page> pages) throws SQLException {
-      for (CSTutor.Model.Manager.Page p : pages) {
-         PreparedStatement s = conn.prepareStatement(
-          "INSERT OR IGNORE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?, ?)");
-         s.setString(1, p.name);
-         s.setString(2, p.parent.name);
-         s.setString(3, p.parent.parent.name);
-         s.setString(4, p.parent.parent.parent.name);
-         s.setString(5, p.parent.parent.parent.parent.name);
-         s.executeUpdate();
-         s.close();
-      }
-   }
-
-
 /*** Tutorial methods *****************************************************************************/
 
    /**
@@ -382,7 +328,6 @@ public class TutorDB {
          ResultSet r = s.executeQuery();
          while (r.next()) {
             t = new CSTutor.Model.Manager.Tutorial(r.getString("tutorialName"), unit);
-            t.pages = getPages(t);
             tutorials.add(t);
          }
          s.close();
@@ -410,7 +355,6 @@ public class TutorDB {
          s.setString(4, t.parent.parent.parent.name);
          s.executeUpdate();
          s.close();
-         savePages(t.pages);
       }
    }
 
@@ -573,9 +517,6 @@ public class TutorDB {
                System.out.println("    <" + u.name + ">");
                for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {
                   System.out.println("      <" + t.name + ">");
-                  for (CSTutor.Model.Manager.Page p : t.pages) {
-                     System.out.println("        <" + p.name + ">");
-                  }
                }
             }
          }
