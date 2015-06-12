@@ -201,11 +201,6 @@ public class Manager {
       post:
        selectedTutorial'.pages.contains(page);
     */
-    public void createPage(Page page){
-       if (selectedTutorial != null) {
- 		   selectedTutorial.pages.add(page);
- 	   }
-    }
 
     /**
      * Deletes the given class 
