@@ -45,7 +45,8 @@ public class StudentTest
     @Test
     public void testToString()
     {
-        
+        String testString = testStudent.toString();
+        assert(testString.equals("John Lennon"));
     }
     
     /**
@@ -54,7 +55,9 @@ public class StudentTest
     @Test
     public void testAddClass()
     {
-        
+        testStudent.addClass(new Class("CPE 102"));
+        enrolledClasses.add(new Class("CPE 102"));
+        assert(testStudent.getEnrolledClasses().equals(enrolledClasses));
     }
     
     /**
@@ -66,6 +69,9 @@ public class StudentTest
         Student newStudent = new Student("Ringo Star", enrolledClasses);
         assert(!newStudent.equals(testStudent));
         
+        Student newStudent2 = new Student("John Lennon", enrolledClasses);
+        assert(newStudent2.equals(testStudent));
+        
     }
     
     /**
@@ -74,6 +80,8 @@ public class StudentTest
     @Test
     public void testGetEnrolledClasses()
     {
+        ArrayList<Class> testClasses = testStudent.getEnrolledClasses();
+        assert(testClasses.equals(enrolledClasses));
         
     }
 }

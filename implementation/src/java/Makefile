@@ -70,7 +70,6 @@ TEST_CLASS = CSTutor.Model.User.PasswordTest \
 		CSTutor.Model.Progress.ClassTest \
 		CSTutor.Model.Progress.StudentListModelTest \
 		CSTutor.Model.Progress.StudentTest \
-		CSTutor.Model.Progress.TutorialDataTest \
 		CSTutor.Model.Progress.TutorialListModelTest \
 		CSTutor.Model.Database.TutorDBTest \
 		CSTutor.Model.Manager.ManagerTest \

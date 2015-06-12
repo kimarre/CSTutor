@@ -1,5 +1,6 @@
 package CSTutor.View.User;
 
+import CSTutor.Model.Database.TutorDB;
 import CSTutor.Model.User.*;
 
 import javax.swing.*;
@@ -119,8 +120,8 @@ public class RegisterGUI extends javax.swing.JFrame {
             this.setVisible(false);
         } else {
             JOptionPane.showConfirmDialog(null,
-                    "Invalid email entered",
-                    "Validation error", JOptionPane.OK_CANCEL_OPTION);
+                    (TutorDB.getUser(emailField.getText()) != null) ? "email already exists" : "email invalid",
+                    "Registration Error", JOptionPane.OK_CANCEL_OPTION);
         }
     }//GEN-LAST:event_SubmitAction
 
