@@ -55,7 +55,6 @@ public class TutorDBTest {
       assertEquals("Comparing correct and test user", correctuser.isInstructor(), testuser.isInstructor());
       TutorDB.deleteUser("sdali");
       assertEquals("Looking for nonexistent user", null, TutorDB.getUser("sdali"));
-      TutorDB.deleteUser("sdali");
    }
 
     /**
@@ -158,18 +157,20 @@ public class TutorDBTest {
    }
 
     /**
-     * Test methods getAllTutorialData.
+     * Test methods getAllTutorialData and getAllUserData.
      */
    @Test
-   public void testGetAllTutorialData() {
-      CSTutor.Model.Tutorial.TutorialData data;
+   public void testGetAllThings() {
       List<CSTutor.Model.Tutorial.TutorialData> all;
-      data = new CSTutor.Model.Tutorial.TutorialData(
+      CSTutor.Model.Tutorial.TutorialData data = new CSTutor.Model.Tutorial.TutorialData(
        1111, "title", "description", "syntax", "example code",
        "example output", "try it yourself");
       TutorDB.setTutorialData(data);
       all = TutorDB.getAllTutorialData();
       assertTrue("Testing getAllTutorialData", all.size() > 0);
+
+      List<CSTutor.Model.Progress.QuizData> quizzes = TutorDB.getAllQuizData();
+      assertNotNull("Testing getAllTQuizData", quizzes);
    }
 
     /**

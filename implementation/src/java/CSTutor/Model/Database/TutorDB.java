@@ -300,7 +300,7 @@ public class TutorDB {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM QuizData");
          ResultSet r = s.executeQuery();
          while (r.next()) {
-            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numPages"));
+            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numQuestions"));
             quizzes.add(q);
          }
          s.close();
