@@ -61,7 +61,7 @@
     100%
   </span>
   <span class="absValue">
-    (16/ 16)
+    (17/ 17)
   </span>
 </td>
 </tr>
@@ -85,15 +85,15 @@
 <i>11</i>&nbsp;	/* The name of the section */
 <i>12</i>&nbsp;   public String name;
 <i>13</i>&nbsp;	/* The enrolled students in the section. A subset of students enrolled in the class*/
-<i>14</i>&nbsp;   public List&lt;User&gt; students;
+<i>14</i>&nbsp;   public List&lt;CSTutor.Model.User.User&gt; students;
 <i>15</i>&nbsp;   /* The set of units within the section*/
 <i>16</i>&nbsp;   public List&lt;Unit&gt; units;
 <i>17</i>&nbsp;   /* the professor in charge of the section */
-<i>18</i>&nbsp;   public User professor;
+<i>18</i>&nbsp;   public CSTutor.Model.User.User professor;
 <i>19</i>&nbsp;   /* The class that this section is a part of */
 <i>20</i>&nbsp;   public Class parent;
 <i>21</i>&nbsp;   
-<b class="fc"><i>22</i>&nbsp;   public Section(String name, List&lt;User&gt; students, User professor, Class parent) {</b>
+<b class="fc"><i>22</i>&nbsp;   public Section(String name, List&lt;CSTutor.Model.User.User&gt; students, CSTutor.Model.User.User professor, Class parent) {</b>
 <b class="fc"><i>23</i>&nbsp;	   this.name = name;</b>
 <b class="fc"><i>24</i>&nbsp;	   this.students = students;</b>
 <b class="fc"><i>25</i>&nbsp;	   this.professor = professor;</b>
@@ -105,22 +105,23 @@
 <i>31</i>&nbsp;
 <b class="fc"><i>32</i>&nbsp;   public Section(String name, Class parent) {</b>
 <b class="fc"><i>33</i>&nbsp;      this.name = name;</b>
-<b class="fc"><i>34</i>&nbsp;      this.students = new ArrayList&lt;User&gt;();</b>
+<b class="fc"><i>34</i>&nbsp;      this.students = new ArrayList&lt;CSTutor.Model.User.User&gt;();</b>
 <b class="fc"><i>35</i>&nbsp;      this.professor = null;</b>
 <b class="fc"><i>36</i>&nbsp;      this.units = new ArrayList&lt;Unit&gt;();</b>
-<b class="fc"><i>37</i>&nbsp;      this.parent = parent;</b>
-<b class="fc"><i>38</i>&nbsp;   }</b>
-<i>39</i>&nbsp;   
-<i>40</i>&nbsp;   public String toString() {
-<b class="fc"><i>41</i>&nbsp;	   return name;</b>
-<i>42</i>&nbsp;   }
-<i>43</i>&nbsp;}
+<b class="fc"><i>37</i>&nbsp;	   this.units.add(new Unit(&quot;Uncategorized&quot;, this));</b>
+<b class="fc"><i>38</i>&nbsp;      this.parent = parent;</b>
+<b class="fc"><i>39</i>&nbsp;   }</b>
+<i>40</i>&nbsp;   
+<i>41</i>&nbsp;   public String toString() {
+<b class="fc"><i>42</i>&nbsp;	   return name;</b>
+<i>43</i>&nbsp;   }
+<i>44</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 23:06</div>
+    <div style="float:right;">generated on 2015-06-11 23:44</div>
 </div>
 </body>
 </html>

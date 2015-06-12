@@ -50,18 +50,18 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    42.1%
+    93.3%
   </span>
   <span class="absValue">
-    (8/ 19)
+    (14/ 15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    34.5%
+    72.2%
   </span>
   <span class="absValue">
-    (30/ 87)
+    (57/ 79)
   </span>
 </td>
 </tr>
@@ -102,11 +102,11 @@
 <b class="fc"><i>28</i>&nbsp;   }</b>
 <i>29</i>&nbsp;   
 <i>30</i>&nbsp;   public void clearSelections() {
-<b class="nc"><i>31</i>&nbsp;   	selectedClass = null;</b>
-<b class="nc"><i>32</i>&nbsp;   	selectedSection = null;</b>
-<b class="nc"><i>33</i>&nbsp;   	selectedUnit = null;</b>
-<b class="nc"><i>34</i>&nbsp;   	selectedTutorial = null;</b>
-<b class="nc"><i>35</i>&nbsp;   }</b>
+<b class="fc"><i>31</i>&nbsp;   	selectedClass = null;</b>
+<b class="fc"><i>32</i>&nbsp;   	selectedSection = null;</b>
+<b class="fc"><i>33</i>&nbsp;   	selectedUnit = null;</b>
+<b class="fc"><i>34</i>&nbsp;   	selectedTutorial = null;</b>
+<b class="fc"><i>35</i>&nbsp;   }</b>
 <i>36</i>&nbsp;
 <i>37</i>&nbsp;   /**
 <i>38</i>&nbsp;    * SelectSection sets the selectedSection to the given section, if it
@@ -177,8 +177,8 @@
 <i>103</i>&nbsp;       selectedTutorial&#39;.equals(select);
 <i>104</i>&nbsp;    */ 
 <i>105</i>&nbsp;   public void selectTutorial(Tutorial select){
-<b class="nc"><i>106</i>&nbsp;   	System.out.println(&quot;Selecting &quot; + select);</b>
-<b class="nc"><i>107</i>&nbsp;	   if (select == null) {</b>
+<b class="fc"><i>106</i>&nbsp;   	System.out.println(&quot;Selecting &quot; + select);</b>
+<b class="fc"><i>107</i>&nbsp;	   if (select == null) {</b>
 <b class="nc"><i>108</i>&nbsp;	   	System.out.println(&quot;Warning: nothing selected&quot;);</b>
 <b class="nc"><i>109</i>&nbsp;		   selectedTutorial = null;</b>
 <b class="nc"><i>110</i>&nbsp;		   selectedUnit = null;</b>
@@ -186,11 +186,11 @@
 <b class="nc"><i>112</i>&nbsp;		   selectedClass = null;</b>
 <i>113</i>&nbsp;	   }
 <i>114</i>&nbsp;	   else {
-<b class="nc"><i>115</i>&nbsp;		   selectedTutorial = select;</b>
-<b class="nc"><i>116</i>&nbsp;		   selectUnit(select.parent);</b>
-<b class="nc"><i>117</i>&nbsp;           System.out.println(&quot;Selected Tutorial: &quot; + selectedTutorial.name);</b>
+<b class="fc"><i>115</i>&nbsp;		   selectedTutorial = select;</b>
+<b class="fc"><i>116</i>&nbsp;		   selectUnit(select.parent);</b>
+<b class="fc"><i>117</i>&nbsp;           System.out.println(&quot;Selected Tutorial: &quot; + selectedTutorial.name);</b>
 <i>118</i>&nbsp;	   }
-<b class="nc"><i>119</i>&nbsp;   }</b>
+<b class="fc"><i>119</i>&nbsp;   }</b>
 <i>120</i>&nbsp;   /**
 <i>121</i>&nbsp;    * SelectPage sets the selectedPage to the given page, if it is within the selectedTutorial.
 <i>122</i>&nbsp;    * &lt;pre&gt;
@@ -275,106 +275,72 @@
 <i>201</i>&nbsp;      post:
 <i>202</i>&nbsp;       selectedTutorial&#39;.pages.contains(page);
 <i>203</i>&nbsp;    */
-<i>204</i>&nbsp;    public void createPage(Page page){
-<b class="nc"><i>205</i>&nbsp;       if (selectedTutorial != null) {</b>
-<b class="nc"><i>206</i>&nbsp; 		   selectedTutorial.pages.add(page);</b>
-<i>207</i>&nbsp; 	   }
-<b class="nc"><i>208</i>&nbsp;    }</b>
-<i>209</i>&nbsp;
-<i>210</i>&nbsp;    /**
-<i>211</i>&nbsp;     * Deletes the given class 
-<i>212</i>&nbsp;     * &lt;pre&gt;
-<i>213</i>&nbsp;      pre:
-<i>214</i>&nbsp;       selectedClass != null &amp;&amp; data.contains(selectedClass);
-<i>215</i>&nbsp;      post:
-<i>216</i>&nbsp;       selectedClass&#39; == null &amp;&amp; !data&#39;.contains(selectedClass);
-<i>217</i>&nbsp;     */
-<i>218</i>&nbsp;    public void deleteClass() {
-<b class="nc"><i>219</i>&nbsp;    	data.remove(selectedClass);</b>
-<b class="nc"><i>220</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteClass()&quot;);</b>
-<b class="nc"><i>221</i>&nbsp;    }</b>
-<i>222</i>&nbsp;
-<i>223</i>&nbsp;    /**
-<i>224</i>&nbsp;     * Deletes the given section 
-<i>225</i>&nbsp;     * &lt;pre&gt;
-<i>226</i>&nbsp;      pre:
-<i>227</i>&nbsp;       selectedSection != null &amp;&amp; selectedClass != null &amp;&amp; selectedClass.sections.contains(selectedSection);
-<i>228</i>&nbsp;      post:
-<i>229</i>&nbsp;       selectedSection&#39; == null &amp;&amp; !selectedClass&#39;.sections.contains(selectedSection);
-<i>230</i>&nbsp;     */
-<i>231</i>&nbsp;    public void deleteSection() {
-<b class="nc"><i>232</i>&nbsp;    	if(selectedClass != null &amp;&amp; selectedSection != null &amp;&amp; selectedSection.name.equals(&quot;All sections&quot;)) {</b>
-<b class="nc"><i>233</i>&nbsp;    		selectedClass.sections.remove(selectedSection);</b>
-<i>234</i>&nbsp;    	}
-<b class="nc"><i>235</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteSection()&quot;);</b>
-<b class="nc"><i>236</i>&nbsp;    }</b>
-<i>237</i>&nbsp;
-<i>238</i>&nbsp;    /**
-<i>239</i>&nbsp;     * Deletes the given unit 
-<i>240</i>&nbsp;     * &lt;pre&gt;
-<i>241</i>&nbsp;      pre:
-<i>242</i>&nbsp;       selectedSection != null &amp;&amp; selectedUnit != null &amp;&amp; selectedSections.units.contains(selectedUnit);
-<i>243</i>&nbsp;      post:
-<i>244</i>&nbsp;       selectedUnit&#39; == null &amp;&amp; !selectedSection&#39;.units.contains(selectedUnit);
-<i>245</i>&nbsp;     */
-<i>246</i>&nbsp;    public void deleteUnit() {
-<b class="nc"><i>247</i>&nbsp;    	if(selectedSection != null &amp;&amp; selectedUnit != null &amp;&amp; selectedUnit.name.equals(&quot;Uncategorized&quot;)) {</b>
-<b class="nc"><i>248</i>&nbsp;    		selectedSection.units.remove(selectedUnit);</b>
-<i>249</i>&nbsp;    	}
-<b class="nc"><i>250</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteUnit()&quot;);</b>
-<b class="nc"><i>251</i>&nbsp;    }</b>
-<i>252</i>&nbsp;
-<i>253</i>&nbsp;    /**
-<i>254</i>&nbsp;     * Deletes the given tutorial 
-<i>255</i>&nbsp;     * &lt;pre&gt;
-<i>256</i>&nbsp;      pre:
-<i>257</i>&nbsp;       selectedTutorial != null &amp;&amp; selectedUnit != null &amp;&amp; selectedUnit.tutorials.contains(selectedTutorial);
-<i>258</i>&nbsp;      post:
-<i>259</i>&nbsp;       selectedTutorial&#39; == null &amp;&amp; !selectedUnit&#39;.sections.contains(selectedTutorial);
-<i>260</i>&nbsp;     */
-<i>261</i>&nbsp;    public void deleteTutorial() {
-<b class="nc"><i>262</i>&nbsp;    	if(selectedUnit != null) {</b>
-<b class="nc"><i>263</i>&nbsp;    		selectedUnit.tutorials.remove(selectedUnit);</b>
-<i>264</i>&nbsp;    	}
-<b class="nc"><i>265</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteTutorial()&quot;);</b>
-<b class="nc"><i>266</i>&nbsp;    }</b>
-<i>267</i>&nbsp;
-<i>268</i>&nbsp;    /**
-<i>269</i>&nbsp;     * Deletes the given page 
-<i>270</i>&nbsp;     */
-<i>271</i>&nbsp;    public void deletePage(Page page) {
-<b class="nc"><i>272</i>&nbsp;    	if(selectedTutorial != null) {</b>
-<b class="nc"><i>273</i>&nbsp;    		selectedTutorial.pages.remove(selectedPage);</b>
-<i>274</i>&nbsp;    	}
-<b class="nc"><i>275</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deletePage()&quot;);</b>
-<b class="nc"><i>276</i>&nbsp;    }</b>
-<i>277</i>&nbsp;
-<i>278</i>&nbsp;
-<i>279</i>&nbsp;   /**
-<i>280</i>&nbsp;    * MovePage moves the selected page into the given tutorial, if it exists.
-<i>281</i>&nbsp;    * &lt;pre&gt;
-<i>282</i>&nbsp;     pre:
-<i>283</i>&nbsp;      selectedPage != null;
-<i>284</i>&nbsp;     post:
-<i>285</i>&nbsp;      newTutorial&#39;.pages.contains(selectedPage);
-<i>286</i>&nbsp;    */
-<b class="nc"><i>287</i>&nbsp;    public void movePage(Tutorial newTutorial){}</b>
-<i>288</i>&nbsp;   /**
-<i>289</i>&nbsp;    * MoveTutorial moves the given tutorial into the given unit.
-<i>290</i>&nbsp;    * &lt;pre&gt;
-<i>291</i>&nbsp;     pre:
-<i>292</i>&nbsp;      selectedTutorial != null;
-<i>293</i>&nbsp;     post:
-<i>294</i>&nbsp;      newUnit&#39;.tutorials.contains(selectedTutorial);
-<i>295</i>&nbsp;    */
-<b class="nc"><i>296</i>&nbsp;    public void moveTutorial(Unit newUnit){}</b>
-<i>297</i>&nbsp;}
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    /**
+<i>206</i>&nbsp;     * Deletes the given class 
+<i>207</i>&nbsp;     * &lt;pre&gt;
+<i>208</i>&nbsp;      pre:
+<i>209</i>&nbsp;       selectedClass != null &amp;&amp; data.contains(selectedClass);
+<i>210</i>&nbsp;      post:
+<i>211</i>&nbsp;       selectedClass&#39; == null &amp;&amp; !data&#39;.contains(selectedClass);
+<i>212</i>&nbsp;     */
+<i>213</i>&nbsp;    public void deleteClass() {
+<b class="fc"><i>214</i>&nbsp;    	data.remove(selectedClass);</b>
+<b class="fc"><i>215</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteClass()&quot;);</b>
+<b class="fc"><i>216</i>&nbsp;    }</b>
+<i>217</i>&nbsp;
+<i>218</i>&nbsp;    /**
+<i>219</i>&nbsp;     * Deletes the given section 
+<i>220</i>&nbsp;     * &lt;pre&gt;
+<i>221</i>&nbsp;      pre:
+<i>222</i>&nbsp;       selectedSection != null &amp;&amp; selectedClass != null &amp;&amp; selectedClass.sections.contains(selectedSection);
+<i>223</i>&nbsp;      post:
+<i>224</i>&nbsp;       selectedSection&#39; == null &amp;&amp; !selectedClass&#39;.sections.contains(selectedSection);
+<i>225</i>&nbsp;     */
+<i>226</i>&nbsp;    public void deleteSection() {
+<b class="fc"><i>227</i>&nbsp;    	if(selectedClass != null &amp;&amp; selectedSection != null &amp;&amp; !selectedSection.name.equals(&quot;All sections&quot;)) {</b>
+<b class="fc"><i>228</i>&nbsp;    		selectedClass.sections.remove(selectedSection);</b>
+<i>229</i>&nbsp;    	}
+<b class="fc"><i>230</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteSection()&quot;);</b>
+<b class="fc"><i>231</i>&nbsp;    }</b>
+<i>232</i>&nbsp;
+<i>233</i>&nbsp;    /**
+<i>234</i>&nbsp;     * Deletes the given unit 
+<i>235</i>&nbsp;     * &lt;pre&gt;
+<i>236</i>&nbsp;      pre:
+<i>237</i>&nbsp;       selectedSection != null &amp;&amp; selectedUnit != null &amp;&amp; selectedSections.units.contains(selectedUnit);
+<i>238</i>&nbsp;      post:
+<i>239</i>&nbsp;       selectedUnit&#39; == null &amp;&amp; !selectedSection&#39;.units.contains(selectedUnit);
+<i>240</i>&nbsp;     */
+<i>241</i>&nbsp;    public void deleteUnit() {
+<b class="fc"><i>242</i>&nbsp;    	if(selectedSection != null &amp;&amp; selectedUnit != null &amp;&amp; !selectedUnit.name.equals(&quot;Uncategorized&quot;)) {</b>
+<b class="fc"><i>243</i>&nbsp;    		System.out.println(&quot;Unit deleted if it exists&quot;);</b>
+<b class="fc"><i>244</i>&nbsp;    		selectedSection.units.remove(selectedUnit);</b>
+<i>245</i>&nbsp;    	}
+<b class="fc"><i>246</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteUnit()&quot;);</b>
+<b class="fc"><i>247</i>&nbsp;    }</b>
+<i>248</i>&nbsp;
+<i>249</i>&nbsp;    /**
+<i>250</i>&nbsp;     * Deletes the given tutorial 
+<i>251</i>&nbsp;     * &lt;pre&gt;
+<i>252</i>&nbsp;      pre:
+<i>253</i>&nbsp;       selectedTutorial != null &amp;&amp; selectedUnit != null &amp;&amp; selectedUnit.tutorials.contains(selectedTutorial);
+<i>254</i>&nbsp;      post:
+<i>255</i>&nbsp;       selectedTutorial&#39; == null &amp;&amp; !selectedUnit&#39;.sections.contains(selectedTutorial);
+<i>256</i>&nbsp;     */
+<i>257</i>&nbsp;    public void deleteTutorial() {
+<b class="fc"><i>258</i>&nbsp;    	if(selectedUnit != null) {</b>
+<b class="fc"><i>259</i>&nbsp;    		selectedUnit.tutorials.remove(selectedTutorial);</b>
+<i>260</i>&nbsp;    	}
+<b class="fc"><i>261</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteTutorial()&quot;);</b>
+<b class="fc"><i>262</i>&nbsp;    }</b>
+<i>263</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 23:06</div>
+    <div style="float:right;">generated on 2015-06-11 23:44</div>
 </div>
 </body>
 </html>
