@@ -42,26 +42,26 @@
   <td class="name">ChatServer</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    33.3%
   </span>
   <span class="absValue">
-    (0/ 3)
+    (1/ 3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    25%
   </span>
   <span class="absValue">
-    (0/ 9)
+    (3/ 12)
   </span>
 </td>
 </tr>
@@ -96,9 +96,9 @@
 <i>22</i>&nbsp;	 * Constructor
 <i>23</i>&nbsp;	 * @throws RemoteException
 <i>24</i>&nbsp;	 */
-<b class="nc"><i>25</i>&nbsp;	protected ChatServer() { </b>
-<b class="nc"><i>26</i>&nbsp;		chatClients = new ArrayList&lt;ObjectOutputStream&gt;();</b>
-<i>27</i>&nbsp;	}
+<b class="fc"><i>25</i>&nbsp;	protected ChatServer() { </b>
+<b class="fc"><i>26</i>&nbsp;		chatClients = new ArrayList&lt;ObjectOutputStream&gt;();</b>
+<b class="fc"><i>27</i>&nbsp;	}</b>
 <i>28</i>&nbsp;	
 <i>29</i>&nbsp;	
 <i>30</i>&nbsp;	/**
@@ -114,7 +114,7 @@
 <b class="nc"><i>40</i>&nbsp;				e.printStackTrace();</b>
 <b class="nc"><i>41</i>&nbsp;			}</b>
 <b class="nc"><i>42</i>&nbsp;		}</b>
-<i>43</i>&nbsp;	}
+<b class="nc"><i>43</i>&nbsp;	}</b>
 <i>44</i>&nbsp;	/**
 <i>45</i>&nbsp;	 * Registers the chat clients with the server. 
 <i>46</i>&nbsp;	 * 
@@ -124,14 +124,14 @@
 <i>50</i>&nbsp;	
 <i>51</i>&nbsp;	public synchronized void registerChatClient(ObjectOutputStream stream){
 <b class="nc"><i>52</i>&nbsp;		this.chatClients.add(stream);</b>
-<i>53</i>&nbsp;	}
+<b class="nc"><i>53</i>&nbsp;	}</b>
 <i>54</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 21:37</div>
+    <div style="float:right;">generated on 2015-06-11 22:24</div>
 </div>
 </body>
 </html>

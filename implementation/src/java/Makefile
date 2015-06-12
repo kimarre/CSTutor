@@ -59,7 +59,10 @@ TESTS = $(TEST_SRC_DIR)/User/*.java \
 		$(TEST_SRC_DIR)/Tutorial/*.java \
 		$(TEST_SRC_DIR)/Progress/*.java \
 		$(TEST_SRC_DIR)/Database/*.java \
-		$(TEST_SRC_DIR)/Manager/*.java 
+		$(TEST_SRC_DIR)/Manager/*.java \
+		$(TEST_SRC_DIR)/Chat/*.java \
+		$(TEST_SRC_DIR)/Chat/Client/*.java \
+		$(TEST_SRC_DIR)/Chat/Server/*.java \
 
 TEST_CLASS = CSTutor.Model.User.PasswordTest \
 		CSTutor.Model.User.RegisterTest \
@@ -73,6 +76,11 @@ TEST_CLASS = CSTutor.Model.User.PasswordTest \
 		CSTutor.Model.Progress.TutorialListModelTest \
 		CSTutor.Model.Database.TutorDBTest \
 		CSTutor.Model.Manager.ManagerTest \
+		CSTutor.Model.Chat.ChatOverlayTest \
+		CSTutor.Model.Chat.Client.ChatClientTest \
+		CSTutor.Model.Chat.Server.ChatServerTest \
+		CSTutor.Model.Chat.Server.ServerDriverTest \
+		CSTutor.Model.Chat.Server.WorkerTest
 
 
 

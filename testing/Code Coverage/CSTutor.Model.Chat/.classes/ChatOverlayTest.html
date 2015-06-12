@@ -1,0 +1,131 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ChatOverlayTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Chat</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ChatOverlayTest (CSTutor.Model.Chat)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatOverlayTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.2%
+  </span>
+  <span class="absValue">
+    (15/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Chat;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import static org.junit.Assert.*;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import org.junit.Test;
+<i>6</i>&nbsp;
+<b class="fc"><i>7</i>&nbsp;public class ChatOverlayTest {</b>
+<i>8</i>&nbsp;	ChatOverlay co;
+<i>9</i>&nbsp;	
+<i>10</i>&nbsp;	@Test
+<i>11</i>&nbsp;	public void testChatOverlay() {
+<b class="fc"><i>12</i>&nbsp;		co = new ChatOverlay(null);</b>
+<b class="fc"><i>13</i>&nbsp;		assertTrue(&quot;ChatOverlay constructor works&quot;, co != null);</b>
+<b class="fc"><i>14</i>&nbsp;	}</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;	@Test
+<i>17</i>&nbsp;	public void testEnter() {
+<b class="fc"><i>18</i>&nbsp;		co = new ChatOverlay(null);</b>
+<b class="fc"><i>19</i>&nbsp;		String s1 = &quot;This is a test.&quot;;</b>
+<b class="fc"><i>20</i>&nbsp;		String s2 = &quot;       &quot;;</b>
+<i>21</i>&nbsp;		
+<b class="fc"><i>22</i>&nbsp;		Boolean test1 = co.Enter(s1);</b>
+<b class="fc"><i>23</i>&nbsp;		Boolean test2 = co.Enter(s2);</b>
+<i>24</i>&nbsp;		
+<b class="fc"><i>25</i>&nbsp;		assertTrue(&quot;Making sure that enter button works&quot;, test1 == true &amp;&amp; test2 == false);</b>
+<b class="fc"><i>26</i>&nbsp;	}</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;	@Test
+<i>29</i>&nbsp;	public void testPushText() {
+<b class="fc"><i>30</i>&nbsp;		co = new ChatOverlay(null);</b>
+<b class="fc"><i>31</i>&nbsp;		co.pushText(&quot;Test&quot;);</b>
+<b class="nc"><i>32</i>&nbsp;		assertTrue(true);</b>
+<b class="nc"><i>33</i>&nbsp;	}</b>
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	@Test
+<i>36</i>&nbsp;	public void testSetLastString() {
+<b class="fc"><i>37</i>&nbsp;		co.setLastString(&quot;Happy Friday!&quot;);</b>
+<b class="nc"><i>38</i>&nbsp;		Boolean test1 = (co.lastStringInput.equals(&quot;Happy Friday!\n&quot;));</b>
+<b class="nc"><i>39</i>&nbsp;		assertTrue(&quot;Making sure the string changed&quot;, test1);</b>
+<b class="nc"><i>40</i>&nbsp;	}</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;	@Test
+<i>43</i>&nbsp;	public void testGetLastString() {
+<b class="fc"><i>44</i>&nbsp;		co.setLastString(&quot;Happy.&quot;);</b>
+<b class="nc"><i>45</i>&nbsp;		assertTrue(&quot;Making sure that it returns the correct string.&quot;, co.getLastString().equals(&quot;Happy.\n&quot;));</b>
+<b class="nc"><i>46</i>&nbsp;	}</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 22:24</div>
+</div>
+</body>
+</html>

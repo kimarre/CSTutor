@@ -42,26 +42,26 @@
   <td class="name">ChatClient</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/ 1)
+    (1/ 1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    75%
   </span>
   <span class="absValue">
-    (0/ 4)
+    (3/ 4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    51.9%
   </span>
   <span class="absValue">
-    (0/ 23)
+    (14/ 27)
   </span>
 </td>
 </tr>
@@ -91,16 +91,16 @@
 <i>17</i>&nbsp; */
 <i>18</i>&nbsp;
 <i>19</i>&nbsp;public class ChatClient implements Runnable {
-<b class="nc"><i>20</i>&nbsp;    	Socket socket = null;</b>
-<b class="nc"><i>21</i>&nbsp;    	ObjectInputStream input = null; </b>
-<b class="nc"><i>22</i>&nbsp;    	ObjectOutputStream output = null;</b>
+<b class="fc"><i>20</i>&nbsp;    	Socket socket = null;</b>
+<b class="fc"><i>21</i>&nbsp;    	ObjectInputStream input = null; </b>
+<b class="fc"><i>22</i>&nbsp;    	ObjectOutputStream output = null;</b>
 <i>23</i>&nbsp;    	
 <i>24</i>&nbsp;    	private ChatOverlay chatOverlay;
 <i>25</i>&nbsp;    	
 <i>26</i>&nbsp;    	/**
 <i>27</i>&nbsp;    	 * The name of the user
 <i>28</i>&nbsp;    	 */
-<b class="nc"><i>29</i>&nbsp;    	public String name = null;</b>
+<b class="fc"><i>29</i>&nbsp;    	public String name = null;</b>
 <i>30</i>&nbsp;
 <i>31</i>&nbsp;    	/**
 <i>32</i>&nbsp;    	 * The constructor for the chatClient class
@@ -111,14 +111,14 @@
 <i>37</i>&nbsp;    	 * @throws UnknownHostException 
 <i>38</i>&nbsp;    	 * @throws RemoteException
 <i>39</i>&nbsp;    	 */
-<b class="nc"><i>40</i>&nbsp;    	public ChatClient(String name, ChatOverlay chatOverlay) throws UnknownHostException, IOException {</b>
-<b class="nc"><i>41</i>&nbsp;    		this.name = name;</b>
-<b class="nc"><i>42</i>&nbsp;    		socket = new Socket(&quot;bunnytails.org&quot;, 8045);</b>
+<b class="fc"><i>40</i>&nbsp;    	public ChatClient(String name, ChatOverlay chatOverlay) throws UnknownHostException, IOException {</b>
+<b class="fc"><i>41</i>&nbsp;    		this.name = name;</b>
+<b class="fc"><i>42</i>&nbsp;    		socket = new Socket(&quot;bunnytails.org&quot;, 8045);</b>
 <i>43</i>&nbsp;    		
-<b class="nc"><i>44</i>&nbsp;    		this.chatOverlay = chatOverlay;</b>
+<b class="fc"><i>44</i>&nbsp;    		this.chatOverlay = chatOverlay;</b>
 <i>45</i>&nbsp;    		
-<b class="nc"><i>46</i>&nbsp;    		new Thread(this).start();</b>
-<i>47</i>&nbsp;    	}
+<b class="fc"><i>46</i>&nbsp;    		new Thread(this).start();</b>
+<b class="fc"><i>47</i>&nbsp;    	}</b>
 <i>48</i>&nbsp;    	
 <i>49</i>&nbsp;    	/**
 <i>50</i>&nbsp;    	 * Takes messages that are broadcast from the server, and prints them to the screen.
@@ -127,18 +127,18 @@
 <i>53</i>&nbsp;    	public void recieveMessage(String message){
 <b class="nc"><i>54</i>&nbsp;    		chatOverlay.setLastString(message);</b>
 <b class="nc"><i>55</i>&nbsp;    		chatOverlay.chatBar.box.updateConsole();</b>
-<i>56</i>&nbsp;    	}
+<b class="nc"><i>56</i>&nbsp;    	}</b>
 <i>57</i>&nbsp;    	
 <i>58</i>&nbsp;    	/**
 <i>59</i>&nbsp;    	 * This sends the message inputted from the view to the chat server over an object stream
 <i>60</i>&nbsp;    	 */
 <i>61</i>&nbsp;    	public void broadcastMessage(String message) {
 <i>62</i>&nbsp;    		try {
-<b class="nc"><i>63</i>&nbsp;				output.writeObject(name + &quot;: &quot; + message);</b>
+<b class="fc"><i>63</i>&nbsp;				output.writeObject(name + &quot;: &quot; + message);</b>
 <b class="nc"><i>64</i>&nbsp;			} catch (IOException e) {</b>
 <b class="nc"><i>65</i>&nbsp;				e.printStackTrace();</b>
 <b class="nc"><i>66</i>&nbsp;			}</b>
-<i>67</i>&nbsp;    	}
+<b class="nc"><i>67</i>&nbsp;    	}</b>
 <i>68</i>&nbsp;    	
 <i>69</i>&nbsp;    	/**
 <i>70</i>&nbsp;    	 * This is a thread function that constantly checks for input from the server. 
@@ -146,11 +146,11 @@
 <i>72</i>&nbsp;    	 */
 <i>73</i>&nbsp;    	public void run() {
 <i>74</i>&nbsp;    		try {
-<b class="nc"><i>75</i>&nbsp;    			output = new ObjectOutputStream(socket.getOutputStream());</b>
-<b class="nc"><i>76</i>&nbsp;				input = new ObjectInputStream(socket.getInputStream());</b>
+<b class="fc"><i>75</i>&nbsp;    			output = new ObjectOutputStream(socket.getOutputStream());</b>
+<b class="fc"><i>76</i>&nbsp;				input = new ObjectInputStream(socket.getInputStream());</b>
 <i>77</i>&nbsp;				while(true) {
 <i>78</i>&nbsp;					try {
-<b class="nc"><i>79</i>&nbsp;						recieveMessage((String) input.readObject());</b>
+<b class="fc"><i>79</i>&nbsp;						recieveMessage((String) input.readObject());</b>
 <b class="nc"><i>80</i>&nbsp;					} catch (ClassNotFoundException | IOException e) {</b>
 <b class="nc"><i>81</i>&nbsp;						e.printStackTrace();</b>
 <b class="nc"><i>82</i>&nbsp;					}</b>
@@ -158,14 +158,14 @@
 <b class="nc"><i>84</i>&nbsp;			} catch (IOException e1) {</b>
 <b class="nc"><i>85</i>&nbsp;				e1.printStackTrace();</b>
 <i>86</i>&nbsp;			}
-<i>87</i>&nbsp;    	}
+<b class="nc"><i>87</i>&nbsp;    	}</b>
 <i>88</i>&nbsp;    }
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 21:37</div>
+    <div style="float:right;">generated on 2015-06-11 22:24</div>
 </div>
 </body>
 </html>

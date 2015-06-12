@@ -51,7 +51,6 @@ public class TutorDB {
          // Since the program is unuseable without a db connection, crash on exception.
          // Only occurs when JDBC jar is missing, or there is an SQL error in the script
          System.err.println("Couldn't open db connection. " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }  
@@ -118,7 +117,6 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in setUser(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
       }
    }
 
@@ -187,7 +185,6 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in getUsernamesByAccessLevel(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }
@@ -219,7 +216,6 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in setTutorialData(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
       }
    }
 
@@ -274,7 +270,6 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }
@@ -303,7 +298,6 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }
@@ -613,7 +607,7 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in getClasses(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
+         return null;
       }
    }
 
@@ -637,7 +631,7 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in getClassNames(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
+         return null;
       }
    }
 
@@ -678,7 +672,6 @@ public class TutorDB {
       } catch(SQLException e) {
          // SQL error, should not happen
          System.err.println("Error in saveClasses(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
       }
    }
 }
