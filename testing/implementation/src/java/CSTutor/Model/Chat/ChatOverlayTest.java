@@ -15,20 +15,26 @@ public class ChatOverlayTest {
 
 	@Test
 	public void testEnter() {
-		Boolean test1 = co.Enter("This is a test.");
-		Boolean test2 = co.Enter("       ");
+		co = new ChatOverlay(null);
+		String s1 = "This is a test.";
+		String s2 = "       ";
+		
+		Boolean test1 = co.Enter(s1);
+		Boolean test2 = co.Enter(s2);
 		
 		assertTrue("Making sure that enter button works", test1 == true && test2 == false);
 	}
 
 	@Test
 	public void testPushText() {
+		co = new ChatOverlay(null);
 		co.pushText("Test");
 		assertTrue(true);
 	}
 
 	@Test
 	public void testSetLastString() {
+		co = new ChatOverlay(null);
 		co.setLastString("Happy Friday!");
 		Boolean test1 = (co.lastStringInput.equals("Happy Friday!\n"));
 		assertTrue("Making sure the string changed", test1);
@@ -36,6 +42,7 @@ public class ChatOverlayTest {
 
 	@Test
 	public void testGetLastString() {
+		co = new ChatOverlay(null);
 		co.setLastString("Happy.");
 		assertTrue("Making sure that it returns the correct string.", co.getLastString().equals("Happy.\n"));
 	}
