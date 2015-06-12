@@ -27,9 +27,6 @@ public class Tutorial extends javax.swing.JPanel {
     
     DefaultListModel listItems = new DefaultListModel();
     
-    /** Provides a quick way to jump between tutorial lessons */
-    public RoadmapModule sideModule;
-
     /** Used to run the python code in the tutorial with the run button **/
     private PythonInterpreter pyinterpreter = new PythonInterpreter();
 
@@ -42,7 +39,6 @@ public class Tutorial extends javax.swing.JPanel {
     public Tutorial() {
         initComponents();
        
-        sideModule = new RoadmapModule();
         initRoadmapContent();
         setAllTheThings(tutorialTrack.database.getTutorialData(currentIndex));
         

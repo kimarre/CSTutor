@@ -100,13 +100,6 @@ public class TutorialData {
        tryItYourself = tryIt;
    }
 
-   /**
-   * Runs the code in the text editor and shows output to the console.
-   */
-   void run() {
-	   
-   }
-
    /*
       pre:                                                          <pre>
          //
