@@ -7,7 +7,7 @@ package CSTutor.Model.Tutorial;
  * @author Kim Arre (karre@calpoly.edu)
  * @version 20Apr2015
  */
-public abstract class EditTextButtons {
+public class EditTextButtons {
     /** Identifies which of several font styles are used to format within the tutorial editor */
    String fontStyle;
    
