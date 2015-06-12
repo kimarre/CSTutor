@@ -19,14 +19,6 @@ public class Unit {
 	   this.parent = parent;
 	   this.tutorials = new ArrayList<Tutorial>();
    }
-   /**
-    * MoveTutorialUp moves the given tutorial up in the list
-    */ 
-   void moveTutorialUp(Tutorial tutorial){}
-   /**
-    * MoveTutorialDown moves the given tutorial down in the list
-    */ 
-   void moveTutorialDown(Tutorial tutorial){}
    public String toString() {
 	   return name;
    }

@@ -191,6 +191,7 @@ public class MoveGUI extends JFrame{
         	   	Section s = ManagerGUI.managerModel.selectedSection;
         	   	s.parent.sections.remove(s);
         	   	c.sections.add(s);
+        	   	s.parent = c;
         	   	ManagerGUI.populateTree();
         	   	break;
 	        	 case UNIT:
@@ -198,6 +199,7 @@ public class MoveGUI extends JFrame{
 	      	   	Unit u = ManagerGUI.managerModel.selectedUnit;
 	      	   	u.parent.units.remove(u);
 	      	   	s2.units.add(u);
+	      	   	u.parent = s2;
 	      	   	ManagerGUI.populateTree();
 	      	   	break;
 	        	case TUTORIAL:
@@ -205,6 +207,7 @@ public class MoveGUI extends JFrame{
 	     	   	Tutorial t = ManagerGUI.managerModel.selectedTutorial;
 	     	   	t.parent.tutorials.remove(t);
 	     	   	u2.tutorials.add(t);
+	     	   	t.parent = u2;
 	     	   	ManagerGUI.populateTree();
 	     	   	break;
         	   }

@@ -13,7 +13,7 @@ public class Class implements Cloneable{
    public List<Section> sections;
 
 	/* All students enrolled in this class */
-   public List<User> students;
+   public List<CSTutor.Model.User.User> students;
    
 	/* The minimum level of access required to view this class */
    public ClassAccessLevel access;
@@ -25,23 +25,9 @@ public class Class implements Cloneable{
    public Class(String name) {
 	   this.name = name;
 	   sections = new ArrayList<Section>();
-	   students = new ArrayList<User>();
+	   students = new ArrayList<CSTutor.Model.User.User>();
 	   access = ClassAccessLevel.Guest;
-	   sections.add(new Section("All sections", new ArrayList<User>(students), null, this));
-   }
-
-   /**
-    * MoveUnitUp moves the unit up one space in the list.
-    */ 
-   public void moveSectionUp(Section sect){
-   	System.out.println("Moveup not yet implemented");
-   }
-
-   /**
-    * MoveUnitDown moves the unit down one space in the list.
-    */ 
-   public void moveUnitDown(Section sect){
-   	System.out.println("Movedown not yet implemented");
+	   sections.add(new Section("All sections", new ArrayList<CSTutor.Model.User.User>(students), null, this));
    }
 
    /** 

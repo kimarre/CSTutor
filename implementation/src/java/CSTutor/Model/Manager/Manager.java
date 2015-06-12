@@ -229,7 +229,7 @@ public class Manager {
        selectedSection' == null && !selectedClass'.sections.contains(selectedSection);
      */
     public void deleteSection() {
-    	if(selectedClass != null && selectedSection != null && selectedSection.name.equals("All sections")) {
+    	if(selectedClass != null && selectedSection != null && !selectedSection.name.equals("All sections")) {
     		selectedClass.sections.remove(selectedSection);
     	}
    	 System.out.println("In CSTutor.Model.Manager.deleteSection()");
@@ -244,7 +244,8 @@ public class Manager {
        selectedUnit' == null && !selectedSection'.units.contains(selectedUnit);
      */
     public void deleteUnit() {
-    	if(selectedSection != null && selectedUnit != null && selectedUnit.name.equals("Uncategorized")) {
+    	if(selectedSection != null && selectedUnit != null && !selectedUnit.name.equals("Uncategorized")) {
+    		System.out.println("Unit deleted if it exists");
     		selectedSection.units.remove(selectedUnit);
     	}
    	 System.out.println("In CSTutor.Model.Manager.deleteUnit()");
@@ -260,38 +261,8 @@ public class Manager {
      */
     public void deleteTutorial() {
     	if(selectedUnit != null) {
-    		selectedUnit.tutorials.remove(selectedUnit);
+    		selectedUnit.tutorials.remove(selectedTutorial);
     	}
    	 System.out.println("In CSTutor.Model.Manager.deleteTutorial()");
     }
-
-    /**
-     * Deletes the given page 
-     */
-    public void deletePage(Page page) {
-    	if(selectedTutorial != null) {
-    		selectedTutorial.pages.remove(selectedPage);
-    	}
-   	 System.out.println("In CSTutor.Model.Manager.deletePage()");
-    }
-
-
-   /**
-    * MovePage moves the selected page into the given tutorial, if it exists.
-    * <pre>
-     pre:
-      selectedPage != null;
-     post:
-      newTutorial'.pages.contains(selectedPage);
-    */
-    public void movePage(Tutorial newTutorial){}
-   /**
-    * MoveTutorial moves the given tutorial into the given unit.
-    * <pre>
-     pre:
-      selectedTutorial != null;
-     post:
-      newUnit'.tutorials.contains(selectedTutorial);
-    */
-    public void moveTutorial(Unit newUnit){}
 }

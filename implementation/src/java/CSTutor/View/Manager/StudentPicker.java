@@ -31,6 +31,7 @@ public class StudentPicker extends JFrame{
 		JPanel selPanel = new JPanel();
 		selPanel.setLayout(new BoxLayout(selPanel, BoxLayout.Y_AXIS));
 		JTextField searchField = new JTextField("John");
+		DefaultListModel<CSTutor.Model.User.User> studentOptions;
 		String[] options = {"John Masanori", "Raymond Flint", "Elizabeth Mills", "Caprice Nisei", "Toshiyuki Sakai", "Mark Yale"};
 		JList<String> stuList = new JList<String>(options);
 		selPanel.add(searchField);

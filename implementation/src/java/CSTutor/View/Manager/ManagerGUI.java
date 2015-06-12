@@ -41,12 +41,13 @@ public class ManagerGUI extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
-        /*
+        
         System.out.println("Attempt to get data");
         managerModel.data = CSTutor.Model.Database.TutorDB.getClasses();
         System.out.println("Data got?");
-        */
+        
         moveTut = new MoveGUI();
+        /*
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
         managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 103"));
@@ -58,7 +59,7 @@ public class ManagerGUI extends JPanel {
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Hello World", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Conditionals", managerModel.selectedUnit));
         managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Loops", managerModel.selectedUnit));
-        
+        */
         
         
         addManagerContent();
@@ -242,9 +243,6 @@ public class ManagerGUI extends JPanel {
 	          		break;
 	          	case 4:
 	          		managerModel.deleteTutorial();
-	          		break;
-	          	case 5:
-	          		managerModel.deletePage(null);
 	          		break;
 	          	default:
 	          		//root or error
