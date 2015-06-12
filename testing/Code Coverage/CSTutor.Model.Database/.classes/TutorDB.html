@@ -39,18 +39,18 @@
   <td class="name">TutorDB</td>
 <td class="coverageStat">
   <span class="percent">
-    44.4%
+    92.6%
   </span>
   <span class="absValue">
-    (12/ 27)
+    (25/ 27)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25.9%
+    74.1%
   </span>
   <span class="absValue">
-    (77/ 297)
+    (220/ 297)
   </span>
 </td>
 </tr>
@@ -77,18 +77,18 @@
   <td class="name"><strong>total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    46.4%
+    92.9%
   </span>
   <span class="absValue">
-    (13/ 28)
+    (26/ 28)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    26.2%
+    74.2%
   </span>
   <span class="absValue">
-    (78/ 298)
+    (221/ 298)
   </span>
 </td>
 </tr>
@@ -409,23 +409,23 @@
 <i>309</i>&nbsp;    *  return != null;
 <i>310</i>&nbsp;    */
 <i>311</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Page&gt; getPages(CSTutor.Model.Manager.Tutorial tutorial) {
-<b class="nc"><i>312</i>&nbsp;      List&lt;CSTutor.Model.Manager.Page&gt; pages = new ArrayList&lt;CSTutor.Model.Manager.Page&gt;();</b>
+<b class="fc"><i>312</i>&nbsp;      List&lt;CSTutor.Model.Manager.Page&gt; pages = new ArrayList&lt;CSTutor.Model.Manager.Page&gt;();</b>
 <i>313</i>&nbsp;      CSTutor.Model.Manager.Page p;
 <i>314</i>&nbsp;      try {
-<b class="nc"><i>315</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>315</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
 <i>316</i>&nbsp;          &quot;SELECT * FROM Pages WHERE tutorialName=? AND unitName=? AND sectionName=? AND className=?&quot;);
-<b class="nc"><i>317</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(tutorial.name, tutorial.parent.name,</b>
+<b class="fc"><i>317</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(tutorial.name, tutorial.parent.name,</b>
 <i>318</i>&nbsp;          tutorial.parent.parent.name, tutorial.parent.parent.parent.name);
-<b class="nc"><i>319</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="nc"><i>320</i>&nbsp;            s.setString(i+1, values.get(i));</b>
+<b class="fc"><i>319</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc"><i>320</i>&nbsp;            s.setString(i+1, values.get(i));</b>
 <i>321</i>&nbsp;         }
-<b class="nc"><i>322</i>&nbsp;         ResultSet r = s.executeQuery();</b>
-<b class="nc"><i>323</i>&nbsp;         while (r.next()) {</b>
-<b class="nc"><i>324</i>&nbsp;            p = new CSTutor.Model.Manager.Page(r.getString(&quot;pageName&quot;), tutorial);</b>
-<b class="nc"><i>325</i>&nbsp;            pages.add(p);</b>
+<b class="fc"><i>322</i>&nbsp;         ResultSet r = s.executeQuery();</b>
+<b class="fc"><i>323</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>324</i>&nbsp;            p = new CSTutor.Model.Manager.Page(r.getString(&quot;pageName&quot;), tutorial);</b>
+<b class="fc"><i>325</i>&nbsp;            pages.add(p);</b>
 <i>326</i>&nbsp;         }
-<b class="nc"><i>327</i>&nbsp;         s.close();</b>
-<b class="nc"><i>328</i>&nbsp;         return pages;</b>
+<b class="fc"><i>327</i>&nbsp;         s.close();</b>
+<b class="fc"><i>328</i>&nbsp;         return pages;</b>
 <b class="nc"><i>329</i>&nbsp;      } catch(Exception e) {</b>
 <i>330</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>331</i>&nbsp;         return pages;</b>
@@ -441,23 +441,23 @@
 <i>341</i>&nbsp;    */
 <i>342</i>&nbsp;   public static void savePages(List&lt;CSTutor.Model.Manager.Page&gt; pages) {
 <i>343</i>&nbsp;      try {
-<b class="nc"><i>344</i>&nbsp;         for (CSTutor.Model.Manager.Page p : pages) {</b>
-<b class="nc"><i>345</i>&nbsp;            PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>344</i>&nbsp;         for (CSTutor.Model.Manager.Page p : pages) {</b>
+<b class="fc"><i>345</i>&nbsp;            PreparedStatement s = conn.prepareStatement(</b>
 <i>346</i>&nbsp;             &quot;INSERT OR IGNORE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?, ?)&quot;);
-<b class="nc"><i>347</i>&nbsp;            s.setString(1, p.name);</b>
-<b class="nc"><i>348</i>&nbsp;            s.setString(2, p.parent.name);</b>
-<b class="nc"><i>349</i>&nbsp;            s.setString(3, p.parent.parent.name);</b>
-<b class="nc"><i>350</i>&nbsp;            s.setString(4, p.parent.parent.parent.name);</b>
-<b class="nc"><i>351</i>&nbsp;            s.setString(5, p.parent.parent.parent.parent.name);</b>
-<b class="nc"><i>352</i>&nbsp;            s.executeUpdate();</b>
-<b class="nc"><i>353</i>&nbsp;            s.close();</b>
-<b class="nc"><i>354</i>&nbsp;         }</b>
+<b class="fc"><i>347</i>&nbsp;            s.setString(1, p.name);</b>
+<b class="fc"><i>348</i>&nbsp;            s.setString(2, p.parent.name);</b>
+<b class="fc"><i>349</i>&nbsp;            s.setString(3, p.parent.parent.name);</b>
+<b class="fc"><i>350</i>&nbsp;            s.setString(4, p.parent.parent.parent.name);</b>
+<b class="fc"><i>351</i>&nbsp;            s.setString(5, p.parent.parent.parent.parent.name);</b>
+<b class="fc"><i>352</i>&nbsp;            s.executeUpdate();</b>
+<b class="fc"><i>353</i>&nbsp;            s.close();</b>
+<b class="fc"><i>354</i>&nbsp;         }</b>
 <b class="nc"><i>355</i>&nbsp;      } catch(Exception e) {</b>
 <i>356</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>357</i>&nbsp;         System.err.println(&quot;Error in savePages(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
 <b class="nc"><i>358</i>&nbsp;         System.exit(1);</b>
-<b class="nc"><i>359</i>&nbsp;      }</b>
-<b class="nc"><i>360</i>&nbsp;   }</b>
+<b class="fc"><i>359</i>&nbsp;      }</b>
+<b class="fc"><i>360</i>&nbsp;   }</b>
 <i>361</i>&nbsp;
 <i>362</i>&nbsp;
 <i>363</i>&nbsp;/*** Tutorial methods *****************************************************************************/
@@ -473,23 +473,23 @@
 <i>373</i>&nbsp;    *  return != null;
 <i>374</i>&nbsp;    */
 <i>375</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Tutorial&gt; getTutorials(CSTutor.Model.Manager.Unit unit) {
-<b class="nc"><i>376</i>&nbsp;      List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials = new ArrayList&lt;CSTutor.Model.Manager.Tutorial&gt;();</b>
+<b class="fc"><i>376</i>&nbsp;      List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials = new ArrayList&lt;CSTutor.Model.Manager.Tutorial&gt;();</b>
 <i>377</i>&nbsp;      CSTutor.Model.Manager.Tutorial t;
 <i>378</i>&nbsp;      try {
-<b class="nc"><i>379</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>379</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
 <i>380</i>&nbsp;          &quot;SELECT * FROM Tutorials WHERE unitName=? AND sectionName=? AND className=?&quot;);
-<b class="nc"><i>381</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(unit.name, unit.parent.name, unit.parent.parent.name);</b>
-<b class="nc"><i>382</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="nc"><i>383</i>&nbsp;            s.setString(i+1, values.get(i));</b>
+<b class="fc"><i>381</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(unit.name, unit.parent.name, unit.parent.parent.name);</b>
+<b class="fc"><i>382</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc"><i>383</i>&nbsp;            s.setString(i+1, values.get(i));</b>
 <i>384</i>&nbsp;         }
-<b class="nc"><i>385</i>&nbsp;         ResultSet r = s.executeQuery();</b>
-<b class="nc"><i>386</i>&nbsp;         while (r.next()) {</b>
-<b class="nc"><i>387</i>&nbsp;            t = new CSTutor.Model.Manager.Tutorial(r.getString(&quot;tutorialName&quot;), unit);</b>
-<b class="nc"><i>388</i>&nbsp;            t.pages = getPages(t);</b>
-<b class="nc"><i>389</i>&nbsp;            tutorials.add(t);</b>
+<b class="fc"><i>385</i>&nbsp;         ResultSet r = s.executeQuery();</b>
+<b class="fc"><i>386</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>387</i>&nbsp;            t = new CSTutor.Model.Manager.Tutorial(r.getString(&quot;tutorialName&quot;), unit);</b>
+<b class="fc"><i>388</i>&nbsp;            t.pages = getPages(t);</b>
+<b class="fc"><i>389</i>&nbsp;            tutorials.add(t);</b>
 <i>390</i>&nbsp;         }
-<b class="nc"><i>391</i>&nbsp;         s.close();</b>
-<b class="nc"><i>392</i>&nbsp;         return tutorials;</b>
+<b class="fc"><i>391</i>&nbsp;         s.close();</b>
+<b class="fc"><i>392</i>&nbsp;         return tutorials;</b>
 <b class="nc"><i>393</i>&nbsp;      } catch(Exception e) {</b>
 <i>394</i>&nbsp;         // User not in db so return empty
 <b class="nc"><i>395</i>&nbsp;         return tutorials;</b>
@@ -505,23 +505,23 @@
 <i>405</i>&nbsp;    */
 <i>406</i>&nbsp;   public static void saveTutorials(List&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials) {
 <i>407</i>&nbsp;      try {
-<b class="nc"><i>408</i>&nbsp;         for (CSTutor.Model.Manager.Tutorial t : tutorials) {</b>
-<b class="nc"><i>409</i>&nbsp;            PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>408</i>&nbsp;         for (CSTutor.Model.Manager.Tutorial t : tutorials) {</b>
+<b class="fc"><i>409</i>&nbsp;            PreparedStatement s = conn.prepareStatement(</b>
 <i>410</i>&nbsp;             &quot;INSERT OR IGNORE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?)&quot;);
-<b class="nc"><i>411</i>&nbsp;            s.setString(1, t.name);</b>
-<b class="nc"><i>412</i>&nbsp;            s.setString(2, t.parent.name);</b>
-<b class="nc"><i>413</i>&nbsp;            s.setString(3, t.parent.parent.name);</b>
-<b class="nc"><i>414</i>&nbsp;            s.setString(4, t.parent.parent.parent.name);</b>
-<b class="nc"><i>415</i>&nbsp;            s.executeUpdate();</b>
-<b class="nc"><i>416</i>&nbsp;            s.close();</b>
-<b class="nc"><i>417</i>&nbsp;            savePages(t.pages);</b>
-<b class="nc"><i>418</i>&nbsp;         }</b>
+<b class="fc"><i>411</i>&nbsp;            s.setString(1, t.name);</b>
+<b class="fc"><i>412</i>&nbsp;            s.setString(2, t.parent.name);</b>
+<b class="fc"><i>413</i>&nbsp;            s.setString(3, t.parent.parent.name);</b>
+<b class="fc"><i>414</i>&nbsp;            s.setString(4, t.parent.parent.parent.name);</b>
+<b class="fc"><i>415</i>&nbsp;            s.executeUpdate();</b>
+<b class="fc"><i>416</i>&nbsp;            s.close();</b>
+<b class="fc"><i>417</i>&nbsp;            savePages(t.pages);</b>
+<b class="fc"><i>418</i>&nbsp;         }</b>
 <b class="nc"><i>419</i>&nbsp;      } catch(Exception e) {</b>
 <i>420</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>421</i>&nbsp;         System.err.println(&quot;Error in saveTutorials(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
 <b class="nc"><i>422</i>&nbsp;         System.exit(1);</b>
-<b class="nc"><i>423</i>&nbsp;      }</b>
-<b class="nc"><i>424</i>&nbsp;   }</b>
+<b class="fc"><i>423</i>&nbsp;      }</b>
+<b class="fc"><i>424</i>&nbsp;   }</b>
 <i>425</i>&nbsp;
 <i>426</i>&nbsp;
 <i>427</i>&nbsp;/*** Unit methods *********************************************************************************/
@@ -537,23 +537,23 @@
 <i>437</i>&nbsp;    *  return != null;
 <i>438</i>&nbsp;    */
 <i>439</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Unit&gt; getUnits(CSTutor.Model.Manager.Section section) {
-<b class="nc"><i>440</i>&nbsp;      List&lt;CSTutor.Model.Manager.Unit&gt; units = new ArrayList&lt;CSTutor.Model.Manager.Unit&gt;();</b>
+<b class="fc"><i>440</i>&nbsp;      List&lt;CSTutor.Model.Manager.Unit&gt; units = new ArrayList&lt;CSTutor.Model.Manager.Unit&gt;();</b>
 <i>441</i>&nbsp;      CSTutor.Model.Manager.Unit u;
 <i>442</i>&nbsp;      try {
-<b class="nc"><i>443</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>443</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
 <i>444</i>&nbsp;          &quot;SELECT * FROM Units WHERE sectionName=? AND className=?&quot;);
-<b class="nc"><i>445</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(section.name, section.parent.name);</b>
-<b class="nc"><i>446</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="nc"><i>447</i>&nbsp;            s.setString(i+1, values.get(i));</b>
+<b class="fc"><i>445</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(section.name, section.parent.name);</b>
+<b class="fc"><i>446</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc"><i>447</i>&nbsp;            s.setString(i+1, values.get(i));</b>
 <i>448</i>&nbsp;         }
-<b class="nc"><i>449</i>&nbsp;         ResultSet r = s.executeQuery();</b>
-<b class="nc"><i>450</i>&nbsp;         while (r.next()) {</b>
-<b class="nc"><i>451</i>&nbsp;            u = new CSTutor.Model.Manager.Unit(r.getString(&quot;unitName&quot;), section);</b>
-<b class="nc"><i>452</i>&nbsp;            u.tutorials = getTutorials(u);</b>
-<b class="nc"><i>453</i>&nbsp;            units.add(u);</b>
+<b class="fc"><i>449</i>&nbsp;         ResultSet r = s.executeQuery();</b>
+<b class="fc"><i>450</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>451</i>&nbsp;            u = new CSTutor.Model.Manager.Unit(r.getString(&quot;unitName&quot;), section);</b>
+<b class="fc"><i>452</i>&nbsp;            u.tutorials = getTutorials(u);</b>
+<b class="fc"><i>453</i>&nbsp;            units.add(u);</b>
 <i>454</i>&nbsp;         }
-<b class="nc"><i>455</i>&nbsp;         s.close();</b>
-<b class="nc"><i>456</i>&nbsp;         return units;</b>
+<b class="fc"><i>455</i>&nbsp;         s.close();</b>
+<b class="fc"><i>456</i>&nbsp;         return units;</b>
 <b class="nc"><i>457</i>&nbsp;      } catch(Exception e) {</b>
 <i>458</i>&nbsp;         // Section not in db so return empty
 <b class="nc"><i>459</i>&nbsp;         return units;</b>
@@ -569,22 +569,22 @@
 <i>469</i>&nbsp;    */
 <i>470</i>&nbsp;   public static void saveUnits(List&lt;CSTutor.Model.Manager.Unit&gt; units) {
 <i>471</i>&nbsp;      try {
-<b class="nc"><i>472</i>&nbsp;         for (CSTutor.Model.Manager.Unit u : units) {</b>
-<b class="nc"><i>473</i>&nbsp;            PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>472</i>&nbsp;         for (CSTutor.Model.Manager.Unit u : units) {</b>
+<b class="fc"><i>473</i>&nbsp;            PreparedStatement s = conn.prepareStatement(</b>
 <i>474</i>&nbsp;             &quot;INSERT OR IGNORE INTO Units(unitName, sectionName, className) VALUES (?, ?, ?)&quot;);
-<b class="nc"><i>475</i>&nbsp;            s.setString(1, u.name);</b>
-<b class="nc"><i>476</i>&nbsp;            s.setString(2, u.parent.name);</b>
-<b class="nc"><i>477</i>&nbsp;            s.setString(3, u.parent.parent.name);</b>
-<b class="nc"><i>478</i>&nbsp;            s.executeUpdate();</b>
-<b class="nc"><i>479</i>&nbsp;            s.close();</b>
-<b class="nc"><i>480</i>&nbsp;            saveTutorials(u.tutorials);</b>
-<b class="nc"><i>481</i>&nbsp;         }</b>
+<b class="fc"><i>475</i>&nbsp;            s.setString(1, u.name);</b>
+<b class="fc"><i>476</i>&nbsp;            s.setString(2, u.parent.name);</b>
+<b class="fc"><i>477</i>&nbsp;            s.setString(3, u.parent.parent.name);</b>
+<b class="fc"><i>478</i>&nbsp;            s.executeUpdate();</b>
+<b class="fc"><i>479</i>&nbsp;            s.close();</b>
+<b class="fc"><i>480</i>&nbsp;            saveTutorials(u.tutorials);</b>
+<b class="fc"><i>481</i>&nbsp;         }</b>
 <b class="nc"><i>482</i>&nbsp;      } catch(Exception e) {</b>
 <i>483</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>484</i>&nbsp;         System.err.println(&quot;Error in saveUnits(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
 <b class="nc"><i>485</i>&nbsp;         System.exit(1);</b>
-<b class="nc"><i>486</i>&nbsp;      }</b>
-<b class="nc"><i>487</i>&nbsp;   }</b>
+<b class="fc"><i>486</i>&nbsp;      }</b>
+<b class="fc"><i>487</i>&nbsp;   }</b>
 <i>488</i>&nbsp;
 <i>489</i>&nbsp;/*** Section methods ******************************************************************************/
 <i>490</i>&nbsp;
@@ -599,23 +599,23 @@
 <i>499</i>&nbsp;    *  return != null;
 <i>500</i>&nbsp;    */
 <i>501</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Section&gt; getSections(CSTutor.Model.Manager.Class clas) {
-<b class="nc"><i>502</i>&nbsp;      List&lt;CSTutor.Model.Manager.Section&gt; sections = new ArrayList&lt;CSTutor.Model.Manager.Section&gt;();</b>
+<b class="fc"><i>502</i>&nbsp;      List&lt;CSTutor.Model.Manager.Section&gt; sections = new ArrayList&lt;CSTutor.Model.Manager.Section&gt;();</b>
 <i>503</i>&nbsp;      CSTutor.Model.Manager.Section sec;
 <i>504</i>&nbsp;      try {
-<b class="nc"><i>505</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
+<b class="fc"><i>505</i>&nbsp;         PreparedStatement s = conn.prepareStatement(</b>
 <i>506</i>&nbsp;          &quot;SELECT * FROM Sections WHERE className=?&quot;);
-<b class="nc"><i>507</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(clas.name);</b>
-<b class="nc"><i>508</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
-<b class="nc"><i>509</i>&nbsp;            s.setString(i+1, values.get(i));</b>
+<b class="fc"><i>507</i>&nbsp;         List&lt;String&gt; values = Arrays.asList(clas.name);</b>
+<b class="fc"><i>508</i>&nbsp;         for (int i = 0; i &lt; values.size(); i++) {</b>
+<b class="fc"><i>509</i>&nbsp;            s.setString(i+1, values.get(i));</b>
 <i>510</i>&nbsp;         }
-<b class="nc"><i>511</i>&nbsp;         ResultSet r = s.executeQuery();</b>
-<b class="nc"><i>512</i>&nbsp;         while (r.next()) {</b>
-<b class="nc"><i>513</i>&nbsp;            sec = new CSTutor.Model.Manager.Section(r.getString(&quot;sectionName&quot;), clas);</b>
-<b class="nc"><i>514</i>&nbsp;            sec.units = getUnits(sec);</b>
-<b class="nc"><i>515</i>&nbsp;            sections.add(sec);</b>
+<b class="fc"><i>511</i>&nbsp;         ResultSet r = s.executeQuery();</b>
+<b class="fc"><i>512</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>513</i>&nbsp;            sec = new CSTutor.Model.Manager.Section(r.getString(&quot;sectionName&quot;), clas);</b>
+<b class="fc"><i>514</i>&nbsp;            sec.units = getUnits(sec);</b>
+<b class="fc"><i>515</i>&nbsp;            sections.add(sec);</b>
 <i>516</i>&nbsp;         }
-<b class="nc"><i>517</i>&nbsp;         s.close();</b>
-<b class="nc"><i>518</i>&nbsp;         return sections;</b>
+<b class="fc"><i>517</i>&nbsp;         s.close();</b>
+<b class="fc"><i>518</i>&nbsp;         return sections;</b>
 <b class="nc"><i>519</i>&nbsp;      } catch(Exception e) {</b>
 <i>520</i>&nbsp;         // Class not in db so return empty
 <b class="nc"><i>521</i>&nbsp;         return sections;</b>
@@ -631,20 +631,20 @@
 <i>531</i>&nbsp;    */
 <i>532</i>&nbsp;   public static void saveSections(List&lt;CSTutor.Model.Manager.Section&gt; sections) {
 <i>533</i>&nbsp;      try {
-<b class="nc"><i>534</i>&nbsp;         for (CSTutor.Model.Manager.Section sec : sections) {</b>
-<b class="nc"><i>535</i>&nbsp;            PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)&quot;);</b>
-<b class="nc"><i>536</i>&nbsp;            s.setString(1, sec.name);</b>
-<b class="nc"><i>537</i>&nbsp;            s.setString(2, sec.parent.name);</b>
-<b class="nc"><i>538</i>&nbsp;            s.executeUpdate();</b>
-<b class="nc"><i>539</i>&nbsp;            s.close();</b>
-<b class="nc"><i>540</i>&nbsp;            saveUnits(sec.units);</b>
-<b class="nc"><i>541</i>&nbsp;         }</b>
+<b class="fc"><i>534</i>&nbsp;         for (CSTutor.Model.Manager.Section sec : sections) {</b>
+<b class="fc"><i>535</i>&nbsp;            PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)&quot;);</b>
+<b class="fc"><i>536</i>&nbsp;            s.setString(1, sec.name);</b>
+<b class="fc"><i>537</i>&nbsp;            s.setString(2, sec.parent.name);</b>
+<b class="fc"><i>538</i>&nbsp;            s.executeUpdate();</b>
+<b class="fc"><i>539</i>&nbsp;            s.close();</b>
+<b class="fc"><i>540</i>&nbsp;            saveUnits(sec.units);</b>
+<b class="fc"><i>541</i>&nbsp;         }</b>
 <b class="nc"><i>542</i>&nbsp;      } catch(Exception e) {</b>
 <i>543</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>544</i>&nbsp;         System.err.println(&quot;Error in saveSections(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
 <b class="nc"><i>545</i>&nbsp;         System.exit(1);</b>
-<b class="nc"><i>546</i>&nbsp;      }</b>
-<b class="nc"><i>547</i>&nbsp;   }</b>
+<b class="fc"><i>546</i>&nbsp;      }</b>
+<b class="fc"><i>547</i>&nbsp;   }</b>
 <i>548</i>&nbsp;
 <i>549</i>&nbsp;
 <i>550</i>&nbsp;/*** Class methods ********************************************************************************/
@@ -656,9 +656,9 @@
 <i>556</i>&nbsp;    * @return ClassAccessLevel enum
 <i>557</i>&nbsp;    */
 <i>558</i>&nbsp;   private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
-<b class="nc"><i>559</i>&nbsp;      switch (access) {</b>
+<b class="fc"><i>559</i>&nbsp;      switch (access) {</b>
 <i>560</i>&nbsp;         case &quot;Guest&quot;:
-<b class="nc"><i>561</i>&nbsp;            return ClassAccessLevel.Guest;</b>
+<b class="fc"><i>561</i>&nbsp;            return ClassAccessLevel.Guest;</b>
 <i>562</i>&nbsp;         case &quot;Student&quot;:
 <b class="nc"><i>563</i>&nbsp;            return ClassAccessLevel.Student;</b>
 <i>564</i>&nbsp;         case &quot;Professor&quot;:
@@ -676,7 +676,7 @@
 <i>576</i>&nbsp;   private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
 <b class="fc"><i>577</i>&nbsp;      switch (access) {</b>
 <i>578</i>&nbsp;         case Guest:
-<b class="nc"><i>579</i>&nbsp;            return &quot;Guest&quot;;</b>
+<b class="fc"><i>579</i>&nbsp;            return &quot;Guest&quot;;</b>
 <i>580</i>&nbsp;         case Student:
 <b class="fc"><i>581</i>&nbsp;            return &quot;Student&quot;;</b>
 <i>582</i>&nbsp;         case Professor:
@@ -686,22 +686,22 @@
 <i>586</i>&nbsp;   }
 <i>587</i>&nbsp;
 <i>588</i>&nbsp;   private static int printClassHierarchy(List&lt;CSTutor.Model.Manager.Class&gt; classes) {
-<b class="nc"><i>589</i>&nbsp;      for (CSTutor.Model.Manager.Class c : classes) {</b>
-<b class="nc"><i>590</i>&nbsp;         System.out.println(&quot;&lt;&quot; + c.name + &quot;&gt;&quot;);</b>
-<b class="nc"><i>591</i>&nbsp;         for (CSTutor.Model.Manager.Section s : c.sections) {</b>
-<b class="nc"><i>592</i>&nbsp;            System.out.println(&quot;  &lt;&quot; + s.name + &quot;&gt;&quot;);</b>
-<b class="nc"><i>593</i>&nbsp;            for (CSTutor.Model.Manager.Unit u : s.units) {</b>
-<b class="nc"><i>594</i>&nbsp;               System.out.println(&quot;    &lt;&quot; + u.name + &quot;&gt;&quot;);</b>
-<b class="nc"><i>595</i>&nbsp;               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {</b>
-<b class="nc"><i>596</i>&nbsp;                  System.out.println(&quot;      &lt;&quot; + t.name + &quot;&gt;&quot;);</b>
-<b class="nc"><i>597</i>&nbsp;                  for (CSTutor.Model.Manager.Page p : t.pages) {</b>
-<b class="nc"><i>598</i>&nbsp;                     System.out.println(&quot;        &lt;&quot; + p.name + &quot;&gt;&quot;);</b>
-<b class="nc"><i>599</i>&nbsp;                  }</b>
-<b class="nc"><i>600</i>&nbsp;               }</b>
-<b class="nc"><i>601</i>&nbsp;            }</b>
-<b class="nc"><i>602</i>&nbsp;         }</b>
-<b class="nc"><i>603</i>&nbsp;      }</b>
-<b class="nc"><i>604</i>&nbsp;      return 0;</b>
+<b class="fc"><i>589</i>&nbsp;      for (CSTutor.Model.Manager.Class c : classes) {</b>
+<b class="fc"><i>590</i>&nbsp;         System.out.println(&quot;&lt;&quot; + c.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>591</i>&nbsp;         for (CSTutor.Model.Manager.Section s : c.sections) {</b>
+<b class="fc"><i>592</i>&nbsp;            System.out.println(&quot;  &lt;&quot; + s.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>593</i>&nbsp;            for (CSTutor.Model.Manager.Unit u : s.units) {</b>
+<b class="fc"><i>594</i>&nbsp;               System.out.println(&quot;    &lt;&quot; + u.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>595</i>&nbsp;               for (CSTutor.Model.Manager.Tutorial t : u.tutorials) {</b>
+<b class="fc"><i>596</i>&nbsp;                  System.out.println(&quot;      &lt;&quot; + t.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>597</i>&nbsp;                  for (CSTutor.Model.Manager.Page p : t.pages) {</b>
+<b class="fc"><i>598</i>&nbsp;                     System.out.println(&quot;        &lt;&quot; + p.name + &quot;&gt;&quot;);</b>
+<b class="fc"><i>599</i>&nbsp;                  }</b>
+<b class="fc"><i>600</i>&nbsp;               }</b>
+<b class="fc"><i>601</i>&nbsp;            }</b>
+<b class="fc"><i>602</i>&nbsp;         }</b>
+<b class="fc"><i>603</i>&nbsp;      }</b>
+<b class="fc"><i>604</i>&nbsp;      return 0;</b>
 <i>605</i>&nbsp;   }
 <i>606</i>&nbsp;
 <i>607</i>&nbsp;   /**
@@ -712,20 +712,20 @@
 <i>612</i>&nbsp;    *  return != null;
 <i>613</i>&nbsp;    */
 <i>614</i>&nbsp;   public static List&lt;CSTutor.Model.Manager.Class&gt; getClasses() {
-<b class="nc"><i>615</i>&nbsp;      List&lt;CSTutor.Model.Manager.Class&gt; classes = new ArrayList&lt;CSTutor.Model.Manager.Class&gt;();</b>
+<b class="fc"><i>615</i>&nbsp;      List&lt;CSTutor.Model.Manager.Class&gt; classes = new ArrayList&lt;CSTutor.Model.Manager.Class&gt;();</b>
 <i>616</i>&nbsp;      CSTutor.Model.Manager.Class c;
 <i>617</i>&nbsp;      try {
-<b class="nc"><i>618</i>&nbsp;         Statement s = conn.createStatement();</b>
-<b class="nc"><i>619</i>&nbsp;         ResultSet r = s.executeQuery(&quot;SELECT * FROM classes;&quot;);</b>
-<b class="nc"><i>620</i>&nbsp;         while (r.next()) {</b>
-<b class="nc"><i>621</i>&nbsp;            c = new CSTutor.Model.Manager.Class(r.getString(&quot;className&quot;));</b>
-<b class="nc"><i>622</i>&nbsp;            c.sections = getSections(c);</b>
-<b class="nc"><i>623</i>&nbsp;            c.access = getAccessEnum(r.getString(&quot;accessLevel&quot;));</b>
-<b class="nc"><i>624</i>&nbsp;            classes.add(c);</b>
+<b class="fc"><i>618</i>&nbsp;         Statement s = conn.createStatement();</b>
+<b class="fc"><i>619</i>&nbsp;         ResultSet r = s.executeQuery(&quot;SELECT * FROM classes;&quot;);</b>
+<b class="fc"><i>620</i>&nbsp;         while (r.next()) {</b>
+<b class="fc"><i>621</i>&nbsp;            c = new CSTutor.Model.Manager.Class(r.getString(&quot;className&quot;));</b>
+<b class="fc"><i>622</i>&nbsp;            c.sections = getSections(c);</b>
+<b class="fc"><i>623</i>&nbsp;            c.access = getAccessEnum(r.getString(&quot;accessLevel&quot;));</b>
+<b class="fc"><i>624</i>&nbsp;            classes.add(c);</b>
 <i>625</i>&nbsp;         }
-<b class="nc"><i>626</i>&nbsp;         s.close();</b>
-<b class="nc"><i>627</i>&nbsp;         printClassHierarchy(classes);</b>
-<b class="nc"><i>628</i>&nbsp;         return classes;</b>
+<b class="fc"><i>626</i>&nbsp;         s.close();</b>
+<b class="fc"><i>627</i>&nbsp;         printClassHierarchy(classes);</b>
+<b class="fc"><i>628</i>&nbsp;         return classes;</b>
 <b class="nc"><i>629</i>&nbsp;      } catch(Exception e) {</b>
 <i>630</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>631</i>&nbsp;         System.err.println(&quot;Error in getClasses(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
@@ -762,14 +762,14 @@
 <i>662</i>&nbsp;    *
 <i>663</i>&nbsp;    */
 <i>664</i>&nbsp;   private static void deleteClassHierarchy() throws Exception {
-<b class="nc"><i>665</i>&nbsp;      List&lt;String&gt; values = Arrays.asList(&quot;Classes&quot;, &quot;Sections&quot;, &quot;Units&quot;, &quot;Tutorials&quot;, &quot;Pages&quot;);</b>
-<b class="nc"><i>666</i>&nbsp;      for (String val : values) {</b>
-<b class="nc"><i>667</i>&nbsp;         PreparedStatement s = conn.prepareStatement(&quot;DELETE FROM &quot; + val + &quot; WHERE 1=1&quot;);</b>
-<b class="nc"><i>668</i>&nbsp;         s.executeUpdate();</b>
-<b class="nc"><i>669</i>&nbsp;         s.close();</b>
-<b class="nc"><i>670</i>&nbsp;      }</b>
-<b class="nc"><i>671</i>&nbsp;      commit();</b>
-<b class="nc"><i>672</i>&nbsp;   }</b>
+<b class="fc"><i>665</i>&nbsp;      List&lt;String&gt; values = Arrays.asList(&quot;Classes&quot;, &quot;Sections&quot;, &quot;Units&quot;, &quot;Tutorials&quot;, &quot;Pages&quot;);</b>
+<b class="fc"><i>666</i>&nbsp;      for (String val : values) {</b>
+<b class="fc"><i>667</i>&nbsp;         PreparedStatement s = conn.prepareStatement(&quot;DELETE FROM &quot; + val + &quot; WHERE 1=1&quot;);</b>
+<b class="fc"><i>668</i>&nbsp;         s.executeUpdate();</b>
+<b class="fc"><i>669</i>&nbsp;         s.close();</b>
+<b class="fc"><i>670</i>&nbsp;      }</b>
+<b class="fc"><i>671</i>&nbsp;      commit();</b>
+<b class="fc"><i>672</i>&nbsp;   }</b>
 <i>673</i>&nbsp;
 <i>674</i>&nbsp;   /**
 <i>675</i>&nbsp;    * Save a list of Classes to the database. Drops all classes, sections, etc not in list.
@@ -780,30 +780,30 @@
 <i>680</i>&nbsp;    */
 <i>681</i>&nbsp;   public static void saveClasses(List&lt;CSTutor.Model.Manager.Class&gt; classes) {
 <i>682</i>&nbsp;      try {
-<b class="nc"><i>683</i>&nbsp;         printClassHierarchy(classes);</b>
-<b class="nc"><i>684</i>&nbsp;         deleteClassHierarchy();</b>
-<b class="nc"><i>685</i>&nbsp;         for (CSTutor.Model.Manager.Class c : classes) {</b>
-<b class="nc"><i>686</i>&nbsp;            PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Classes VALUES (?, ?)&quot;);</b>
-<b class="nc"><i>687</i>&nbsp;            s.setString(1, c.name);</b>
-<b class="nc"><i>688</i>&nbsp;            s.setString(2, getAccessString(c.access));</b>
-<b class="nc"><i>689</i>&nbsp;            s.executeUpdate();</b>
-<b class="nc"><i>690</i>&nbsp;            s.close();</b>
-<b class="nc"><i>691</i>&nbsp;            saveSections(c.sections);</b>
-<b class="nc"><i>692</i>&nbsp;         }</b>
-<b class="nc"><i>693</i>&nbsp;         commit();</b>
+<b class="fc"><i>683</i>&nbsp;         printClassHierarchy(classes);</b>
+<b class="fc"><i>684</i>&nbsp;         deleteClassHierarchy();</b>
+<b class="fc"><i>685</i>&nbsp;         for (CSTutor.Model.Manager.Class c : classes) {</b>
+<b class="fc"><i>686</i>&nbsp;            PreparedStatement s = conn.prepareStatement(&quot;INSERT OR IGNORE INTO Classes VALUES (?, ?)&quot;);</b>
+<b class="fc"><i>687</i>&nbsp;            s.setString(1, c.name);</b>
+<b class="fc"><i>688</i>&nbsp;            s.setString(2, getAccessString(c.access));</b>
+<b class="fc"><i>689</i>&nbsp;            s.executeUpdate();</b>
+<b class="fc"><i>690</i>&nbsp;            s.close();</b>
+<b class="fc"><i>691</i>&nbsp;            saveSections(c.sections);</b>
+<b class="fc"><i>692</i>&nbsp;         }</b>
+<b class="fc"><i>693</i>&nbsp;         commit();</b>
 <b class="nc"><i>694</i>&nbsp;      } catch(Exception e) {</b>
 <i>695</i>&nbsp;         // This method should never throw an exception in normal operation
 <b class="nc"><i>696</i>&nbsp;         System.err.println(&quot;Error in saveClasses(). &quot; + e.getClass().getName() + &quot;: &quot; + e.getMessage());</b>
 <b class="nc"><i>697</i>&nbsp;         System.exit(1);</b>
-<b class="nc"><i>698</i>&nbsp;      }</b>
-<b class="nc"><i>699</i>&nbsp;   }</b>
+<b class="fc"><i>698</i>&nbsp;      }</b>
+<b class="fc"><i>699</i>&nbsp;   }</b>
 <i>700</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-11 18:51</div>
+    <div style="float:right;">generated on 2015-06-11 19:54</div>
 </div>
 </body>
 </html>
