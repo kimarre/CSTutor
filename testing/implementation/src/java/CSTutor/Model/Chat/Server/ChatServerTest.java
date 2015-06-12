@@ -3,6 +3,7 @@ package CSTutor.Model.Chat.Server;
 import static org.junit.Assert.*;
 
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import org.junit.Test;
 
@@ -18,12 +19,13 @@ public class ChatServerTest {
 	}
 
 	@Test
-	public void testBroadcastMessage() {		
+	public void testBroadcastMessage() {
 	}
 
 	@Test
 	public void testRegisterChatClient() {
-		ObjectOutputStream os = new ObjectOutputStream();
+		Socket s = new Socket();
+		ObjectOutputStream os = new ObjectOutputStream(s.getOutputStream());
 		cs.registerChatClient(os);
 		assertTrue("Register chat client works: ", cs.chatClients.contains(os));
 		cs.chatClients.remove(os);

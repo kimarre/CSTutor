@@ -1,7 +1,7 @@
 package CSTutor.Model.Chat.Server;
 
 import static org.junit.Assert.*;
-
+import java.net.Socket;
 import org.junit.Test;
 
 public class WorkerTest {
