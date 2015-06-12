@@ -1,0 +1,48 @@
+Code Review For Kyle Reis
+Reviewed By Luke Gordon
+
+
+Class Password: 
+   Meets all standards. Minor inconsistencies in javadoc formatting, sometimes starts with capital letter, sometimes not.
+
+Method Password: Meets all standards.
+Method validateHash: Meets all standards.
+Method setPassword: Meets all standards.
+Method checker: Meets all standards.
+Method getHash: Meets all standards.
+
+
+Class RecoverPass:
+   Meets all standards.
+
+Method RecoverPass: Meets all standards.
+Method generateResetToken: Might want to explain the magic numbers and symbols ("6", ":")
+Method sendEmail: Doesn't do anything.
+
+
+Class Register:
+   Meets all standards.
+
+Method createUser: Maybe throw an error instead of printing it.
+
+
+Class TokenDB:
+   Meets all standards.
+
+Method TokenDB: Meets all standards.
+Method addToken: Meets all standards.
+Method isToken: Meets all standards.
+Method removeToken: Meets all standards.
+
+
+Class User:
+   Meets all standards.
+
+Method User: Meets all standards.
+Method getPassword: Meets all standards.
+Method getEmail: Meets all standards.
+Method getName: Meets all standards.
+Method getFirstName: Meets all standards.
+Method getLastName: Meets all standards.
+Method isInstructor: Meets all standards.
+Method setInstructor: Meets all standards.
