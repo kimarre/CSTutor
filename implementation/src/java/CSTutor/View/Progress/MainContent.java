@@ -71,17 +71,25 @@ public class MainContent extends JPanel
         separatorPanel.setLayout(new BoxLayout(separatorPanel, BoxLayout.X_AXIS));
         separatorPanel.setBackground(LIGHT_BLUE);
         separatorPanel.add(Box.createHorizontalStrut(30));
+        separatorPanel.setPreferredSize(new Dimension(width, 2));
+        separatorPanel.setMinimumSize(new Dimension(width, 2));
+        separatorPanel.setMaximumSize(new Dimension(width, 2));
         
-        JPanel linePanel = new JPanel();
-        linePanel.setPreferredSize(new Dimension(800, 2));
-        linePanel.setMinimumSize(new Dimension(800, 2));
-        linePanel.setMaximumSize(new Dimension(800, 2));
-        linePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.add(linePanel);
+        JLabel line = new JLabel();
+        line.setPreferredSize(new Dimension(690, 2));
+        line.setMinimumSize(new Dimension(690, 2));
+        line.setMaximumSize(new Dimension(690, 2));
+        line.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        separatorPanel.add(line);
+        separatorPanel.add(Box.createHorizontalGlue());
+        
+        this.add(separatorPanel);
         this.add(Box.createVerticalStrut(15));
         
         content = new JPanel();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
+        content.setBackground(LIGHT_BLUE);
+        this.setBorder(BorderFactory.createLineBorder(Color.darkGray));
         this.add(content);
     }
     
@@ -307,7 +315,87 @@ public class MainContent extends JPanel
             
             JLabel yAxisLabel = new JLabel("Average Quiz Score");
             yAxisLabel.setUI(new VerticalLabelUI(false));
+            yAxisLabel.setFont(new Font("Avenir", Font.PLAIN, 14));
             
+            JLabel zeroLabel = new JLabel("0");
+            zeroLabel.setFont(new Font("Avenir", Font.PLAIN, 12));
+            zeroLabel.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel dashLabel1 = new JLabel("-");
+            dashLabel1.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel twentyfiveLabel = new JLabel("25");
+            twentyfiveLabel.setFont(new Font("Avenir", Font.PLAIN, 12));
+            twentyfiveLabel.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel dashLabel2 = new JLabel("-");
+            dashLabel2.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel fiftyLabel = new JLabel("50");
+            fiftyLabel.setFont(new Font("Avenir", Font.PLAIN, 12));
+            fiftyLabel.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel dashLabel3 = new JLabel("-");
+            dashLabel3.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel seventyfiveLabel = new JLabel("75");
+            seventyfiveLabel.setFont(new Font("Avenir", Font.PLAIN, 12));
+            seventyfiveLabel.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JLabel dashLabel4 = new JLabel("-");
+            dashLabel4.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            
+            JLabel hundredLabel = new JLabel("100");
+            hundredLabel.setFont(new Font("Avenir", Font.PLAIN, 12));
+            hundredLabel.setAlignmentX(RIGHT_ALIGNMENT);
+            
+            JPanel vertLabels = new JPanel();
+            vertLabels.setLayout(new BoxLayout(vertLabels, BoxLayout.Y_AXIS));
+            vertLabels.setBackground(LIGHT_BLUE);
+            vertLabels.setPreferredSize(new Dimension(30, 250));
+            vertLabels.setMinimumSize(new Dimension(30, 250));
+            vertLabels.setMaximumSize(new Dimension(30, 250));
+            vertLabels.add(hundredLabel);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(dashLabel1);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(seventyfiveLabel);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(dashLabel2);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(fiftyLabel);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(dashLabel3);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(twentyfiveLabel);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(dashLabel4);
+            vertLabels.add(Box.createVerticalGlue());
+            vertLabels.add(zeroLabel);
+            
+            
+            JPanel quizLabels = new JPanel();
+            quizLabels.setLayout(new BoxLayout(quizLabels, BoxLayout.X_AXIS));
+            quizLabels.setBackground(LIGHT_BLUE);
+            quizLabels.setPreferredSize(new Dimension(400, 15));
+            quizLabels.setMinimumSize(new Dimension(400, 15));
+            quizLabels.setMaximumSize(new Dimension(400, 15));
+            quizLabels.add(Box.createHorizontalStrut(15));
+            for(int i= 0; i< tutorial.getNumQuizzes(); i++)
+            {
+                JLabel quizLabel = new JLabel(tutorial.getQuizName(i));
+                quizLabel.setFont(new Font("Avenir", Font.PLAIN, 9));
+                quizLabels.add(quizLabel);
+                if((i+1) != tutorial.getNumQuizzes())
+                {
+                    quizLabels.add(Box.createHorizontalGlue());
+                }
+                else
+                {
+                    quizLabels.add(Box.createHorizontalStrut(15));
+                }
+            }
             
             /*JLabel quiz1 = new JLabel("Quiz 1");
             JLabel quiz2 = new JLabel("Quiz 2");
@@ -335,24 +423,35 @@ public class MainContent extends JPanel
             
             
             graphPanel.add(yAxisLabel);
+            graphPanel.add(vertLabels);
             graphPanel.add(axisPanel);
             
             
             overallPanel.add(graphPanel);
-            /*overallPanel.add(quizLabels);*/
+            overallPanel.add(quizLabels);
             
             content.add(overallPanel);
-            content.add(Box.createVerticalStrut(5));
-            
-            
+            content.add(Box.createVerticalStrut(15));
             
             JTable table = new JTable(data, colNames);
             
+            JPanel tablePanel = new JPanel();
+            tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.X_AXIS));
+            tablePanel.setBackground(LIGHT_BLUE);
             JScrollPane scrollPane = new JScrollPane(table);
             table.setFillsViewportHeight(true);
+            tablePanel.add(Box.createHorizontalStrut(30));
+            tablePanel.add(scrollPane);
+            tablePanel.add(Box.createHorizontalStrut(30));
+            
+            content.add(tablePanel);
+            
+            content.add(Box.createVerticalStrut(15));
             
             
-            content.add(scrollPane);
+            
+            
+            //content.add(scrollPane);
         }
         else
         {
@@ -388,6 +487,7 @@ public class MainContent extends JPanel
         button.setMaximumSize(new Dimension(100, 25));
         titlePanel.add(Box.createHorizontalGlue());
         titlePanel.add(button);
+        titlePanel.add(Box.createHorizontalStrut(30));
     }
     
     /**
@@ -409,7 +509,7 @@ public class MainContent extends JPanel
         
         ProgressBar bar = new ProgressBar(400, 26, tutorial.getNumberOfPagesSeen(), tutorial.getNumberOfPages());
         bar.setVisible(true);
-        progressPanel.add(Box.createHorizontalStrut(25));
+        progressPanel.add(Box.createHorizontalStrut(30));
         progressPanel.add(bar);
         int percentage = (int)(((double)tutorial.getNumberOfPagesSeen())/((double)tutorial.getNumberOfPages()) * 100);
         JLabel label = new JLabel(new String(percentage + "% complete"));
@@ -424,13 +524,15 @@ public class MainContent extends JPanel
         quizPanel.setLayout(new BoxLayout(quizPanel, BoxLayout.Y_AXIS));
         quizPanel.setBackground(LIGHT_BLUE);
         
+        
+        
         JPanel quizTitlePanel = new JPanel();
         quizTitlePanel.setLayout(new BoxLayout(quizTitlePanel, BoxLayout.X_AXIS));
-        quizTitlePanel.setMinimumSize(new Dimension(width, 50));
-        quizTitlePanel.setPreferredSize(new Dimension(width,50));
-        quizTitlePanel.setMaximumSize(new Dimension(width, 50));
+        quizTitlePanel.setMinimumSize(new Dimension(width, 45));
+        quizTitlePanel.setPreferredSize(new Dimension(width,45));
+        quizTitlePanel.setMaximumSize(new Dimension(width, 45));
         quizTitlePanel.setBackground(LIGHT_BLUE);
-        quizTitlePanel.add(Box.createHorizontalStrut(10));
+        quizTitlePanel.add(Box.createHorizontalStrut(30));
         
         JLabel title = new JLabel(new String("Quiz Scores"));
         title.setFont(new Font("Avenir", Font.PLAIN, 25));
@@ -440,12 +542,22 @@ public class MainContent extends JPanel
         quizPanel.add(quizTitlePanel);
         
         
-        JPanel linePanel = new JPanel();
-        linePanel.setPreferredSize(new Dimension(500, 2));
-        linePanel.setMinimumSize(new Dimension(500, 2));
-        linePanel.setMaximumSize(new Dimension(500, 2));
-        linePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        quizPanel.add(linePanel);
+        JPanel separatorPanel = new JPanel();
+        separatorPanel.setLayout(new BoxLayout(separatorPanel, BoxLayout.X_AXIS));
+        separatorPanel.setBackground(LIGHT_BLUE);
+        separatorPanel.add(Box.createHorizontalStrut(30));
+        separatorPanel.setPreferredSize(new Dimension(width, 2));
+        separatorPanel.setMinimumSize(new Dimension(width, 2));
+        separatorPanel.setMaximumSize(new Dimension(width, 2));
+        
+        JLabel line = new JLabel();
+        line.setPreferredSize(new Dimension(690, 2));
+        line.setMinimumSize(new Dimension(690, 2));
+        line.setMaximumSize(new Dimension(690, 2));
+        line.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        separatorPanel.add(line);
+        separatorPanel.add(Box.createHorizontalGlue());
+        quizPanel.add(separatorPanel);
         
         
         if(tutorial.hasQuizzes())
@@ -480,7 +592,10 @@ public class MainContent extends JPanel
             tablePanel.setBackground(LIGHT_BLUE);
             JScrollPane scrollPane = new JScrollPane(table);
             table.setFillsViewportHeight(true);
+            tablePanel.add(Box.createHorizontalStrut(30));
             tablePanel.add(scrollPane);
+            tablePanel.add(Box.createHorizontalStrut(30));
+            quizPanel.add(Box.createVerticalStrut(15));
             quizPanel.add(tablePanel);
         }
         else
@@ -498,5 +613,7 @@ public class MainContent extends JPanel
         }
         content.add(Box.createVerticalStrut(30));
         content.add(quizPanel); 
+        content.add(Box.createVerticalStrut(15));
+        content.add(Box.createVerticalGlue());
     }
 }
