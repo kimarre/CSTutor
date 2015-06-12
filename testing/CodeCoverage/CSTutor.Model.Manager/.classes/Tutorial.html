@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Tutorial</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Manager</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Tutorial (CSTutor.Model.Manager)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Tutorial</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Manager;
+<i>2</i>&nbsp;import java.util.*;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;/**
+<i>5</i>&nbsp; * Class Tutorial represents a tutorial track. It contains multiple pages.
+<i>6</i>&nbsp; * 
+<i>7</i>&nbsp; * @author Simon Vurens (svurens@calpoly.edu)
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class Tutorial {
+<i>10</i>&nbsp;	/* All tutorial pages in this track*/
+<i>11</i>&nbsp;   public List&lt;Page&gt; pages;
+<i>12</i>&nbsp;   /* The name of the tutorial track*/
+<i>13</i>&nbsp;   public String name;
+<i>14</i>&nbsp;   
+<i>15</i>&nbsp;   public Unit parent;
+<i>16</i>&nbsp;   
+<b class="fc"><i>17</i>&nbsp;   public Tutorial(String name, Unit parent) {</b>
+<b class="fc"><i>18</i>&nbsp;	   this.name = name;</b>
+<b class="fc"><i>19</i>&nbsp;	   this.parent = parent;</b>
+<b class="fc"><i>20</i>&nbsp;	   this.pages = new ArrayList&lt;Page&gt;();</b>
+<b class="fc"><i>21</i>&nbsp;   }</b>
+<i>22</i>&nbsp;   /**
+<i>23</i>&nbsp;    * MoveUp moves the page up one space if possible
+<i>24</i>&nbsp;    */
+<b class="nc"><i>25</i>&nbsp;   void moveUp(Page page){}</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;   /**
+<i>28</i>&nbsp;    * MoveDown moves the page down one space if possible
+<i>29</i>&nbsp;    */
+<b class="nc"><i>30</i>&nbsp;   void moveDown(Page page){}</b>
+<i>31</i>&nbsp;   public String toString() {
+<b class="nc"><i>32</i>&nbsp;	   return name;</b>
+<i>33</i>&nbsp;   }
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
+</div>
+</body>
+</html>

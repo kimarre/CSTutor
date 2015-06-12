@@ -1,0 +1,112 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: StudentQuiz</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Quiz</a> ]
+</div>
+
+<h1>Coverage Summary for Class: StudentQuiz (CSTutor.Model.Quiz)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StudentQuiz</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Quiz;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Collection;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * A studentQuiz is a sample quiz taken by the student. It has a set of pages  
+<i>7</i>&nbsp; * of questions to be answered by the student. Once the student finishes the
+<i>8</i>&nbsp; * set of questions, isSubmited become true indicating the student has finished
+<i>9</i>&nbsp; * the quiz
+<i>10</i>&nbsp; */
+<b class="nc"><i>11</i>&nbsp;public abstract class StudentQuiz {</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    /**
+<i>14</i>&nbsp;     *
+<i>15</i>&nbsp;     */
+<i>16</i>&nbsp;    abstract void turninQuiz();
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    //students go to first page of tutorial only if the student got a score lower than 60 
+<i>19</i>&nbsp;    abstract void goToFirstPage();
+<i>20</i>&nbsp;    
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    //students go the page to review some material if the score is between 60 and 80
+<i>23</i>&nbsp;    abstract void goToSpecifiedPage(int number);
+<i>24</i>&nbsp;    //consist of a set of pages of questions
+<i>25</i>&nbsp;    Collection&lt;Page&gt; quizquestions;
+<i>26</i>&nbsp;    //checks to see whether the quiz has been submited
+<i>27</i>&nbsp;    boolean isSubmited;
+<i>28</i>&nbsp;    int score;
+<i>29</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
+</div>
+</body>
+</html>

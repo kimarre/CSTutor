@@ -1,5 +1,6 @@
 package CSTutor.View.User;
 
+import CSTutor.Model.Database.TutorDB;
 import CSTutor.Model.User.*;
 
 import javax.swing.*;
@@ -112,15 +113,15 @@ public class RegisterGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitAction
-        boolean valid = Register.createUser(fisrtNameField.getText(), lastNameField.getText(), emailField.getText(), new String(passwordField.getPassword()), false);
+        boolean valid = User.registerUser(fisrtNameField.getText(), lastNameField.getText(), emailField.getText(), new String(passwordField.getPassword()), false);
         System.out.println("User Registered: " + valid);
         if (valid)
         {
             this.setVisible(false);
         } else {
             JOptionPane.showConfirmDialog(null,
-                    "Invalid email entered",
-                    "Validation error", JOptionPane.OK_CANCEL_OPTION);
+                    (TutorDB.getUser(emailField.getText()) != null) ? "email already exists" : "email invalid",
+                    "Registration Error", JOptionPane.OK_CANCEL_OPTION);
         }
     }//GEN-LAST:event_SubmitAction
 
@@ -178,5 +179,4 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JTextField lastNameField;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
-    private CSTutor.Model.User.Register register;
 }

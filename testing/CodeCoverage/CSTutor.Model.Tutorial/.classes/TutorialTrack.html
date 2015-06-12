@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TutorialTrack</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Tutorial</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TutorialTrack (CSTutor.Model.Tutorial)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TutorialTrack</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;
+<i>2</i>&nbsp;package CSTutor.Model.Tutorial;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import java.util.*;
+<i>5</i>&nbsp;import CSTutor.Model.Tutorial.*;
+<i>6</i>&nbsp;import CSTutor.Model.Database.*;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * Overall structure for the list of tutorials.
+<i>10</i>&nbsp; * @author Kim Arre (karre@calpoly.edu)
+<i>11</i>&nbsp; * @version 07May2015
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public class TutorialTrack {
+<i>14</i>&nbsp;    /** Overall structure that houses the list of tutorials. */
+<i>15</i>&nbsp;    public static ArrayList&lt;Integer&gt; track;
+<b class="fc"><i>16</i>&nbsp;    public static int maxIndex = 0;</b>
+<i>17</i>&nbsp;    public static TutorDB database;
+<i>18</i>&nbsp;    
+<i>19</i>&nbsp;    public static int getNextID() {
+<b class="fc"><i>20</i>&nbsp;        maxIndex++;</b>
+<b class="fc"><i>21</i>&nbsp;        return maxIndex-1;</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;    
+<b class="fc"><i>24</i>&nbsp;    public TutorialTrack() {</b>
+<b class="fc"><i>25</i>&nbsp;        track = new ArrayList&lt;Integer&gt;();</b>
+<b class="fc"><i>26</i>&nbsp;        database = new TutorDB();</b>
+<i>27</i>&nbsp;        
+<i>28</i>&nbsp;        // First sample tutorial Content
+<b class="fc"><i>29</i>&nbsp;        String newTitle = &quot;For Loops&quot;;</b>
+<b class="fc"><i>30</i>&nbsp;        String desc = &quot;For loops are a type of control structure that &quot;</b>
+<i>31</i>&nbsp;          + &quot;allow code to be repeatedly executed. They take three arguments&quot;
+<i>32</i>&nbsp;          + &quot; in the order of:&lt;br&gt;     1. starting condition;&lt;br&gt;     2. condition &quot;
+<i>33</i>&nbsp;          + &quot;to exit the loop;&lt;br&gt;     3. post loop increment&quot;;
+<i>34</i>&nbsp;        
+<b class="fc"><i>35</i>&nbsp;        String syn = &quot;for (int i=start; i&amp;#60;upperLimit; i++) {&lt;br&gt;&amp;#32;&amp;#32;&amp;#32;...&lt;br&gt;}&quot;;</b>
+<b class="fc"><i>36</i>&nbsp;        String output = &quot;Hello world&lt;br&gt;Hello world&lt;br&gt;Hello world&lt;br&gt;Hello world&lt;br&gt;Hello world&quot;;</b>
+<b class="fc"><i>37</i>&nbsp;        String code = &quot;for (int i=0; i&amp;#60;5; i++) {&lt;br&gt;&amp;#32;&amp;#32;&amp;#32;printf(\&quot;Hello world\\n\&quot;);&lt;br&gt;}&quot;;</b>
+<b class="fc"><i>38</i>&nbsp;        String tryIt = &quot;Write a program that outputs every multiple of 5 from 0 to 25. (ex. 0 5 10 15 20 15)&quot;;</b>
+<i>39</i>&nbsp;        
+<b class="fc"><i>40</i>&nbsp;        int ndx = getNextID();</b>
+<b class="fc"><i>41</i>&nbsp;        TutorialData first = new TutorialData(ndx, newTitle, desc, syn, code, output, tryIt);</b>
+<b class="fc"><i>42</i>&nbsp;        track.add(ndx);</b>
+<i>43</i>&nbsp;        
+<b class="fc"><i>44</i>&nbsp;        database.setTutorialData(first);</b>
+<i>45</i>&nbsp;        
+<i>46</i>&nbsp;        // Second sample tutorial content
+<i>47</i>&nbsp;        
+<b class="fc"><i>48</i>&nbsp;        newTitle = &quot;While Loops&quot;;</b>
+<b class="fc"><i>49</i>&nbsp;        desc = &quot;While loops are only sometimes as cool as for loops.&quot;;</b>
+<b class="fc"><i>50</i>&nbsp;        syn = &quot;while (condition) { &lt;br&gt;&lt;br&gt;}&quot;;</b>
+<i>51</i>&nbsp;        
+<b class="fc"><i>52</i>&nbsp;        TutorialData second = new TutorialData(ndx = getNextID(), newTitle, desc, syn, &quot;&quot;, &quot;&quot;, &quot;&quot;);</b>
+<b class="fc"><i>53</i>&nbsp;        track.add(ndx);</b>
+<b class="fc"><i>54</i>&nbsp;        database.setTutorialData(second);</b>
+<b class="fc"><i>55</i>&nbsp;    }</b>
+<i>56</i>&nbsp;    
+<i>57</i>&nbsp;    /*public void initRoadmapArray(String[] arr) {
+<i>58</i>&nbsp;        System.out.println(&quot;max index is: &quot; + maxIndex);
+<i>59</i>&nbsp;        for(int i=0; i&lt;maxIndex; i++) {
+<i>60</i>&nbsp;            //
+<i>61</i>&nbsp;            System.out.println(&quot;Maxindex: &quot; + maxIndex + &quot; TITLE: &quot; + database.getTutorialData(i).title);
+<i>62</i>&nbsp;            System.out.println(&quot;arr.length &quot; + arr.length);
+<i>63</i>&nbsp;            arr[i] = database.getTutorialData(i).title;
+<i>64</i>&nbsp;            
+<i>65</i>&nbsp;        }
+<i>66</i>&nbsp;        
+<i>67</i>&nbsp;    }*/
+<i>68</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
+</div>
+</body>
+</html>

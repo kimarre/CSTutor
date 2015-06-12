@@ -13,8 +13,8 @@ import java.net.Socket;
  */
 
 public class Worker implements Runnable {
-	protected Socket clientSocket = null;
-	protected ChatServer parent = null;
+	public Socket clientSocket = null;
+	public ChatServer parent = null;
 	Object inputObject = null;
 	
 	/**

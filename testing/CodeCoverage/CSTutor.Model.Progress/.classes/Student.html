@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Student</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Progress</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Student (CSTutor.Model.Progress)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Student</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Progress;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.*;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/****
+<i>6</i>&nbsp; * Class Student is a data structure that represents a student who is enrolled
+<i>7</i>&nbsp; * in an instructor&#39;s class and completing tutorials. Class Student provides
+<i>8</i>&nbsp; * methods to access the name of the student and the list of classes they
+<i>9</i>&nbsp; * are enrolled in.
+<i>10</i>&nbsp; * @author Erica Solum (esolum@calpoly.edu)
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public class Student
+<i>14</i>&nbsp;{ 
+<i>15</i>&nbsp;    /** Displayable name of the student */
+<i>16</i>&nbsp;    private String name;
+<i>17</i>&nbsp;    /** List of classes the student is enrolled in */
+<i>18</i>&nbsp;    private ArrayList&lt;Class&gt; enrolledClasses;
+<i>19</i>&nbsp;    
+<i>20</i>&nbsp;    public Student(String name, ArrayList&lt;Class&gt; enrolled)
+<b class="fc"><i>21</i>&nbsp;    {</b>
+<b class="fc"><i>22</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>23</i>&nbsp;        enrolledClasses = enrolled;</b>
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;    
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * Returns a string representation of Student, also know as the name of
+<i>28</i>&nbsp;     * the student.
+<i>29</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>30</i>&nbsp;     pre:
+<i>31</i>&nbsp;       // String name must not be null.
+<i>32</i>&nbsp;       name != null &amp;&amp; !name.isEmpty();
+<i>33</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    public String toString()
+<i>36</i>&nbsp;    {
+<b class="fc"><i>37</i>&nbsp;        return name;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;    
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     * Adds a class to the student&#39;s list of enrolled classes.
+<i>42</i>&nbsp;     * @param cl  class to be added
+<i>43</i>&nbsp;     *                                                   &lt;pre&gt;
+<i>44</i>&nbsp;     pre:
+<i>45</i>&nbsp;       // Class cl must not be null.
+<i>46</i>&nbsp;       cl != null;
+<i>47</i>&nbsp;       
+<i>48</i>&nbsp;     post:
+<i>49</i>&nbsp;       // The class cl is now in this.enrolledClasses.
+<i>50</i>&nbsp;       enrolledClasses&#39;.contains(cl);
+<i>51</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    public void addClass(Class cl)
+<i>54</i>&nbsp;    {
+<b class="fc"><i>55</i>&nbsp;        System.out.println(&quot;In Student.addClass&quot;);</b>
+<b class="fc"><i>56</i>&nbsp;        enrolledClasses.add(cl);</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;    
+<i>59</i>&nbsp;    /**
+<i>60</i>&nbsp;     * Returns if the names of the students are the same.
+<i>61</i>&nbsp;     *                                                  &lt;pre&gt;
+<i>62</i>&nbsp;     pre:
+<i>63</i>&nbsp;       // String name must not be null.
+<i>64</i>&nbsp;       name != null &amp;&amp; !name.isEmpty();
+<i>65</i>&nbsp;       // Student st must not be null.
+<i>66</i>&nbsp;       st != null;
+<i>67</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    public boolean equals(Student student)
+<i>70</i>&nbsp;    {
+<b class="fc"><i>71</i>&nbsp;        if(student.toString().equals(name))</b>
+<i>72</i>&nbsp;        {
+<b class="fc"><i>73</i>&nbsp;            return true;</b>
+<i>74</i>&nbsp;        }
+<b class="fc"><i>75</i>&nbsp;        return false;</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;    
+<i>78</i>&nbsp;    /**
+<i>79</i>&nbsp;     * Returns the list of classes this student is enrolled in.
+<i>80</i>&nbsp;     * @return  enrolledClasses
+<i>81</i>&nbsp;     */
+<i>82</i>&nbsp;    public ArrayList&lt;Class&gt; getEnrolledClasses()
+<i>83</i>&nbsp;    {
+<b class="fc"><i>84</i>&nbsp;        return enrolledClasses;</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
+</div>
+</body>
+</html>

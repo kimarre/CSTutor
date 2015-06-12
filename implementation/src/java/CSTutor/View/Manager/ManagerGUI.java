@@ -41,27 +41,11 @@ public class ManagerGUI extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         newObject = new NewObjectGUI();
-        
         System.out.println("Attempt to get data");
         managerModel.data = CSTutor.Model.Database.TutorDB.getClasses();
         System.out.println("Data got?");
-        
-        moveTut = new MoveGUI();
-        /*
-        managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 101"));
-        managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 102"));
-        managerModel.data.add(new CSTutor.Model.Manager.Class("CSC 103"));
-        managerModel.selectClass(managerModel.data.get(0));
-        managerModel.createSection(new CSTutor.Model.Manager.Section("Section 1", null, null, managerModel.selectedClass));
-        managerModel.selectSection(managerModel.selectedClass.sections.get(1));
-        managerModel.createUnit(new CSTutor.Model.Manager.Unit("Printing Text", managerModel.selectedSection));
-        managerModel.selectUnit(managerModel.selectedSection.units.get(1));
-        managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Hello World", managerModel.selectedUnit));
-        managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Conditionals", managerModel.selectedUnit));
-        managerModel.createTutorial(new CSTutor.Model.Manager.Tutorial("Loops", managerModel.selectedUnit));
-        */
-        
-        
+
+        moveTut = new MoveGUI(); 
         addManagerContent();
         this.setVisible(true);
     }

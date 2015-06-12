@@ -1,0 +1,115 @@
+<html>
+<head>
+   <title>Tutorial Acceptance Testing</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="container">
+   <h3>Tutorial Acceptance Testing</h3>
+   
+   <table class="table table-condensed table-bordered">
+   <tbody>
+      <tr>
+         <td><b>Case No.</b></td>
+         <td><b>User Inputs and Commands</b></td>
+         <td><b>Expected Output</b></td>
+         <td><b>Remarks</b></td>
+         <td><b>Results</b></td>
+      </tr>
+      <tr>
+         <td>1</td>
+         <td>Menu Tutorial -> My Tutorials</td>
+         <td>Student View of the tutorial</td>
+         <td>Tests that the tutorials are viewable. Note: can only be done after signing in.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>2</td>
+         <td>Press 'Jump to End' and 'Jump to Beginning' buttons</td>
+         <td>Tutorial updates with expected content from the tutorial track.</td>
+         <td>Tests that quick jump functionality works</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>3</td>
+         <td>Click any of the entires of the Roadmap Module on the left</td>
+         <td>Tutorial updates with expected content from the tutorial track.</td>
+         <td>Tests that quick jump functionality works</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>4</td>
+         <td>Press 'Next' and 'Previous' buttons</td>
+         <td>Tutorial updates with expected content from the tutorial track.</td>
+         <td>Tests that tutorial track can be traversed forward and backward.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>5</td>
+         <td>Enter text into the text editor and press 'Run'</td>
+         <td>Python interpreter displays the output in the console below.</td>
+         <td>Tests the Python interpreter</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>6</td>
+         <td>Menu Tutorials -> Create Tutorial</td>
+         <td>Editor Tutorial should appear for editing.</td>
+         <td>Tests the editing functionality</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>7</td>
+         <td>Enter only a title and/or description and press 'save' and 'yes'</td>
+         <td>Expect an error that not enough fields have been filled out</td>
+         <td>Tests that the data validation works.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>8</td>
+         <td>Enter a title, description, and syntax, and press 'save'</td>
+         <td>No visual feedbac</td>
+         <td>Tutorial accepts the info. Step 9 verifies.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>9</td>
+         <td>Go back to 'My Tutorials'</td>
+         <td>The new tutorial has been added to the Roadmap Module on the left</td>
+         <td>Tests that the information exists in the tutorial track. You can
+            click on the menu item to verify all information is correct</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>10</td>
+         <td>From 'Create Tutorial,' enter as many desired fields, and click
+            'Preview'</td>
+         <td>Normal student tutorial appears with greyed out buttons</td>
+         <td>Tests that information can be read and buttons can't be pressed to
+         traverse a nonexistent tutorial track.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>11</td>
+         <td>Press the 'Tools' button</td>
+         <td>See the toolbar appear</td>
+         <td>Tests that the controls for editing text show up.</td>
+         <td>Pass</td>
+      </tr>
+      <tr>
+         <td>12</td>
+         <td>Change the values in the editing toolbar.</td>
+         <td>See the text change within the tutorial text fields.</td>
+         <td>Tests that toolbar functionality works as expected</td>
+         <td>Fail, not implemented</td>
+      </tr>
+   </tbody>
+   </table>
+   
+
+</body>
+
+</html>
+
+

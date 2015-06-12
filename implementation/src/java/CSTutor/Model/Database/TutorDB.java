@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,9 +48,9 @@ public class TutorDB {
          init_db(c);
          return c;
       } catch(Exception e) {
-         // Since the program is unuseable without a db connection, crash on exception
+         // Since the program is unuseable without a db connection, crash on exception.
+         // Only occurs when JDBC jar is missing, or there is an SQL error in the script
          System.err.println("Couldn't open db connection. " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }  
@@ -82,14 +83,8 @@ public class TutorDB {
     * pre:
     *  conn != null;
     */
-   public static void commit() {
-      try {
-         conn.commit();
-      } catch(Exception e) {
-         // Committing should never throw an exception in normal operation
-         System.err.println("Error in commit(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
-      }
+   private static void commit() throws SQLException {
+      conn.commit();
    }
 
    
@@ -119,10 +114,9 @@ public class TutorDB {
          s.executeUpdate();
          s.close();
          commit();
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in setUser(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
       }
    }
 
@@ -145,9 +139,27 @@ public class TutorDB {
          );
          s.close();
          return user;
-      } catch(Exception e) {
-         // User is not in db so return null
+      } catch(SQLException e) {
+         // User not in db so return null
          return null;
+      }
+   }
+
+   /**
+    * Delete a user from the database.
+    *
+    * @param username Username to delete
+    * pre:
+    *  username != null;
+    */
+   public static void deleteUser(String username) {
+      try {
+         PreparedStatement s = conn.prepareStatement("DELETE FROM Users WHERE username=?");
+         s.setString(1, username);
+         s.executeUpdate();
+         s.close();
+         commit();
+      } catch(SQLException e) {
       }
    }
 
@@ -170,10 +182,9 @@ public class TutorDB {
          }
          s.close();
          return usernames;
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
-         System.err.println("Error in getAllUsers(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
+      } catch(SQLException e) {
+         // SQL error, should not happen
+         System.err.println("Error in getUsernamesByAccessLevel(). " + e.getClass().getName() + ": " + e.getMessage());
          return null;
       }
    }
@@ -202,10 +213,9 @@ public class TutorDB {
          s.executeUpdate();
          s.close();
          commit();
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in setTutorialData(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
       }
    }
 
@@ -228,7 +238,7 @@ public class TutorDB {
           r.getBoolean("hasSeen"));
          s.close();
          return data;
-      } catch(Exception e) {
+      } catch(SQLException e) {
          // Tutorial is not in db so return null
          return null;
       }
@@ -257,10 +267,9 @@ public class TutorDB {
          }
          s.close();
          return tutorials;
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }
@@ -281,15 +290,14 @@ public class TutorDB {
          PreparedStatement s = conn.prepareStatement("SELECT * FROM QuizData");
          ResultSet r = s.executeQuery();
          while (r.next()) {
-            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numPages"));
+            q = new CSTutor.Model.Progress.QuizData(r.getString("name"), r.getInt("id"), r.getInt("numQuestions"));
             quizzes.add(q);
          }
          s.close();
          return quizzes;
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in getAllTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
          return null;
       }
    }
@@ -308,28 +316,23 @@ public class TutorDB {
     * post:
     *  return != null;
     */
-   public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) {
+   public static List<CSTutor.Model.Manager.Page> getPages(CSTutor.Model.Manager.Tutorial tutorial) throws SQLException {
       List<CSTutor.Model.Manager.Page> pages = new ArrayList<CSTutor.Model.Manager.Page>();
       CSTutor.Model.Manager.Page p;
-      try {
-         PreparedStatement s = conn.prepareStatement(
-          "SELECT * FROM Pages WHERE tutorialName=? AND unitName=? AND sectionName=? AND className=?");
-         List<String> values = Arrays.asList(tutorial.name, tutorial.parent.name,
-          tutorial.parent.parent.name, tutorial.parent.parent.parent.name);
-         for (int i = 0; i < values.size(); i++) {
-            s.setString(i+1, values.get(i));
-         }
-         ResultSet r = s.executeQuery();
-         while (r.next()) {
-            p = new CSTutor.Model.Manager.Page(r.getString("pageName"), tutorial);
-            pages.add(p);
-         }
-         s.close();
-         return pages;
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
-         return pages;
+      PreparedStatement s = conn.prepareStatement(
+       "SELECT * FROM Pages WHERE tutorialName=? AND unitName=? AND sectionName=? AND className=?");
+      List<String> values = Arrays.asList(tutorial.name, tutorial.parent.name,
+       tutorial.parent.parent.name, tutorial.parent.parent.parent.name);
+      for (int i = 0; i < values.size(); i++) {
+         s.setString(i+1, values.get(i));
       }
+      ResultSet r = s.executeQuery();
+      while (r.next()) {
+         p = new CSTutor.Model.Manager.Page(r.getString("pageName"), tutorial);
+         pages.add(p);
+      }
+      s.close();
+      return pages;
    }
 
    /**
@@ -339,23 +342,17 @@ public class TutorDB {
     * pre:
     *  pages != null;
     */
-   public static void savePages(List<CSTutor.Model.Manager.Page> pages) {
-      try {
-         for (CSTutor.Model.Manager.Page p : pages) {
-            PreparedStatement s = conn.prepareStatement(
-             "INSERT OR IGNORE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?, ?)");
-            s.setString(1, p.name);
-            s.setString(2, p.parent.name);
-            s.setString(3, p.parent.parent.name);
-            s.setString(4, p.parent.parent.parent.name);
-            s.setString(5, p.parent.parent.parent.parent.name);
-            s.executeUpdate();
-            s.close();
-         }
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
-         System.err.println("Error in savePages(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
+   public static void savePages(List<CSTutor.Model.Manager.Page> pages) throws SQLException {
+      for (CSTutor.Model.Manager.Page p : pages) {
+         PreparedStatement s = conn.prepareStatement(
+          "INSERT OR IGNORE INTO Pages(pageName, tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?, ?)");
+         s.setString(1, p.name);
+         s.setString(2, p.parent.name);
+         s.setString(3, p.parent.parent.name);
+         s.setString(4, p.parent.parent.parent.name);
+         s.setString(5, p.parent.parent.parent.parent.name);
+         s.executeUpdate();
+         s.close();
       }
    }
 
@@ -390,8 +387,8 @@ public class TutorDB {
          }
          s.close();
          return tutorials;
-      } catch(Exception e) {
-         // User not in db so return empty
+      } catch(SQLException e) {
+         // SQL error, should not happen
          return tutorials;
       }
    }
@@ -403,23 +400,17 @@ public class TutorDB {
     * pre:
     *  tutorials != null;
     */
-   public static void saveTutorials(List<CSTutor.Model.Manager.Tutorial> tutorials) {
-      try {
-         for (CSTutor.Model.Manager.Tutorial t : tutorials) {
-            PreparedStatement s = conn.prepareStatement(
-             "INSERT OR IGNORE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?)");
-            s.setString(1, t.name);
-            s.setString(2, t.parent.name);
-            s.setString(3, t.parent.parent.name);
-            s.setString(4, t.parent.parent.parent.name);
-            s.executeUpdate();
-            s.close();
-            savePages(t.pages);
-         }
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
-         System.err.println("Error in saveTutorials(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
+   public static void saveTutorials(List<CSTutor.Model.Manager.Tutorial> tutorials) throws SQLException {
+      for (CSTutor.Model.Manager.Tutorial t : tutorials) {
+         PreparedStatement s = conn.prepareStatement(
+          "INSERT OR IGNORE INTO Tutorials(tutorialName, unitName, sectionName, className) VALUES (?, ?, ?, ?)");
+         s.setString(1, t.name);
+         s.setString(2, t.parent.name);
+         s.setString(3, t.parent.parent.name);
+         s.setString(4, t.parent.parent.parent.name);
+         s.executeUpdate();
+         s.close();
+         savePages(t.pages);
       }
    }
 
@@ -454,8 +445,8 @@ public class TutorDB {
          }
          s.close();
          return units;
-      } catch(Exception e) {
-         // Section not in db so return empty
+      } catch(SQLException e) {
+         // SQL error, should not happen
          return units;
       }
    }
@@ -467,22 +458,16 @@ public class TutorDB {
     * pre:
     *  units != null;
     */
-   public static void saveUnits(List<CSTutor.Model.Manager.Unit> units) {
-      try {
-         for (CSTutor.Model.Manager.Unit u : units) {
-            PreparedStatement s = conn.prepareStatement(
-             "INSERT OR IGNORE INTO Units(unitName, sectionName, className) VALUES (?, ?, ?)");
-            s.setString(1, u.name);
-            s.setString(2, u.parent.name);
-            s.setString(3, u.parent.parent.name);
-            s.executeUpdate();
-            s.close();
-            saveTutorials(u.tutorials);
-         }
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
-         System.err.println("Error in saveUnits(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
+   public static void saveUnits(List<CSTutor.Model.Manager.Unit> units) throws SQLException {
+      for (CSTutor.Model.Manager.Unit u : units) {
+         PreparedStatement s = conn.prepareStatement(
+          "INSERT OR IGNORE INTO Units(unitName, sectionName, className) VALUES (?, ?, ?)");
+         s.setString(1, u.name);
+         s.setString(2, u.parent.name);
+         s.setString(3, u.parent.parent.name);
+         s.executeUpdate();
+         s.close();
+         saveTutorials(u.tutorials);
       }
    }
 
@@ -516,8 +501,8 @@ public class TutorDB {
          }
          s.close();
          return sections;
-      } catch(Exception e) {
-         // Class not in db so return empty
+      } catch(SQLException e) {
+         // SQL error, should not happen
          return sections;
       }
    }
@@ -529,20 +514,14 @@ public class TutorDB {
     * pre:
     *  sections != null;
     */
-   public static void saveSections(List<CSTutor.Model.Manager.Section> sections) {
-      try {
-         for (CSTutor.Model.Manager.Section sec : sections) {
-            PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)");
-            s.setString(1, sec.name);
-            s.setString(2, sec.parent.name);
-            s.executeUpdate();
-            s.close();
-            saveUnits(sec.units);
-         }
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
-         System.err.println("Error in saveSections(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
+   public static void saveSections(List<CSTutor.Model.Manager.Section> sections) throws SQLException {
+      for (CSTutor.Model.Manager.Section sec : sections) {
+         PreparedStatement s = conn.prepareStatement("INSERT OR IGNORE INTO Sections(sectionName, className) VALUES (?, ?)");
+         s.setString(1, sec.name);
+         s.setString(2, sec.parent.name);
+         s.executeUpdate();
+         s.close();
+         saveUnits(sec.units);
       }
    }
 
@@ -557,14 +536,12 @@ public class TutorDB {
     */
    private static CSTutor.Model.Manager.Class.ClassAccessLevel getAccessEnum(String access) {
       switch (access) {
-         case "Guest":
-            return ClassAccessLevel.Guest;
          case "Student":
             return ClassAccessLevel.Student;
          case "Professor":
             return ClassAccessLevel.Professor;
       }
-      return null;
+      return ClassAccessLevel.Guest;
    }
 
    /**
@@ -575,17 +552,19 @@ public class TutorDB {
     */
    private static String getAccessString(CSTutor.Model.Manager.Class.ClassAccessLevel access) {
       switch (access) {
-         case Guest:
-            return "Guest";
          case Student:
             return "Student";
          case Professor:
             return "Professor";
       }
-      return null;
+      return "Guest";
    }
 
-   private static int printClassHierarchy(List<CSTutor.Model.Manager.Class> classes) {
+   /**
+    * Prints the contents of the list of classes to stdout. Used in debugging.
+    * @param classes The list of classes to print
+    */
+   private static void printClassHierarchy(List<CSTutor.Model.Manager.Class> classes) {
       for (CSTutor.Model.Manager.Class c : classes) {
          System.out.println("<" + c.name + ">");
          for (CSTutor.Model.Manager.Section s : c.sections) {
@@ -601,7 +580,6 @@ public class TutorDB {
             }
          }
       }
-      return 0;
    }
 
    /**
@@ -626,10 +604,10 @@ public class TutorDB {
          s.close();
          printClassHierarchy(classes);
          return classes;
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in getClasses(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
+         return null;
       }
    }
 
@@ -650,10 +628,10 @@ public class TutorDB {
         }
         s.close();
         return classes;
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in getClassNames(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1); return null;
+         return null;
       }
    }
 
@@ -661,7 +639,7 @@ public class TutorDB {
     * Delete rows from tables in class hierarchy
     *
     */
-   private static void deleteClassHierarchy() throws Exception {
+   private static void deleteClassHierarchy() throws SQLException {
       List<String> values = Arrays.asList("Classes", "Sections", "Units", "Tutorials", "Pages");
       for (String val : values) {
          PreparedStatement s = conn.prepareStatement("DELETE FROM " + val + " WHERE 1=1");
@@ -691,10 +669,9 @@ public class TutorDB {
             saveSections(c.sections);
          }
          commit();
-      } catch(Exception e) {
-         // This method should never throw an exception in normal operation
+      } catch(SQLException e) {
+         // SQL error, should not happen
          System.err.println("Error in saveClasses(). " + e.getClass().getName() + ": " + e.getMessage());
-         System.exit(1);
       }
    }
 }

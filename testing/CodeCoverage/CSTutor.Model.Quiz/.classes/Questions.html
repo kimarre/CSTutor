@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Questions</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Quiz</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Questions (CSTutor.Model.Quiz)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Questions</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Quiz;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * A Question consist of a description of a question, number of question, and
+<i>5</i>&nbsp; * a choice for the question.
+<i>6</i>&nbsp; */
+<b class="nc"><i>7</i>&nbsp;public abstract class Questions{</b>
+<i>8</i>&nbsp;   // Indicate what number the question is
+<i>9</i>&nbsp;   int questionNum;
+<i>10</i>&nbsp;   /*
+<i>11</i>&nbsp;      post:
+<i>12</i>&nbsp;        //There exist at least one character for the question asked
+<i>13</i>&nbsp;        exists (Description question; question.length() &gt; 0);
+<i>14</i>&nbsp;     */
+<i>15</i>&nbsp;   abstract void createDescription();
+<i>16</i>&nbsp;    
+<i>17</i>&nbsp;   // Gives a description of what the questions request for
+<i>18</i>&nbsp;   Description question;
+<i>19</i>&nbsp;   // multiple choices for the question
+<i>20</i>&nbsp;   char[] answer;
+<i>21</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
+</div>
+</body>
+</html>

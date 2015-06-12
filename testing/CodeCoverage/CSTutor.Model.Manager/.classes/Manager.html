@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Manager</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">CSTutor.Model.Manager</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Manager (CSTutor.Model.Manager)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Manager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.1%
+  </span>
+  <span class="absValue">
+    (8/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    34.5%
+  </span>
+  <span class="absValue">
+    (30/ 87)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Manager;
+<i>2</i>&nbsp;import java.util.*;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;/****
+<i>5</i>&nbsp; * The Manager contains all the information for the manager view. It contains
+<i>6</i>&nbsp; * all Classes, as well as what is currently selected. 
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * @author Simon Vurens (svurens@calpoly.edu)
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;public class Manager {
+<i>11</i>&nbsp;	/* A list of all classes */
+<i>12</i>&nbsp;   public List&lt;Class&gt; data;
+<i>13</i>&nbsp;	/* The selected class */
+<i>14</i>&nbsp;   public Class selectedClass;
+<i>15</i>&nbsp;	/* The selected section */
+<i>16</i>&nbsp;   public Section selectedSection;
+<i>17</i>&nbsp;	/* The selected unit */
+<i>18</i>&nbsp;   public Unit selectedUnit;
+<i>19</i>&nbsp;	/* The selected tutorial */
+<i>20</i>&nbsp;   public Tutorial selectedTutorial;
+<i>21</i>&nbsp;	/* The selected page */
+<i>22</i>&nbsp;   public Page selectedPage;
+<i>23</i>&nbsp;   /**
+<i>24</i>&nbsp;    * Creates a manager model. Should only be one per site.
+<i>25</i>&nbsp;    */
+<b class="fc"><i>26</i>&nbsp;   public Manager() {</b>
+<b class="fc"><i>27</i>&nbsp;      data = new ArrayList&lt;Class&gt;();</b>
+<b class="fc"><i>28</i>&nbsp;   }</b>
+<i>29</i>&nbsp;   
+<i>30</i>&nbsp;   public void clearSelections() {
+<b class="nc"><i>31</i>&nbsp;   	selectedClass = null;</b>
+<b class="nc"><i>32</i>&nbsp;   	selectedSection = null;</b>
+<b class="nc"><i>33</i>&nbsp;   	selectedUnit = null;</b>
+<b class="nc"><i>34</i>&nbsp;   	selectedTutorial = null;</b>
+<b class="nc"><i>35</i>&nbsp;   }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;   /**
+<i>38</i>&nbsp;    * SelectSection sets the selectedSection to the given section, if it
+<i>39</i>&nbsp;    * is within the selectedClass. &lt;pre&gt;
+<i>40</i>&nbsp;      pre:
+<i>41</i>&nbsp;       // The selected section is within the selectedClass
+<i>42</i>&nbsp;       selectedClass != null &amp;&amp;
+<i>43</i>&nbsp;       selectedClass.sections.contains(select);
+<i>44</i>&nbsp;      post:
+<i>45</i>&nbsp;       selectedSection&#39;.equals(select);
+<i>46</i>&nbsp;    */
+<i>47</i>&nbsp;   public void selectSection(Section select) {
+<b class="fc"><i>48</i>&nbsp;   	System.out.println(&quot;Selecting &quot; + select);</b>
+<b class="fc"><i>49</i>&nbsp;	   if (select == null) {</b>
+<b class="nc"><i>50</i>&nbsp;	   	System.out.println(&quot;Warning: nothing selected&quot;);</b>
+<b class="nc"><i>51</i>&nbsp;		   selectedSection = null;</b>
+<b class="nc"><i>52</i>&nbsp;		   selectedClass = null;</b>
+<i>53</i>&nbsp;	   }
+<i>54</i>&nbsp;	   else {
+<b class="fc"><i>55</i>&nbsp;		   selectedSection = select;</b>
+<b class="fc"><i>56</i>&nbsp;		   selectClass(select.parent);</b>
+<b class="fc"><i>57</i>&nbsp;           System.out.println(&quot;Selected Section: &quot; + selectedSection.name);</b>
+<i>58</i>&nbsp;	   }
+<b class="fc"><i>59</i>&nbsp;   }</b>
+<i>60</i>&nbsp;   /**
+<i>61</i>&nbsp;    * SelectClass sets the selectedClass to the given class, if it exists.
+<i>62</i>&nbsp;    * &lt;pre&gt;
+<i>63</i>&nbsp;      pre:
+<i>64</i>&nbsp;      
+<i>65</i>&nbsp;       select != null &amp;&amp; data.contains(select);
+<i>66</i>&nbsp;      post:
+<i>67</i>&nbsp;       selectedClass&#39;.equals(select);
+<i>68</i>&nbsp;    */ 
+<i>69</i>&nbsp;   public void selectClass(Class select) {
+<b class="fc"><i>70</i>&nbsp;	   selectedClass = select;</b>
+<i>71</i>&nbsp;
+<b class="fc"><i>72</i>&nbsp;       System.out.println(&quot;Selected Class: &quot; + selectedClass.name);</b>
+<b class="fc"><i>73</i>&nbsp;   }</b>
+<i>74</i>&nbsp;   /**
+<i>75</i>&nbsp;    * SelectUnit sets the selectedUnit to the given unit, if it is within the selected class or section.
+<i>76</i>&nbsp;    * &lt;pre&gt;
+<i>77</i>&nbsp;      pre:
+<i>78</i>&nbsp;       selectedClass !=null &amp;&amp; ((selectedSection == null &amp;&amp; selectedClass.units.contains(select)) || 
+<i>79</i>&nbsp;       (selectedSection != null &amp;&amp; (selectedSection.units.contains(select) || selectedSection.parent.units.contains(select))));
+<i>80</i>&nbsp;      post:
+<i>81</i>&nbsp;       selectedUnit&#39;.equals(select);
+<i>82</i>&nbsp;    */ 
+<i>83</i>&nbsp;   public void selectUnit(Unit select){
+<b class="fc"><i>84</i>&nbsp;   	System.out.println(&quot;Selecting &quot; + select);</b>
+<b class="fc"><i>85</i>&nbsp;	   if (select == null) {</b>
+<b class="nc"><i>86</i>&nbsp;	   	System.out.println(&quot;Warning: nothing selected&quot;);</b>
+<b class="nc"><i>87</i>&nbsp;		   selectedUnit = null;</b>
+<b class="nc"><i>88</i>&nbsp;		   selectedSection = null;</b>
+<b class="nc"><i>89</i>&nbsp;		   selectedClass = null;</b>
+<i>90</i>&nbsp;	   }
+<i>91</i>&nbsp;	   else {
+<b class="fc"><i>92</i>&nbsp;		   selectedUnit = select;</b>
+<b class="fc"><i>93</i>&nbsp;		   selectSection(select.parent);</b>
+<b class="fc"><i>94</i>&nbsp;           System.out.println(&quot;Selected Unit: &quot; + selectedUnit.name);</b>
+<i>95</i>&nbsp;	   }
+<b class="fc"><i>96</i>&nbsp;   }</b>
+<i>97</i>&nbsp;   /**
+<i>98</i>&nbsp;    * SelectTutorial sets the selectedTutorial to the given tutorial, if it is withing the selected unit.
+<i>99</i>&nbsp;    * &lt;pre&gt;
+<i>100</i>&nbsp;      pre:
+<i>101</i>&nbsp;       selectedUnit != null &amp;&amp; selectedUnit.tutorials.contains(select);
+<i>102</i>&nbsp;      post:
+<i>103</i>&nbsp;       selectedTutorial&#39;.equals(select);
+<i>104</i>&nbsp;    */ 
+<i>105</i>&nbsp;   public void selectTutorial(Tutorial select){
+<b class="nc"><i>106</i>&nbsp;   	System.out.println(&quot;Selecting &quot; + select);</b>
+<b class="nc"><i>107</i>&nbsp;	   if (select == null) {</b>
+<b class="nc"><i>108</i>&nbsp;	   	System.out.println(&quot;Warning: nothing selected&quot;);</b>
+<b class="nc"><i>109</i>&nbsp;		   selectedTutorial = null;</b>
+<b class="nc"><i>110</i>&nbsp;		   selectedUnit = null;</b>
+<b class="nc"><i>111</i>&nbsp;		   selectedSection = null;</b>
+<b class="nc"><i>112</i>&nbsp;		   selectedClass = null;</b>
+<i>113</i>&nbsp;	   }
+<i>114</i>&nbsp;	   else {
+<b class="nc"><i>115</i>&nbsp;		   selectedTutorial = select;</b>
+<b class="nc"><i>116</i>&nbsp;		   selectUnit(select.parent);</b>
+<b class="nc"><i>117</i>&nbsp;           System.out.println(&quot;Selected Tutorial: &quot; + selectedTutorial.name);</b>
+<i>118</i>&nbsp;	   }
+<b class="nc"><i>119</i>&nbsp;   }</b>
+<i>120</i>&nbsp;   /**
+<i>121</i>&nbsp;    * SelectPage sets the selectedPage to the given page, if it is within the selectedTutorial.
+<i>122</i>&nbsp;    * &lt;pre&gt;
+<i>123</i>&nbsp;      pre:
+<i>124</i>&nbsp;       selectedTutorial != null &amp;&amp; selectedTutorial.pages.contains(select);
+<i>125</i>&nbsp;      post:
+<i>126</i>&nbsp;       selectedPage&#39;.equals(select);
+<i>127</i>&nbsp;    */ 
+<i>128</i>&nbsp;   public void selectPage(Page select){
+<b class="nc"><i>129</i>&nbsp;	   if (select == null) {</b>
+<b class="nc"><i>130</i>&nbsp;	   	System.out.println(&quot;Warning: nothing selected&quot;);</b>
+<b class="nc"><i>131</i>&nbsp;		   selectedPage = null;</b>
+<b class="nc"><i>132</i>&nbsp;		   selectedTutorial = null;</b>
+<b class="nc"><i>133</i>&nbsp;		   selectedUnit = null;</b>
+<b class="nc"><i>134</i>&nbsp;		   selectedSection = null;</b>
+<b class="nc"><i>135</i>&nbsp;		   selectedClass = null;</b>
+<i>136</i>&nbsp;	   }
+<i>137</i>&nbsp;	   else {
+<b class="nc"><i>138</i>&nbsp;		   selectedPage = select;</b>
+<b class="nc"><i>139</i>&nbsp;		   selectTutorial(select.parent);</b>
+<i>140</i>&nbsp;	   }
+<b class="nc"><i>141</i>&nbsp;   }</b>
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;   /**
+<i>144</i>&nbsp;    * CreateClass adds the given class to data.
+<i>145</i>&nbsp;    * &lt;pre&gt;
+<i>146</i>&nbsp;      pre:
+<i>147</i>&nbsp;       !data.contains(classs);
+<i>148</i>&nbsp;      post:
+<i>149</i>&nbsp;       data&#39;.contains(classs);
+<i>150</i>&nbsp;    */
+<i>151</i>&nbsp;   public void createClass(Class classs){
+<b class="fc"><i>152</i>&nbsp;	   data.add(classs);</b>
+<b class="fc"><i>153</i>&nbsp;  	 	System.out.println(&quot;In CSTutor.Model.Manager.createClass()&quot;);</b>
+<b class="fc"><i>154</i>&nbsp;  	}</b>
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;   /**
+<i>157</i>&nbsp;    * CreateSection adds the given section to the currently selected class.
+<i>158</i>&nbsp;    * &lt;pre&gt;
+<i>159</i>&nbsp;      pre:
+<i>160</i>&nbsp;       selectedClass != null &amp;&amp; !selectedClass.sections.contains(section);
+<i>161</i>&nbsp;      post:
+<i>162</i>&nbsp;       selectedClass&#39;.sections.contains(section);
+<i>163</i>&nbsp;    */
+<i>164</i>&nbsp;   public void createSection(Section section){
+<b class="fc"><i>165</i>&nbsp;	   if (selectedClass != null) {</b>
+<b class="fc"><i>166</i>&nbsp;		   selectedClass.sections.add(section);</b>
+<i>167</i>&nbsp;	   }
+<b class="fc"><i>168</i>&nbsp;   }</b>
+<i>169</i>&nbsp;   /**
+<i>170</i>&nbsp;    * CreateUnit adds the given section to the currently selected class.
+<i>171</i>&nbsp;    * &lt;pre&gt;
+<i>172</i>&nbsp;      pre:
+<i>173</i>&nbsp;       selectedClass != null &amp;&amp; ((selectedSection == null &amp;&amp; !selectedClass.units.contains(unit)) ||
+<i>174</i>&nbsp;       (selectedSection != null &amp;&amp; !selectedSection.units.contains(unit) &amp;&amp; !selectedSection.parent.units.contains(unit)))
+<i>175</i>&nbsp;      post:
+<i>176</i>&nbsp;       selectedClass&#39;.units.contains(unit) || selectedSection&#39; != null &amp;&amp; selectedSection&#39;.units.contains(unit);
+<i>177</i>&nbsp;    */
+<i>178</i>&nbsp;   public void createUnit(Unit unit){
+<b class="fc"><i>179</i>&nbsp;	   if (selectedSection != null) {</b>
+<b class="fc"><i>180</i>&nbsp;		   selectedSection.units.add(unit);</b>
+<i>181</i>&nbsp;	   }
+<b class="fc"><i>182</i>&nbsp;   }</b>
+<i>183</i>&nbsp;   /**
+<i>184</i>&nbsp;    * CreateTutorial adds the given tutorial to the currently selected unit.
+<i>185</i>&nbsp;    * &lt;pre&gt;
+<i>186</i>&nbsp;      pre:
+<i>187</i>&nbsp;       selectedUnit != null &amp;&amp; !selectedUnit.tutorials.contains(tutorial);
+<i>188</i>&nbsp;      post:
+<i>189</i>&nbsp;       selectedUnit&#39;.tutorials.contains(tutorial);
+<i>190</i>&nbsp;    */
+<i>191</i>&nbsp;    public void createTutorial(Tutorial tutorial){
+<b class="fc"><i>192</i>&nbsp;    	if (selectedUnit != null) {</b>
+<b class="fc"><i>193</i>&nbsp; 		   selectedUnit.tutorials.add(tutorial);</b>
+<i>194</i>&nbsp; 	   }
+<b class="fc"><i>195</i>&nbsp;    }</b>
+<i>196</i>&nbsp;   /**
+<i>197</i>&nbsp;    * CreatePage adds the given page to the currently selected tutorial.
+<i>198</i>&nbsp;    * &lt;pre&gt;
+<i>199</i>&nbsp;      pre:
+<i>200</i>&nbsp;       selectedTutorial != null &amp;&amp; !selectedTutorial.pages.contains(page);
+<i>201</i>&nbsp;      post:
+<i>202</i>&nbsp;       selectedTutorial&#39;.pages.contains(page);
+<i>203</i>&nbsp;    */
+<i>204</i>&nbsp;    public void createPage(Page page){
+<b class="nc"><i>205</i>&nbsp;       if (selectedTutorial != null) {</b>
+<b class="nc"><i>206</i>&nbsp; 		   selectedTutorial.pages.add(page);</b>
+<i>207</i>&nbsp; 	   }
+<b class="nc"><i>208</i>&nbsp;    }</b>
+<i>209</i>&nbsp;
+<i>210</i>&nbsp;    /**
+<i>211</i>&nbsp;     * Deletes the given class 
+<i>212</i>&nbsp;     * &lt;pre&gt;
+<i>213</i>&nbsp;      pre:
+<i>214</i>&nbsp;       selectedClass != null &amp;&amp; data.contains(selectedClass);
+<i>215</i>&nbsp;      post:
+<i>216</i>&nbsp;       selectedClass&#39; == null &amp;&amp; !data&#39;.contains(selectedClass);
+<i>217</i>&nbsp;     */
+<i>218</i>&nbsp;    public void deleteClass() {
+<b class="nc"><i>219</i>&nbsp;    	data.remove(selectedClass);</b>
+<b class="nc"><i>220</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteClass()&quot;);</b>
+<b class="nc"><i>221</i>&nbsp;    }</b>
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;    /**
+<i>224</i>&nbsp;     * Deletes the given section 
+<i>225</i>&nbsp;     * &lt;pre&gt;
+<i>226</i>&nbsp;      pre:
+<i>227</i>&nbsp;       selectedSection != null &amp;&amp; selectedClass != null &amp;&amp; selectedClass.sections.contains(selectedSection);
+<i>228</i>&nbsp;      post:
+<i>229</i>&nbsp;       selectedSection&#39; == null &amp;&amp; !selectedClass&#39;.sections.contains(selectedSection);
+<i>230</i>&nbsp;     */
+<i>231</i>&nbsp;    public void deleteSection() {
+<b class="nc"><i>232</i>&nbsp;    	if(selectedClass != null &amp;&amp; selectedSection != null &amp;&amp; selectedSection.name.equals(&quot;All sections&quot;)) {</b>
+<b class="nc"><i>233</i>&nbsp;    		selectedClass.sections.remove(selectedSection);</b>
+<i>234</i>&nbsp;    	}
+<b class="nc"><i>235</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteSection()&quot;);</b>
+<b class="nc"><i>236</i>&nbsp;    }</b>
+<i>237</i>&nbsp;
+<i>238</i>&nbsp;    /**
+<i>239</i>&nbsp;     * Deletes the given unit 
+<i>240</i>&nbsp;     * &lt;pre&gt;
+<i>241</i>&nbsp;      pre:
+<i>242</i>&nbsp;       selectedSection != null &amp;&amp; selectedUnit != null &amp;&amp; selectedSections.units.contains(selectedUnit);
+<i>243</i>&nbsp;      post:
+<i>244</i>&nbsp;       selectedUnit&#39; == null &amp;&amp; !selectedSection&#39;.units.contains(selectedUnit);
+<i>245</i>&nbsp;     */
+<i>246</i>&nbsp;    public void deleteUnit() {
+<b class="nc"><i>247</i>&nbsp;    	if(selectedSection != null &amp;&amp; selectedUnit != null &amp;&amp; selectedUnit.name.equals(&quot;Uncategorized&quot;)) {</b>
+<b class="nc"><i>248</i>&nbsp;    		selectedSection.units.remove(selectedUnit);</b>
+<i>249</i>&nbsp;    	}
+<b class="nc"><i>250</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteUnit()&quot;);</b>
+<b class="nc"><i>251</i>&nbsp;    }</b>
+<i>252</i>&nbsp;
+<i>253</i>&nbsp;    /**
+<i>254</i>&nbsp;     * Deletes the given tutorial 
+<i>255</i>&nbsp;     * &lt;pre&gt;
+<i>256</i>&nbsp;      pre:
+<i>257</i>&nbsp;       selectedTutorial != null &amp;&amp; selectedUnit != null &amp;&amp; selectedUnit.tutorials.contains(selectedTutorial);
+<i>258</i>&nbsp;      post:
+<i>259</i>&nbsp;       selectedTutorial&#39; == null &amp;&amp; !selectedUnit&#39;.sections.contains(selectedTutorial);
+<i>260</i>&nbsp;     */
+<i>261</i>&nbsp;    public void deleteTutorial() {
+<b class="nc"><i>262</i>&nbsp;    	if(selectedUnit != null) {</b>
+<b class="nc"><i>263</i>&nbsp;    		selectedUnit.tutorials.remove(selectedUnit);</b>
+<i>264</i>&nbsp;    	}
+<b class="nc"><i>265</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deleteTutorial()&quot;);</b>
+<b class="nc"><i>266</i>&nbsp;    }</b>
+<i>267</i>&nbsp;
+<i>268</i>&nbsp;    /**
+<i>269</i>&nbsp;     * Deletes the given page 
+<i>270</i>&nbsp;     */
+<i>271</i>&nbsp;    public void deletePage(Page page) {
+<b class="nc"><i>272</i>&nbsp;    	if(selectedTutorial != null) {</b>
+<b class="nc"><i>273</i>&nbsp;    		selectedTutorial.pages.remove(selectedPage);</b>
+<i>274</i>&nbsp;    	}
+<b class="nc"><i>275</i>&nbsp;   	 System.out.println(&quot;In CSTutor.Model.Manager.deletePage()&quot;);</b>
+<b class="nc"><i>276</i>&nbsp;    }</b>
+<i>277</i>&nbsp;
+<i>278</i>&nbsp;
+<i>279</i>&nbsp;   /**
+<i>280</i>&nbsp;    * MovePage moves the selected page into the given tutorial, if it exists.
+<i>281</i>&nbsp;    * &lt;pre&gt;
+<i>282</i>&nbsp;     pre:
+<i>283</i>&nbsp;      selectedPage != null;
+<i>284</i>&nbsp;     post:
+<i>285</i>&nbsp;      newTutorial&#39;.pages.contains(selectedPage);
+<i>286</i>&nbsp;    */
+<b class="nc"><i>287</i>&nbsp;    public void movePage(Tutorial newTutorial){}</b>
+<i>288</i>&nbsp;   /**
+<i>289</i>&nbsp;    * MoveTutorial moves the given tutorial into the given unit.
+<i>290</i>&nbsp;    * &lt;pre&gt;
+<i>291</i>&nbsp;     pre:
+<i>292</i>&nbsp;      selectedTutorial != null;
+<i>293</i>&nbsp;     post:
+<i>294</i>&nbsp;      newUnit&#39;.tutorials.contains(selectedTutorial);
+<i>295</i>&nbsp;    */
+<b class="nc"><i>296</i>&nbsp;    public void moveTutorial(Unit newUnit){}</b>
+<i>297</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-11 23:06</div>
+</div>
+</body>
+</html>

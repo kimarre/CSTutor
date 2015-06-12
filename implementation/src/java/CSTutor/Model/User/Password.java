@@ -9,7 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * <a href="../../requirements/functionalRequirements/login.html"> Section 2.6 
  * </a> the requirements.
  *
- * @author Kyle Reis
+ * @author Kyle Reis (kjreis@calpoly.edu)
  */
 public class Password {
     /**
@@ -67,7 +67,7 @@ public class Password {
      * @param password the password to be checked.
      * @return True - if the password meets all of the criteria.
      */
-    boolean checker(String password)
+    private boolean checker(String password)
     {
         Pattern regex = Pattern.compile("[^!@#$%^&*()a-zA-Z0-9]");
         Matcher m = regex.matcher(password);
