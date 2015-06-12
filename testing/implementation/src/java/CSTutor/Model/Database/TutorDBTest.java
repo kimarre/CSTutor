@@ -45,6 +45,7 @@ public class TutorDBTest {
    public void testSetGetUser() {
       CSTutor.Model.User.User testuser, correctuser;
       correctuser = new CSTutor.Model.User.User("sdali", "DEADBEEF", "Bob", "Smith", false, true);
+      assertEquals("Looking for nonexistent user", TutorDB.getUser("blahblahblah237284"), null);
       TutorDB.setUser("sdali", "DEADBEEF", "Bob", "Smith", "Student");
       testuser = TutorDB.getUser("sdali");
       assertEquals("Comparing correct and test user", correctuser.getName(), testuser.getName());
