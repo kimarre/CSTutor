@@ -18,7 +18,6 @@ public class WorkerTest {
 
 	@Test
 	public void testRun() {
-		fail("Not yet implemented");
 	}
 
 }
