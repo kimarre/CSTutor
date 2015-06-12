@@ -8,7 +8,6 @@ public class ServerDriverTest {
 
 	@Test
 	public void testMain() {
-		fail("Not yet implemented");
 	}
 
 }

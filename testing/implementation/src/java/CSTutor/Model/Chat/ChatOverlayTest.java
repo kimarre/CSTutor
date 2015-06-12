@@ -34,7 +34,6 @@ public class ChatOverlayTest {
 
 	@Test
 	public void testSetLastString() {
-		co = new ChatOverlay(null);
 		co.setLastString("Happy Friday!");
 		Boolean test1 = (co.lastStringInput.equals("Happy Friday!\n"));
 		assertTrue("Making sure the string changed", test1);
@@ -42,7 +41,6 @@ public class ChatOverlayTest {
 
 	@Test
 	public void testGetLastString() {
-		co = new ChatOverlay(null);
 		co.setLastString("Happy.");
 		assertTrue("Making sure that it returns the correct string.", co.getLastString().equals("Happy.\n"));
 	}
