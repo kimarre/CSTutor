@@ -222,24 +222,71 @@ public class MainContent extends JPanel
         content.removeAll();
         ArrayList<CSTutor.Model.Progress.Class> enCls = student.getEnrolledClasses();
         
+        JPanel enrolledTitlePanel = new JPanel();
+        enrolledTitlePanel.setLayout(new BoxLayout(enrolledTitlePanel, BoxLayout.X_AXIS));
+        enrolledTitlePanel.setMinimumSize(new Dimension(width, 45));
+        enrolledTitlePanel.setPreferredSize(new Dimension(width,45));
+        enrolledTitlePanel.setMaximumSize(new Dimension(width, 45));
+        enrolledTitlePanel.setBackground(LIGHT_BLUE);
+        enrolledTitlePanel.add(Box.createHorizontalStrut(35));
+        
+        JLabel title = new JLabel(new String("Enrolled Classes"));
+        title.setFont(new Font("Avenir", Font.PLAIN, 22));
+        title.setVisible(true);
+        enrolledTitlePanel.add(title);
+        
+        content.add(enrolledTitlePanel);
+        
+        
+        JPanel separatorPanel = new JPanel();
+        separatorPanel.setLayout(new BoxLayout(separatorPanel, BoxLayout.X_AXIS));
+        separatorPanel.setBackground(LIGHT_BLUE);
+        separatorPanel.add(Box.createHorizontalStrut(35));
+        separatorPanel.setPreferredSize(new Dimension(width, 2));
+        separatorPanel.setMinimumSize(new Dimension(width, 2));
+        separatorPanel.setMaximumSize(new Dimension(width, 2));
+        
+        JLabel line = new JLabel();
+        line.setPreferredSize(new Dimension(685, 2));
+        line.setMinimumSize(new Dimension(685, 2));
+        line.setMaximumSize(new Dimension(685, 2));
+        line.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        separatorPanel.add(line);
+        separatorPanel.add(Box.createHorizontalGlue());
+        content.add(separatorPanel);
+        content.add(Box.createVerticalStrut(15));
+        
+        JPanel overall = new JPanel();
+        overall.setLayout(new BoxLayout(overall, BoxLayout.Y_AXIS));
+        overall.setBackground(LIGHT_BLUE);
+        
+        
+        JScrollPane scroll = new JScrollPane(overall);
+        scroll.setBackground(LIGHT_BLUE);
+        JPanel classPanel = new JPanel();
+        classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
+        classPanel.setBackground(LIGHT_BLUE);
+        //classPanel.add(Box.createVerticalStrut(15));
+        
         for(int i=0; i<enCls.size(); i++)
         {
             JPanel tempPanel = new JPanel();
             tempPanel.setLayout(new BoxLayout(tempPanel, BoxLayout.X_AXIS));
             tempPanel.setBackground(LIGHT_BLUE);
-            tempPanel.add(Box.createVerticalStrut(20));
+            tempPanel.add(Box.createHorizontalStrut(35));
             
             JLabel tempLabel = new JLabel(enCls.get(i).toString());
-            tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            //tempLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
             tempLabel.setFont(new Font("Avenir", Font.PLAIN, 20));
 
             tempPanel.add(tempLabel);
             tempPanel.add(Box.createHorizontalGlue());
-            content.add(tempPanel);
+            classPanel.add(tempPanel);
         }
+        content.add(classPanel);
+        content.add(Box.createVerticalGlue());
 
-        this.revalidate();
-        this.repaint();
+        
     }
     
     /**
