@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 6)
+    (0/ 9)
   </span>
 </td>
 </tr>
@@ -74,62 +74,64 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Chat.Server;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import java.rmi.RemoteException;
-<i>4</i>&nbsp;import java.rmi.server.UnicastRemoteObject;
+<i>3</i>&nbsp;import java.io.IOException;
+<i>4</i>&nbsp;import java.io.ObjectOutputStream;
 <i>5</i>&nbsp;import java.util.ArrayList;
 <i>6</i>&nbsp;
-<i>7</i>&nbsp;import CSTutor.Model.Chat.Client.*;
-<i>8</i>&nbsp;
-<i>9</i>&nbsp;/**
-<i>10</i>&nbsp; * Class that represents the chat server.  Holds a list of chat clients, and broadcasts messages.
-<i>11</i>&nbsp; * 
-<i>12</i>&nbsp; * @author stephen
-<i>13</i>&nbsp; *
-<i>14</i>&nbsp; */
-<i>15</i>&nbsp;
-<i>16</i>&nbsp;public class ChatServer extends UnicastRemoteObject implements ServerIF{
-<i>17</i>&nbsp;	private static final long serialVersionUID = 1L;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Class that represents the chat server.  Holds a list of chat clients, and broadcasts messages.
+<i>9</i>&nbsp; * 
+<i>10</i>&nbsp; * @author stephen
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;public class ChatServer {
+<i>15</i>&nbsp;	
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;	private ArrayList&lt;ObjectOutputStream&gt; chatClients;
 <i>18</i>&nbsp;	
-<i>19</i>&nbsp;	private ArrayList&lt;ClientIF&gt; chatClients;
+<i>19</i>&nbsp;	
 <i>20</i>&nbsp;	
 <i>21</i>&nbsp;	/**
 <i>22</i>&nbsp;	 * Constructor
 <i>23</i>&nbsp;	 * @throws RemoteException
 <i>24</i>&nbsp;	 */
-<i>25</i>&nbsp;	protected ChatServer() throws RemoteException {
-<b class="nc"><i>26</i>&nbsp;		super(0);</b>
-<b class="nc"><i>27</i>&nbsp;		chatClients = new ArrayList&lt;ClientIF&gt;();</b>
-<i>28</i>&nbsp;	}
+<b class="nc"><i>25</i>&nbsp;	protected ChatServer() { </b>
+<b class="nc"><i>26</i>&nbsp;		chatClients = new ArrayList&lt;ObjectOutputStream&gt;();</b>
+<i>27</i>&nbsp;	}
+<i>28</i>&nbsp;	
 <i>29</i>&nbsp;	
-<i>30</i>&nbsp;	
-<i>31</i>&nbsp;	/**
-<i>32</i>&nbsp;	 * Takes messages and sends them to each of the registered chat clients.
-<i>33</i>&nbsp;	 * 
-<i>34</i>&nbsp;	 * @param message The message to be broadcasted to all the registered clients.
-<i>35</i>&nbsp;	 */
-<i>36</i>&nbsp;	@Override
-<i>37</i>&nbsp;	public synchronized void broadcastMessage(String message) throws RemoteException {
-<b class="nc"><i>38</i>&nbsp;		int i = 0;</b>
-<b class="nc"><i>39</i>&nbsp;		while (i &lt; chatClients.size()) {</b>
-<b class="nc"><i>40</i>&nbsp;			chatClients.get(i++).recieveMessage(message);</b>
-<i>41</i>&nbsp;		}
-<i>42</i>&nbsp;	}
-<i>43</i>&nbsp;	/**
-<i>44</i>&nbsp;	 * Registers the chat clients with the server. 
-<i>45</i>&nbsp;	 * 
-<i>46</i>&nbsp;	 * @param chatClient A client that to be added to the server list.
-<i>47</i>&nbsp;	 */
-<i>48</i>&nbsp;	@Override
-<i>49</i>&nbsp;	public synchronized void registerChatClient(ClientIF chatClient) throws RemoteException {
-<b class="nc"><i>50</i>&nbsp;		this.chatClients.add(chatClient);</b>
-<i>51</i>&nbsp;	}
-<i>52</i>&nbsp;}
+<i>30</i>&nbsp;	/**
+<i>31</i>&nbsp;	 * Takes messages and sends them to each of the registered chat clients.
+<i>32</i>&nbsp;	 * 
+<i>33</i>&nbsp;	 * @param message The message to be broadcasted to all the registered clients.
+<i>34</i>&nbsp;	 */
+<i>35</i>&nbsp;	public synchronized void broadcastMessage(Object message) {
+<b class="nc"><i>36</i>&nbsp;		for(ObjectOutputStream stream : chatClients) {</b>
+<i>37</i>&nbsp;			try {
+<b class="nc"><i>38</i>&nbsp;				stream.writeObject(message);</b>
+<b class="nc"><i>39</i>&nbsp;			} catch (IOException e) {</b>
+<b class="nc"><i>40</i>&nbsp;				e.printStackTrace();</b>
+<b class="nc"><i>41</i>&nbsp;			}</b>
+<b class="nc"><i>42</i>&nbsp;		}</b>
+<i>43</i>&nbsp;	}
+<i>44</i>&nbsp;	/**
+<i>45</i>&nbsp;	 * Registers the chat clients with the server. 
+<i>46</i>&nbsp;	 * 
+<i>47</i>&nbsp;	 * @param chatClient A client that to be added to the server list.
+<i>48</i>&nbsp;	 */
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	
+<i>51</i>&nbsp;	public synchronized void registerChatClient(ObjectOutputStream stream){
+<b class="nc"><i>52</i>&nbsp;		this.chatClients.add(stream);</b>
+<i>53</i>&nbsp;	}
+<i>54</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

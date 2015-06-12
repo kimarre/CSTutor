@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 94)
+    (0/ 107)
   </span>
 </td>
 </tr>
@@ -75,142 +75,142 @@
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Progress;
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import CSTutor.Model.Database.*;
-<i>4</i>&nbsp;
-<i>5</i>&nbsp;import java.util.*;
-<i>6</i>&nbsp;
-<i>7</i>&nbsp;import javax.swing.DefaultListModel;
-<i>8</i>&nbsp;import javax.swing.JList;
-<i>9</i>&nbsp;
+<i>4</i>&nbsp;import CSTutor.Model.Tutorial.*;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.*;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import javax.swing.DefaultListModel;
+<i>9</i>&nbsp;import javax.swing.JList;
 <i>10</i>&nbsp;
-<i>11</i>&nbsp;/****
-<i>12</i>&nbsp; * Class InstructorModel is a model class for the Calendar Tool progress and
-<i>13</i>&nbsp; * assessment feature. It contains methods for all of the operations defined
-<i>14</i>&nbsp; * for Instructor users, including retrieving data from the database.
-<i>15</i>&nbsp; * @author Erica Solum (esolum@calpoly.edu)
-<i>16</i>&nbsp; * @version 13Apr15
-<i>17</i>&nbsp; */
-<i>18</i>&nbsp;public class InstructorModel
-<i>19</i>&nbsp;{
-<i>20</i>&nbsp;    private JList&lt;TutorialData&gt; tutorialList;
-<i>21</i>&nbsp;    private JList&lt;Class&gt; classList;
-<i>22</i>&nbsp;    private JList&lt;Student&gt; studentList;
-<i>23</i>&nbsp;    private DefaultListModel&lt;TutorialData&gt; tutorialsModel;
-<i>24</i>&nbsp;    private DefaultListModel&lt;Student&gt; studentModel;
-<i>25</i>&nbsp;    private ClassListModel&lt;Class&gt; fullClassesModel;
-<i>26</i>&nbsp;    private StudentListModel&lt;Student&gt; fullStudentsModel;
-<i>27</i>&nbsp;    private TutorialListModel&lt;TutorialData&gt; fullTutorialsModel;
-<i>28</i>&nbsp;    private ClassListModel&lt;Class&gt; searchClassesModel;
-<i>29</i>&nbsp;    private StudentListModel&lt;Student&gt; searchStudentsModel;
-<i>30</i>&nbsp;    private TutorialListModel&lt;TutorialData&gt; searchTutorialsModel;
-<i>31</i>&nbsp;    private Class currentClass;
-<i>32</i>&nbsp;    
-<i>33</i>&nbsp;    public InstructorModel()
-<b class="nc"><i>34</i>&nbsp;    {</b>
-<b class="nc"><i>35</i>&nbsp;        retrieveClassesData();</b>
-<b class="nc"><i>36</i>&nbsp;        retrieveStudentData();</b>
-<b class="nc"><i>37</i>&nbsp;        retrieveTutorialData(); </b>
-<i>38</i>&nbsp;    }
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/****
+<i>13</i>&nbsp; * Class InstructorModel is a model class for the Calendar Tool progress and
+<i>14</i>&nbsp; * assessment feature. It contains methods for all of the operations defined
+<i>15</i>&nbsp; * for Instructor users, including retrieving data from the database.
+<i>16</i>&nbsp; * @author Erica Solum (esolum@calpoly.edu)
+<i>17</i>&nbsp; * @version 13Apr15
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;public class InstructorModel
+<i>20</i>&nbsp;{
+<i>21</i>&nbsp;    /** List of instructor&#39;s tutorials */
+<i>22</i>&nbsp;    private JList&lt;ScoredTutorialTrack&gt; tutorialList;
+<i>23</i>&nbsp;    /** list of Classes with this user listed as an instructor */
+<i>24</i>&nbsp;    private JList&lt;Class&gt; classList;
+<i>25</i>&nbsp;    /** List of students that are enrolled in any of the instructor&#39;s classes */
+<i>26</i>&nbsp;    private JList&lt;Student&gt; studentList;
+<i>27</i>&nbsp;    /** List model for the classes that are listed in the Classes tab */
+<i>28</i>&nbsp;    private ClassListModel&lt;Class&gt; fullClassesModel;
+<i>29</i>&nbsp;    /** List model for the Students that are listed in the Students tab */
+<i>30</i>&nbsp;    private StudentListModel&lt;Student&gt; fullStudentsModel;
+<i>31</i>&nbsp;    /** List model for the tutorials that are listed in the Tutorials tab */
+<i>32</i>&nbsp;    private TutorialListModel&lt;ScoredTutorialTrack&gt; fullTutorialsModel;
+<i>33</i>&nbsp;    /** List model for the Classes that are found when conducting a search */
+<i>34</i>&nbsp;    private ClassListModel&lt;Class&gt; searchClassesModel;
+<i>35</i>&nbsp;    /** List model for the students that are found when conducting a search */
+<i>36</i>&nbsp;    private StudentListModel&lt;Student&gt; searchStudentsModel;
+<i>37</i>&nbsp;    /** List model for the tutorials that are found when conducting a search */
+<i>38</i>&nbsp;    private TutorialListModel&lt;ScoredTutorialTrack&gt; searchTutorialsModel;
 <i>39</i>&nbsp;    
-<i>40</i>&nbsp;    /**
-<i>41</i>&nbsp;     * Retrieves data about instructor&#39;s tutorials from the database. Puts
-<i>42</i>&nbsp;     * data into a JList for easy formatting later on. Currently sample 
-<i>43</i>&nbsp;     * data is filling the list for viewing purposes until further 
-<i>44</i>&nbsp;     * database implementation is done.
-<i>45</i>&nbsp;     */
-<i>46</i>&nbsp;    private void retrieveTutorialData()
-<i>47</i>&nbsp;    {
-<b class="nc"><i>48</i>&nbsp;        System.out.println(&quot;In InstructorModel.retrieveTutorialData&quot;);</b>
-<i>49</i>&nbsp;        
-<i>50</i>&nbsp;        /* Tutorials list */
-<b class="nc"><i>51</i>&nbsp;        fullTutorialsModel</b>
-<i>52</i>&nbsp;            = new TutorialListModel&lt;TutorialData&gt;(); /* List model for the JList */
-<i>53</i>&nbsp;        
-<i>54</i>&nbsp;        /* Add sample elements to the list */
-<b class="nc"><i>55</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;Hello World!&quot;));</b>
-<b class="nc"><i>56</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;Intro. to C&quot;));</b>
-<b class="nc"><i>57</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;Data Types&quot;));</b>
-<b class="nc"><i>58</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;If Statements&quot;));</b>
-<b class="nc"><i>59</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;Loops in C&quot;));</b>
-<b class="nc"><i>60</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;Functions&quot;));</b>
-<b class="nc"><i>61</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;The Stack&quot;));</b>
-<b class="nc"><i>62</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>63</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>64</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>65</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>66</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>67</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>68</i>&nbsp;        fullTutorialsModel.addElement(new TutorialData(&quot;     ...&quot;));</b>
-<b class="nc"><i>69</i>&nbsp;        tutorialList = new JList&lt;TutorialData&gt;(fullTutorialsModel);</b>
+<i>40</i>&nbsp;    public InstructorModel()
+<b class="nc"><i>41</i>&nbsp;    {</b>
+<b class="nc"><i>42</i>&nbsp;        retrieveClassesData();</b>
+<b class="nc"><i>43</i>&nbsp;        retrieveStudentData();</b>
+<b class="nc"><i>44</i>&nbsp;        retrieveTutorialData(); </b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;    
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * Retrieves data about instructor&#39;s tutorials from the database. Puts
+<i>49</i>&nbsp;     * data into a JList for easy formatting later on. Currently sample 
+<i>50</i>&nbsp;     * data is filling the list for viewing purposes until further 
+<i>51</i>&nbsp;     * database implementation is done.
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    private void retrieveTutorialData()
+<i>54</i>&nbsp;    {
+<b class="nc"><i>55</i>&nbsp;        System.out.println(&quot;In InstructorModel.retrieveTutorialData&quot;);</b>
+<i>56</i>&nbsp;        
+<i>57</i>&nbsp;        ArrayList&lt;CSTutor.Model.Tutorial.TutorialData&gt; tutorials = 
+<b class="nc"><i>58</i>&nbsp;            (ArrayList&lt;CSTutor.Model.Tutorial.TutorialData&gt;) TutorDB.getAllTutorialData();</b>
+<i>59</i>&nbsp;        
+<b class="nc"><i>60</i>&nbsp;        fullTutorialsModel</b>
+<i>61</i>&nbsp;            = new TutorialListModel&lt;ScoredTutorialTrack&gt;(); /* List model for the JList */
+<i>62</i>&nbsp;        
+<b class="nc"><i>63</i>&nbsp;        ArrayList&lt;QuizData&gt; quizzes = new ArrayList&lt;QuizData&gt;();</b>
+<b class="nc"><i>64</i>&nbsp;        quizzes.add(new QuizData(&quot;For Loops Quiz Part 1&quot;, 1, 4));</b>
+<b class="nc"><i>65</i>&nbsp;        quizzes.add(new QuizData(&quot;For Loops Quiz Part 2&quot;, 2, 3));</b>
+<b class="nc"><i>66</i>&nbsp;        quizzes.add(new QuizData(&quot;While Loops Part 1&quot;, 3, 3));</b>
+<b class="nc"><i>67</i>&nbsp;        quizzes.add(new QuizData(&quot;While Loops Part 2&quot;, 4, 4));</b>
+<b class="nc"><i>68</i>&nbsp;        quizzes.add(new QuizData(&quot;While Loops Part 3&quot;, 5, 5));</b>
+<b class="nc"><i>69</i>&nbsp;        quizzes.add(new QuizData(&quot;While Loops Part 4&quot;, 6, 2));</b>
 <i>70</i>&nbsp;        
-<i>71</i>&nbsp;    }
-<i>72</i>&nbsp;    
-<i>73</i>&nbsp;    /**
-<i>74</i>&nbsp;     * Retrieves list of students enrolled in any of this instructor&#39;s tutorials 
-<i>75</i>&nbsp;     * from the database. Puts data into a JList for easy formatting
-<i>76</i>&nbsp;     * later on. Currently sample data is filling the list for viewing
-<i>77</i>&nbsp;     * purposes until further database implementation is done.
-<i>78</i>&nbsp;     */
-<i>79</i>&nbsp;    private void retrieveStudentData()
-<i>80</i>&nbsp;    {
-<i>81</i>&nbsp;        //System.out.println(&quot;In InstructorModel.retrieveStudentData&quot;);
-<i>82</i>&nbsp;        
-<i>83</i>&nbsp;        /*
-<i>84</i>&nbsp;         * List model for the JList.
-<i>85</i>&nbsp;         */
-<b class="nc"><i>86</i>&nbsp;        fullStudentsModel</b>
-<i>87</i>&nbsp;            = new StudentListModel&lt;Student&gt;(); 
-<i>88</i>&nbsp;        
-<b class="nc"><i>89</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses = new ArrayList&lt;Class&gt;();</b>
-<b class="nc"><i>90</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 225&quot;));</b>
-<b class="nc"><i>91</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 357&quot;));</b>
-<i>92</i>&nbsp;        
-<b class="nc"><i>93</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses2 = new ArrayList&lt;Class&gt;();</b>
-<b class="nc"><i>94</i>&nbsp;        enrolledClasses2.add(new Class(&quot;CPE 101&quot;));</b>
-<b class="nc"><i>95</i>&nbsp;        enrolledClasses2.add(new Class(&quot;CPE 102&quot;));</b>
-<i>96</i>&nbsp;        
-<b class="nc"><i>97</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses3 = new ArrayList&lt;Class&gt;();</b>
-<b class="nc"><i>98</i>&nbsp;        enrolledClasses3.add(new Class(&quot;CPE 305&quot;));</b>
-<b class="nc"><i>99</i>&nbsp;        enrolledClasses3.add(new Class(&quot;CPE 308&quot;));</b>
-<i>100</i>&nbsp;        
-<b class="nc"><i>101</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses4 = new ArrayList&lt;Class&gt;();</b>
-<b class="nc"><i>102</i>&nbsp;        enrolledClasses4.add(new Class(&quot;CPE 300&quot;));</b>
-<b class="nc"><i>103</i>&nbsp;        enrolledClasses4.add(new Class(&quot;CPE 349&quot;));</b>
-<i>104</i>&nbsp;        
-<b class="nc"><i>105</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses5 = new ArrayList&lt;Class&gt;();</b>
-<b class="nc"><i>106</i>&nbsp;        enrolledClasses5.add(new Class(&quot;CPE 378&quot;));</b>
-<b class="nc"><i>107</i>&nbsp;        enrolledClasses5.add(new Class(&quot;CPE 453&quot;));</b>
-<i>108</i>&nbsp;        
-<i>109</i>&nbsp;        /*
-<i>110</i>&nbsp;         * Add sample elements to the list.
-<i>111</i>&nbsp;         */
-<b class="nc"><i>112</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Maria Auxier&quot;, enrolledClasses));</b>
-<b class="nc"><i>113</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Marian Bell&quot;, enrolledClasses2));</b>
-<b class="nc"><i>114</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Eugene Brown&quot;, enrolledClasses3));</b>
-<b class="nc"><i>115</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Jamie Bryant&quot;, enrolledClasses4));</b>
-<b class="nc"><i>116</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Danielle Carter&quot;, enrolledClasses5));</b>
-<b class="nc"><i>117</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Vernon Chilton&quot;, enrolledClasses));</b>
-<i>118</i>&nbsp;        
-<b class="nc"><i>119</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Mary Clark&quot;, enrolledClasses2));</b>
-<b class="nc"><i>120</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Laurie Crawford&quot;, enrolledClasses3));</b>
-<b class="nc"><i>121</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Geoffrey Dunning&quot;, enrolledClasses4));</b>
-<b class="nc"><i>122</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Lester Flores&quot;, enrolledClasses5));</b>
-<b class="nc"><i>123</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Suzanne Gridley&quot;, enrolledClasses));</b>
-<b class="nc"><i>124</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Bruce Griffin&quot;, enrolledClasses2));</b>
-<i>125</i>&nbsp;        
-<b class="nc"><i>126</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Jennifer Headrick&quot;, enrolledClasses3));</b>
-<b class="nc"><i>127</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Kevin Hoover&quot;, enrolledClasses4));</b>
-<b class="nc"><i>128</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Constance Jackson&quot;, enrolledClasses5));</b>
-<b class="nc"><i>129</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Chris Kapp&quot;, enrolledClasses));</b>
-<b class="nc"><i>130</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Leon Lewis&quot;, enrolledClasses2));</b>
-<b class="nc"><i>131</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Victor Massey&quot;, enrolledClasses3));</b>
-<i>132</i>&nbsp;        
-<b class="nc"><i>133</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Blanche Natal&quot;, enrolledClasses4));</b>
-<b class="nc"><i>134</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Dianne Ohara&quot;, enrolledClasses5));</b>
-<b class="nc"><i>135</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Charlotte Perry&quot;, enrolledClasses));</b>
-<b class="nc"><i>136</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Eric Prince&quot;, enrolledClasses2));</b>
-<b class="nc"><i>137</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Frank Reed&quot;, enrolledClasses3));</b>
-<b class="nc"><i>138</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Nicole Rios&quot;, enrolledClasses4));</b>
-<i>139</i>&nbsp;        
+<b class="nc"><i>71</i>&nbsp;        for(int i=0; i&lt; tutorials.size(); i++)</b>
+<i>72</i>&nbsp;        {
+<b class="nc"><i>73</i>&nbsp;            ScoredTutorialTrack tempTrack = new ScoredTutorialTrack(tutorials.get(i));</b>
+<b class="nc"><i>74</i>&nbsp;            if(i == 0)</b>
+<i>75</i>&nbsp;            {
+<b class="nc"><i>76</i>&nbsp;                tempTrack.placeQuizInTrack(quizzes.get(0));</b>
+<b class="nc"><i>77</i>&nbsp;                tempTrack.placeQuizInTrack(quizzes.get(1));</b>
+<i>78</i>&nbsp;            }
+<b class="nc"><i>79</i>&nbsp;            if(i == 1)</b>
+<i>80</i>&nbsp;            {
+<b class="nc"><i>81</i>&nbsp;                tempTrack.placeQuizInTrack(quizzes.get(2));</b>
+<b class="nc"><i>82</i>&nbsp;                tempTrack.placeQuizInTrack(quizzes.get(3));</b>
+<b class="nc"><i>83</i>&nbsp;                tempTrack.placeQuizInTrack(quizzes.get(4));</b>
+<b class="nc"><i>84</i>&nbsp;                tempTrack.placeQuizInTrack(quizzes.get(5));</b>
+<i>85</i>&nbsp;            }
+<b class="nc"><i>86</i>&nbsp;            fullTutorialsModel.addElement(tempTrack);</b>
+<i>87</i>&nbsp;        }
+<b class="nc"><i>88</i>&nbsp;        tutorialList = new JList&lt;ScoredTutorialTrack&gt;(fullTutorialsModel);</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;    
+<i>91</i>&nbsp;    /**
+<i>92</i>&nbsp;     * Retrieves list of students enrolled in any of this instructor&#39;s tutorials 
+<i>93</i>&nbsp;     * from the database. Puts data into a JList for easy formatting
+<i>94</i>&nbsp;     * later on. Currently sample data is filling the list for viewing
+<i>95</i>&nbsp;     * purposes until further database implementation is done.
+<i>96</i>&nbsp;     */
+<i>97</i>&nbsp;    private void retrieveStudentData()
+<i>98</i>&nbsp;    {
+<b class="nc"><i>99</i>&nbsp;        fullStudentsModel = new StudentListModel&lt;Student&gt;(); </b>
+<b class="nc"><i>100</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses = new ArrayList&lt;Class&gt;();</b>
+<b class="nc"><i>101</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 225&quot;));</b>
+<b class="nc"><i>102</i>&nbsp;        enrolledClasses.add(new Class(&quot;CPE 357&quot;));</b>
+<b class="nc"><i>103</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses2 = new ArrayList&lt;Class&gt;();</b>
+<b class="nc"><i>104</i>&nbsp;        enrolledClasses2.add(new Class(&quot;CPE 101&quot;));</b>
+<b class="nc"><i>105</i>&nbsp;        enrolledClasses2.add(new Class(&quot;CPE 102&quot;));</b>
+<b class="nc"><i>106</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses3 = new ArrayList&lt;Class&gt;();</b>
+<b class="nc"><i>107</i>&nbsp;        enrolledClasses3.add(new Class(&quot;CPE 305&quot;));</b>
+<b class="nc"><i>108</i>&nbsp;        enrolledClasses3.add(new Class(&quot;CPE 308&quot;));</b>
+<b class="nc"><i>109</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses4 = new ArrayList&lt;Class&gt;();</b>
+<b class="nc"><i>110</i>&nbsp;        enrolledClasses4.add(new Class(&quot;CPE 300&quot;));</b>
+<b class="nc"><i>111</i>&nbsp;        enrolledClasses4.add(new Class(&quot;CPE 349&quot;));</b>
+<b class="nc"><i>112</i>&nbsp;        ArrayList&lt;Class&gt; enrolledClasses5 = new ArrayList&lt;Class&gt;();</b>
+<b class="nc"><i>113</i>&nbsp;        enrolledClasses5.add(new Class(&quot;CPE 378&quot;));</b>
+<b class="nc"><i>114</i>&nbsp;        enrolledClasses5.add(new Class(&quot;CPE 453&quot;));</b>
+<i>115</i>&nbsp;        
+<b class="nc"><i>116</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Maria Auxier&quot;, enrolledClasses));</b>
+<b class="nc"><i>117</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Marian Bell&quot;, enrolledClasses2));</b>
+<b class="nc"><i>118</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Eugene Brown&quot;, enrolledClasses3));</b>
+<b class="nc"><i>119</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Jamie Bryant&quot;, enrolledClasses4));</b>
+<b class="nc"><i>120</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Danielle Carter&quot;, enrolledClasses5));</b>
+<b class="nc"><i>121</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Vernon Chilton&quot;, enrolledClasses));</b>
+<b class="nc"><i>122</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Mary Clark&quot;, enrolledClasses2));</b>
+<b class="nc"><i>123</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Laurie Crawford&quot;, enrolledClasses3));</b>
+<b class="nc"><i>124</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Geoffrey Dunning&quot;, enrolledClasses4));</b>
+<b class="nc"><i>125</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Lester Flores&quot;, enrolledClasses5));</b>
+<b class="nc"><i>126</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Suzanne Gridley&quot;, enrolledClasses));</b>
+<b class="nc"><i>127</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Bruce Griffin&quot;, enrolledClasses2));</b>
+<b class="nc"><i>128</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Jennifer Headrick&quot;, enrolledClasses3));</b>
+<b class="nc"><i>129</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Kevin Hoover&quot;, enrolledClasses4));</b>
+<b class="nc"><i>130</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Constance Jackson&quot;, enrolledClasses5));</b>
+<b class="nc"><i>131</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Chris Kapp&quot;, enrolledClasses));</b>
+<b class="nc"><i>132</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Leon Lewis&quot;, enrolledClasses2));</b>
+<b class="nc"><i>133</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Victor Massey&quot;, enrolledClasses3));</b>
+<b class="nc"><i>134</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Blanche Natal&quot;, enrolledClasses4));</b>
+<b class="nc"><i>135</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Dianne Ohara&quot;, enrolledClasses5));</b>
+<b class="nc"><i>136</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Charlotte Perry&quot;, enrolledClasses));</b>
+<b class="nc"><i>137</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Eric Prince&quot;, enrolledClasses2));</b>
+<b class="nc"><i>138</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Frank Reed&quot;, enrolledClasses3));</b>
+<b class="nc"><i>139</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Nicole Rios&quot;, enrolledClasses4));</b>
 <b class="nc"><i>140</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;David Rodriguez&quot;, enrolledClasses5));</b>
 <b class="nc"><i>141</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;James Scott&quot;, enrolledClasses));</b>
 <b class="nc"><i>142</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Robert Taylor&quot;, enrolledClasses2));</b>
@@ -218,136 +218,147 @@
 <b class="nc"><i>144</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;James Welsh&quot;, enrolledClasses4));</b>
 <b class="nc"><i>145</i>&nbsp;        fullStudentsModel.addElement(new Student(&quot;Marlene Williams&quot;, enrolledClasses5));</b>
 <b class="nc"><i>146</i>&nbsp;        studentList = new JList&lt;Student&gt;(fullStudentsModel);  </b>
-<i>147</i>&nbsp;        
-<i>148</i>&nbsp;    }
-<i>149</i>&nbsp;    
-<i>150</i>&nbsp;    /**
-<i>151</i>&nbsp;     * Retrieves list of instructor&#39;s classes from the database. Puts 
-<i>152</i>&nbsp;     * data into a JList for easy formatting later on. Currently sample 
-<i>153</i>&nbsp;     * data is filling the list for viewing purposes until further
-<i>154</i>&nbsp;     *  database implementation is done.
-<i>155</i>&nbsp;     */
-<i>156</i>&nbsp;    private void retrieveClassesData()
-<i>157</i>&nbsp;    {
-<i>158</i>&nbsp;        //System.out.println(&quot;In InstructorModel.retrieveClassesData&quot;);
-<b class="nc"><i>159</i>&nbsp;        List&lt;String&gt; dbClasses = TutorDB.getClassNames();</b>
-<b class="nc"><i>160</i>&nbsp;        fullClassesModel = new ClassListModel&lt;Class&gt;();</b>
-<i>161</i>&nbsp;        
-<b class="nc"><i>162</i>&nbsp;        for(int i=0; i&lt;dbClasses.size(); i++)</b>
-<i>163</i>&nbsp;        {
-<b class="nc"><i>164</i>&nbsp;            fullClassesModel.addElement(new Class(dbClasses.get(i).toString()));</b>
-<i>165</i>&nbsp;        }
-<i>166</i>&nbsp;        
-<b class="nc"><i>167</i>&nbsp;        classList = new JList&lt;Class&gt;(fullClassesModel);</b>
-<i>168</i>&nbsp;    }
-<i>169</i>&nbsp;    
-<i>170</i>&nbsp;    /**
-<i>171</i>&nbsp;     * Returns the JList filled with student data.
-<i>172</i>&nbsp;     *                                                 &lt;pre&gt;
-<i>173</i>&nbsp;     pre:
-<i>174</i>&nbsp;       // The JList studentList must not be null.
-<i>175</i>&nbsp;       studentList != null;
-<i>176</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>177</i>&nbsp;     */
-<i>178</i>&nbsp;    public JList&lt;Student&gt; getStudentList()
-<i>179</i>&nbsp;    {
-<b class="nc"><i>180</i>&nbsp;        return studentList;     </b>
-<i>181</i>&nbsp;    }
-<i>182</i>&nbsp;    
-<i>183</i>&nbsp;    /**
-<i>184</i>&nbsp;     * Returns the JList filled with tutorial data.
-<i>185</i>&nbsp;     *                                                 &lt;pre&gt;
-<i>186</i>&nbsp;     pre:
-<i>187</i>&nbsp;       // The JList tutorialList must not be null.
-<i>188</i>&nbsp;       tutorialList != null;
-<i>189</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>190</i>&nbsp;     */
-<i>191</i>&nbsp;    public JList&lt;TutorialData&gt; getTutorialList()
-<i>192</i>&nbsp;    {
-<b class="nc"><i>193</i>&nbsp;        return tutorialList;</b>
-<i>194</i>&nbsp;    }
-<i>195</i>&nbsp;    
-<i>196</i>&nbsp;    /**
-<i>197</i>&nbsp;     * Returns the JList filled with class data.
-<i>198</i>&nbsp;     *                                                 &lt;pre&gt;
-<i>199</i>&nbsp;     pre:
-<i>200</i>&nbsp;       // The JList classList must not be null.
-<i>201</i>&nbsp;       classList != null;
-<i>202</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>203</i>&nbsp;     */
-<i>204</i>&nbsp;    public JList&lt;Class&gt; getClassList()
-<i>205</i>&nbsp;    {
-<b class="nc"><i>206</i>&nbsp;        return classList;</b>
-<i>207</i>&nbsp;    }
-<i>208</i>&nbsp;    
-<i>209</i>&nbsp;    /**
-<i>210</i>&nbsp;     * Returns a list of classes that match the search string.
-<i>211</i>&nbsp;     *                                                 &lt;pre&gt;
-<i>212</i>&nbsp;     pre:
-<i>213</i>&nbsp;       // fullClassesModel must be initialized.
-<i>214</i>&nbsp;       fullClassesModel != null;
-<i>215</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>216</i>&nbsp;     */
-<i>217</i>&nbsp;    public JList&lt;Class&gt; searchForClass(String searchString)
-<i>218</i>&nbsp;    {
-<b class="nc"><i>219</i>&nbsp;        ArrayList&lt;Class&gt; simClasses = fullClassesModel.getSimilarClasses(new Class(searchString));</b>
-<b class="nc"><i>220</i>&nbsp;        searchClassesModel = new ClassListModel&lt;Class&gt;();</b>
-<i>221</i>&nbsp;        
-<b class="nc"><i>222</i>&nbsp;        for(Class cl: simClasses)</b>
-<i>223</i>&nbsp;        {
-<b class="nc"><i>224</i>&nbsp;            searchClassesModel.addElement(cl);</b>
-<b class="nc"><i>225</i>&nbsp;        }</b>
-<b class="nc"><i>226</i>&nbsp;        return new JList&lt;Class&gt;(searchClassesModel); </b>
-<i>227</i>&nbsp;    }
-<i>228</i>&nbsp;    
-<i>229</i>&nbsp;    /**
-<i>230</i>&nbsp;     * Returns a list of students that match the search string.
-<i>231</i>&nbsp;     *                                                 &lt;pre&gt;
-<i>232</i>&nbsp;     pre:
-<i>233</i>&nbsp;       // fullStudentsModel must be initialized.
-<i>234</i>&nbsp;       fullStudentsModel != null;
-<i>235</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>236</i>&nbsp;     */
-<i>237</i>&nbsp;    public JList&lt;Student&gt; searchForStudent(String searchString)
-<i>238</i>&nbsp;    {
-<b class="nc"><i>239</i>&nbsp;        ArrayList&lt;Student&gt; simStudents = fullStudentsModel.getSimilarStudents(searchString);</b>
-<b class="nc"><i>240</i>&nbsp;        searchStudentsModel = new StudentListModel&lt;Student&gt;();</b>
-<i>241</i>&nbsp;        
-<b class="nc"><i>242</i>&nbsp;        for(Student stu: simStudents)</b>
-<i>243</i>&nbsp;        {
-<b class="nc"><i>244</i>&nbsp;            searchStudentsModel.addElement(stu);</b>
-<b class="nc"><i>245</i>&nbsp;        }</b>
-<b class="nc"><i>246</i>&nbsp;        return new JList&lt;Student&gt;(searchStudentsModel);</b>
-<i>247</i>&nbsp;    }
-<i>248</i>&nbsp;    
-<i>249</i>&nbsp;    /**
-<i>250</i>&nbsp;     * Returns a list of students that match the search string.
-<i>251</i>&nbsp;     *                                                 &lt;pre&gt;
-<i>252</i>&nbsp;     pre:
-<i>253</i>&nbsp;       // fullTutorialsModel must be initialized.
-<i>254</i>&nbsp;       fullTutorialsModel != null;
-<i>255</i>&nbsp;     *                                                  &lt;/pre&gt;
-<i>256</i>&nbsp;     */
-<i>257</i>&nbsp;    public JList&lt;TutorialData&gt; searchForTutorial(String searchString)
-<i>258</i>&nbsp;    {
-<b class="nc"><i>259</i>&nbsp;        ArrayList&lt;TutorialData&gt; simTutorials = fullTutorialsModel.getSimilarTutorials(new TutorialData(searchString));  </b>
-<b class="nc"><i>260</i>&nbsp;        searchTutorialsModel = new TutorialListModel&lt;TutorialData&gt;();</b>
-<i>261</i>&nbsp;        
-<b class="nc"><i>262</i>&nbsp;        for(TutorialData tut: simTutorials)</b>
-<i>263</i>&nbsp;        {
-<b class="nc"><i>264</i>&nbsp;            searchTutorialsModel.addElement(tut);</b>
-<b class="nc"><i>265</i>&nbsp;        }</b>
-<b class="nc"><i>266</i>&nbsp;        return new JList&lt;TutorialData&gt;(searchTutorialsModel);</b>
-<i>267</i>&nbsp;    }
-<i>268</i>&nbsp;    
-<i>269</i>&nbsp;
-<i>270</i>&nbsp;}
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;    
+<i>149</i>&nbsp;    /**
+<i>150</i>&nbsp;     * Retrieves list of instructor&#39;s classes from the database. Puts 
+<i>151</i>&nbsp;     * data into a JList for easy formatting later on. Currently sample 
+<i>152</i>&nbsp;     * data is filling the list for viewing purposes until further
+<i>153</i>&nbsp;     *  database implementation is done.
+<i>154</i>&nbsp;     */
+<i>155</i>&nbsp;    private void retrieveClassesData()
+<i>156</i>&nbsp;    {
+<b class="nc"><i>157</i>&nbsp;        ArrayList&lt;CSTutor.Model.Manager.Class&gt; managerClassList = (ArrayList&lt;CSTutor.Model.Manager.Class&gt;)TutorDB.getClasses();</b>
+<b class="nc"><i>158</i>&nbsp;        CSTutor.Model.Manager.Class class1 = managerClassList.get(0);</b>
+<i>159</i>&nbsp;        
+<b class="nc"><i>160</i>&nbsp;        ArrayList&lt;CSTutor.Model.Manager.Section&gt; sections = (ArrayList&lt;CSTutor.Model.Manager.Section&gt;)TutorDB.getSections(class1);</b>
+<b class="nc"><i>161</i>&nbsp;        CSTutor.Model.Manager.Section section1 = sections.get(0);</b>
+<i>162</i>&nbsp;        
+<b class="nc"><i>163</i>&nbsp;        ArrayList&lt;CSTutor.Model.Manager.Unit&gt; units = (ArrayList&lt;CSTutor.Model.Manager.Unit&gt;) TutorDB.getUnits(section1);</b>
+<b class="nc"><i>164</i>&nbsp;        CSTutor.Model.Manager.Unit unit1 = units.get(0);</b>
+<i>165</i>&nbsp;        
+<b class="nc"><i>166</i>&nbsp;        ArrayList&lt;CSTutor.Model.Manager.Tutorial&gt; tutorials = (ArrayList&lt;CSTutor.Model.Manager.Tutorial&gt;) TutorDB.getTutorials(unit1);</b>
+<i>167</i>&nbsp;        
+<i>168</i>&nbsp;        
+<b class="nc"><i>169</i>&nbsp;        List&lt;String&gt; dbClasses = TutorDB.getClassNames();</b>
+<b class="nc"><i>170</i>&nbsp;        fullClassesModel = new ClassListModel&lt;Class&gt;();</b>
+<i>171</i>&nbsp;        
+<b class="nc"><i>172</i>&nbsp;        for(int i=0; i&lt;dbClasses.size(); i++)</b>
+<i>173</i>&nbsp;        {
+<b class="nc"><i>174</i>&nbsp;            fullClassesModel.addElement(new Class(dbClasses.get(i).toString()));</b>
+<i>175</i>&nbsp;        }
+<i>176</i>&nbsp;        
+<b class="nc"><i>177</i>&nbsp;        classList = new JList&lt;Class&gt;(fullClassesModel);</b>
+<i>178</i>&nbsp;    }
+<i>179</i>&nbsp;    
+<i>180</i>&nbsp;    /**
+<i>181</i>&nbsp;     * Returns the JList filled with student data.
+<i>182</i>&nbsp;     *                                                 &lt;pre&gt;
+<i>183</i>&nbsp;     pre:
+<i>184</i>&nbsp;       // The JList studentList must not be null.
+<i>185</i>&nbsp;       studentList != null;
+<i>186</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>187</i>&nbsp;     */
+<i>188</i>&nbsp;    public JList&lt;Student&gt; getStudentList()
+<i>189</i>&nbsp;    {
+<b class="nc"><i>190</i>&nbsp;        return studentList;     </b>
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;    
+<i>193</i>&nbsp;    /**
+<i>194</i>&nbsp;     * Returns the JList filled with tutorial data.
+<i>195</i>&nbsp;     *                                                 &lt;pre&gt;
+<i>196</i>&nbsp;     pre:
+<i>197</i>&nbsp;       // The JList tutorialList must not be null.
+<i>198</i>&nbsp;       tutorialList != null;
+<i>199</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>200</i>&nbsp;     */
+<i>201</i>&nbsp;    public JList&lt;ScoredTutorialTrack&gt; getTutorialList()
+<i>202</i>&nbsp;    {
+<b class="nc"><i>203</i>&nbsp;        System.out.println(&quot;Tutorial List Size: &quot; + tutorialList.getModel().getSize());</b>
+<b class="nc"><i>204</i>&nbsp;        return tutorialList;</b>
+<i>205</i>&nbsp;    }
+<i>206</i>&nbsp;    
+<i>207</i>&nbsp;    /**
+<i>208</i>&nbsp;     * Returns the JList filled with class data.
+<i>209</i>&nbsp;     *                                                 &lt;pre&gt;
+<i>210</i>&nbsp;     pre:
+<i>211</i>&nbsp;       // The JList classList must not be null.
+<i>212</i>&nbsp;       classList != null;
+<i>213</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>214</i>&nbsp;     */
+<i>215</i>&nbsp;    public JList&lt;Class&gt; getClassList()
+<i>216</i>&nbsp;    {
+<b class="nc"><i>217</i>&nbsp;        return classList;</b>
+<i>218</i>&nbsp;    }
+<i>219</i>&nbsp;    
+<i>220</i>&nbsp;    /**
+<i>221</i>&nbsp;     * Returns a list of classes that match the search string.
+<i>222</i>&nbsp;     *                                                 &lt;pre&gt;
+<i>223</i>&nbsp;     pre:
+<i>224</i>&nbsp;       // fullClassesModel must be initialized.
+<i>225</i>&nbsp;       fullClassesModel != null;
+<i>226</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>227</i>&nbsp;     */
+<i>228</i>&nbsp;    public JList&lt;Class&gt; searchForClass(String searchString)
+<i>229</i>&nbsp;    {
+<b class="nc"><i>230</i>&nbsp;        ArrayList&lt;Class&gt; simClasses = fullClassesModel.getSimilarClasses(new Class(searchString));</b>
+<b class="nc"><i>231</i>&nbsp;        searchClassesModel = new ClassListModel&lt;Class&gt;();</b>
+<i>232</i>&nbsp;        
+<b class="nc"><i>233</i>&nbsp;        for(Class cl: simClasses)</b>
+<i>234</i>&nbsp;        {
+<b class="nc"><i>235</i>&nbsp;            searchClassesModel.addElement(cl);</b>
+<b class="nc"><i>236</i>&nbsp;        }</b>
+<b class="nc"><i>237</i>&nbsp;        return new JList&lt;Class&gt;(searchClassesModel); </b>
+<i>238</i>&nbsp;    }
+<i>239</i>&nbsp;    
+<i>240</i>&nbsp;    /**
+<i>241</i>&nbsp;     * Returns a list of students that match the search string.
+<i>242</i>&nbsp;     *                                                 &lt;pre&gt;
+<i>243</i>&nbsp;     pre:
+<i>244</i>&nbsp;       // fullStudentsModel must be initialized.
+<i>245</i>&nbsp;       fullStudentsModel != null;
+<i>246</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>247</i>&nbsp;     */
+<i>248</i>&nbsp;    public JList&lt;Student&gt; searchForStudent(String searchString)
+<i>249</i>&nbsp;    {
+<b class="nc"><i>250</i>&nbsp;        ArrayList&lt;Student&gt; simStudents = fullStudentsModel.getSimilarStudents(searchString);</b>
+<b class="nc"><i>251</i>&nbsp;        searchStudentsModel = new StudentListModel&lt;Student&gt;();</b>
+<i>252</i>&nbsp;        
+<b class="nc"><i>253</i>&nbsp;        for(Student stu: simStudents)</b>
+<i>254</i>&nbsp;        {
+<b class="nc"><i>255</i>&nbsp;            searchStudentsModel.addElement(stu);</b>
+<b class="nc"><i>256</i>&nbsp;        }</b>
+<b class="nc"><i>257</i>&nbsp;        return new JList&lt;Student&gt;(searchStudentsModel);</b>
+<i>258</i>&nbsp;    }
+<i>259</i>&nbsp;    
+<i>260</i>&nbsp;    /**
+<i>261</i>&nbsp;     * Returns a list of tutorials that match the search string.
+<i>262</i>&nbsp;     *                                                 &lt;pre&gt;
+<i>263</i>&nbsp;     pre:
+<i>264</i>&nbsp;       // fullTutorialsModel must be initialized.
+<i>265</i>&nbsp;       fullTutorialsModel != null;
+<i>266</i>&nbsp;     *                                                  &lt;/pre&gt;
+<i>267</i>&nbsp;     */
+<i>268</i>&nbsp;    public JList&lt;ScoredTutorialTrack&gt; searchForTutorial(String searchString)
+<i>269</i>&nbsp;    {
+<b class="nc"><i>270</i>&nbsp;        ArrayList&lt;ScoredTutorialTrack&gt; simTutorials = fullTutorialsModel.getSimilarTutorials(searchString);  </b>
+<b class="nc"><i>271</i>&nbsp;        searchTutorialsModel = new TutorialListModel&lt;ScoredTutorialTrack&gt;();</b>
+<i>272</i>&nbsp;        
+<b class="nc"><i>273</i>&nbsp;        for(ScoredTutorialTrack tut: simTutorials)</b>
+<i>274</i>&nbsp;        {
+<b class="nc"><i>275</i>&nbsp;            searchTutorialsModel.addElement(tut);</b>
+<b class="nc"><i>276</i>&nbsp;        }</b>
+<b class="nc"><i>277</i>&nbsp;        return new JList&lt;ScoredTutorialTrack&gt;(searchTutorialsModel);</b>
+<i>278</i>&nbsp;    }
+<i>279</i>&nbsp;    
+<i>280</i>&nbsp;
+<i>281</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

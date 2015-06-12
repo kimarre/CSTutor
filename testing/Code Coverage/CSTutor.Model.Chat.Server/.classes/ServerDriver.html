@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 8)
+    (0/ 17)
   </span>
 </td>
 </tr>
@@ -74,41 +74,62 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package CSTutor.Model.Chat.Server;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import java.net.MalformedURLException;
-<i>4</i>&nbsp;import java.rmi.AlreadyBoundException;
-<i>5</i>&nbsp;import java.rmi.Naming;
-<i>6</i>&nbsp;import java.rmi.RemoteException;
-<i>7</i>&nbsp;import java.rmi.registry.LocateRegistry;
-<i>8</i>&nbsp;
-<i>9</i>&nbsp;/**
-<i>10</i>&nbsp; * A class that represents the server driver. This is the program that starts the RMI chat server
-<i>11</i>&nbsp; * 
-<i>12</i>&nbsp; * @author stephen
-<i>13</i>&nbsp; *
-<i>14</i>&nbsp; */
-<i>15</i>&nbsp;
-<b class="nc"><i>16</i>&nbsp;public class ServerDriver {</b>
-<i>17</i>&nbsp;	public static void main(String[] args) throws RemoteException, MalformedURLException, AlreadyBoundException {
-<b class="nc"><i>18</i>&nbsp;		if (1 != args.length) {</b>
-<b class="nc"><i>19</i>&nbsp;			System.out.println(&quot;Usage: java ChatServer &lt;server_port&gt;&quot;);</b>
-<b class="nc"><i>20</i>&nbsp;			System.out.println(&quot;Example: java ChatServer 2001&quot;);</b>
-<i>21</i>&nbsp;			return;
-<i>22</i>&nbsp;		}
-<b class="nc"><i>23</i>&nbsp;		ChatServer server = new ChatServer();</b>
-<i>24</i>&nbsp;		
-<b class="nc"><i>25</i>&nbsp;		int port = Integer.parseUnsignedInt(args[0]);</b>
-<b class="nc"><i>26</i>&nbsp;        LocateRegistry.getRegistry(port).bind(&quot;RMIChatServer&quot;, server);</b>
-<b class="nc"><i>27</i>&nbsp;        System.out.println(&quot;Server started at {0}, waiting for connections...&quot;);</b>
-<i>28</i>&nbsp;		
-<i>29</i>&nbsp;		//Naming.rebind(&quot;RMIChatServer&quot;, new ChatServer());
-<i>30</i>&nbsp;	}
-<i>31</i>&nbsp;}
+<i>3</i>&nbsp;import java.io.IOException;
+<i>4</i>&nbsp;import java.net.ServerSocket;
+<i>5</i>&nbsp;import java.net.Socket;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * A class that represents the server driver. This is the program that starts the RMI chat server
+<i>9</i>&nbsp; * 
+<i>10</i>&nbsp; * @author stephen
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;
+<b class="nc"><i>14</i>&nbsp;public class ServerDriver {</b>
+<i>15</i>&nbsp;	@SuppressWarnings(&quot;resource&quot;)
+<i>16</i>&nbsp;	
+<i>17</i>&nbsp;	/**
+<i>18</i>&nbsp;	 * The main method for the chat server. This function initiates a socket and then constantly
+<i>19</i>&nbsp;	 * tries to except new connections
+<i>20</i>&nbsp;	 */
+<i>21</i>&nbsp;	public static void main(String[] args) {
+<i>22</i>&nbsp;		
+<i>23</i>&nbsp;		
+<b class="nc"><i>24</i>&nbsp;		if (1 != args.length) {</b>
+<b class="nc"><i>25</i>&nbsp;			System.out.println(&quot;Usage: java ServerDriver &lt;server_port&gt;&quot;);</b>
+<b class="nc"><i>26</i>&nbsp;			System.out.println(&quot;Example: java ServerDriver 2001&quot;);</b>
+<i>27</i>&nbsp;			return;
+<i>28</i>&nbsp;		}
+<i>29</i>&nbsp;		
+<b class="nc"><i>30</i>&nbsp;		ServerSocket serverSocket = null;</b>
+<b class="nc"><i>31</i>&nbsp;	    int port = Integer.parseInt(args[0]);</b>
+<b class="nc"><i>32</i>&nbsp;	    ChatServer server = new ChatServer();</b>
+<i>33</i>&nbsp;	    
+<i>34</i>&nbsp;		try {
+<b class="nc"><i>35</i>&nbsp;			serverSocket = new ServerSocket (port);</b>
+<i>36</i>&nbsp;			
+<i>37</i>&nbsp;			while(true) {
+<b class="nc"><i>38</i>&nbsp;				Socket clientSocket = null;</b>
+<i>39</i>&nbsp;				
+<i>40</i>&nbsp;				try {
+<b class="nc"><i>41</i>&nbsp;					clientSocket = serverSocket.accept();</b>
+<b class="nc"><i>42</i>&nbsp;				} catch (IOException e) {</b>
+<b class="nc"><i>43</i>&nbsp;					e.printStackTrace();</b>
+<b class="nc"><i>44</i>&nbsp;				}</b>
+<b class="nc"><i>45</i>&nbsp;				new Thread (new Worker(clientSocket, server)).start();</b>
+<b class="nc"><i>46</i>&nbsp;			}</b>
+<i>47</i>&nbsp;			
+<b class="nc"><i>48</i>&nbsp;		} catch (IOException e) {</b>
+<b class="nc"><i>49</i>&nbsp;			e.printStackTrace();</b>
+<i>50</i>&nbsp;		}
+<i>51</i>&nbsp;	}
+<i>52</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2015-06-03 15:19</div>
+    <div style="float:right;">generated on 2015-06-11 18:51</div>
 </div>
 </body>
 </html>

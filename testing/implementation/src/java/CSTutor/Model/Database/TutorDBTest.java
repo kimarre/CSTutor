@@ -167,5 +167,16 @@ public class TutorDBTest {
       assertTrue("Testing getAllTutorialData", all.size() > 0);
    }
 
+   /**
+     * Test class hierarchy methods.
+     */
+   @Test
+   public void testClassHierarchy() {
+      List<CSTutor.Model.Manager.Class> classes = TutorDB.getClasses();
+      TutorDB.setUser("sdali12345", "DEADBEEF", "Bob", "Smith", "Student");
+      TutorDB.saveClasses(classes);
+      assertEquals("Comparing class hierarchies", classes.size(), TutorDB.getClasses().size());
+   }
+
 
 }

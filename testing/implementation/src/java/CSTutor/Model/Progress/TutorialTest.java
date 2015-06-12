@@ -5,7 +5,7 @@
  */
 package CSTutor.Model.Progress;
 
-import CSTutor.Model.Progress.TutorialData;
+import CSTutor.Model.Progress.Tutorial;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /****
  *
- * Class TutorialDataTest is the companion testing class for TutorialData.  
+ * Class TutorialTest is the companion testing class for TutorialData.  
  * It implements the following module test plan:
  *									  <pre>
  *    Phase 1: Unit test the constructor.
@@ -28,13 +28,13 @@ import static org.junit.Assert.*;
  *    Phase 4: Stress test the equals method with many other TutorialData objects.
  *									 </pre>
  */
-public class TutorialDataTest 
+public class TutorialTest 
 {
-    TutorialData data;
+    Tutorial data;
     
-    public TutorialDataTest() 
+    public TutorialTest() 
     {
-        data = new TutorialData("Hello World");
+        data = new Tutorial("Hello World");
     }
     
     /**
